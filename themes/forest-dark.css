@@ -1,0 +1,28 @@
+/* Forest Dark Theme */
+:root {
+    --bg-primary: #0f1c0a;
+    --bg-secondary: #1a2817;
+    --bg-tertiary: #2d4a2b;
+    --text-primary: #d9f99d;
+    --text-secondary: #a3e635;
+    --border-color: #3f6212;
+    
+    --h1-color: #84cc16;
+    --h2-color: #a3e635;
+    --h3-color: #bef264;
+    --h4-color: #4ade80;
+    --h5-color: #22c55e;
+    --h6-color: #16a34a;
+    
+    --link-color: #84cc16;
+    --link-hover: #a3e635;
+    --code-bg: #1a2817;
+    --code-text: #a3e635;
+    --code-block-bg: #0f1c0a;
+    --blockquote-border: #84cc16;
+    --blockquote-bg: #1a2817;
+    --bold-color: #fbbf24;
+    --italic-color: #84cc16;
+    --table-header-bg: #2d4a2b;
+    --table-border: #3f6212;
+}

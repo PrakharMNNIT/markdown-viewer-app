@@ -1,0 +1,28 @@
+/* Sunset Light Theme */
+:root {
+    --bg-primary: #fff7ed;
+    --bg-secondary: #ffedd5;
+    --bg-tertiary: #fed7aa;
+    --text-primary: #431407;
+    --text-secondary: #7c2d12;
+    --border-color: #fdba74;
+    
+    --h1-color: #ea580c;
+    --h2-color: #f97316;
+    --h3-color: #fb923c;
+    --h4-color: #dc2626;
+    --h5-color: #e11d48;
+    --h6-color: #db2777;
+    
+    --link-color: #ea580c;
+    --link-hover: #c2410c;
+    --code-bg: #ffedd5;
+    --code-text: #dc2626;
+    --code-block-bg: #7c2d12;
+    --blockquote-border: #f97316;
+    --blockquote-bg: #ffedd5;
+    --bold-color: #dc2626;
+    --italic-color: #e11d48;
+    --table-header-bg: #fed7aa;
+    --table-border: #fdba74;
+}

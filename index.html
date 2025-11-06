@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Viewer Pro</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.0.0/marked.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Theme Stylesheet (dynamically loaded) -->
+    <link rel="stylesheet" href="themes/default-light.css" id="theme-stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <h1>📝 Markdown Viewer Pro</h1>
+            <div class="toolbar-controls">
+                <select id="theme-selector" class="btn">
+                    <optgroup label="Default">
+                        <option value="default-light" selected>Default Light</option>
+                        <option value="default-dark">Default Dark</option>
+                    </optgroup>
+                    <optgroup label="Ocean">
+                        <option value="ocean-light">Ocean Light</option>
+                        <option value="ocean-dark">Ocean Dark</option>
+                    </optgroup>
+                    <optgroup label="Neon">
+                        <option value="neon-light">Neon Light</option>
+                        <option value="neon-dark">Neon Dark</option>
+                    </optgroup>
+                    <optgroup label="Forest">
+                        <option value="forest-light">Forest Light</option>
+                        <option value="forest-dark">Forest Dark</option>
+                    </optgroup>
+                    <optgroup label="Sunset">
+                        <option value="sunset-light">Sunset Light</option>
+                        <option value="sunset-dark">Sunset Dark</option>
+                    </optgroup>
+                    <optgroup label="Custom">
+                        <option value="custom">Custom Theme</option>
+                    </optgroup>
+                </select>
+                <button class="btn" id="customize-btn">🎨 Customize Colors</button>
+                <button class="btn" id="export-btn">💾 Export HTML</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Editor -->
+            <div class="editor-container">
+                <div class="editor-header">MARKDOWN EDITOR</div>
+                <textarea id="markdown-editor" placeholder="Type your markdown here..."></textarea>
+            </div>
+
+            <!-- Preview -->
+            <div class="preview-container">
+                <div class="preview-header">PREVIEW</div>
+                <div id="markdown-preview"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Customizer Modal -->
+    <div id="customizer-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎨 Theme Customizer</h2>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+
+            <div class="section-title">Background Colors</div>
+            <div class="color-grid">
+                <div class="color-control">
+                    <label>Primary Background</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="bg-primary" data-var="--bg-primary">
+                        <input type="text" id="bg-primary-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Secondary Background</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="bg-secondary" data-var="--bg-secondary">
+                        <input type="text" id="bg-secondary-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Tertiary Background</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="bg-tertiary" data-var="--bg-tertiary">
+                        <input type="text" id="bg-tertiary-text" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Text Colors</div>
+            <div class="color-grid">
+                <div class="color-control">
+                    <label>Primary Text</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="text-primary" data-var="--text-primary">
+                        <input type="text" id="text-primary-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Secondary Text</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="text-secondary" data-var="--text-secondary">
+                        <input type="text" id="text-secondary-text" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Header Colors</div>
+            <div class="color-grid">
+                <div class="color-control">
+                    <label>H1 Header</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="h1-color" data-var="--h1-color">
+                        <input type="text" id="h1-color-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>H2 Header</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="h2-color" data-var="--h2-color">
+                        <input type="text" id="h2-color-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>H3 Header</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="h3-color" data-var="--h3-color">
+                        <input type="text" id="h3-color-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>H4 Header</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="h4-color" data-var="--h4-color">
+                        <input type="text" id="h4-color-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>H5 Header</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="h5-color" data-var="--h5-color">
+                        <input type="text" id="h5-color-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>H6 Header</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="h6-color" data-var="--h6-color">
+                        <input type="text" id="h6-color-text" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Element Colors</div>
+            <div class="color-grid">
+                <div class="color-control">
+                    <label>Links</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="link-color" data-var="--link-color">
+                        <input type="text" id="link-color-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Bold Text</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="bold-color" data-var="--bold-color">
+                        <input type="text" id="bold-color-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Italic Text</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="italic-color" data-var="--italic-color">
+                        <input type="text" id="italic-color-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Inline Code</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="code-text" data-var="--code-text">
+                        <input type="text" id="code-text-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Code Background</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="code-bg" data-var="--code-bg">
+                        <input type="text" id="code-bg-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Blockquote Border</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="blockquote-border" data-var="--blockquote-border">
+                        <input type="text" id="blockquote-border-text" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn" id="reset-btn">Reset to Default</button>
+                <button class="btn" id="save-theme-btn">Save Custom Theme</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>

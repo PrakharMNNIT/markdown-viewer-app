@@ -1,0 +1,28 @@
+/* Neon Dark Theme */
+:root {
+    --bg-primary: #0d0d0d;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #262626;
+    --text-primary: #ffffff;
+    --text-secondary: #a3a3a3;
+    --border-color: #404040;
+    
+    --h1-color: #ff006e;
+    --h2-color: #8338ec;
+    --h3-color: #3a86ff;
+    --h4-color: #00f5d4;
+    --h5-color: #ffbe0b;
+    --h6-color: #fb5607;
+    
+    --link-color: #ff006e;
+    --link-hover: #ff1a8c;
+    --code-bg: #1a1a1a;
+    --code-text: #00f5d4;
+    --code-block-bg: #0d0d0d;
+    --blockquote-border: #8338ec;
+    --blockquote-bg: #1a1a1a;
+    --bold-color: #ffbe0b;
+    --italic-color: #ff006e;
+    --table-header-bg: #262626;
+    --table-border: #404040;
+}

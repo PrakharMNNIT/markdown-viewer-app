@@ -1,0 +1,28 @@
+/* Default Light Theme */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    
+    --h1-color: #2563eb;
+    --h2-color: #7c3aed;
+    --h3-color: #db2777;
+    --h4-color: #059669;
+    --h5-color: #ea580c;
+    --h6-color: #ca8a04;
+    
+    --link-color: #2563eb;
+    --link-hover: #1e40af;
+    --code-bg: #f1f5f9;
+    --code-text: #e11d48;
+    --code-block-bg: #1e293b;
+    --blockquote-border: #7c3aed;
+    --blockquote-bg: #f3f4f6;
+    --bold-color: #ea580c;
+    --italic-color: #db2777;
+    --table-header-bg: #e0e7ff;
+    --table-border: #cbd5e1;
+}
