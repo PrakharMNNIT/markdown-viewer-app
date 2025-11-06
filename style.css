@@ -444,6 +444,17 @@ body {
     background: var(--text-secondary);
 }
 
+/* ==================== FOOTER ==================== */
+.app-footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+}
+
 /* ==================== MERMAID DIAGRAMS ==================== */
 .mermaid {
     margin: 2em 0;
