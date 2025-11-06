@@ -40,8 +40,42 @@ body {
 
 .toolbar-controls {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
+}
+
+/* View Mode Buttons */
+.view-mode-buttons {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.view-btn {
+    padding: 8px 12px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-btn:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.view-btn.active {
+    background-color: var(--bg-tertiary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.view-btn svg {
+    display: block;
 }
 
 .btn {
@@ -224,7 +258,7 @@ body {
     font-style: italic;
 }
 
-#markdown-preview ul, 
+#markdown-preview ul,
 #markdown-preview ol {
     margin: 1em 0;
     padding-left: 2em;
@@ -422,23 +456,23 @@ body {
     .main-content {
         flex-direction: column;
     }
-    
+
     .editor-container {
         border-right: none;
         border-bottom: 1px solid var(--border-color);
     }
-    
+
     .toolbar {
         flex-direction: column;
         gap: 10px;
         padding: 15px;
     }
-    
+
     .toolbar-controls {
         width: 100%;
         flex-wrap: wrap;
     }
-    
+
     .color-grid {
         grid-template-columns: 1fr;
     }

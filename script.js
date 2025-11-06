@@ -118,6 +118,13 @@ graph TD
     const saveThemeBtn = document.getElementById('save-theme-btn');
     const themeStylesheet = document.getElementById('theme-stylesheet');
 
+    // View mode buttons
+    const editorOnlyBtn = document.getElementById('editor-only-btn');
+    const splitViewBtn = document.getElementById('split-view-btn');
+    const previewOnlyBtn = document.getElementById('preview-only-btn');
+    const editorContainer = document.querySelector('.editor-container');
+    const previewContainer = document.querySelector('.preview-container');
+
     // Set default content
     const savedContent = localStorage.getItem('markdownContent');
     editor.value = savedContent || defaultMarkdown;
@@ -358,12 +365,51 @@ graph TD
 
     exportBtn.addEventListener('click', exportHTML);
 
+    // View mode switching
+    function setViewMode(mode) {
+        // Remove active class from all buttons
+        editorOnlyBtn.classList.remove('active');
+        splitViewBtn.classList.remove('active');
+        previewOnlyBtn.classList.remove('active');
+
+        // Apply view mode
+        switch(mode) {
+            case 'editor-only':
+                editorOnlyBtn.classList.add('active');
+                editorContainer.style.display = 'flex';
+                previewContainer.style.display = 'none';
+                break;
+            case 'split-view':
+                splitViewBtn.classList.add('active');
+                editorContainer.style.display = 'flex';
+                previewContainer.style.display = 'flex';
+                break;
+            case 'preview-only':
+                previewOnlyBtn.classList.add('active');
+                editorContainer.style.display = 'none';
+                previewContainer.style.display = 'flex';
+                break;
+        }
+
+        // Save view mode preference
+        localStorage.setItem('viewMode', mode);
+    }
+
+    // View mode button event listeners
+    editorOnlyBtn.addEventListener('click', () => setViewMode('editor-only'));
+    splitViewBtn.addEventListener('click', () => setViewMode('split-view'));
+    previewOnlyBtn.addEventListener('click', () => setViewMode('preview-only'));
+
     // Load saved theme
     const savedTheme = localStorage.getItem('selectedTheme');
     if (savedTheme) {
         themeSelector.value = savedTheme;
         changeTheme(savedTheme);
     }
+
+    // Load saved view mode
+    const savedViewMode = localStorage.getItem('viewMode') || 'split-view';
+    setViewMode(savedViewMode);
 
     // Initial render
     renderMarkdown();
