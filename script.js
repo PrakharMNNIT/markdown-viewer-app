@@ -111,7 +111,8 @@ graph TD
     const preview = document.getElementById('markdown-preview');
     const themeSelector = document.getElementById('theme-selector');
     const customizeBtn = document.getElementById('customize-btn');
-    const exportBtn = document.getElementById('export-btn');
+    const exportHtmlBtn = document.getElementById('export-html-btn');
+    const exportPdfBtn = document.getElementById('export-pdf-btn');
     const modal = document.getElementById('customizer-modal');
     const closeModal = document.getElementById('close-modal');
     const resetBtn = document.getElementById('reset-btn');
@@ -363,7 +364,72 @@ graph TD
         modal.classList.remove('active');
     });
 
-    exportBtn.addEventListener('click', exportHTML);
+    // Export to PDF with theme preservation
+    function exportPDF() {
+        // Check if html2pdf is loaded
+        if (typeof html2pdf === 'undefined') {
+            alert('PDF library is still loading. Please try again in a moment.');
+            return;
+        }
+
+        // Clone the preview content
+        const element = preview.cloneNode(true);
+
+        // Create a container with current theme styles
+        const container = document.createElement('div');
+        container.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif';
+        container.style.maxWidth = '800px';
+        container.style.margin = '0 auto';
+        container.style.padding = '40px 20px';
+        container.style.lineHeight = '1.7';
+        container.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim();
+        container.style.color = getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim();
+        container.appendChild(element);
+
+        // PDF configuration with theme preservation
+        const opt = {
+            margin: [0.5, 0.5, 0.5, 0.5],
+            filename: 'markdown-export.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                letterRendering: true,
+                backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim()
+            },
+            jsPDF: {
+                unit: 'in',
+                format: 'a4',
+                orientation: 'portrait'
+            },
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+
+        // Show a loading message
+        const originalText = exportPdfBtn.textContent;
+        exportPdfBtn.textContent = '⏳ Generating PDF...';
+        exportPdfBtn.disabled = true;
+
+        // Generate PDF
+        html2pdf()
+            .set(opt)
+            .from(container)
+            .save()
+            .then(() => {
+                exportPdfBtn.textContent = originalText;
+                exportPdfBtn.disabled = false;
+            })
+            .catch(err => {
+                console.error('PDF generation error:', err);
+                alert('Error generating PDF: ' + err.message);
+                exportPdfBtn.textContent = originalText;
+                exportPdfBtn.disabled = false;
+            });
+    }
+
+    // Event listeners for export buttons
+    exportHtmlBtn.addEventListener('click', exportHTML);
+    exportPdfBtn.addEventListener('click', exportPDF);
 
     // View mode switching
     function setViewMode(mode) {
