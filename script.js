@@ -126,6 +126,13 @@ graph TD
     const editorContainer = document.querySelector('.editor-container');
     const previewContainer = document.querySelector('.preview-container');
 
+    // Zoom controls
+    const zoomInBtn = document.getElementById('zoom-in-btn');
+    const zoomOutBtn = document.getElementById('zoom-out-btn');
+    const zoomResetBtn = document.getElementById('zoom-reset-btn');
+    const zoomLevelDisplay = document.getElementById('zoom-level');
+    let currentZoom = 100; // Default zoom level
+
     // Set default content
     const savedContent = localStorage.getItem('markdownContent');
     editor.value = savedContent || defaultMarkdown;
@@ -471,6 +478,74 @@ graph TD
     if (savedTheme) {
         themeSelector.value = savedTheme;
         changeTheme(savedTheme);
+    }
+
+    // Zoom functionality
+    function setZoom(zoomLevel) {
+        // Constrain zoom level between 50% and 200%
+        currentZoom = Math.max(50, Math.min(200, zoomLevel));
+
+        // Apply zoom using CSS transform
+        preview.style.transform = `scale(${currentZoom / 100})`;
+        preview.style.transformOrigin = 'top left';
+        preview.style.width = `${10000 / currentZoom}%`;
+
+        // Update display
+        zoomLevelDisplay.textContent = `${currentZoom}%`;
+
+        // Save to localStorage
+        localStorage.setItem('previewZoom', currentZoom.toString());
+    }
+
+    function zoomIn() {
+        setZoom(currentZoom + 10);
+    }
+
+    function zoomOut() {
+        setZoom(currentZoom - 10);
+    }
+
+    function resetZoom() {
+        setZoom(100);
+    }
+
+    // Zoom event listeners
+    zoomInBtn.addEventListener('click', zoomIn);
+    zoomOutBtn.addEventListener('click', zoomOut);
+    zoomResetBtn.addEventListener('click', resetZoom);
+
+    // Keyboard shortcuts for zoom (Ctrl/Cmd + Plus/Minus/0)
+    preview.addEventListener('wheel', (e) => {
+        if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                zoomIn();
+            } else {
+                zoomOut();
+            }
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.target.tagName !== 'TEXTAREA') {
+            if (e.key === '=' || e.key === '+') {
+                e.preventDefault();
+                zoomIn();
+            } else if (e.key === '-') {
+                e.preventDefault();
+                zoomOut();
+            } else if (e.key === '0') {
+                e.preventDefault();
+                resetZoom();
+            }
+        }
+    });
+
+    // Load saved zoom level
+    const savedZoom = localStorage.getItem('previewZoom');
+    if (savedZoom) {
+        currentZoom = parseInt(savedZoom, 10);
+        setZoom(currentZoom);
     }
 
     // Load saved view mode
