@@ -1,63 +1,84 @@
 // Markdown Viewer Pro - Main Script
+
+// Import constants and utilities
+
 // Wait for all scripts to load
-window.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
+window.addEventListener('DOMContentLoaded', function () {
+  initializeApp();
 });
 
 function initializeApp() {
-    // Check if libraries are loaded
-    if (typeof marked === 'undefined' || typeof Prism === 'undefined' || typeof mermaid === 'undefined') {
-        console.error('Required libraries not loaded. Retrying...');
-        setTimeout(initializeApp, 100);
-        return;
-    }
+  // Check if libraries are loaded
+  if (
+    typeof marked === 'undefined' ||
+    typeof Prism === 'undefined' ||
+    typeof mermaid === 'undefined'
+  ) {
+    console.error('Required libraries not loaded. Retrying...');
+    setTimeout(initializeApp, 100);
+    return;
+  }
 
-    // Initialize Mermaid with theme-aware configuration
-    initMermaidTheme();
+  // Initialize Mermaid with theme-aware configuration
+  initMermaidTheme();
 
-    setupEditor();
+  setupEditor();
 }
 
 // Initialize Mermaid with theme-aware colors
 function initMermaidTheme() {
-    const isDark = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim().startsWith('#0') ||
-                   getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim().startsWith('#1') ||
-                   getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim().startsWith('#2');
+  const isDark =
+    getComputedStyle(document.documentElement)
+      .getPropertyValue('--bg-primary')
+      .trim()
+      .startsWith('#0') ||
+    getComputedStyle(document.documentElement)
+      .getPropertyValue('--bg-primary')
+      .trim()
+      .startsWith('#1') ||
+    getComputedStyle(document.documentElement)
+      .getPropertyValue('--bg-primary')
+      .trim()
+      .startsWith('#2');
 
-    const h1Color = getComputedStyle(document.documentElement).getPropertyValue('--h1-color').trim();
-    const h2Color = getComputedStyle(document.documentElement).getPropertyValue('--h2-color').trim();
-    const h3Color = getComputedStyle(document.documentElement).getPropertyValue('--h3-color').trim();
-    const bgSecondary = getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary').trim();
-    const textPrimary = getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim();
+  const h1Color = getComputedStyle(document.documentElement).getPropertyValue('--h1-color').trim();
+  const h2Color = getComputedStyle(document.documentElement).getPropertyValue('--h2-color').trim();
+  const h3Color = getComputedStyle(document.documentElement).getPropertyValue('--h3-color').trim();
+  const bgSecondary = getComputedStyle(document.documentElement)
+    .getPropertyValue('--bg-secondary')
+    .trim();
+  const textPrimary = getComputedStyle(document.documentElement)
+    .getPropertyValue('--text-primary')
+    .trim();
 
-    mermaid.initialize({
-        startOnLoad: false,
-        theme: 'base',
-        themeVariables: {
-            primaryColor: bgSecondary,
-            primaryTextColor: textPrimary,
-            primaryBorderColor: h1Color,
-            lineColor: h2Color,
-            secondaryColor: bgSecondary,
-            tertiaryColor: bgSecondary,
-            background: bgSecondary,
-            mainBkg: bgSecondary,
-            secondBkg: bgSecondary,
-            tertiaryBkg: bgSecondary,
-            nodeBorder: h1Color,
-            clusterBkg: bgSecondary,
-            clusterBorder: h3Color,
-            titleColor: textPrimary,
-            edgeLabelBackground: bgSecondary,
-            nodeTextColor: textPrimary,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-        }
-    });
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: bgSecondary,
+      primaryTextColor: textPrimary,
+      primaryBorderColor: h1Color,
+      lineColor: h2Color,
+      secondaryColor: bgSecondary,
+      tertiaryColor: bgSecondary,
+      background: bgSecondary,
+      mainBkg: bgSecondary,
+      secondBkg: bgSecondary,
+      tertiaryBkg: bgSecondary,
+      nodeBorder: h1Color,
+      clusterBkg: bgSecondary,
+      clusterBorder: h3Color,
+      titleColor: textPrimary,
+      edgeLabelBackground: bgSecondary,
+      nodeTextColor: textPrimary,
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    },
+  });
 }
 
 function setupEditor() {
-    // Default markdown content
-    const defaultMarkdown = `# Welcome to Markdown Viewer Pro! 🚀
+  // Default markdown content
+  const defaultMarkdown = `# Welcome to Markdown Viewer Pro! 🚀
 
 This is a powerful markdown viewer with **syntax highlighting**, *italic text*, and much more!
 
@@ -143,174 +164,184 @@ graph TD
 **Try switching themes** from the dropdown menu! 🎨
 `;
 
-    // DOM Elements
-    const editor = document.getElementById('markdown-editor');
-    const preview = document.getElementById('markdown-preview');
-    const themeSelector = document.getElementById('theme-selector');
-    const customizeBtn = document.getElementById('customize-btn');
-    const exportHtmlBtn = document.getElementById('export-html-btn');
-    const exportPdfBtn = document.getElementById('export-pdf-btn');
-    const modal = document.getElementById('customizer-modal');
-    const closeModal = document.getElementById('close-modal');
-    const resetBtn = document.getElementById('reset-btn');
-    const saveThemeBtn = document.getElementById('save-theme-btn');
-    const themeStylesheet = document.getElementById('theme-stylesheet');
+  // DOM Elements
+  const editor = document.getElementById('markdown-editor');
+  const preview = document.getElementById('markdown-preview');
+  const themeSelector = document.getElementById('theme-selector');
+  const customizeBtn = document.getElementById('customize-btn');
+  const exportHtmlBtn = document.getElementById('export-html-btn');
+  const exportPdfBtn = document.getElementById('export-pdf-btn');
+  const modal = document.getElementById('customizer-modal');
+  const closeModal = document.getElementById('close-modal');
+  const resetBtn = document.getElementById('reset-btn');
+  const saveThemeBtn = document.getElementById('save-theme-btn');
+  const themeStylesheet = document.getElementById('theme-stylesheet');
 
-    // View mode buttons
-    const editorOnlyBtn = document.getElementById('editor-only-btn');
-    const splitViewBtn = document.getElementById('split-view-btn');
-    const previewOnlyBtn = document.getElementById('preview-only-btn');
-    const editorContainer = document.querySelector('.editor-container');
-    const previewContainer = document.querySelector('.preview-container');
+  // View mode buttons
+  const editorOnlyBtn = document.getElementById('editor-only-btn');
+  const splitViewBtn = document.getElementById('split-view-btn');
+  const previewOnlyBtn = document.getElementById('preview-only-btn');
+  const editorContainer = document.querySelector('.editor-container');
+  const previewContainer = document.querySelector('.preview-container');
 
-    // Zoom controls
-    const zoomInBtn = document.getElementById('zoom-in-btn');
-    const zoomOutBtn = document.getElementById('zoom-out-btn');
-    const zoomResetBtn = document.getElementById('zoom-reset-btn');
-    const zoomLevelDisplay = document.getElementById('zoom-level');
-    let currentZoom = 100; // Default zoom level
+  // Zoom controls
+  const zoomInBtn = document.getElementById('zoom-in-btn');
+  const zoomOutBtn = document.getElementById('zoom-out-btn');
+  const zoomResetBtn = document.getElementById('zoom-reset-btn');
+  const zoomLevelDisplay = document.getElementById('zoom-level');
+  let currentZoom = 100; // Default zoom level
 
-    // Set default content
-    const savedContent = localStorage.getItem('markdownContent');
-    editor.value = savedContent || defaultMarkdown;
+  // Set default content
+  const savedContent = localStorage.getItem('markdownContent');
+  editor.value = savedContent || defaultMarkdown;
 
-    // Helper function to decode HTML entities
-    function decodeHtmlEntities(text) {
-        const textarea = document.createElement('textarea');
-        textarea.innerHTML = text;
-        return textarea.value;
-    }
+  // Helper function to decode HTML entities
+  function decodeHtmlEntities(text) {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
+  }
 
-    // Render markdown
-    function renderMarkdown() {
-        try {
-            const markdownText = editor.value;
-            let html = marked.parse(markdownText);
+  // Render markdown
+  function renderMarkdown() {
+    try {
+      const markdownText = editor.value;
+      let html = marked.parse(markdownText);
 
-            // Replace mermaid code blocks
-            html = html.replace(/<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g, (match, code) => {
-                // Decode HTML entities before passing to Mermaid
-                const decodedCode = decodeHtmlEntities(code);
-                const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
-                setTimeout(() => {
-                    try {
-                        const element = document.getElementById(id);
-                        if (element && typeof mermaid !== 'undefined') {
-                            mermaid.render('mermaid-svg-' + id, decodedCode).then(result => {
-                                element.innerHTML = result.svg;
-                            }).catch(err => {
-                                element.innerHTML = '<p style="color: red;">Mermaid diagram error: ' + err.message + '</p>';
-                            });
-                        }
-                    } catch (e) {
-                        console.error('Mermaid render error:', e);
-                    }
-                }, 100);
-                return `<div class="mermaid" id="${id}">${code}</div>`;
-            });
-
-            preview.innerHTML = html;
-
-            // Apply Prism syntax highlighting
-            if (typeof Prism !== 'undefined') {
-                preview.querySelectorAll('pre code').forEach((block) => {
-                    Prism.highlightElement(block);
-                });
+      // Replace mermaid code blocks
+      html = html.replace(
+        /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
+        (match, code) => {
+          // Decode HTML entities before passing to Mermaid
+          const decodedCode = decodeHtmlEntities(code);
+          const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
+          setTimeout(() => {
+            try {
+              const element = document.getElementById(id);
+              if (element && typeof mermaid !== 'undefined') {
+                mermaid
+                  .render('mermaid-svg-' + id, decodedCode)
+                  .then(result => {
+                    element.innerHTML = result.svg;
+                  })
+                  .catch(err => {
+                    element.innerHTML =
+                      '<p style="color: red;">Mermaid diagram error: ' + err.message + '</p>';
+                  });
+              }
+            } catch (e) {
+              console.error('Mermaid render error:', e);
             }
-
-            // Save content
-            localStorage.setItem('markdownContent', markdownText);
-        } catch (error) {
-            console.error('Render error:', error);
-            preview.innerHTML = '<p style="color: red;">Error rendering markdown: ' + error.message + '</p>';
+          }, 100);
+          return `<div class="mermaid" id="${id}">${code}</div>`;
         }
-    }
+      );
 
-    // Change theme
-    function changeTheme(themeName) {
-        if (themeName === 'custom') {
-            const customTheme = localStorage.getItem('customTheme');
-            if (customTheme) {
-                const theme = JSON.parse(customTheme);
-                Object.entries(theme).forEach(([property, value]) => {
-                    document.documentElement.style.setProperty(property, value);
-                });
-            }
-        } else {
-            // Remove inline styles
-            const root = document.documentElement;
-            const styles = root.style;
-            for (let i = styles.length - 1; i >= 0; i--) {
-                const prop = styles[i];
-                if (prop.startsWith('--')) {
-                    root.style.removeProperty(prop);
-                }
-            }
+      preview.innerHTML = html;
 
-            // Load theme stylesheet
-            themeStylesheet.href = `themes/${themeName}.css`;
-        }
-        localStorage.setItem('selectedTheme', themeName);
-
-        // Reinitialize Mermaid with new theme colors
-        setTimeout(() => {
-            initMermaidTheme();
-            renderMarkdown(); // Re-render to apply new Mermaid theme
-        }, 100);
-    }
-
-    // Initialize color inputs
-    function initColorInputs() {
-        document.querySelectorAll('.color-control input[type="color"]').forEach(input => {
-            const varName = input.dataset.var;
-            const textInput = document.getElementById(input.id + '-text');
-            const currentValue = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-
-            input.value = currentValue;
-            textInput.value = currentValue;
-
-            input.addEventListener('input', (e) => {
-                const color = e.target.value;
-                document.documentElement.style.setProperty(varName, color);
-                textInput.value = color;
-            });
+      // Apply Prism syntax highlighting
+      if (typeof Prism !== 'undefined') {
+        preview.querySelectorAll('pre code').forEach(block => {
+          Prism.highlightElement(block);
         });
+      }
+
+      // Save content
+      localStorage.setItem('markdownContent', markdownText);
+    } catch (error) {
+      console.error('Render error:', error);
+      preview.innerHTML =
+        '<p style="color: red;">Error rendering markdown: ' + error.message + '</p>';
+    }
+  }
+
+  // Change theme
+  function changeTheme(themeName) {
+    if (themeName === 'custom') {
+      const customTheme = localStorage.getItem('customTheme');
+      if (customTheme) {
+        const theme = JSON.parse(customTheme);
+        Object.entries(theme).forEach(([property, value]) => {
+          document.documentElement.style.setProperty(property, value);
+        });
+      }
+    } else {
+      // Remove inline styles
+      const root = document.documentElement;
+      const styles = root.style;
+      for (let i = styles.length - 1; i >= 0; i--) {
+        const prop = styles[i];
+        if (prop.startsWith('--')) {
+          root.style.removeProperty(prop);
+        }
+      }
+
+      // Load theme stylesheet
+      themeStylesheet.href = `themes/${themeName}.css`;
+    }
+    localStorage.setItem('selectedTheme', themeName);
+
+    // Reinitialize Mermaid with new theme colors
+    setTimeout(() => {
+      initMermaidTheme();
+      renderMarkdown(); // Re-render to apply new Mermaid theme
+    }, 100);
+  }
+
+  // Initialize color inputs
+  function initColorInputs() {
+    document.querySelectorAll('.color-control input[type="color"]').forEach(input => {
+      const varName = input.dataset.var;
+      const textInput = document.getElementById(input.id + '-text');
+      const currentValue = getComputedStyle(document.documentElement)
+        .getPropertyValue(varName)
+        .trim();
+
+      input.value = currentValue;
+      textInput.value = currentValue;
+
+      input.addEventListener('input', e => {
+        const color = e.target.value;
+        document.documentElement.style.setProperty(varName, color);
+        textInput.value = color;
+      });
+    });
+  }
+
+  // Export to HTML
+  function exportHTML() {
+    const currentTheme = themeSelector.value;
+    let themeCSS = '';
+
+    if (currentTheme === 'custom') {
+      const customTheme = localStorage.getItem('customTheme');
+      if (customTheme) {
+        const theme = JSON.parse(customTheme);
+        themeCSS = ':root {\n';
+        Object.entries(theme).forEach(([property, value]) => {
+          themeCSS += `    ${property}: ${value};\n`;
+        });
+        themeCSS += '}';
+      }
+    } else {
+      // Fetch theme CSS
+      fetch(`themes/${currentTheme}.css`)
+        .then(response => response.text())
+        .then(css => {
+          themeCSS = css;
+          generateHTML();
+        })
+        .catch(err => {
+          console.error('Error loading theme:', err);
+          generateHTML();
+        });
+      return;
     }
 
-    // Export to HTML
-    function exportHTML() {
-        const currentTheme = themeSelector.value;
-        let themeCSS = '';
+    generateHTML();
 
-        if (currentTheme === 'custom') {
-            const customTheme = localStorage.getItem('customTheme');
-            if (customTheme) {
-                const theme = JSON.parse(customTheme);
-                themeCSS = ':root {\n';
-                Object.entries(theme).forEach(([property, value]) => {
-                    themeCSS += `    ${property}: ${value};\n`;
-                });
-                themeCSS += '}';
-            }
-        } else {
-            // Fetch theme CSS
-            fetch(`themes/${currentTheme}.css`)
-                .then(response => response.text())
-                .then(css => {
-                    themeCSS = css;
-                    generateHTML();
-                })
-                .catch(err => {
-                    console.error('Error loading theme:', err);
-                    generateHTML();
-                });
-            return;
-        }
-
-        generateHTML();
-
-        function generateHTML() {
-            const html = `<!DOCTYPE html>
+    function generateHTML() {
+      const html = `<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -364,237 +395,244 @@ graph TD
 </body>
 </html>`;
 
-            const blob = new Blob([html], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'markdown-export.html';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'markdown-export.html';
+      a.click();
+      URL.revokeObjectURL(url);
     }
+  }
 
-    // Event Listeners
-    editor.addEventListener('input', renderMarkdown);
+  // Event Listeners
+  editor.addEventListener('input', renderMarkdown);
 
-    themeSelector.addEventListener('change', (e) => {
-        changeTheme(e.target.value);
+  themeSelector.addEventListener('change', e => {
+    changeTheme(e.target.value);
+  });
+
+  customizeBtn.addEventListener('click', () => {
+    modal.classList.add('active');
+    initColorInputs();
+  });
+
+  closeModal.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+
+  modal.addEventListener('click', e => {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+    }
+  });
+
+  resetBtn.addEventListener('click', () => {
+    const currentTheme = themeSelector.value === 'custom' ? 'default-light' : themeSelector.value;
+    changeTheme(currentTheme);
+    initColorInputs();
+  });
+
+  saveThemeBtn.addEventListener('click', () => {
+    const customTheme = {};
+    document.querySelectorAll('.color-control input[type="color"]').forEach(input => {
+      const varName = input.dataset.var;
+      customTheme[varName] = input.value;
     });
+    localStorage.setItem('customTheme', JSON.stringify(customTheme));
+    themeSelector.value = 'custom';
+    alert('Custom theme saved! Select "Custom Theme" from the dropdown to use it.');
+    modal.classList.remove('active');
+  });
 
-    customizeBtn.addEventListener('click', () => {
-        modal.classList.add('active');
-        initColorInputs();
-    });
-
-    closeModal.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
-    });
-
-    resetBtn.addEventListener('click', () => {
-        const currentTheme = themeSelector.value === 'custom' ? 'default-light' : themeSelector.value;
-        changeTheme(currentTheme);
-        initColorInputs();
-    });
-
-    saveThemeBtn.addEventListener('click', () => {
-        const customTheme = {};
-        document.querySelectorAll('.color-control input[type="color"]').forEach(input => {
-            const varName = input.dataset.var;
-            customTheme[varName] = input.value;
-        });
-        localStorage.setItem('customTheme', JSON.stringify(customTheme));
-        themeSelector.value = 'custom';
-        alert('Custom theme saved! Select "Custom Theme" from the dropdown to use it.');
-        modal.classList.remove('active');
-    });
-
-    // Export to PDF with theme preservation
-    function exportPDF() {
-        // Check if html2pdf is loaded
-        if (typeof html2pdf === 'undefined') {
-            alert('PDF library is still loading. Please try again in a moment.');
-            return;
-        }
-
-        // Clone the preview content
-        const element = preview.cloneNode(true);
-
-        // Create a container with current theme styles
-        const container = document.createElement('div');
-        container.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif';
-        container.style.maxWidth = '800px';
-        container.style.margin = '0 auto';
-        container.style.padding = '40px 20px';
-        container.style.lineHeight = '1.7';
-        container.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim();
-        container.style.color = getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim();
-        container.appendChild(element);
-
-        // PDF configuration with theme preservation
-        const opt = {
-            margin: [0.25, 0.25, 0.25, 0.25],
-            filename: 'markdown-export.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: {
-                scale: 2,
-                useCORS: true,
-                letterRendering: true,
-                backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim()
-            },
-            jsPDF: {
-                unit: 'in',
-                format: 'a4',
-                orientation: 'portrait'
-            },
-            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-        };
-
-        // Show a loading message
-        const originalText = exportPdfBtn.textContent;
-        exportPdfBtn.textContent = '⏳ Generating PDF...';
-        exportPdfBtn.disabled = true;
-
-        // Generate PDF
-        html2pdf()
-            .set(opt)
-            .from(container)
-            .save()
-            .then(() => {
-                exportPdfBtn.textContent = originalText;
-                exportPdfBtn.disabled = false;
-            })
-            .catch(err => {
-                console.error('PDF generation error:', err);
-                alert('Error generating PDF: ' + err.message);
-                exportPdfBtn.textContent = originalText;
-                exportPdfBtn.disabled = false;
-            });
+  // Export to PDF with theme preservation
+  function exportPDF() {
+    // Check if html2pdf is loaded
+    if (typeof html2pdf === 'undefined') {
+      alert('PDF library is still loading. Please try again in a moment.');
+      return;
     }
 
-    // Event listeners for export buttons
-    exportHtmlBtn.addEventListener('click', exportHTML);
-    exportPdfBtn.addEventListener('click', exportPDF);
+    // Clone the preview content
+    const element = preview.cloneNode(true);
 
-    // View mode switching
-    function setViewMode(mode) {
-        // Remove active class from all buttons
-        editorOnlyBtn.classList.remove('active');
-        splitViewBtn.classList.remove('active');
-        previewOnlyBtn.classList.remove('active');
+    // Create a container with current theme styles
+    const container = document.createElement('div');
+    container.style.fontFamily =
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif';
+    container.style.maxWidth = '800px';
+    container.style.margin = '0 auto';
+    container.style.padding = '40px 20px';
+    container.style.lineHeight = '1.7';
+    container.style.backgroundColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--bg-primary')
+      .trim();
+    container.style.color = getComputedStyle(document.documentElement)
+      .getPropertyValue('--text-primary')
+      .trim();
+    container.appendChild(element);
 
-        // Apply view mode
-        switch(mode) {
-            case 'editor-only':
-                editorOnlyBtn.classList.add('active');
-                editorContainer.style.display = 'flex';
-                previewContainer.style.display = 'none';
-                break;
-            case 'split-view':
-                splitViewBtn.classList.add('active');
-                editorContainer.style.display = 'flex';
-                previewContainer.style.display = 'flex';
-                break;
-            case 'preview-only':
-                previewOnlyBtn.classList.add('active');
-                editorContainer.style.display = 'none';
-                previewContainer.style.display = 'flex';
-                break;
-        }
+    // PDF configuration with theme preservation
+    const opt = {
+      margin: [0.25, 0.25, 0.25, 0.25],
+      filename: 'markdown-export.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        letterRendering: true,
+        backgroundColor: getComputedStyle(document.documentElement)
+          .getPropertyValue('--bg-primary')
+          .trim(),
+      },
+      jsPDF: {
+        unit: 'in',
+        format: 'a4',
+        orientation: 'portrait',
+      },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+    };
 
-        // Save view mode preference
-        localStorage.setItem('viewMode', mode);
+    // Show a loading message
+    const originalText = exportPdfBtn.textContent;
+    exportPdfBtn.textContent = '⏳ Generating PDF...';
+    exportPdfBtn.disabled = true;
+
+    // Generate PDF
+    html2pdf()
+      .set(opt)
+      .from(container)
+      .save()
+      .then(() => {
+        exportPdfBtn.textContent = originalText;
+        exportPdfBtn.disabled = false;
+      })
+      .catch(err => {
+        console.error('PDF generation error:', err);
+        alert('Error generating PDF: ' + err.message);
+        exportPdfBtn.textContent = originalText;
+        exportPdfBtn.disabled = false;
+      });
+  }
+
+  // Event listeners for export buttons
+  exportHtmlBtn.addEventListener('click', exportHTML);
+  exportPdfBtn.addEventListener('click', exportPDF);
+
+  // View mode switching
+  function setViewMode(mode) {
+    // Remove active class from all buttons
+    editorOnlyBtn.classList.remove('active');
+    splitViewBtn.classList.remove('active');
+    previewOnlyBtn.classList.remove('active');
+
+    // Apply view mode
+    switch (mode) {
+      case 'editor-only':
+        editorOnlyBtn.classList.add('active');
+        editorContainer.style.display = 'flex';
+        previewContainer.style.display = 'none';
+        break;
+      case 'split-view':
+        splitViewBtn.classList.add('active');
+        editorContainer.style.display = 'flex';
+        previewContainer.style.display = 'flex';
+        break;
+      case 'preview-only':
+        previewOnlyBtn.classList.add('active');
+        editorContainer.style.display = 'none';
+        previewContainer.style.display = 'flex';
+        break;
     }
 
-    // View mode button event listeners
-    editorOnlyBtn.addEventListener('click', () => setViewMode('editor-only'));
-    splitViewBtn.addEventListener('click', () => setViewMode('split-view'));
-    previewOnlyBtn.addEventListener('click', () => setViewMode('preview-only'));
+    // Save view mode preference
+    localStorage.setItem('viewMode', mode);
+  }
 
-    // Load saved theme
-    const savedTheme = localStorage.getItem('selectedTheme');
-    if (savedTheme) {
-        themeSelector.value = savedTheme;
-        changeTheme(savedTheme);
+  // View mode button event listeners
+  editorOnlyBtn.addEventListener('click', () => setViewMode('editor-only'));
+  splitViewBtn.addEventListener('click', () => setViewMode('split-view'));
+  previewOnlyBtn.addEventListener('click', () => setViewMode('preview-only'));
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem('selectedTheme');
+  if (savedTheme) {
+    themeSelector.value = savedTheme;
+    changeTheme(savedTheme);
+  }
+
+  // Zoom functionality
+  function setZoom(zoomLevel) {
+    // Constrain zoom level between 50% and 200%
+    currentZoom = Math.max(50, Math.min(200, zoomLevel));
+
+    // Apply zoom using CSS transform
+    preview.style.transform = `scale(${currentZoom / 100})`;
+    preview.style.transformOrigin = 'top left';
+    preview.style.width = `${10000 / currentZoom}%`;
+
+    // Update display
+    zoomLevelDisplay.textContent = `${currentZoom}%`;
+
+    // Save to localStorage
+    localStorage.setItem('previewZoom', currentZoom.toString());
+  }
+
+  function zoomIn() {
+    setZoom(currentZoom + 10);
+  }
+
+  function zoomOut() {
+    setZoom(currentZoom - 10);
+  }
+
+  function resetZoom() {
+    setZoom(100);
+  }
+
+  // Zoom event listeners
+  zoomInBtn.addEventListener('click', zoomIn);
+  zoomOutBtn.addEventListener('click', zoomOut);
+  zoomResetBtn.addEventListener('click', resetZoom);
+
+  // Keyboard shortcuts for zoom (Ctrl/Cmd + Plus/Minus/0)
+  preview.addEventListener('wheel', e => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      if (e.deltaY < 0) {
+        zoomIn();
+      } else {
+        zoomOut();
+      }
     }
+  });
 
-    // Zoom functionality
-    function setZoom(zoomLevel) {
-        // Constrain zoom level between 50% and 200%
-        currentZoom = Math.max(50, Math.min(200, zoomLevel));
-
-        // Apply zoom using CSS transform
-        preview.style.transform = `scale(${currentZoom / 100})`;
-        preview.style.transformOrigin = 'top left';
-        preview.style.width = `${10000 / currentZoom}%`;
-
-        // Update display
-        zoomLevelDisplay.textContent = `${currentZoom}%`;
-
-        // Save to localStorage
-        localStorage.setItem('previewZoom', currentZoom.toString());
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.target.tagName !== 'TEXTAREA') {
+      if (e.key === '=' || e.key === '+') {
+        e.preventDefault();
+        zoomIn();
+      } else if (e.key === '-') {
+        e.preventDefault();
+        zoomOut();
+      } else if (e.key === '0') {
+        e.preventDefault();
+        resetZoom();
+      }
     }
+  });
 
-    function zoomIn() {
-        setZoom(currentZoom + 10);
-    }
+  // Load saved zoom level
+  const savedZoom = localStorage.getItem('previewZoom');
+  if (savedZoom) {
+    currentZoom = parseInt(savedZoom, 10);
+    setZoom(currentZoom);
+  }
 
-    function zoomOut() {
-        setZoom(currentZoom - 10);
-    }
+  // Load saved view mode
+  const savedViewMode = localStorage.getItem('viewMode') || 'split-view';
+  setViewMode(savedViewMode);
 
-    function resetZoom() {
-        setZoom(100);
-    }
-
-    // Zoom event listeners
-    zoomInBtn.addEventListener('click', zoomIn);
-    zoomOutBtn.addEventListener('click', zoomOut);
-    zoomResetBtn.addEventListener('click', resetZoom);
-
-    // Keyboard shortcuts for zoom (Ctrl/Cmd + Plus/Minus/0)
-    preview.addEventListener('wheel', (e) => {
-        if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            if (e.deltaY < 0) {
-                zoomIn();
-            } else {
-                zoomOut();
-            }
-        }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.target.tagName !== 'TEXTAREA') {
-            if (e.key === '=' || e.key === '+') {
-                e.preventDefault();
-                zoomIn();
-            } else if (e.key === '-') {
-                e.preventDefault();
-                zoomOut();
-            } else if (e.key === '0') {
-                e.preventDefault();
-                resetZoom();
-            }
-        }
-    });
-
-    // Load saved zoom level
-    const savedZoom = localStorage.getItem('previewZoom');
-    if (savedZoom) {
-        currentZoom = parseInt(savedZoom, 10);
-        setZoom(currentZoom);
-    }
-
-    // Load saved view mode
-    const savedViewMode = localStorage.getItem('viewMode') || 'split-view';
-    setViewMode(savedViewMode);
-
-    // Initial render
-    renderMarkdown();
+  // Initial render
+  renderMarkdown();
 }
