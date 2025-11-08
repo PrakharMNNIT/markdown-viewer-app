@@ -18,7 +18,7 @@ body {
 .app-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 44px); /* Reserve space for footer */
 }
 
 /* ==================== TOOLBAR ==================== */
@@ -527,6 +527,18 @@ body {
     font-size: 14px;
     color: var(--text-secondary);
     box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+}
+
+.app-footer a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.app-footer a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
 }
 
 /* ==================== MERMAID DIAGRAMS ==================== */
