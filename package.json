@@ -14,7 +14,9 @@
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
     "format": "prettier --write \"**/*.{js,css,html,md}\"",
-    "format:check": "prettier --check \"**/*.{js,css,html,md}\""
+    "format:check": "prettier --check \"**/*.{js,css,html,md}\"",
+    "review": "git add . && npx ai-review quick",
+    "review:full": "git add . && npx ai-review full"
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,7 @@
   "devDependencies": {
     "@vitest/coverage-v8": "4.0.8",
     "@vitest/ui": "4.0.8",
+    "ai-visual-code-review": "2.2.1",
     "eslint": "9.39.1",
     "jsdom": "27.1.0",
     "prettier": "3.6.2",
