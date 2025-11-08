@@ -74,6 +74,10 @@
                         <option value="sunset-light">Sunset Light</option>
                         <option value="sunset-dark">Sunset Dark</option>
                     </optgroup>
+                    <optgroup label="Obsidian">
+                        <option value="obsidian-light">Obsidian Light</option>
+                        <option value="obsidian-dark">Obsidian Dark</option>
+                    </optgroup>
                     <optgroup label="Custom">
                         <option value="custom">Custom Theme</option>
                     </optgroup>
@@ -254,24 +258,95 @@
                     </div>
                 </div>
                 <div class="color-control">
-                    <label>Inline Code</label>
+                    <label>Blockquote Border</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="blockquote-border" data-var="--blockquote-border">
+                        <input type="text" id="blockquote-border-text" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">💻 Code Block Colors</div>
+            <div class="color-grid">
+                <div class="color-control">
+                    <label>Inline Code Text</label>
                     <div class="color-input-wrapper">
                         <input type="color" id="code-text" data-var="--code-text">
                         <input type="text" id="code-text-text" readonly>
                     </div>
                 </div>
                 <div class="color-control">
-                    <label>Code Background</label>
+                    <label>Inline Code Background</label>
                     <div class="color-input-wrapper">
                         <input type="color" id="code-bg" data-var="--code-bg">
                         <input type="text" id="code-bg-text" readonly>
                     </div>
                 </div>
                 <div class="color-control">
-                    <label>Blockquote Border</label>
+                    <label>Code Block Background</label>
                     <div class="color-input-wrapper">
-                        <input type="color" id="blockquote-border" data-var="--blockquote-border">
-                        <input type="text" id="blockquote-border-text" readonly>
+                        <input type="color" id="code-block-bg" data-var="--code-block-bg">
+                        <input type="text" id="code-block-bg-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Code Block Border</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="code-border" data-var="--code-border">
+                        <input type="text" id="code-border-text" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">🎨 Syntax Highlighting</div>
+            <div class="color-grid">
+                <div class="color-control">
+                    <label>Keywords (if, else, class)</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="syntax-keyword" data-var="--syntax-keyword">
+                        <input type="text" id="syntax-keyword-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Strings ("text")</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="syntax-string" data-var="--syntax-string">
+                        <input type="text" id="syntax-string-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Numbers (123, 4.56)</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="syntax-number" data-var="--syntax-number">
+                        <input type="text" id="syntax-number-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Functions</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="syntax-function" data-var="--syntax-function">
+                        <input type="text" id="syntax-function-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Comments (// text)</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="syntax-comment" data-var="--syntax-comment">
+                        <input type="text" id="syntax-comment-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Operators (+, -, *, /)</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="syntax-operator" data-var="--syntax-operator">
+                        <input type="text" id="syntax-operator-text" readonly>
+                    </div>
+                </div>
+                <div class="color-control">
+                    <label>Punctuation ({, }, ;)</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" id="syntax-punctuation" data-var="--syntax-punctuation">
+                        <input type="text" id="syntax-punctuation-text" readonly>
                     </div>
                 </div>
             </div>

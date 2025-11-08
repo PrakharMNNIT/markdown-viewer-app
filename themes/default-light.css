@@ -1,28 +1,43 @@
 /* Default Light Theme */
 :root {
     --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-tertiary: #e9ecef;
-    --text-primary: #212529;
-    --text-secondary: #6c757d;
-    --border-color: #dee2e6;
-    
-    --h1-color: #2563eb;
-    --h2-color: #7c3aed;
-    --h3-color: #db2777;
-    --h4-color: #059669;
-    --h5-color: #ea580c;
-    --h6-color: #ca8a04;
-    
-    --link-color: #2563eb;
-    --link-hover: #1e40af;
-    --code-bg: #f1f5f9;
-    --code-text: #e11d48;
-    --code-block-bg: #1e293b;
-    --blockquote-border: #7c3aed;
-    --blockquote-bg: #f3f4f6;
-    --bold-color: #ea580c;
-    --italic-color: #db2777;
-    --table-header-bg: #e0e7ff;
-    --table-border: #cbd5e1;
+    --bg-secondary: #f6f8fa;
+    --bg-tertiary: #eaeef2;
+    --text-primary: #1f2328;
+    --text-secondary: #636c76;
+    --border-color: #d0d7de;
+
+    --h1-color: #0969da;
+    --h2-color: #8250df;
+    --h3-color: #cf222e;
+    --h4-color: #1a7f37;
+    --h5-color: #bc4c00;
+    --h6-color: #8250df;
+
+    --link-color: #0969da;
+    --link-hover: #0550ae;
+
+    --bold-color: #1f2328;
+    --italic-color: #636c76;
+
+    /* Code Colors */
+    --code-text: #cf222e;
+    --code-bg: rgba(175, 184, 193, 0.2);
+    --code-block-bg: #f6f8fa;
+    --code-border: #d0d7de;
+
+    /* Syntax Highlighting */
+    --syntax-keyword: #cf222e;
+    --syntax-string: #1a7f37;
+    --syntax-number: #0550ae;
+    --syntax-function: #8250df;
+    --syntax-comment: #636c76;
+    --syntax-operator: #cf222e;
+    --syntax-punctuation: #636c76;
+
+    --blockquote-border: #0969da;
+    --blockquote-bg: #ddf4ff;
+
+    --table-header-bg: #f6f8fa;
+    --table-border: #d0d7de;
 }

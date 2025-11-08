@@ -1,0 +1,74 @@
+/* 🎨 Obsidian Vibrant Light Theme */
+/* Modern, colorful, clean design inspired by Obsidian */
+
+:root {
+  /* 🌈 Light Color Palette */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7fa;
+  --bg-tertiary: #e8ecf1;
+  --bg-code: #f8f9fc;
+
+  /* 🎯 Accent Colors */
+  --color-pink: #e91e63;
+  --color-coral: #ff4081;
+  --color-yellow: #ffc107;
+  --color-cyan: #00bcd4;
+  --color-green: #4caf50;
+  --color-purple: #9c27b0;
+  --color-orange: #ff9800;
+  --color-blue: #2196f3;
+
+  /* 📝 Text Colors */
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-muted: #8a8a8a;
+  --text-code: #2e7d32;
+
+  /* 🎯 Semantic Colors */
+  --info: #0288d1;
+  --success: #388e3c;
+  --warning: #f57c00;
+  --error: #d32f2f;
+
+  /* Heading Colors */
+  --h1-color: #e91e63;
+  --h2-color: #f57c00;
+  --h3-color: #00bcd4;
+  --h4-color: #9c27b0;
+  --h5-color: #ff9800;
+  --h6-color: #4caf50;
+
+  /* Link Colors */
+  --link-color: #00bcd4;
+  --link-hover: #2196f3;
+
+  /* Text Formatting */
+  --bold-color: #1a1a1a;
+  --italic-color: #4a4a4a;
+
+  /* Code Colors */
+  --code-text: #2e7d32;
+  --code-bg: rgba(33, 150, 243, 0.08);
+  --code-block-bg: #f8f9fc;
+  --code-border: rgba(0, 188, 212, 0.2);
+
+  /* Syntax Highlighting */
+  --syntax-keyword: #9c27b0;
+  --syntax-string: #4caf50;
+  --syntax-number: #f57c00;
+  --syntax-function: #2196f3;
+  --syntax-comment: #9e9e9e;
+  --syntax-operator: #00bcd4;
+  --syntax-punctuation: #616161;
+
+  /* Blockquote */
+  --blockquote-border: #e91e63;
+  --blockquote-bg: rgba(233, 30, 99, 0.05);
+
+  /* Table */
+  --table-header-bg: rgba(233, 30, 99, 0.1);
+  --table-border: rgba(0, 0, 0, 0.12);
+
+  /* Border */
+  --border-color: rgba(0, 0, 0, 0.12);
+}

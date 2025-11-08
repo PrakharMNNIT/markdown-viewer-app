@@ -290,6 +290,40 @@ body {
     padding: 0;
 }
 
+/* Syntax Highlighting with Custom Variables */
+#markdown-preview .token.keyword {
+    color: var(--syntax-keyword, #c792ea) !important;
+}
+
+#markdown-preview .token.string {
+    color: var(--syntax-string, #a5e844) !important;
+}
+
+#markdown-preview .token.number,
+#markdown-preview .token.boolean {
+    color: var(--syntax-number, #ffcb6b) !important;
+}
+
+#markdown-preview .token.function {
+    color: var(--syntax-function, #82aaff) !important;
+}
+
+#markdown-preview .token.comment {
+    color: var(--syntax-comment, #7f85a3) !important;
+}
+
+#markdown-preview .token.operator {
+    color: var(--syntax-operator, #89ddff) !important;
+}
+
+#markdown-preview .token.punctuation {
+    color: var(--syntax-punctuation, #89ddff) !important;
+}
+
+#markdown-preview .token.class-name {
+    color: var(--syntax-keyword, #ffcb6b) !important;
+}
+
 #markdown-preview blockquote {
     border-left: 4px solid var(--blockquote-border);
     background-color: var(--blockquote-bg);
