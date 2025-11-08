@@ -35,3 +35,15 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build output
+dist/
+.vite/
+
+# Testing
+coverage/
+.vitest/
