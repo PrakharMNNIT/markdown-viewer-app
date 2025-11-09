@@ -1,366 +1,461 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Markdown Viewer Pro</title>
 
     <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/marked@11.0.0/marked.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" defer></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"
+      defer
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
 
     <!-- Main Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 
     <!-- Theme Stylesheet (dynamically loaded) -->
-    <link rel="stylesheet" href="themes/default-light.css" id="theme-stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="themes/default-light.css" id="theme-stylesheet" />
+  </head>
+  <body>
     <div class="app-container">
-        <!-- Toolbar -->
-        <div class="toolbar">
-            <h1>📝 Markdown Viewer Pro</h1>
-            <div class="toolbar-controls">
-                <!-- View Mode Buttons -->
-                <div class="view-mode-buttons">
-                    <button class="btn view-btn" id="editor-only-btn" title="Editor Only" aria-label="Editor Only">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                        </svg>
-                    </button>
-                    <button class="btn view-btn active" id="split-view-btn" title="Split View" aria-label="Split View">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="12" y1="3" x2="12" y2="21"></line>
-                        </svg>
-                    </button>
-                    <button class="btn view-btn" id="preview-only-btn" title="Preview Only" aria-label="Preview Only">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </button>
-                </div>
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <h1>📝 Markdown Viewer Pro</h1>
+        <div class="toolbar-controls">
+          <!-- View Mode Buttons -->
+          <div class="view-mode-buttons">
+            <button
+              class="btn view-btn"
+              id="editor-only-btn"
+              title="Editor Only"
+              aria-label="Editor Only"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+              </svg>
+            </button>
+            <button
+              class="btn view-btn active"
+              id="split-view-btn"
+              title="Split View"
+              aria-label="Split View"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="12" y1="3" x2="12" y2="21"></line>
+              </svg>
+            </button>
+            <button
+              class="btn view-btn"
+              id="preview-only-btn"
+              title="Preview Only"
+              aria-label="Preview Only"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
 
-                <select id="theme-selector" class="btn">
-                    <optgroup label="Default">
-                        <option value="default-light" selected>Default Light</option>
-                        <option value="default-dark">Default Dark</option>
-                    </optgroup>
-                    <optgroup label="Ocean">
-                        <option value="ocean-light">Ocean Light</option>
-                        <option value="ocean-dark">Ocean Dark</option>
-                    </optgroup>
-                    <optgroup label="Neon">
-                        <option value="neon-light">Neon Light</option>
-                        <option value="neon-dark">Neon Dark</option>
-                    </optgroup>
-                    <optgroup label="Forest">
-                        <option value="forest-light">Forest Light</option>
-                        <option value="forest-dark">Forest Dark</option>
-                    </optgroup>
-                    <optgroup label="Sunset">
-                        <option value="sunset-light">Sunset Light</option>
-                        <option value="sunset-dark">Sunset Dark</option>
-                    </optgroup>
-                    <optgroup label="Obsidian">
-                        <option value="obsidian-light">Obsidian Light</option>
-                        <option value="obsidian-dark">Obsidian Dark</option>
-                    </optgroup>
-                    <optgroup label="Custom">
-                        <option value="custom">Custom Theme</option>
-                    </optgroup>
-                </select>
-                <button class="btn" id="customize-btn">🎨 Customize Colors</button>
-                <button class="btn" id="export-html-btn">💾 Export HTML</button>
-                <button class="btn" id="export-pdf-btn">📕 Export PDF</button>
-            </div>
+          <select id="theme-selector" class="btn">
+            <optgroup label="Default">
+              <option value="default-light" selected>Default Light</option>
+              <option value="default-dark">Default Dark</option>
+            </optgroup>
+            <optgroup label="Ocean">
+              <option value="ocean-light">Ocean Light</option>
+              <option value="ocean-dark">Ocean Dark</option>
+            </optgroup>
+            <optgroup label="Neon">
+              <option value="neon-light">Neon Light</option>
+              <option value="neon-dark">Neon Dark</option>
+            </optgroup>
+            <optgroup label="Forest">
+              <option value="forest-light">Forest Light</option>
+              <option value="forest-dark">Forest Dark</option>
+            </optgroup>
+            <optgroup label="Sunset">
+              <option value="sunset-light">Sunset Light</option>
+              <option value="sunset-dark">Sunset Dark</option>
+            </optgroup>
+            <optgroup label="Obsidian">
+              <option value="obsidian-light">Obsidian Light</option>
+              <option value="obsidian-dark">Obsidian Dark</option>
+            </optgroup>
+            <optgroup label="Custom">
+              <option value="custom">Custom Theme</option>
+            </optgroup>
+          </select>
+          <button class="btn" id="customize-btn">🎨 Customize Colors</button>
+          <button class="btn" id="export-html-btn">💾 Export HTML</button>
+          <button class="btn" id="export-pdf-btn">📕 Export PDF</button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Editor -->
+        <div class="editor-container">
+          <div class="editor-header">MARKDOWN EDITOR</div>
+          <textarea id="markdown-editor" placeholder="Type your markdown here..."></textarea>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Editor -->
-            <div class="editor-container">
-                <div class="editor-header">MARKDOWN EDITOR</div>
-                <textarea id="markdown-editor" placeholder="Type your markdown here..."></textarea>
+        <!-- Preview -->
+        <div class="preview-container">
+          <div class="preview-header">
+            <span>PREVIEW</span>
+            <div class="zoom-controls">
+              <button class="zoom-btn" id="zoom-out-btn" title="Zoom Out" aria-label="Zoom Out">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+              <span class="zoom-level" id="zoom-level">100%</span>
+              <button class="zoom-btn" id="zoom-in-btn" title="Zoom In" aria-label="Zoom In">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+              <button
+                class="zoom-btn"
+                id="zoom-reset-btn"
+                title="Reset Zoom"
+                aria-label="Reset Zoom"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                  <path d="M21 3v5h-5"></path>
+                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                  <path d="M3 21v-5h5"></path>
+                </svg>
+              </button>
             </div>
-
-            <!-- Preview -->
-            <div class="preview-container">
-                <div class="preview-header">
-                    <span>PREVIEW</span>
-                    <div class="zoom-controls">
-                        <button class="zoom-btn" id="zoom-out-btn" title="Zoom Out" aria-label="Zoom Out">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                <line x1="8" y1="11" x2="14" y2="11"></line>
-                            </svg>
-                        </button>
-                        <span class="zoom-level" id="zoom-level">100%</span>
-                        <button class="zoom-btn" id="zoom-in-btn" title="Zoom In" aria-label="Zoom In">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                <line x1="11" y1="8" x2="11" y2="14"></line>
-                                <line x1="8" y1="11" x2="14" y2="11"></line>
-                            </svg>
-                        </button>
-                        <button class="zoom-btn" id="zoom-reset-btn" title="Reset Zoom" aria-label="Reset Zoom">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
-                                <path d="M21 3v5h-5"></path>
-                                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
-                                <path d="M3 21v-5h5"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div id="markdown-preview"></div>
-            </div>
+          </div>
+          <div id="markdown-preview"></div>
         </div>
+      </div>
     </div>
 
     <!-- Footer -->
     <footer class="app-footer">
-        Made with ❤️ by Prax Lannister | Follow me on
-        <a href="https://github.com/PrakharMNNIT" target="_blank" rel="noopener noreferrer">GitHub</a> &
-        <a href="https://x.com/ByteByByteSrSDE" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+      Made with ❤️ by Prax Lannister | Follow me on
+      <a href="https://github.com/PrakharMNNIT" target="_blank" rel="noopener noreferrer">GitHub</a>
+      &
+      <a href="https://x.com/ByteByByteSrSDE" target="_blank" rel="noopener noreferrer"
+        >X (Twitter)</a
+      >
     </footer>
 
     <!-- Theme Customizer Modal -->
     <div id="customizer-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🎨 Theme Customizer</h2>
-                <button class="close-btn" id="close-modal">&times;</button>
-            </div>
-
-            <div class="section-title">Background Colors</div>
-            <div class="color-grid">
-                <div class="color-control">
-                    <label>Primary Background</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="bg-primary" data-var="--bg-primary">
-                        <input type="text" id="bg-primary-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Secondary Background</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="bg-secondary" data-var="--bg-secondary">
-                        <input type="text" id="bg-secondary-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Tertiary Background</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="bg-tertiary" data-var="--bg-tertiary">
-                        <input type="text" id="bg-tertiary-text" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-title">Text Colors</div>
-            <div class="color-grid">
-                <div class="color-control">
-                    <label>Primary Text</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="text-primary" data-var="--text-primary">
-                        <input type="text" id="text-primary-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Secondary Text</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="text-secondary" data-var="--text-secondary">
-                        <input type="text" id="text-secondary-text" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-title">Header Colors</div>
-            <div class="color-grid">
-                <div class="color-control">
-                    <label>H1 Header</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="h1-color" data-var="--h1-color">
-                        <input type="text" id="h1-color-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>H2 Header</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="h2-color" data-var="--h2-color">
-                        <input type="text" id="h2-color-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>H3 Header</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="h3-color" data-var="--h3-color">
-                        <input type="text" id="h3-color-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>H4 Header</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="h4-color" data-var="--h4-color">
-                        <input type="text" id="h4-color-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>H5 Header</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="h5-color" data-var="--h5-color">
-                        <input type="text" id="h5-color-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>H6 Header</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="h6-color" data-var="--h6-color">
-                        <input type="text" id="h6-color-text" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-title">Element Colors</div>
-            <div class="color-grid">
-                <div class="color-control">
-                    <label>Links</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="link-color" data-var="--link-color">
-                        <input type="text" id="link-color-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Bold Text</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="bold-color" data-var="--bold-color">
-                        <input type="text" id="bold-color-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Italic Text</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="italic-color" data-var="--italic-color">
-                        <input type="text" id="italic-color-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Blockquote Border</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="blockquote-border" data-var="--blockquote-border">
-                        <input type="text" id="blockquote-border-text" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-title">💻 Code Block Colors</div>
-            <div class="color-grid">
-                <div class="color-control">
-                    <label>Inline Code Text</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="code-text" data-var="--code-text">
-                        <input type="text" id="code-text-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Inline Code Background</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="code-bg" data-var="--code-bg">
-                        <input type="text" id="code-bg-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Code Block Background</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="code-block-bg" data-var="--code-block-bg">
-                        <input type="text" id="code-block-bg-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Code Block Border</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="code-border" data-var="--code-border">
-                        <input type="text" id="code-border-text" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-title">🎨 Syntax Highlighting</div>
-            <div class="color-grid">
-                <div class="color-control">
-                    <label>Keywords (if, else, class)</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="syntax-keyword" data-var="--syntax-keyword">
-                        <input type="text" id="syntax-keyword-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Strings ("text")</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="syntax-string" data-var="--syntax-string">
-                        <input type="text" id="syntax-string-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Numbers (123, 4.56)</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="syntax-number" data-var="--syntax-number">
-                        <input type="text" id="syntax-number-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Functions</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="syntax-function" data-var="--syntax-function">
-                        <input type="text" id="syntax-function-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Comments (// text)</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="syntax-comment" data-var="--syntax-comment">
-                        <input type="text" id="syntax-comment-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Operators (+, -, *, /)</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="syntax-operator" data-var="--syntax-operator">
-                        <input type="text" id="syntax-operator-text" readonly>
-                    </div>
-                </div>
-                <div class="color-control">
-                    <label>Punctuation ({, }, ;)</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" id="syntax-punctuation" data-var="--syntax-punctuation">
-                        <input type="text" id="syntax-punctuation-text" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-actions">
-                <button class="btn" id="reset-btn">Reset to Default</button>
-                <button class="btn" id="save-theme-btn">Save Custom Theme</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>🎨 Theme Customizer</h2>
+          <button class="close-btn" id="close-modal">&times;</button>
         </div>
+
+        <div class="section-title">Background Colors</div>
+        <div class="color-grid">
+          <div class="color-control">
+            <label>Primary Background</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="bg-primary" data-var="--bg-primary" />
+              <input type="text" id="bg-primary-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Secondary Background</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="bg-secondary" data-var="--bg-secondary" />
+              <input type="text" id="bg-secondary-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Tertiary Background</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="bg-tertiary" data-var="--bg-tertiary" />
+              <input type="text" id="bg-tertiary-text" readonly />
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">Text Colors</div>
+        <div class="color-grid">
+          <div class="color-control">
+            <label>Primary Text</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="text-primary" data-var="--text-primary" />
+              <input type="text" id="text-primary-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Secondary Text</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="text-secondary" data-var="--text-secondary" />
+              <input type="text" id="text-secondary-text" readonly />
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">Header Colors</div>
+        <div class="color-grid">
+          <div class="color-control">
+            <label>H1 Header</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="h1-color" data-var="--h1-color" />
+              <input type="text" id="h1-color-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>H2 Header</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="h2-color" data-var="--h2-color" />
+              <input type="text" id="h2-color-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>H3 Header</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="h3-color" data-var="--h3-color" />
+              <input type="text" id="h3-color-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>H4 Header</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="h4-color" data-var="--h4-color" />
+              <input type="text" id="h4-color-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>H5 Header</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="h5-color" data-var="--h5-color" />
+              <input type="text" id="h5-color-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>H6 Header</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="h6-color" data-var="--h6-color" />
+              <input type="text" id="h6-color-text" readonly />
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">Element Colors</div>
+        <div class="color-grid">
+          <div class="color-control">
+            <label>Links</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="link-color" data-var="--link-color" />
+              <input type="text" id="link-color-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Bold Text</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="bold-color" data-var="--bold-color" />
+              <input type="text" id="bold-color-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Italic Text</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="italic-color" data-var="--italic-color" />
+              <input type="text" id="italic-color-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Blockquote Border</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="blockquote-border" data-var="--blockquote-border" />
+              <input type="text" id="blockquote-border-text" readonly />
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">💻 Code Block Colors</div>
+        <div class="color-grid">
+          <div class="color-control">
+            <label>Inline Code Text</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="code-text" data-var="--code-text" />
+              <input type="text" id="code-text-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Inline Code Background</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="code-bg" data-var="--code-bg" />
+              <input type="text" id="code-bg-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Code Block Background</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="code-block-bg" data-var="--code-block-bg" />
+              <input type="text" id="code-block-bg-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Code Block Border</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="code-border" data-var="--code-border" />
+              <input type="text" id="code-border-text" readonly />
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">🎨 Syntax Highlighting</div>
+        <div class="color-grid">
+          <div class="color-control">
+            <label>Keywords (if, else, class)</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="syntax-keyword" data-var="--syntax-keyword" />
+              <input type="text" id="syntax-keyword-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Strings ("text")</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="syntax-string" data-var="--syntax-string" />
+              <input type="text" id="syntax-string-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Numbers (123, 4.56)</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="syntax-number" data-var="--syntax-number" />
+              <input type="text" id="syntax-number-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Functions</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="syntax-function" data-var="--syntax-function" />
+              <input type="text" id="syntax-function-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Comments (// text)</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="syntax-comment" data-var="--syntax-comment" />
+              <input type="text" id="syntax-comment-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Operators (+, -, *, /)</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="syntax-operator" data-var="--syntax-operator" />
+              <input type="text" id="syntax-operator-text" readonly />
+            </div>
+          </div>
+          <div class="color-control">
+            <label>Punctuation ({, }, ;)</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="syntax-punctuation" data-var="--syntax-punctuation" />
+              <input type="text" id="syntax-punctuation-text" readonly />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn" id="reset-btn">Reset to Default</button>
+          <button class="btn" id="save-theme-btn">Save Custom Theme</button>
+        </div>
+      </div>
     </div>
 
     <!-- Main Script -->
-    <script src="script.js"></script>
-</body>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
