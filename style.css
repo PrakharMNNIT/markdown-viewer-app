@@ -143,7 +143,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto; /* Single scrollbar for preview container */
 }
 
 .preview-header {
@@ -196,11 +196,10 @@ body {
 }
 
 #markdown-preview {
-  flex: 1;
   padding: 30px;
   padding-bottom: 60px; /* Extra bottom padding for footer clearance */
-  overflow-y: auto;
   background-color: var(--bg-primary);
+  min-height: 100%; /* Ensure content fills container */
 }
 
 /* ==================== MARKDOWN PREVIEW STYLES ==================== */

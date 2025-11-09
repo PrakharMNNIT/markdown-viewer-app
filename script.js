@@ -566,10 +566,17 @@ graph TD
     // Constrain zoom level between 50% and 200%
     currentZoom = Math.max(50, Math.min(200, zoomLevel));
 
-    // Apply zoom using CSS transform
+    // Apply zoom using CSS transform with proper container sizing
     preview.style.transform = `scale(${currentZoom / 100})`;
     preview.style.transformOrigin = 'top left';
     preview.style.width = `${10000 / currentZoom}%`;
+    preview.style.height = `${10000 / currentZoom}%`;
+
+    // Ensure scrollbar remains visible and functional
+    const previewContainer = preview.parentElement;
+    if (previewContainer) {
+      previewContainer.style.overflow = 'auto';
+    }
 
     // Update display
     zoomLevelDisplay.textContent = `${currentZoom}%`;
