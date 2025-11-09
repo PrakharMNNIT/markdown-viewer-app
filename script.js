@@ -1,6 +1,16 @@
 // Markdown Viewer Pro - Main Script
 
-// Import constants and utilities
+// Import constants, utilities, services, and core modules
+import { StorageManager } from './src/js/core/StorageManager.js';
+import { ThemeManager } from './src/js/core/ThemeManager.js';
+import { MermaidService } from './src/js/services/MermaidService.js';
+import { PrismService } from './src/js/services/PrismService.js';
+
+// Initialize services and managers (but don't use yet - feature flags OFF)
+const storageManager = new StorageManager();
+const themeManager = new ThemeManager(storageManager);
+const mermaidService = new MermaidService();
+const prismService = new PrismService();
 
 // Wait for all scripts to load
 window.addEventListener('DOMContentLoaded', function () {
