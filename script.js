@@ -160,8 +160,8 @@ graph TD
   const zoomLevelDisplay = document.getElementById('zoom-level');
   let currentZoom = 100; // Default zoom level
 
-  // Set default content
-  const savedContent = localStorage.getItem('markdownContent');
+  // Set default content using StorageManager
+  const savedContent = storageManager.get('markdownContent');
   editor.value = savedContent || defaultMarkdown;
 
   // Helper function to decode HTML entities
@@ -211,8 +211,8 @@ graph TD
       // Apply Prism syntax highlighting using PrismService
       prismService.highlightAll(preview);
 
-      // Save content
-      localStorage.setItem('markdownContent', markdownText);
+      // Save content using StorageManager
+      storageManager.set('markdownContent', markdownText);
     } catch (error) {
       console.error('Render error:', error);
       preview.innerHTML =
@@ -220,36 +220,13 @@ graph TD
     }
   }
 
-  // Change theme
-  function changeTheme(themeName) {
-    if (themeName === 'custom') {
-      const customTheme = localStorage.getItem('customTheme');
-      if (customTheme) {
-        const theme = JSON.parse(customTheme);
-        Object.entries(theme).forEach(([property, value]) => {
-          document.documentElement.style.setProperty(property, value);
-        });
-      }
-    } else {
-      // Remove inline styles
-      const root = document.documentElement;
-      const styles = root.style;
-      for (let i = styles.length - 1; i >= 0; i--) {
-        const prop = styles[i];
-        if (prop.startsWith('--')) {
-          root.style.removeProperty(prop);
-        }
-      }
+  // Change theme using ThemeManager
+  async function changeTheme(themeName) {
+    await themeManager.loadTheme(themeName);
 
-      // Load theme stylesheet
-      themeStylesheet.href = `themes/${themeName}.css`;
-    }
-    localStorage.setItem('selectedTheme', themeName);
-
-    // Reinitialize Mermaid with new theme colors
+    // Re-render to apply new Mermaid theme (observer already handles reinit)
     setTimeout(() => {
-      initMermaidTheme();
-      renderMarkdown(); // Re-render to apply new Mermaid theme
+      renderMarkdown();
     }, 100);
   }
 
@@ -279,9 +256,9 @@ graph TD
     let themeCSS = '';
 
     if (currentTheme === 'custom') {
-      const customTheme = localStorage.getItem('customTheme');
+      const customTheme = storageManager.getJSON('customTheme');
       if (customTheme) {
-        const theme = JSON.parse(customTheme);
+        const theme = customTheme;
         themeCSS = ':root {\n';
         Object.entries(theme).forEach(([property, value]) => {
           themeCSS += `    ${property}: ${value};\n`;
@@ -373,8 +350,8 @@ graph TD
   // Event Listeners
   editor.addEventListener('input', renderMarkdown);
 
-  themeSelector.addEventListener('change', e => {
-    changeTheme(e.target.value);
+  themeSelector.addEventListener('change', async e => {
+    await changeTheme(e.target.value);
   });
 
   customizeBtn.addEventListener('click', () => {
@@ -392,21 +369,25 @@ graph TD
     }
   });
 
-  resetBtn.addEventListener('click', () => {
+  resetBtn.addEventListener('click', async () => {
     const currentTheme = themeSelector.value === 'custom' ? 'default-light' : themeSelector.value;
-    changeTheme(currentTheme);
+    await changeTheme(currentTheme);
     initColorInputs();
   });
 
-  saveThemeBtn.addEventListener('click', () => {
+  saveThemeBtn.addEventListener('click', async () => {
     const customTheme = {};
     document.querySelectorAll('.color-control input[type="color"]').forEach(input => {
       const varName = input.dataset.var;
       customTheme[varName] = input.value;
     });
-    localStorage.setItem('customTheme', JSON.stringify(customTheme));
+
+    // Save and load custom theme using ThemeManager
+    themeManager.saveCustomTheme(customTheme);
+    await themeManager.loadTheme('custom');
     themeSelector.value = 'custom';
-    alert('Custom theme saved! Select "Custom Theme" from the dropdown to use it.');
+
+    alert('Custom theme saved and applied!');
     modal.classList.remove('active');
   });
 
@@ -511,7 +492,7 @@ graph TD
     }
 
     // Save view mode preference
-    localStorage.setItem('viewMode', mode);
+    storageManager.set('viewMode', mode);
   }
 
   // View mode button event listeners
@@ -519,11 +500,14 @@ graph TD
   splitViewBtn.addEventListener('click', () => setViewMode('split-view'));
   previewOnlyBtn.addEventListener('click', () => setViewMode('preview-only'));
 
-  // Load saved theme
-  const savedTheme = localStorage.getItem('selectedTheme');
+  // Load saved theme using ThemeManager
+  const savedTheme = storageManager.get('selectedTheme');
   if (savedTheme) {
     themeSelector.value = savedTheme;
-    changeTheme(savedTheme);
+    themeManager.loadTheme(savedTheme).catch(err => {
+      console.error('Failed to load saved theme:', err);
+      themeManager.loadTheme('default-light');
+    });
   }
 
   // Zoom functionality
@@ -547,7 +531,7 @@ graph TD
     zoomLevelDisplay.textContent = `${currentZoom}%`;
 
     // Save to localStorage
-    localStorage.setItem('previewZoom', currentZoom.toString());
+    storageManager.set('previewZoom', currentZoom.toString());
   }
 
   function zoomIn() {
@@ -595,14 +579,14 @@ graph TD
   });
 
   // Load saved zoom level
-  const savedZoom = localStorage.getItem('previewZoom');
+  const savedZoom = storageManager.get('previewZoom');
   if (savedZoom) {
     currentZoom = parseInt(savedZoom, 10);
     setZoom(currentZoom);
   }
 
   // Load saved view mode
-  const savedViewMode = localStorage.getItem('viewMode') || 'split-view';
+  const savedViewMode = storageManager.get('viewMode') || 'split-view';
   setViewMode(savedViewMode);
 
   // Initial render
