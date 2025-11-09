@@ -4,6 +4,7 @@
 import { StorageManager } from './src/js/core/StorageManager.js';
 import { ThemeManager } from './src/js/core/ThemeManager.js';
 import { MermaidService } from './src/js/services/MermaidService.js';
+import { PDFService } from './src/js/services/PDFService.js';
 import { PrismService } from './src/js/services/PrismService.js';
 
 // Initialize services and managers - NOW ACTIVELY USED
@@ -11,6 +12,7 @@ const storageManager = new StorageManager();
 const themeManager = new ThemeManager(storageManager);
 const mermaidService = new MermaidService();
 const prismService = new PrismService();
+const pdfService = new PDFService();
 
 // Configure theme change listener to update Mermaid
 themeManager.setThemeChangeListener(() => {
@@ -33,6 +35,15 @@ function initializeApp() {
     setTimeout(initializeApp, 100);
     return;
   }
+
+  // Wait for html2pdf to load before setting up editor
+  if (typeof html2pdf === 'undefined') {
+    console.log('Waiting for html2pdf library...');
+    setTimeout(initializeApp, 100);
+    return;
+  }
+
+  console.log('All libraries loaded successfully');
 
   // Initialize Mermaid with theme-aware configuration
   initMermaidTheme();
@@ -391,79 +402,147 @@ graph TD
     modal.classList.remove('active');
   });
 
-  // Export to PDF with theme preservation
-  function exportPDF() {
-    // Check if html2pdf is loaded
-    if (typeof html2pdf === 'undefined') {
+  // PDF Modal and Controls
+  const pdfModal = document.getElementById('pdf-modal');
+  const closePdfModal = document.getElementById('close-pdf-modal');
+  const pdfPreviewFrame = document.getElementById('pdf-preview-frame');
+  const pdfPageSize = document.getElementById('pdf-page-size');
+  const pdfOrientation = document.getElementById('pdf-orientation');
+  const pdfMarginTop = document.getElementById('pdf-margin-top');
+  const pdfMarginRight = document.getElementById('pdf-margin-right');
+  const pdfMarginBottom = document.getElementById('pdf-margin-bottom');
+  const pdfMarginLeft = document.getElementById('pdf-margin-left');
+  const pdfFontDecrease = document.getElementById('pdf-font-decrease');
+  const pdfFontIncrease = document.getElementById('pdf-font-increase');
+  const pdfFontSizeDisplay = document.getElementById('pdf-font-size-display');
+  const pdfPreviewBtn = document.getElementById('pdf-preview-btn');
+  const pdfDownloadBtn = document.getElementById('pdf-download-btn');
+
+  let currentFontSize = 12;
+
+  // Open PDF modal
+  function openPDFModal() {
+    if (!pdfService.isReady()) {
       alert('PDF library is still loading. Please try again in a moment.');
       return;
     }
-
-    // Clone the preview content
-    const element = preview.cloneNode(true);
-
-    // Create a container with current theme styles
-    const container = document.createElement('div');
-    container.style.fontFamily =
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif';
-    container.style.maxWidth = '800px';
-    container.style.margin = '0 auto';
-    container.style.padding = '40px 20px';
-    container.style.lineHeight = '1.7';
-    container.style.backgroundColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--bg-primary')
-      .trim();
-    container.style.color = getComputedStyle(document.documentElement)
-      .getPropertyValue('--text-primary')
-      .trim();
-    container.appendChild(element);
-
-    // PDF configuration with theme preservation
-    const opt = {
-      margin: [0.25, 0.25, 0.25, 0.25],
-      filename: 'markdown-export.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: {
-        scale: 2,
-        useCORS: true,
-        letterRendering: true,
-        backgroundColor: getComputedStyle(document.documentElement)
-          .getPropertyValue('--bg-primary')
-          .trim(),
-      },
-      jsPDF: {
-        unit: 'in',
-        format: 'a4',
-        orientation: 'portrait',
-      },
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-    };
-
-    // Show a loading message
-    const originalText = exportPdfBtn.textContent;
-    exportPdfBtn.textContent = '⏳ Generating PDF...';
-    exportPdfBtn.disabled = true;
-
-    // Generate PDF
-    html2pdf()
-      .set(opt)
-      .from(container)
-      .save()
-      .then(() => {
-        exportPdfBtn.textContent = originalText;
-        exportPdfBtn.disabled = false;
-      })
-      .catch(err => {
-        console.error('PDF generation error:', err);
-        alert('Error generating PDF: ' + err.message);
-        exportPdfBtn.textContent = originalText;
-        exportPdfBtn.disabled = false;
-      });
+    pdfModal.classList.add('active');
+    updatePDFPreview();
   }
+
+  // Close PDF modal
+  closePdfModal.addEventListener('click', () => {
+    pdfModal.classList.remove('active');
+    // Clean up iframe
+    pdfPreviewFrame.src = '';
+  });
+
+  pdfModal.addEventListener('click', e => {
+    if (e.target === pdfModal) {
+      pdfModal.classList.remove('active');
+      pdfPreviewFrame.src = '';
+    }
+  });
+
+  // Get current PDF configuration from UI
+  function getPDFConfig() {
+    return {
+      pageSize: pdfPageSize.value,
+      orientation: pdfOrientation.value,
+      margins: [
+        parseFloat(pdfMarginTop.value),
+        parseFloat(pdfMarginRight.value),
+        parseFloat(pdfMarginBottom.value),
+        parseFloat(pdfMarginLeft.value),
+      ],
+      fontSize: currentFontSize,
+    };
+  }
+
+  // Update PDF preview
+  async function updatePDFPreview() {
+    try {
+      pdfPreviewBtn.textContent = '⏳ Generating Preview...';
+      pdfPreviewBtn.disabled = true;
+
+      const config = getPDFConfig();
+      const previewUrl = await pdfService.previewPDF(preview, config);
+      pdfPreviewFrame.src = previewUrl;
+
+      pdfPreviewBtn.textContent = '👁️ Update Preview';
+      pdfPreviewBtn.disabled = false;
+    } catch (error) {
+      console.error('PDF preview error:', error);
+      alert('Error generating preview: ' + error.message);
+      pdfPreviewBtn.textContent = '👁️ Update Preview';
+      pdfPreviewBtn.disabled = false;
+    }
+  }
+
+  // Download PDF
+  async function downloadPDF() {
+    try {
+      pdfDownloadBtn.textContent = '⏳ Downloading...';
+      pdfDownloadBtn.disabled = true;
+
+      const success = pdfService.downloadPDF();
+      if (success) {
+        setTimeout(() => {
+          pdfModal.classList.remove('active');
+          pdfPreviewFrame.src = '';
+        }, 500);
+      }
+
+      pdfDownloadBtn.textContent = '💾 Download PDF';
+      pdfDownloadBtn.disabled = false;
+    } catch (error) {
+      console.error('PDF download error:', error);
+      alert('Error downloading PDF: ' + error.message);
+      pdfDownloadBtn.textContent = '💾 Download PDF';
+      pdfDownloadBtn.disabled = false;
+    }
+  }
+
+  // Font size controls with auto-update
+  pdfFontDecrease.addEventListener('click', () => {
+    if (currentFontSize > 8) {
+      currentFontSize -= 1;
+      pdfFontSizeDisplay.textContent = `${currentFontSize}pt`;
+      updatePDFPreview();
+    }
+  });
+
+  pdfFontIncrease.addEventListener('click', () => {
+    if (currentFontSize < 24) {
+      currentFontSize += 1;
+      pdfFontSizeDisplay.textContent = `${currentFontSize}pt`;
+      updatePDFPreview();
+    }
+  });
+
+  // Auto-update preview when settings change
+  pdfPageSize.addEventListener('change', updatePDFPreview);
+  pdfOrientation.addEventListener('change', updatePDFPreview);
+  pdfMarginTop.addEventListener('input', updatePDFPreview);
+  pdfMarginRight.addEventListener('input', updatePDFPreview);
+  pdfMarginBottom.addEventListener('input', updatePDFPreview);
+  pdfMarginLeft.addEventListener('input', updatePDFPreview);
+
+  // PDF Event Listeners
+  pdfPreviewBtn.addEventListener('click', updatePDFPreview);
+  pdfDownloadBtn.addEventListener('click', downloadPDF);
 
   // Event listeners for export buttons
   exportHtmlBtn.addEventListener('click', exportHTML);
-  exportPdfBtn.addEventListener('click', exportPDF);
+  exportPdfBtn.addEventListener('click', () => {
+    console.log('Export PDF button clicked');
+    openPDFModal();
+  });
+
+  // Debug: Verify elements are found
+  console.log('Export PDF Button:', exportPdfBtn);
+  console.log('PDF Modal:', pdfModal);
+  console.log('PDF Service Ready:', pdfService.isReady());
 
   // View mode switching
   function setViewMode(mode) {

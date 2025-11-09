@@ -56,10 +56,28 @@ export const THEMES = {
 
 // PDF Export Configuration
 export const PDF_CONFIG = {
-  MARGIN: [0.25, 0.25, 0.25, 0.25],
+  PAGE_SIZES: {
+    A4: { width: 210, height: 297 },
+    LETTER: { width: 216, height: 279 },
+    LEGAL: { width: 216, height: 356 },
+  },
+  ORIENTATIONS: {
+    PORTRAIT: 'portrait',
+    LANDSCAPE: 'landscape',
+  },
+  DEFAULT_MARGINS: [0.5, 0.5, 0.5, 0.5], // inches: [top, right, bottom, left]
+  MARGIN_LIMITS: {
+    MIN: 0,
+    MAX: 2,
+    STEP: 0.25,
+  },
+  FONT_SIZES: {
+    MIN: 8,
+    MAX: 24,
+    DEFAULT: 12,
+    STEP: 1,
+  },
   FILENAME: 'markdown-export.pdf',
-  FORMAT: 'a4',
-  ORIENTATION: 'portrait',
   SCALE: 2,
   QUALITY: 0.98,
 };
