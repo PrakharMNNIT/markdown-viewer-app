@@ -6,11 +6,16 @@ import { ThemeManager } from './src/js/core/ThemeManager.js';
 import { MermaidService } from './src/js/services/MermaidService.js';
 import { PrismService } from './src/js/services/PrismService.js';
 
-// Initialize services and managers (but don't use yet - feature flags OFF)
+// Initialize services and managers - NOW ACTIVELY USED
 const storageManager = new StorageManager();
 const themeManager = new ThemeManager(storageManager);
 const mermaidService = new MermaidService();
 const prismService = new PrismService();
+
+// Configure theme change listener to update Mermaid
+themeManager.setThemeChangeListener(() => {
+  mermaidService.reinitialize();
+});
 
 // Wait for all scripts to load
 window.addEventListener('DOMContentLoaded', function () {
@@ -35,55 +40,9 @@ function initializeApp() {
   setupEditor();
 }
 
-// Initialize Mermaid with theme-aware colors
+// Initialize Mermaid using MermaidService
 function initMermaidTheme() {
-  const isDark =
-    getComputedStyle(document.documentElement)
-      .getPropertyValue('--bg-primary')
-      .trim()
-      .startsWith('#0') ||
-    getComputedStyle(document.documentElement)
-      .getPropertyValue('--bg-primary')
-      .trim()
-      .startsWith('#1') ||
-    getComputedStyle(document.documentElement)
-      .getPropertyValue('--bg-primary')
-      .trim()
-      .startsWith('#2');
-
-  const h1Color = getComputedStyle(document.documentElement).getPropertyValue('--h1-color').trim();
-  const h2Color = getComputedStyle(document.documentElement).getPropertyValue('--h2-color').trim();
-  const h3Color = getComputedStyle(document.documentElement).getPropertyValue('--h3-color').trim();
-  const bgSecondary = getComputedStyle(document.documentElement)
-    .getPropertyValue('--bg-secondary')
-    .trim();
-  const textPrimary = getComputedStyle(document.documentElement)
-    .getPropertyValue('--text-primary')
-    .trim();
-
-  mermaid.initialize({
-    startOnLoad: false,
-    theme: 'base',
-    themeVariables: {
-      primaryColor: bgSecondary,
-      primaryTextColor: textPrimary,
-      primaryBorderColor: h1Color,
-      lineColor: h2Color,
-      secondaryColor: bgSecondary,
-      tertiaryColor: bgSecondary,
-      background: bgSecondary,
-      mainBkg: bgSecondary,
-      secondBkg: bgSecondary,
-      tertiaryBkg: bgSecondary,
-      nodeBorder: h1Color,
-      clusterBkg: bgSecondary,
-      clusterBorder: h3Color,
-      titleColor: textPrimary,
-      edgeLabelBackground: bgSecondary,
-      nodeTextColor: textPrimary,
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    },
-  });
+  mermaidService.initialize();
 }
 
 function setupEditor() {
@@ -249,12 +208,8 @@ graph TD
 
       preview.innerHTML = html;
 
-      // Apply Prism syntax highlighting
-      if (typeof Prism !== 'undefined') {
-        preview.querySelectorAll('pre code').forEach(block => {
-          Prism.highlightElement(block);
-        });
-      }
+      // Apply Prism syntax highlighting using PrismService
+      prismService.highlightAll(preview);
 
       // Save content
       localStorage.setItem('markdownContent', markdownText);
