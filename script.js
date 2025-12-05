@@ -61,10 +61,86 @@ function initializeApp() {
 
   console.log('✅ KaTeX loaded - Math formula rendering available');
 
+  // Configure marked.js with KaTeX extension
+  configureMarkedWithMath();
+
   // Initialize Mermaid with theme-aware configuration
   initMermaidTheme();
 
   setupEditor();
+}
+
+// Configure marked.js to handle math formulas
+function configureMarkedWithMath() {
+  if (typeof katex === 'undefined') {
+    console.warn('KaTeX not loaded, math rendering unavailable');
+    return;
+  }
+
+  marked.use({
+    extensions: [
+      {
+        name: 'mathBlock',
+        level: 'block',
+        start(src) {
+          return src.match(/^\$\$/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\$\$([\s\S]+?)\$\$/);
+          if (match) {
+            return {
+              type: 'mathBlock',
+              raw: match[0],
+              text: match[1].trim(),
+            };
+          }
+        },
+        renderer(token) {
+          try {
+            return katex.renderToString(token.text, {
+              displayMode: true,
+              throwOnError: false,
+              output: 'html',
+            });
+          } catch (e) {
+            console.warn('KaTeX display math error:', e);
+            return `<div style="color: red; padding: 10px;">Math Error: ${e.message}</div>`;
+          }
+        },
+      },
+      {
+        name: 'mathInline',
+        level: 'inline',
+        start(src) {
+          return src.match(/\$/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\$([^$\n]+?)\$/);
+          if (match) {
+            return {
+              type: 'mathInline',
+              raw: match[0],
+              text: match[1].trim(),
+            };
+          }
+        },
+        renderer(token) {
+          try {
+            return katex.renderToString(token.text, {
+              displayMode: false,
+              throwOnError: false,
+              output: 'html',
+            });
+          } catch (e) {
+            console.warn('KaTeX inline math error:', e);
+            return `<span style="color: red;">Math Error</span>`;
+          }
+        },
+      },
+    ],
+  });
+
+  console.log('✅ Marked.js configured with KaTeX extension');
 }
 
 // Initialize Mermaid using MermaidService
@@ -198,100 +274,13 @@ graph TD
     return textarea.value;
   }
 
-  // Helper function to render math formulas with KaTeX
-  function renderMath(html) {
-    if (typeof katex === 'undefined') {
-      return html;
-    }
-
-    try {
-      // Render display math: $$...$$
-      html = html.replace(/\$\$([\s\S]+?)\$\$/g, (match, math) => {
-        try {
-          return katex.renderToString(math.trim(), {
-            displayMode: true,
-            throwOnError: false,
-            output: 'html',
-          });
-        } catch (e) {
-          console.warn('KaTeX display math error:', e);
-          return `<span style="color: red;">Math error: ${e.message}</span>`;
-        }
-      });
-
-      // Render inline math: $...$
-      // Use negative lookahead to avoid matching $$ which is already handled
-      html = html.replace(/\$(?!\$)([^$\n]+?)\$/g, (match, math) => {
-        try {
-          return katex.renderToString(math.trim(), {
-            displayMode: false,
-            throwOnError: false,
-            output: 'html',
-          });
-        } catch (e) {
-          console.warn('KaTeX inline math error:', e);
-          return `<span style="color: red;">Math error</span>`;
-        }
-      });
-
-      return html;
-    } catch (error) {
-      console.error('Math rendering error:', error);
-      return html;
-    }
-  }
-
   // Render markdown
   function renderMarkdown() {
     try {
-      let markdownText = editor.value;
+      const markdownText = editor.value;
 
-      // Process math BEFORE markdown parsing to avoid HTML encoding issues
-      // Temporarily replace math with placeholders
-      const mathPlaceholders = [];
-      let mathIndex = 0;
-
-      // Extract display math: $$...$$
-      markdownText = markdownText.replace(/\$\$([\s\S]+?)\$\$/g, (match, math) => {
-        const placeholder = `__MATH_DISPLAY_${mathIndex}__`;
-        mathPlaceholders.push({ placeholder, math: math.trim(), display: true });
-        mathIndex++;
-        return placeholder;
-      });
-
-      // Extract inline math: $...$
-      markdownText = markdownText.replace(/\$(?!\$)([^$\n]+?)\$/g, (match, math) => {
-        const placeholder = `__MATH_INLINE_${mathIndex}__`;
-        mathPlaceholders.push({ placeholder, math: math.trim(), display: false });
-        mathIndex++;
-        return placeholder;
-      });
-
-      // Now parse markdown
+      // Parse markdown with math extension handling math automatically
       let html = marked.parse(markdownText);
-
-      // Restore and render math formulas
-      if (typeof katex !== 'undefined') {
-        mathPlaceholders.forEach(({ placeholder, math, display }) => {
-          try {
-            const rendered = katex.renderToString(math, {
-              displayMode: display,
-              throwOnError: false,
-              output: 'html',
-            });
-            // Use regex to replace placeholder even if wrapped in HTML tags
-            const escapedPlaceholder = placeholder.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            html = html.replace(new RegExp(escapedPlaceholder, 'g'), rendered);
-          } catch (e) {
-            console.warn(`KaTeX ${display ? 'display' : 'inline'} math error:`, e);
-            const escapedPlaceholder = placeholder.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            html = html.replace(
-              new RegExp(escapedPlaceholder, 'g'),
-              `<span style="color: red;">Math error: ${e.message}</span>`
-            );
-          }
-        });
-      }
 
       // Replace mermaid code blocks
       html = html.replace(
