@@ -64,10 +64,16 @@ export class ThemeManager {
       // Clear any custom inline styles
       this.clearInlineStyles();
 
-      // Load theme stylesheet
-      const stylesheet = document.getElementById(ELEMENT_IDS.THEME_STYLESHEET);
+      // Find or create theme stylesheet element
+      let stylesheet = document.getElementById(ELEMENT_IDS.THEME_STYLESHEET);
+
       if (!stylesheet) {
-        throw new Error('Theme stylesheet element not found');
+        // Create the element if it doesn't exist (happens in Vite production build)
+        stylesheet = document.createElement('link');
+        stylesheet.id = ELEMENT_IDS.THEME_STYLESHEET;
+        stylesheet.rel = 'stylesheet';
+        document.head.appendChild(stylesheet);
+        console.log('Created theme stylesheet element (production mode)');
       }
 
       // Use BASE_URL for proper path resolution in production
