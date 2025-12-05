@@ -20,7 +20,7 @@ themeManager.setThemeChangeListener(() => {
 });
 
 // Wait for all scripts to load
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', () => {
   initializeApp();
 });
 
@@ -44,6 +44,13 @@ function initializeApp() {
   }
 
   console.log('All libraries loaded successfully');
+
+  // Configure Prism autoloader with correct CDN path
+  if (typeof Prism !== 'undefined' && Prism.plugins && Prism.plugins.autoloader) {
+    Prism.plugins.autoloader.languages_path =
+      'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+    console.log('✅ Prism autoloader configured - 200+ languages available');
+  }
 
   // Initialize Mermaid with theme-aware configuration
   initMermaidTheme();
