@@ -70,7 +70,9 @@ export class ThemeManager {
         throw new Error('Theme stylesheet element not found');
       }
 
-      stylesheet.href = `themes/${themeName}.css`;
+      // Use BASE_URL for proper path resolution in production
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      stylesheet.href = `${baseUrl}themes/${themeName}.css`;
 
       // Save selection
       this.currentTheme = themeName;
