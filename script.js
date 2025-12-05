@@ -279,11 +279,14 @@ graph TD
               throwOnError: false,
               output: 'html',
             });
-            html = html.replace(placeholder, rendered);
+            // Use regex to replace placeholder even if wrapped in HTML tags
+            const escapedPlaceholder = placeholder.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            html = html.replace(new RegExp(escapedPlaceholder, 'g'), rendered);
           } catch (e) {
             console.warn(`KaTeX ${display ? 'display' : 'inline'} math error:`, e);
+            const escapedPlaceholder = placeholder.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             html = html.replace(
-              placeholder,
+              new RegExp(escapedPlaceholder, 'g'),
               `<span style="color: red;">Math error: ${e.message}</span>`
             );
           }
