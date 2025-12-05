@@ -1,28 +1,52 @@
 /* Forest Light Theme */
 :root {
-    --bg-primary: #f7fee7;
-    --bg-secondary: #ecfccb;
-    --bg-tertiary: #d9f99d;
-    --text-primary: #1a2e05;
-    --text-secondary: #3f6212;
-    --border-color: #bef264;
-    
-    --h1-color: #15803d;
-    --h2-color: #16a34a;
-    --h3-color: #22c55e;
-    --h4-color: #4ade80;
-    --h5-color: #84cc16;
-    --h6-color: #a3e635;
-    
-    --link-color: #15803d;
-    --link-hover: #14532d;
-    --code-bg: #ecfccb;
-    --code-text: #15803d;
-    --code-block-bg: #14532d;
-    --blockquote-border: #16a34a;
-    --blockquote-bg: #ecfccb;
-    --bold-color: #854d0e;
-    --italic-color: #15803d;
-    --table-header-bg: #d9f99d;
-    --table-border: #bef264;
+  --bg-primary: #f7fee7;
+  --bg-secondary: #ecfccb;
+  --bg-tertiary: #d9f99d;
+  --text-primary: #1a2e05;
+  --text-secondary: #3f6212;
+  --border-color: #bef264;
+
+  --h1-color: #15803d;
+  --h2-color: #16a34a;
+  --h3-color: #22c55e;
+  --h4-color: #4ade80;
+  --h5-color: #84cc16;
+  --h6-color: #a3e635;
+
+  --link-color: #15803d;
+  --link-hover: #14532d;
+  --code-bg: #ecfccb;
+  --code-text: #15803d;
+  --code-block-bg: #ecfccb; /* Fixed: Light green background for readability */
+  --code-border: #bef264;
+  --blockquote-border: #16a34a;
+  --blockquote-bg: #ecfccb;
+  --bold-color: #854d0e;
+  --italic-color: #15803d;
+  --table-header-bg: #d9f99d;
+  --table-border: #bef264;
+}
+
+/* Prism.js Token Styling for Better Readability */
+.token.parameter,
+.token.variable,
+.token.plain {
+  color: #15803d !important; /* Forest green - readable */
+  font-weight: 500;
+}
+
+.token.function,
+.token.function-variable {
+  color: #16a34a !important; /* Bright green */
+  font-weight: 600;
+}
+
+.token.class-name {
+  color: #22c55e !important; /* Lime green */
+  font-weight: 600;
+}
+
+pre[class*='language-'] code {
+  color: #1a2e05 !important; /* Dark forest */
 }
