@@ -291,7 +291,7 @@ body {
   padding: 0;
 }
 
-/* Syntax Highlighting with Custom Variables */
+/* Syntax Highlighting with Custom Variables - Comprehensive Token Coverage */
 #markdown-preview .token.keyword {
   color: var(--syntax-keyword, #c792ea) !important;
 }
@@ -305,8 +305,12 @@ body {
   color: var(--syntax-number, #ffcb6b) !important;
 }
 
-#markdown-preview .token.function {
+#markdown-preview .token.function,
+#markdown-preview .token.function-variable,
+#markdown-preview .token.method,
+#markdown-preview .token.method-variable {
   color: var(--syntax-function, #82aaff) !important;
+  font-weight: 600;
 }
 
 #markdown-preview .token.comment {
@@ -321,8 +325,34 @@ body {
   color: var(--syntax-punctuation, #89ddff) !important;
 }
 
-#markdown-preview .token.class-name {
+#markdown-preview .token.class-name,
+#markdown-preview .token.type-class-name {
   color: var(--syntax-keyword, #ffcb6b) !important;
+  font-weight: 600;
+}
+
+/* Variables and Parameters - NEW */
+#markdown-preview .token.parameter,
+#markdown-preview .token.variable,
+#markdown-preview .token.plain {
+  color: var(--syntax-variable, var(--text-primary)) !important;
+  font-weight: 500;
+}
+
+/* Properties and Namespaces - NEW */
+#markdown-preview .token.property,
+#markdown-preview .token.property-access {
+  color: var(--syntax-property, var(--syntax-function)) !important;
+}
+
+#markdown-preview .token.namespace {
+  color: var(--syntax-namespace, var(--syntax-keyword)) !important;
+  font-weight: 500;
+}
+
+#markdown-preview .token.builtin {
+  color: var(--syntax-builtin, var(--syntax-function)) !important;
+  font-weight: 500;
 }
 
 #markdown-preview blockquote {

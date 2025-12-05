@@ -16,37 +16,32 @@
 
   --link-color: #ea580c;
   --link-hover: #c2410c;
+
+  /* Code Colors */
   --code-bg: #ffedd5;
   --code-text: #dc2626;
-  --code-block-bg: #ffedd5; /* Fixed: Light orange background for readability */
+  --code-block-bg: #ffedd5; /* Light orange background */
   --code-border: #fdba74;
+
+  /* Syntax Highlighting - Comprehensive Token Colors */
+  --syntax-keyword: #ea580c;
+  --syntax-string: #16a34a;
+  --syntax-number: #f59e0b;
+  --syntax-function: #dc2626;
+  --syntax-comment: #78716c;
+  --syntax-operator: #c2410c;
+  --syntax-punctuation: #57534e;
+
+  /* Additional Token Types for Full Customization */
+  --syntax-variable: #ea580c; /* Variables - sunset orange */
+  --syntax-property: #dc2626; /* Properties - red */
+  --syntax-namespace: #f97316; /* Namespaces - bright orange */
+  --syntax-builtin: #dc2626; /* Builtins - red */
+
   --blockquote-border: #f97316;
   --blockquote-bg: #ffedd5;
   --bold-color: #dc2626;
   --italic-color: #e11d48;
   --table-header-bg: #fed7aa;
   --table-border: #fdba74;
-}
-
-/* Prism.js Token Styling for Better Readability */
-.token.parameter,
-.token.variable,
-.token.plain {
-  color: #ea580c !important; /* Sunset orange - readable */
-  font-weight: 500;
-}
-
-.token.function,
-.token.function-variable {
-  color: #dc2626 !important; /* Red */
-  font-weight: 600;
-}
-
-.token.class-name {
-  color: #f97316 !important; /* Bright orange */
-  font-weight: 600;
-}
-
-pre[class*='language-'] code {
-  color: #431407 !important; /* Dark brown */
 }

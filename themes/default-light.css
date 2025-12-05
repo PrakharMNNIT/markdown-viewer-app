@@ -26,7 +26,7 @@
   --code-block-bg: #f6f8fa;
   --code-border: #d0d7de;
 
-  /* Syntax Highlighting */
+  /* Syntax Highlighting - Comprehensive Token Colors */
   --syntax-keyword: #cf222e;
   --syntax-string: #1a7f37;
   --syntax-number: #0550ae;
@@ -35,63 +35,15 @@
   --syntax-operator: #cf222e;
   --syntax-punctuation: #636c76;
 
+  /* Additional Token Types for Full Customization */
+  --syntax-variable: #0550ae; /* Variables, parameters */
+  --syntax-property: #1a7f37; /* Properties, attributes */
+  --syntax-namespace: #cf222e; /* Namespaces */
+  --syntax-builtin: #8250df; /* Built-in functions */
+
   --blockquote-border: #0969da;
   --blockquote-bg: #ddf4ff;
 
   --table-header-bg: #f6f8fa;
   --table-border: #d0d7de;
-}
-
-/* Prism.js Token Styling for Better Readability in Light Mode */
-/* Variables and Parameters - High Contrast Blue */
-.token.parameter,
-.token.variable,
-.token.plain {
-  color: #0550ae !important; /* Dark blue - excellent readability */
-  font-weight: 500;
-}
-
-/* Functions - Purple for Distinction */
-.token.function,
-.token.function-variable,
-.token.method,
-.token.method-variable {
-  color: #8250df !important; /* Purple - stands out */
-  font-weight: 600;
-}
-
-/* Class Names - Bright Blue */
-.token.class-name,
-.token.type-class-name {
-  color: #0969da !important; /* Bright blue - clear distinction */
-  font-weight: 600;
-}
-
-/* Namespaces - Red */
-.token.namespace {
-  color: #cf222e !important; /* Red - high visibility */
-  font-weight: 500;
-}
-
-/* Properties - Green */
-.token.property,
-.token.property-access {
-  color: #1a7f37 !important; /* Green - readable contrast */
-  font-weight: 500;
-}
-
-/* Builtins - Purple */
-.token.builtin {
-  color: #8250df !important; /* Purple - matches functions */
-  font-weight: 500;
-}
-
-/* Ensure all code has minimum contrast */
-pre[class*='language-'] code {
-  color: #1f2328 !important; /* Dark gray - base color for all code */
-}
-
-/* Make sure no token is too light */
-.token {
-  color: inherit;
 }
