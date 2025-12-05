@@ -38,7 +38,7 @@ yarn-error.log*
 
 # Dependencies
 node_modules/
-package-lock.json
+# Note: package-lock.json is committed for reproducible CI/CD builds
 
 # Build output
 dist/
