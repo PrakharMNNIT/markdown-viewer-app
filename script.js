@@ -43,6 +43,13 @@ function initializeApp() {
     return;
   }
 
+  // Wait for KaTeX to load
+  if (typeof katex === 'undefined') {
+    console.log('Waiting for KaTeX library...');
+    setTimeout(initializeApp, 100);
+    return;
+  }
+
   console.log('All libraries loaded successfully');
 
   // Configure Prism autoloader with correct CDN path
@@ -51,6 +58,8 @@ function initializeApp() {
       'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
     console.log('✅ Prism autoloader configured - 200+ languages available');
   }
+
+  console.log('✅ KaTeX loaded - Math formula rendering available');
 
   // Initialize Mermaid with theme-aware configuration
   initMermaidTheme();
@@ -189,11 +198,57 @@ graph TD
     return textarea.value;
   }
 
+  // Helper function to render math formulas with KaTeX
+  function renderMath(html) {
+    if (typeof katex === 'undefined') {
+      return html;
+    }
+
+    try {
+      // Render display math: $$...$$
+      html = html.replace(/\$\$([\s\S]+?)\$\$/g, (match, math) => {
+        try {
+          return katex.renderToString(math.trim(), {
+            displayMode: true,
+            throwOnError: false,
+            output: 'html',
+          });
+        } catch (e) {
+          console.warn('KaTeX display math error:', e);
+          return `<span style="color: red;">Math error: ${e.message}</span>`;
+        }
+      });
+
+      // Render inline math: $...$
+      // Use negative lookahead to avoid matching $$ which is already handled
+      html = html.replace(/\$(?!\$)([^$\n]+?)\$/g, (match, math) => {
+        try {
+          return katex.renderToString(math.trim(), {
+            displayMode: false,
+            throwOnError: false,
+            output: 'html',
+          });
+        } catch (e) {
+          console.warn('KaTeX inline math error:', e);
+          return `<span style="color: red;">Math error</span>`;
+        }
+      });
+
+      return html;
+    } catch (error) {
+      console.error('Math rendering error:', error);
+      return html;
+    }
+  }
+
   // Render markdown
   function renderMarkdown() {
     try {
       const markdownText = editor.value;
       let html = marked.parse(markdownText);
+
+      // Render math formulas
+      html = renderMath(html);
 
       // Replace mermaid code blocks
       html = html.replace(
