@@ -72,3 +72,57 @@
   /* Border */
   --border-color: rgba(0, 0, 0, 0.12);
 }
+
+/* Prism.js Token Styling for Better Readability */
+/* Variables and Parameters - High Contrast Blue */
+.token.parameter,
+.token.variable,
+.token.plain {
+  color: #2196f3 !important; /* Bright blue - distinct and readable */
+  font-weight: 500;
+}
+
+/* Functions - Purple for Distinction */
+.token.function,
+.token.function-variable,
+.token.method,
+.token.method-variable {
+  color: #9c27b0 !important; /* Purple - stands out */
+  font-weight: 600;
+}
+
+/* Class Names - Pink */
+.token.class-name,
+.token.type-class-name {
+  color: #e91e63 !important; /* Pink - clear distinction */
+  font-weight: 600;
+}
+
+/* Namespaces - Orange */
+.token.namespace {
+  color: #f57c00 !important; /* Orange - high visibility */
+  font-weight: 500;
+}
+
+/* Properties - Cyan */
+.token.property,
+.token.property-access {
+  color: #00bcd4 !important; /* Cyan - readable contrast */
+  font-weight: 500;
+}
+
+/* Builtins - Purple */
+.token.builtin {
+  color: #9c27b0 !important; /* Purple - matches functions */
+  font-weight: 500;
+}
+
+/* Ensure all code has minimum contrast */
+pre[class*='language-'] code {
+  color: #1a1a1a !important; /* Dark color - base for all code */
+}
+
+/* Make sure no token is too light */
+.token {
+  color: inherit;
+}
