@@ -244,11 +244,51 @@ graph TD
   // Render markdown
   function renderMarkdown() {
     try {
-      const markdownText = editor.value;
+      let markdownText = editor.value;
+
+      // Process math BEFORE markdown parsing to avoid HTML encoding issues
+      // Temporarily replace math with placeholders
+      const mathPlaceholders = [];
+      let mathIndex = 0;
+
+      // Extract display math: $$...$$
+      markdownText = markdownText.replace(/\$\$([\s\S]+?)\$\$/g, (match, math) => {
+        const placeholder = `__MATH_DISPLAY_${mathIndex}__`;
+        mathPlaceholders.push({ placeholder, math: math.trim(), display: true });
+        mathIndex++;
+        return placeholder;
+      });
+
+      // Extract inline math: $...$
+      markdownText = markdownText.replace(/\$(?!\$)([^$\n]+?)\$/g, (match, math) => {
+        const placeholder = `__MATH_INLINE_${mathIndex}__`;
+        mathPlaceholders.push({ placeholder, math: math.trim(), display: false });
+        mathIndex++;
+        return placeholder;
+      });
+
+      // Now parse markdown
       let html = marked.parse(markdownText);
 
-      // Render math formulas
-      html = renderMath(html);
+      // Restore and render math formulas
+      if (typeof katex !== 'undefined') {
+        mathPlaceholders.forEach(({ placeholder, math, display }) => {
+          try {
+            const rendered = katex.renderToString(math, {
+              displayMode: display,
+              throwOnError: false,
+              output: 'html',
+            });
+            html = html.replace(placeholder, rendered);
+          } catch (e) {
+            console.warn(`KaTeX ${display ? 'display' : 'inline'} math error:`, e);
+            html = html.replace(
+              placeholder,
+              `<span style="color: red;">Math error: ${e.message}</span>`
+            );
+          }
+        });
+      }
 
       // Replace mermaid code blocks
       html = html.replace(
