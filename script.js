@@ -796,6 +796,7 @@ graph TD
   // Folder browser DOM elements
   const fileBrowser = document.getElementById('file-browser');
   const openFolderBtn = document.getElementById('open-folder-btn');
+  const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
   const closeBrowserBtn = document.getElementById('close-browser-btn');
   const fileTree = document.getElementById('file-tree');
   const currentFolderNameEl = document.getElementById('current-folder-name');
@@ -843,9 +844,26 @@ graph TD
     console.log(`✅ Loaded ${result.totalFiles} markdown files from ${result.folderName}`);
   });
 
-  // Close browser handler
+  // Toggle sidebar collapse/expand
+  toggleSidebarBtn.addEventListener('click', () => {
+    if (fileBrowser.style.display === 'none') {
+      // Expand sidebar
+      fileBrowser.style.display = 'flex';
+      toggleSidebarBtn.textContent = '◀ Hide Files';
+      toggleSidebarBtn.title = 'Hide File Browser';
+    } else {
+      // Collapse sidebar (keep data)
+      fileBrowser.style.display = 'none';
+      toggleSidebarBtn.textContent = '▶ Show Files';
+      toggleSidebarBtn.title = 'Show File Browser';
+    }
+  });
+
+  // Close browser handler (clears data)
   closeBrowserBtn.addEventListener('click', () => {
     fileBrowser.style.display = 'none';
+    toggleSidebarBtn.style.display = 'none';
+    openFolderBtn.style.display = 'inline-block';
     folderFiles = [];
     activeFileHandle = null;
   });
