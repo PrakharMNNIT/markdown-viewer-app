@@ -3,16 +3,22 @@
 // Import constants, utilities, services, and core modules
 import { StorageManager } from './src/js/core/StorageManager.js';
 import { ThemeManager } from './src/js/core/ThemeManager.js';
+import { FolderBrowserService } from './src/js/services/FolderBrowserService.js';
 import { MermaidService } from './src/js/services/MermaidService.js';
 import { PDFService } from './src/js/services/PDFService.js';
 import { PrismService } from './src/js/services/PrismService.js';
 
-// Initialize services and managers - NOW ACTIVELY USED
+// Initialize services and managers
 const storageManager = new StorageManager();
 const themeManager = new ThemeManager(storageManager);
 const mermaidService = new MermaidService();
 const prismService = new PrismService();
 const pdfService = new PDFService();
+const folderBrowserService = new FolderBrowserService(storageManager);
+
+// Folder browser state
+const currentFolderFiles = [];
+const currentFileHandle = null;
 
 // Configure theme change listener to update Mermaid
 themeManager.setThemeChangeListener(() => {
@@ -784,6 +790,191 @@ graph TD
   // Load saved view mode
   const savedViewMode = storageManager.get('viewMode') || 'split-view';
   setViewMode(savedViewMode);
+
+  // ==================== FOLDER BROWSER FUNCTIONALITY ====================
+
+  // Folder browser DOM elements
+  const fileBrowser = document.getElementById('file-browser');
+  const openFolderBtn = document.getElementById('open-folder-btn');
+  const closeBrowserBtn = document.getElementById('close-browser-btn');
+  const fileTree = document.getElementById('file-tree');
+  const currentFolderNameEl = document.getElementById('current-folder-name');
+  const fileCountEl = document.getElementById('file-count');
+
+  // Folder browser state (using let to allow reassignment)
+  let folderFiles = [];
+  let activeFileHandle = null;
+
+  // Open folder handler
+  openFolderBtn.addEventListener('click', async () => {
+    if (!folderBrowserService.isSupported()) {
+      alert(
+        'Folder browsing requires File System Access API.\n\n' +
+          'Please use Chrome 86+ or Edge 86+.\n\n' +
+          'Firefox and Safari are not currently supported.'
+      );
+      return;
+    }
+
+    const result = await folderBrowserService.openFolder();
+
+    if (result.cancelled) {
+      return; // User cancelled
+    }
+
+    if (!result.success) {
+      alert('Error opening folder: ' + result.error);
+      return;
+    }
+
+    // Store files
+    folderFiles = result.files;
+
+    // Show browser
+    fileBrowser.style.display = 'flex';
+
+    // Update UI
+    currentFolderNameEl.textContent = result.folderName;
+    fileCountEl.textContent = `${result.totalFiles} file${result.totalFiles !== 1 ? 's' : ''}`;
+
+    // Render tree
+    renderFileTree(result.files);
+
+    console.log(`✅ Loaded ${result.totalFiles} markdown files from ${result.folderName}`);
+  });
+
+  // Close browser handler
+  closeBrowserBtn.addEventListener('click', () => {
+    fileBrowser.style.display = 'none';
+    folderFiles = [];
+    activeFileHandle = null;
+  });
+
+  // Render file tree
+  function renderFileTree(items, container = fileTree, indent = 0) {
+    // Clear container on first render
+    if (indent === 0) {
+      container.innerHTML = '';
+    }
+
+    if (items.length === 0 && indent === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <p>📂 No markdown files found</p>
+          <p class="hint">This folder doesn't contain any .md files</p>
+        </div>
+      `;
+      return;
+    }
+
+    items.forEach(item => {
+      if (item.type === 'directory') {
+        const folderDiv = createFolderElement(item, indent);
+        container.appendChild(folderDiv);
+
+        if (item.expanded && item.children) {
+          const childContainer = document.createElement('div');
+          childContainer.className = 'tree-children';
+          renderFileTree(item.children, childContainer, indent + 1);
+          container.appendChild(childContainer);
+        }
+      } else if (item.type === 'file') {
+        const fileDiv = createFileElement(item, indent);
+        container.appendChild(fileDiv);
+      }
+    });
+  }
+
+  // Create folder element
+  function createFolderElement(item, indent) {
+    const div = document.createElement('div');
+    div.className = 'tree-item folder';
+    div.style.paddingLeft = indent * 20 + 12 + 'px';
+
+    const icon = item.expanded ? '📂' : '📁';
+    const folderIcon = document.createElement('span');
+    folderIcon.className = 'folder-icon';
+    folderIcon.textContent = icon;
+
+    const folderName = document.createElement('span');
+    folderName.className = 'folder-name';
+    folderName.textContent = item.name;
+
+    const fileCount = document.createElement('span');
+    fileCount.className = 'file-count';
+    fileCount.textContent = item.fileCount;
+
+    div.appendChild(folderIcon);
+    div.appendChild(folderName);
+    div.appendChild(fileCount);
+
+    div.addEventListener('click', e => {
+      e.stopPropagation();
+      toggleFolder(item);
+    });
+
+    return div;
+  }
+
+  // Create file element
+  function createFileElement(item, indent) {
+    const div = document.createElement('div');
+    div.className = 'tree-item file';
+    div.style.paddingLeft = indent * 20 + 12 + 'px';
+
+    // Mark as active if this is the current file
+    if (activeFileHandle === item.handle) {
+      div.classList.add('active');
+    }
+
+    const fileIcon = document.createElement('span');
+    fileIcon.className = 'file-icon';
+    fileIcon.textContent = '📄';
+
+    const fileName = document.createElement('span');
+    fileName.className = 'file-name';
+    fileName.textContent = item.name;
+
+    div.appendChild(fileIcon);
+    div.appendChild(fileName);
+
+    div.addEventListener('click', async e => {
+      e.stopPropagation();
+      await loadFileFromBrowser(item);
+    });
+
+    return div;
+  }
+
+  // Toggle folder expand/collapse
+  function toggleFolder(folder) {
+    folder.expanded = !folder.expanded;
+    renderFileTree(folderFiles);
+  }
+
+  // Load file from browser
+  async function loadFileFromBrowser(fileItem) {
+    const result = await folderBrowserService.readFile(fileItem.handle);
+
+    if (!result.success) {
+      alert('Error loading file: ' + result.error);
+      return;
+    }
+
+    // Load content into editor
+    editor.value = result.content;
+
+    // Mark as active file
+    activeFileHandle = fileItem.handle;
+
+    // Re-render tree to update active state
+    renderFileTree(folderFiles);
+
+    // Render markdown
+    renderMarkdown();
+
+    console.log(`✅ Loaded file: ${fileItem.name} (${result.size} bytes)`);
+  }
 
   // Initial render
   renderMarkdown();

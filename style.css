@@ -684,3 +684,166 @@ body {
   color: var(--text-primary);
   font-size: 16px;
 }
+
+/* ==================== FOLDER BROWSER ==================== */
+.file-browser {
+  width: 280px;
+  min-width: 200px;
+  max-width: 400px;
+  background-color: var(--bg-secondary);
+  border-right: 2px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.browser-header {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-tertiary);
+}
+
+.browser-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.browser-stats {
+  padding: 8px 12px;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.file-tree {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 0;
+}
+
+/* Tree Items */
+.tree-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.15s ease;
+  user-select: none;
+  font-size: 14px;
+  border-left: 3px solid transparent;
+}
+
+.tree-item:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.tree-item.active {
+  background-color: var(--h1-color);
+  color: white;
+  border-left-color: var(--h2-color);
+  font-weight: 600;
+}
+
+.tree-item.folder {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tree-item.file {
+  color: var(--text-secondary);
+}
+
+.tree-children {
+  border-left: 1px dashed var(--border-color);
+  margin-left: 20px;
+}
+
+.folder-icon,
+.file-icon {
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.folder-name,
+.file-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-count {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-secondary);
+  background-color: var(--bg-tertiary);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* Empty State */
+.empty-state {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.empty-state p {
+  margin: 8px 0;
+}
+
+.empty-state .hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Loading State */
+.loading-state {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--h1-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

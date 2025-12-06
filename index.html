@@ -45,6 +45,16 @@
       <div class="toolbar">
         <h1>📝 Markdown Viewer Pro</h1>
         <div class="toolbar-controls">
+          <!-- Folder Browser Toggle -->
+          <button
+            class="btn"
+            id="open-folder-btn"
+            title="Open Folder"
+            aria-label="Open Folder to Browse Markdown Files"
+          >
+            📁 Open Folder
+          </button>
+
           <!-- View Mode Buttons -->
           <div class="view-mode-buttons">
             <button
@@ -139,6 +149,36 @@
 
       <!-- Main Content -->
       <div class="main-content">
+        <!-- Folder Browser Sidebar (Hidden by default) -->
+        <div class="file-browser" id="file-browser" style="display: none">
+          <div class="browser-header">
+            <div class="browser-title">
+              <span class="folder-icon">📁</span>
+              <span id="current-folder-name">No Folder Open</span>
+            </div>
+            <button
+              class="btn-icon"
+              id="close-browser-btn"
+              title="Close Folder Browser"
+              aria-label="Close Folder Browser"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div class="browser-stats" id="browser-stats">
+            <span id="file-count">0 files</span>
+          </div>
+
+          <div class="file-tree" id="file-tree">
+            <!-- Tree structure will be rendered here -->
+            <div class="empty-state">
+              <p>📂 No folder selected</p>
+              <p class="hint">Click "Open Folder" to browse markdown files</p>
+            </div>
+          </div>
+        </div>
+
         <!-- Editor -->
         <div class="editor-container">
           <div class="editor-header">MARKDOWN EDITOR</div>
