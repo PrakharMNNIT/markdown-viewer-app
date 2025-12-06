@@ -798,6 +798,7 @@ graph TD
   const openFolderBtn = document.getElementById('open-folder-btn');
   const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
   const closeBrowserBtn = document.getElementById('close-browser-btn');
+  const floatingShowBtn = document.getElementById('floating-show-btn');
   const fileTree = document.getElementById('file-tree');
   const currentFolderNameEl = document.getElementById('current-folder-name');
   const fileCountEl = document.getElementById('file-count');
@@ -831,8 +832,9 @@ graph TD
     // Store files
     folderFiles = result.files;
 
-    // Show browser sidebar
+    // Show browser sidebar, hide floating button
     fileBrowser.style.display = 'flex';
+    floatingShowBtn.style.display = 'none';
 
     // Update UI
     currentFolderNameEl.textContent = result.folderName;
@@ -846,29 +848,25 @@ graph TD
 
   // Toggle sidebar collapse/expand (keeps folder data)
   toggleSidebarBtn.addEventListener('click', () => {
-    if (fileBrowser.style.display === 'none') {
-      // Expand sidebar
-      fileBrowser.style.display = 'flex';
-      toggleSidebarBtn.textContent = '◀';
-      toggleSidebarBtn.title = 'Hide Sidebar';
-    } else {
-      // Collapse sidebar (keep data)
-      fileBrowser.style.display = 'none';
-      toggleSidebarBtn.textContent = '▶';
-      toggleSidebarBtn.title = 'Show Sidebar';
-    }
+    // Hide sidebar, show floating button
+    fileBrowser.style.display = 'none';
+    floatingShowBtn.style.display = 'block';
+  });
+
+  // Floating button - show sidebar
+  floatingShowBtn.addEventListener('click', () => {
+    // Show sidebar, hide floating button
+    fileBrowser.style.display = 'flex';
+    floatingShowBtn.style.display = 'none';
   });
 
   // Close browser handler (clears all folder data)
   closeBrowserBtn.addEventListener('click', () => {
-    // Hide sidebar AND clear data
+    // Hide everything AND clear data
     fileBrowser.style.display = 'none';
+    floatingShowBtn.style.display = 'none';
     folderFiles = [];
     activeFileHandle = null;
-
-    // Reset toggle button
-    toggleSidebarBtn.textContent = '◀';
-    toggleSidebarBtn.title = 'Hide Sidebar';
   });
 
   // Render file tree
