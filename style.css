@@ -716,6 +716,12 @@ body {
   font-size: 14px;
 }
 
+.browser-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .btn-icon {
   background: none;
   border: none;

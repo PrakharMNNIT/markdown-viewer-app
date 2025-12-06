@@ -831,11 +831,8 @@ graph TD
     // Store files
     folderFiles = result.files;
 
-    // Show browser and toggle button, hide "Open Folder" button
+    // Show browser sidebar
     fileBrowser.style.display = 'flex';
-    toggleSidebarBtn.style.display = 'inline-block';
-    toggleSidebarBtn.textContent = '◀ Hide Files';
-    openFolderBtn.style.display = 'none';
 
     // Update UI
     currentFolderNameEl.textContent = result.folderName;
@@ -847,27 +844,31 @@ graph TD
     console.log(`✅ Loaded ${result.totalFiles} markdown files from ${result.folderName}`);
   });
 
-  // Toggle sidebar collapse/expand
+  // Toggle sidebar collapse/expand (keeps folder data)
   toggleSidebarBtn.addEventListener('click', () => {
     if (fileBrowser.style.display === 'none') {
       // Expand sidebar
       fileBrowser.style.display = 'flex';
-      toggleSidebarBtn.textContent = '◀ Hide Files';
-      toggleSidebarBtn.title = 'Hide File Browser';
+      toggleSidebarBtn.textContent = '◀';
+      toggleSidebarBtn.title = 'Hide Sidebar';
     } else {
       // Collapse sidebar (keep data)
       fileBrowser.style.display = 'none';
-      toggleSidebarBtn.textContent = '▶ Show Files';
-      toggleSidebarBtn.title = 'Show File Browser';
+      toggleSidebarBtn.textContent = '▶';
+      toggleSidebarBtn.title = 'Show Sidebar';
     }
   });
 
-  // Close browser handler (now just hides sidebar, keeps data)
+  // Close browser handler (clears all folder data)
   closeBrowserBtn.addEventListener('click', () => {
-    // Just hide sidebar (keep data)
+    // Hide sidebar AND clear data
     fileBrowser.style.display = 'none';
-    toggleSidebarBtn.textContent = '▶ Show Files';
-    toggleSidebarBtn.title = 'Show File Browser';
+    folderFiles = [];
+    activeFileHandle = null;
+
+    // Reset toggle button
+    toggleSidebarBtn.textContent = '◀';
+    toggleSidebarBtn.title = 'Hide Sidebar';
   });
 
   // Render file tree
