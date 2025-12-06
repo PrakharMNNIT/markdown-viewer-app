@@ -809,9 +809,9 @@ graph TD
   let activeFileHandle = null;
   let isResizing = false;
   let sidebarWidth = 280; // Default width
-  const minWidth = 200;
+  const minWidth = 100; // Allow squeezing to very narrow
   const maxWidth = 600;
-  const collapseThreshold = 150; // Auto-collapse if dragged below this
+  const collapseThreshold = 80; // Auto-collapse at very left edge only
 
   // Load saved sidebar width
   const savedWidth = storageManager.get('sidebarWidth');

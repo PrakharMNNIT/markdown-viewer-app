@@ -711,8 +711,8 @@ body {
 
 .file-browser {
   width: 280px;
-  min-width: 200px;
-  max-width: 400px;
+  min-width: 100px;
+  max-width: 600px;
   background-color: var(--bg-secondary);
   border-right: 2px solid var(--border-color);
   display: flex;
