@@ -831,8 +831,11 @@ graph TD
     // Store files
     folderFiles = result.files;
 
-    // Show browser
+    // Show browser and toggle button, hide "Open Folder" button
     fileBrowser.style.display = 'flex';
+    toggleSidebarBtn.style.display = 'inline-block';
+    toggleSidebarBtn.textContent = '◀ Hide Files';
+    openFolderBtn.style.display = 'none';
 
     // Update UI
     currentFolderNameEl.textContent = result.folderName;
@@ -859,13 +862,12 @@ graph TD
     }
   });
 
-  // Close browser handler (clears data)
+  // Close browser handler (now just hides sidebar, keeps data)
   closeBrowserBtn.addEventListener('click', () => {
+    // Just hide sidebar (keep data)
     fileBrowser.style.display = 'none';
-    toggleSidebarBtn.style.display = 'none';
-    openFolderBtn.style.display = 'inline-block';
-    folderFiles = [];
-    activeFileHandle = null;
+    toggleSidebarBtn.textContent = '▶ Show Files';
+    toggleSidebarBtn.title = 'Show File Browser';
   });
 
   // Render file tree
