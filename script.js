@@ -97,11 +97,15 @@ function configureMarkedWithMath() {
         },
         renderer(token) {
           try {
-            return katex.renderToString(token.text, {
-              displayMode: true,
-              throwOnError: false,
-              output: 'html',
-            });
+            return (
+              '<div style="margin: 1.5em 0;">' +
+              katex.renderToString(token.text, {
+                displayMode: true,
+                throwOnError: false,
+                output: 'html',
+              }) +
+              '</div>'
+            );
           } catch (e) {
             console.warn('KaTeX display math error:', e);
             return `<div style="color: red; padding: 10px;">Math Error: ${e.message}</div>`;
@@ -115,24 +119,43 @@ function configureMarkedWithMath() {
           return src.match(/\$/)?.index;
         },
         tokenizer(src) {
-          const match = src.match(/^\$([^$\n]+?)\$/);
-          if (match) {
+          // Try display math first ($$...$$)
+          const displayMatch = src.match(/^\$\$([\s\S]+?)\$\$/);
+          if (displayMatch) {
             return {
               type: 'mathInline',
-              raw: match[0],
-              text: match[1].trim(),
+              raw: displayMatch[0],
+              text: displayMatch[1].trim(),
+              displayMode: true,
+            };
+          }
+
+          // Then try inline math ($...$)
+          const inlineMatch = src.match(/^\$([^$\n]+?)\$/);
+          if (inlineMatch) {
+            return {
+              type: 'mathInline',
+              raw: inlineMatch[0],
+              text: inlineMatch[1].trim(),
+              displayMode: false,
             };
           }
         },
         renderer(token) {
           try {
-            return katex.renderToString(token.text, {
-              displayMode: false,
+            const rendered = katex.renderToString(token.text, {
+              displayMode: token.displayMode || false,
               throwOnError: false,
               output: 'html',
             });
+
+            // Wrap display math in a div for proper spacing
+            if (token.displayMode) {
+              return '<div style="margin: 1.5em 0;">' + rendered + '</div>';
+            }
+            return rendered;
           } catch (e) {
-            console.warn('KaTeX inline math error:', e);
+            console.warn('KaTeX math error:', e);
             return `<span style="color: red;">Math Error</span>`;
           }
         },
