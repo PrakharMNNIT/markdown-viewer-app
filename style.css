@@ -687,18 +687,17 @@ body {
 
 /* ==================== FOLDER BROWSER ==================== */
 
-/* Floating show button (appears when sidebar is hidden) */
+/* Floating show button (appears when sidebar is hidden) - TOP LEFT */
 .floating-show-btn {
   position: fixed;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 60px;
   background-color: var(--h1-color);
   color: white;
   border: none;
   border-radius: 0 8px 8px 0;
-  padding: 16px 8px;
-  font-size: 20px;
+  padding: 12px 8px;
+  font-size: 18px;
   cursor: pointer;
   z-index: 100;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
@@ -723,7 +722,7 @@ body {
 }
 
 .browser-header {
-  padding: 12px;
+  padding: 8px 12px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
@@ -738,12 +737,14 @@ body {
   font-weight: 600;
   color: var(--text-primary);
   font-size: 14px;
+  flex: 1;
 }
 
 .browser-actions {
   display: flex;
   align-items: center;
   gap: 4px;
+  order: -1; /* Place at the start (left side) */
 }
 
 .btn-icon {
