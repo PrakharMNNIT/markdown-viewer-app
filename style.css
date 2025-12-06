@@ -720,6 +720,11 @@ body {
   overflow: hidden;
   flex-shrink: 0;
   position: relative;
+  transition: width 0.1s ease-out;
+}
+
+.file-browser.resizing {
+  transition: none; /* Disable transition during drag for immediate feedback */
 }
 
 /* Resize handle for dragging */
@@ -732,12 +737,19 @@ body {
   background-color: transparent;
   cursor: col-resize;
   z-index: 10;
-  transition: background-color 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.resize-handle:hover,
-.resize-handle.dragging {
+.resize-handle:hover {
   background-color: var(--h1-color);
+  width: 6px;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.resize-handle.dragging {
+  background-color: var(--h2-color);
+  width: 6px;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
 }
 
 .browser-header {

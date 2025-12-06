@@ -822,6 +822,7 @@ graph TD
   // Resize functionality
   resizeHandle.addEventListener('mousedown', e => {
     isResizing = true;
+    fileBrowser.classList.add('resizing');
     resizeHandle.classList.add('dragging');
     document.body.style.cursor = 'col-resize';
     document.body.style.userSelect = 'none';
@@ -835,7 +836,8 @@ graph TD
 
     // Check if dragged to leftmost (auto-collapse)
     if (newWidth < collapseThreshold) {
-      // Auto-collapse
+      // Auto-collapse with smooth animation
+      fileBrowser.classList.remove('resizing');
       fileBrowser.style.display = 'none';
       floatingShowBtn.style.display = 'block';
       isResizing = false;
@@ -855,6 +857,7 @@ graph TD
   document.addEventListener('mouseup', () => {
     if (isResizing) {
       isResizing = false;
+      fileBrowser.classList.remove('resizing');
       resizeHandle.classList.remove('dragging');
       document.body.style.cursor = '';
       document.body.style.userSelect = '';
