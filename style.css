@@ -719,6 +719,25 @@ body {
   flex-direction: column;
   overflow: hidden;
   flex-shrink: 0;
+  position: relative;
+}
+
+/* Resize handle for dragging */
+.resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: transparent;
+  cursor: col-resize;
+  z-index: 10;
+  transition: background-color 0.2s;
+}
+
+.resize-handle:hover,
+.resize-handle.dragging {
+  background-color: var(--h1-color);
 }
 
 .browser-header {

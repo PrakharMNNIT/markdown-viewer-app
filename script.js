@@ -799,6 +799,7 @@ graph TD
   const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
   const closeBrowserBtn = document.getElementById('close-browser-btn');
   const floatingShowBtn = document.getElementById('floating-show-btn');
+  const resizeHandle = document.getElementById('resize-handle');
   const fileTree = document.getElementById('file-tree');
   const currentFolderNameEl = document.getElementById('current-folder-name');
   const fileCountEl = document.getElementById('file-count');
@@ -806,6 +807,62 @@ graph TD
   // Folder browser state (using let to allow reassignment)
   let folderFiles = [];
   let activeFileHandle = null;
+  let isResizing = false;
+  let sidebarWidth = 280; // Default width
+  const minWidth = 200;
+  const maxWidth = 600;
+  const collapseThreshold = 150; // Auto-collapse if dragged below this
+
+  // Load saved sidebar width
+  const savedWidth = storageManager.get('sidebarWidth');
+  if (savedWidth) {
+    sidebarWidth = parseInt(savedWidth, 10);
+  }
+
+  // Resize functionality
+  resizeHandle.addEventListener('mousedown', e => {
+    isResizing = true;
+    resizeHandle.classList.add('dragging');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!isResizing) return;
+
+    const newWidth = e.clientX;
+
+    // Check if dragged to leftmost (auto-collapse)
+    if (newWidth < collapseThreshold) {
+      // Auto-collapse
+      fileBrowser.style.display = 'none';
+      floatingShowBtn.style.display = 'block';
+      isResizing = false;
+      resizeHandle.classList.remove('dragging');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      return;
+    }
+
+    // Constrain width
+    if (newWidth >= minWidth && newWidth <= maxWidth) {
+      sidebarWidth = newWidth;
+      fileBrowser.style.width = `${sidebarWidth}px`;
+    }
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (isResizing) {
+      isResizing = false;
+      resizeHandle.classList.remove('dragging');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+
+      // Save width
+      storageManager.set('sidebarWidth', sidebarWidth.toString());
+    }
+  });
 
   // Open folder handler
   openFolderBtn.addEventListener('click', async () => {
