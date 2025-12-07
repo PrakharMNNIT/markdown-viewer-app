@@ -56,6 +56,13 @@ function initializeApp() {
     return;
   }
 
+  // Wait for KaTeX auto-render to load
+  if (typeof renderMathInElement === 'undefined') {
+    console.log('Waiting for KaTeX auto-render...');
+    setTimeout(initializeApp, 100);
+    return;
+  }
+
   console.log('All libraries loaded successfully');
 
   // Configure Prism autoloader with correct CDN path
@@ -356,6 +363,17 @@ graph TD
 
       // Apply Prism syntax highlighting using PrismService
       prismService.highlightAll(preview);
+
+      // Apply KaTeX auto-render for LaTeX environments (\begin{align}, \[...\], etc.)
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(preview, {
+          delimiters: [
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\begin{', right: '\\end{', display: true },
+          ],
+          throwOnError: false,
+        });
+      }
 
       // Save content using StorageManager
       storageManager.set('markdownContent', markdownText);
