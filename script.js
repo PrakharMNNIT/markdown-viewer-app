@@ -414,13 +414,22 @@ graph TD
 
       // Apply KaTeX auto-render for LaTeX environments (\begin{align}, \[...\], etc.)
       if (typeof renderMathInElement !== 'undefined') {
-        renderMathInElement(preview, {
-          delimiters: [
-            { left: '\\[', right: '\\]', display: true },
-            { left: '\\begin{', right: '\\end{', display: true },
-          ],
-          throwOnError: false,
-        });
+        try {
+          renderMathInElement(preview, {
+            delimiters: [
+              { left: '\\[', right: '\\]', display: true },
+              { left: '\\(', right: '\\)', display: false },
+              { left: '$$', right: '$$', display: true },
+              { left: '$', right: '$', display: false },
+            ],
+            throwOnError: false,
+            trust: true,
+            strict: false,
+          });
+          console.log('✅ LaTeX environments rendered');
+        } catch (e) {
+          console.warn('KaTeX auto-render error:', e);
+        }
       }
 
       // Save content using StorageManager
