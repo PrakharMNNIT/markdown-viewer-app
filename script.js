@@ -83,13 +83,61 @@ function initializeApp() {
   setupEditor();
 }
 
-// Configure marked.js extensions (math + footnotes)
+// Configure marked.js extensions (math + footnotes + admonitions)
 function configureMarkedExtensions() {
   // Enable footnote support
   if (typeof markedFootnote !== 'undefined') {
     marked.use(markedFootnote());
     console.log('✅ Footnotes enabled');
   }
+
+  // Add GitHub-style admonitions
+  marked.use({
+    extensions: [
+      {
+        name: 'admonition',
+        level: 'block',
+        start(src) {
+          return src.match(/^> \[!/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(
+            /^> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*\n((?:> .*\n?)*)/
+          );
+          if (match) {
+            const type = match[1];
+            const content = match[2].replace(/^> ?/gm, '').trim();
+            return {
+              type: 'admonition',
+              raw: match[0],
+              admonitionType: type,
+              text: content,
+            };
+          }
+        },
+        renderer(token) {
+          const icons = {
+            NOTE: 'ℹ️',
+            TIP: '💡',
+            IMPORTANT: '❗',
+            WARNING: '⚠️',
+            CAUTION: '🚨',
+          };
+          const icon = icons[token.admonitionType] || 'ℹ️';
+          const typeClass = token.admonitionType.toLowerCase();
+
+          return `<div class="admonition admonition-${typeClass}">
+            <div class="admonition-title">
+              <span class="admonition-icon">${icon}</span>
+              <strong>${token.admonitionType}</strong>
+            </div>
+            <div class="admonition-content">${marked.parseInline(token.text)}</div>
+          </div>`;
+        },
+      },
+    ],
+  });
+  console.log('✅ GitHub admonitions enabled');
 
   // Configure math formulas
   if (typeof katex === 'undefined') {

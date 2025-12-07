@@ -915,3 +915,57 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* ==================== GITHUB ADMONITIONS ==================== */
+
+.admonition {
+  margin: 1.5em 0;
+  padding: 16px 20px;
+  border-radius: 8px;
+  border-left: 4px solid;
+  background-color: var(--bg-secondary);
+}
+
+.admonition-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.admonition-icon {
+  font-size: 18px;
+}
+
+.admonition-content {
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Admonition Types - Distinct Colors */
+.admonition-note {
+  border-left-color: #0969da;
+  background-color: rgba(9, 105, 218, 0.1);
+}
+
+.admonition-tip {
+  border-left-color: #1a7f37;
+  background-color: rgba(26, 127, 55, 0.1);
+}
+
+.admonition-important {
+  border-left-color: #8250df;
+  background-color: rgba(130, 80, 223, 0.1);
+}
+
+.admonition-warning {
+  border-left-color: #d29922;
+  background-color: rgba(210, 153, 34, 0.1);
+}
+
+.admonition-caution {
+  border-left-color: #cf222e;
+  background-color: rgba(207, 34, 46, 0.1);
+}
