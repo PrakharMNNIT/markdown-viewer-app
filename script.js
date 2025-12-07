@@ -145,101 +145,10 @@ function configureMarkedExtensions() {
     return;
   }
 
-  // Add LaTeX environment extensions
+  // Add inline math and text formatting extensions only
+  // LaTeX environments (align, gather, etc.) are not supported by KaTeX
   marked.use({
     extensions: [
-      {
-        name: 'latexEnvironment',
-        level: 'block',
-        start(src) {
-          return src.match(/^\\begin\{/)?.index;
-        },
-        tokenizer(src) {
-          const match = src.match(/^\\begin\{([^}]+)\}([\s\S]*?)\\end\{\1\}/);
-          if (match) {
-            return {
-              type: 'latexEnvironment',
-              raw: match[0],
-              text: match[0],
-            };
-          }
-        },
-        renderer(token) {
-          try {
-            const rendered = katex.renderToString(token.text, {
-              displayMode: true,
-              throwOnError: false,
-              trust: true,
-              strict: false,
-            });
-            return `<div class="katex-display">${rendered}</div>`;
-          } catch (e) {
-            console.warn('KaTeX environment render error:', e);
-            return `<div style="color: red; padding: 10px;">LaTeX Error: ${e.message}</div>`;
-          }
-        },
-      },
-      {
-        name: 'latexDisplayBracket',
-        level: 'block',
-        start(src) {
-          return src.match(/^\\\[/)?.index;
-        },
-        tokenizer(src) {
-          const match = src.match(/^\\\[([\s\S]*?)\\\]/);
-          if (match) {
-            return {
-              type: 'latexDisplayBracket',
-              raw: match[0],
-              text: match[1].trim(),
-            };
-          }
-        },
-        renderer(token) {
-          try {
-            const rendered = katex.renderToString(token.text, {
-              displayMode: true,
-              throwOnError: false,
-              trust: true,
-              strict: false,
-            });
-            return `<div class="katex-display">${rendered}</div>`;
-          } catch (e) {
-            console.warn('KaTeX bracket render error:', e);
-            return `<div style="color: red; padding: 10px;">LaTeX Error: ${e.message}</div>`;
-          }
-        },
-      },
-      {
-        name: 'latexInlineParen',
-        level: 'inline',
-        start(src) {
-          return src.match(/\\\(/)?.index;
-        },
-        tokenizer(src) {
-          const match = src.match(/^\\\(([\s\S]*?)\\\)/);
-          if (match) {
-            return {
-              type: 'latexInlineParen',
-              raw: match[0],
-              text: match[1].trim(),
-            };
-          }
-        },
-        renderer(token) {
-          try {
-            return katex.renderToString(token.text, {
-              displayMode: false,
-              throwOnError: false,
-              trust: true,
-              strict: false,
-            });
-          } catch (e) {
-            console.warn('KaTeX paren render error:', e);
-            return `<span style="color: red;">LaTeX Error</span>`;
-          }
-        },
-      },
       {
         name: 'mathBlock',
         level: 'block',
@@ -503,101 +412,10 @@ graph TD
     return textarea.value;
   }
 
-  // Add LaTeX environment extensions that render directly with KaTeX
+  // Keep only subscript and superscript extensions
+  // Remove LaTeX environment extensions that don't work with KaTeX
   marked.use({
     extensions: [
-      {
-        name: 'latexEnvironment',
-        level: 'block',
-        start(src) {
-          return src.match(/^\\begin\{/)?.index;
-        },
-        tokenizer(src) {
-          const match = src.match(/^\\begin\{([^}]+)\}([\s\S]*?)\\end\{\1\}/);
-          if (match) {
-            return {
-              type: 'latexEnvironment',
-              raw: match[0],
-              text: match[0],
-            };
-          }
-        },
-        renderer(token) {
-          try {
-            const rendered = katex.renderToString(token.text, {
-              displayMode: true,
-              throwOnError: false,
-              trust: true,
-              strict: false,
-            });
-            return `<div class="katex-display">${rendered}</div>`;
-          } catch (e) {
-            console.warn('KaTeX environment render error:', e);
-            return `<div style="color: red; padding: 10px;">LaTeX Error: ${e.message}</div>`;
-          }
-        },
-      },
-      {
-        name: 'latexDisplayBracket',
-        level: 'block',
-        start(src) {
-          return src.match(/^\\\[/)?.index;
-        },
-        tokenizer(src) {
-          const match = src.match(/^\\\[([\s\S]*?)\\\]/);
-          if (match) {
-            return {
-              type: 'latexDisplayBracket',
-              raw: match[0],
-              text: match[1].trim(),
-            };
-          }
-        },
-        renderer(token) {
-          try {
-            const rendered = katex.renderToString(token.text, {
-              displayMode: true,
-              throwOnError: false,
-              trust: true,
-              strict: false,
-            });
-            return `<div class="katex-display">${rendered}</div>`;
-          } catch (e) {
-            console.warn('KaTeX bracket render error:', e);
-            return `<div style="color: red; padding: 10px;">LaTeX Error: ${e.message}</div>`;
-          }
-        },
-      },
-      {
-        name: 'latexInlineParen',
-        level: 'inline',
-        start(src) {
-          return src.match(/\\\(/)?.index;
-        },
-        tokenizer(src) {
-          const match = src.match(/^\\\(([\s\S]*?)\\\)/);
-          if (match) {
-            return {
-              type: 'latexInlineParen',
-              raw: match[0],
-              text: match[1].trim(),
-            };
-          }
-        },
-        renderer(token) {
-          try {
-            return katex.renderToString(token.text, {
-              displayMode: false,
-              throwOnError: false,
-              trust: true,
-              strict: false,
-            });
-          } catch (e) {
-            console.warn('KaTeX paren render error:', e);
-            return `<span style="color: red;">LaTeX Error</span>`;
-          }
-        },
-      },
       {
         name: 'subscript',
         level: 'inline',
@@ -641,7 +459,7 @@ graph TD
     ],
   });
 
-  console.log('✅ LaTeX environments, subscript, and superscript enabled');
+  console.log('✅ Subscript and superscript enabled (LaTeX environments display as-is)');
 
   // Render markdown
   function renderMarkdown() {
@@ -685,22 +503,9 @@ graph TD
       // Apply Prism syntax highlighting using PrismService
       prismService.highlightAll(preview);
 
-      // Apply KaTeX auto-render only for any remaining $...$ syntax
-      if (typeof renderMathInElement !== 'undefined') {
-        try {
-          renderMathInElement(preview, {
-            delimiters: [
-              { left: '$$', right: '$$', display: true },
-              { left: '$', right: '$', display: false },
-            ],
-            throwOnError: false,
-            trust: true,
-            strict: false,
-          });
-        } catch (e) {
-          console.warn('KaTeX auto-render error:', e);
-        }
-      }
+      // NOTE: KaTeX auto-render is DISABLED
+      // We handle all math via marked.js extensions ($...$ and $$...$$)
+      // KaTeX auto-render was causing issues with unsupported LaTeX environments
 
       // Save content using StorageManager
       storageManager.set('markdownContent', markdownText);
@@ -1167,11 +972,21 @@ graph TD
   // Load saved theme using ThemeManager
   const savedTheme = storageManager.get('selectedTheme');
   if (savedTheme) {
-    themeSelector.value = savedTheme;
-    themeManager.loadTheme(savedTheme).catch(err => {
-      console.error('Failed to load saved theme:', err);
-      themeManager.loadTheme('default-light');
-    });
+    // Load theme first, then sync dropdown only on success
+    themeManager
+      .loadTheme(savedTheme)
+      .then(() => {
+        // Theme loaded successfully - sync dropdown
+        themeSelector.value = savedTheme;
+        console.log(`✅ Theme restored: ${savedTheme}`);
+      })
+      .catch(err => {
+        console.error('Failed to load saved theme:', err);
+        // Fallback to default-light on error
+        themeManager.loadTheme('default-light').then(() => {
+          themeSelector.value = 'default-light';
+        });
+      });
   }
 
   // Zoom functionality

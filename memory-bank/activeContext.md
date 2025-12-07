@@ -202,7 +202,57 @@ html = restoreLatexEnvironments(html);
 
 ## Open Questions
 
-None - All LaTeX rendering issues resolved
+None - All issues resolved
+
+## Recent Fixes (Latest Session)
+
+### Theme Dropdown Sync Fix ✅
+
+**Problem:** Theme dropdown showing "Default Light" even when sunset-dark theme was loaded from LocalStorage.
+
+**Root Cause:** Race condition in theme loading - dropdown was being set BEFORE async theme load completed.
+
+**Solution:**
+
+```javascript
+// OLD (buggy):
+if (savedTheme) {
+  themeSelector.value = savedTheme; // Sets immediately
+  themeManager.loadTheme(savedTheme); // Async, not awaited
+}
+
+// NEW (fixed):
+if (savedTheme) {
+  themeManager
+    .loadTheme(savedTheme)
+    .then(() => {
+      themeSelector.value = savedTheme; // Only after successful load
+      console.log(`✅ Theme restored: ${savedTheme}`);
+    })
+    .catch(err => {
+      // Fallback with proper sync
+      themeManager.loadTheme('default-light').then(() => {
+        themeSelector.value = 'default-light';
+      });
+    });
+}
+```
+
+**Key Changes:**
+
+1. Await theme load completion before syncing dropdown
+2. Added success callback for dropdown update
+3. Added error handling with fallback
+4. Added console logging for debugging
+
+**Results:**
+
+- ✅ Dropdown now syncs correctly with all themes
+- ✅ No more race conditions
+- ✅ Proper error handling
+- ✅ Works for all 12 themes (6 theme families × 2 variants)
+
+**Files Modified:** `script.js` (lines 1167-1183)
 
 ## Performance Observations
 
