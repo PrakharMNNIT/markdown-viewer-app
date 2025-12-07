@@ -67,8 +67,8 @@ function initializeApp() {
 
   console.log('✅ KaTeX loaded - Math formula rendering available');
 
-  // Configure marked.js with KaTeX extension
-  configureMarkedWithMath();
+  // Configure marked.js extensions
+  configureMarkedExtensions();
 
   // Initialize Mermaid with theme-aware configuration
   initMermaidTheme();
@@ -76,8 +76,15 @@ function initializeApp() {
   setupEditor();
 }
 
-// Configure marked.js to handle math formulas
-function configureMarkedWithMath() {
+// Configure marked.js extensions (math + footnotes)
+function configureMarkedExtensions() {
+  // Enable footnote support
+  if (typeof markedFootnote !== 'undefined') {
+    marked.use(markedFootnote());
+    console.log('✅ Footnotes enabled');
+  }
+
+  // Configure math formulas
   if (typeof katex === 'undefined') {
     console.warn('KaTeX not loaded, math rendering unavailable');
     return;
