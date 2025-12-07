@@ -1,28 +1,47 @@
 /* Forest Dark Theme */
 :root {
-    --bg-primary: #0f1c0a;
-    --bg-secondary: #1a2817;
-    --bg-tertiary: #2d4a2b;
-    --text-primary: #d9f99d;
-    --text-secondary: #a3e635;
-    --border-color: #3f6212;
-    
-    --h1-color: #84cc16;
-    --h2-color: #a3e635;
-    --h3-color: #bef264;
-    --h4-color: #4ade80;
-    --h5-color: #22c55e;
-    --h6-color: #16a34a;
-    
-    --link-color: #84cc16;
-    --link-hover: #a3e635;
-    --code-bg: #1a2817;
-    --code-text: #a3e635;
-    --code-block-bg: #0f1c0a;
-    --blockquote-border: #84cc16;
-    --blockquote-bg: #1a2817;
-    --bold-color: #fbbf24;
-    --italic-color: #84cc16;
-    --table-header-bg: #2d4a2b;
-    --table-border: #3f6212;
+  --bg-primary: #0f1c0a;
+  --bg-secondary: #1a2817;
+  --bg-tertiary: #2d4a2b;
+  --text-primary: #d9f99d;
+  --text-secondary: #a3e635;
+  --border-color: #3f6212;
+
+  --h1-color: #84cc16;
+  --h2-color: #a3e635;
+  --h3-color: #bef264;
+  --h4-color: #4ade80;
+  --h5-color: #22c55e;
+  --h6-color: #16a34a;
+
+  --link-color: #84cc16;
+  --link-hover: #a3e635;
+
+  /* Code Colors */
+  --code-bg: #1a2817;
+  --code-text: #a3e635;
+  --code-block-bg: #0f1c0a;
+  --code-border: #3f6212;
+
+  /* Syntax Highlighting - Comprehensive Token Colors */
+  --syntax-keyword: #84cc16;
+  --syntax-string: #a3e635;
+  --syntax-number: #bef264;
+  --syntax-function: #4ade80;
+  --syntax-comment: #737373;
+  --syntax-operator: #22c55e;
+  --syntax-punctuation: #a3a3a3;
+
+  /* Additional Token Types */
+  --syntax-variable: #bef264; /* Variables - bright lime (distinct from text #d9f99d) */
+  --syntax-property: #4ade80; /* Properties - green */
+  --syntax-namespace: #84cc16; /* Namespaces - lime */
+  --syntax-builtin: #22c55e; /* Builtins - green */
+
+  --blockquote-border: #84cc16;
+  --blockquote-bg: #1a2817;
+  --bold-color: #fbbf24;
+  --italic-color: #84cc16;
+  --table-header-bg: #2d4a2b;
+  --table-border: #3f6212;
 }

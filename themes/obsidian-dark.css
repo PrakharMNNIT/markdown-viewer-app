@@ -61,6 +61,12 @@
   --syntax-operator: #89ddff;
   --syntax-punctuation: #b8bcc8;
 
+  /* Additional Token Types */
+  --syntax-variable: #82aaff; /* Variables - blue (distinct from text #f5f7ff) */
+  --syntax-property: #4ecdc4; /* Properties - cyan */
+  --syntax-namespace: #ffb86c; /* Namespaces - orange */
+  --syntax-builtin: #c77dff; /* Builtins - purple */
+
   /* Blockquote */
   --blockquote-border: #ff6b9d;
   --blockquote-bg: rgba(255, 107, 157, 0.1);

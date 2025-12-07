@@ -1,28 +1,47 @@
-/* Sunset Dark Theme */
+r/* Sunset Dark Theme */
 :root {
-    --bg-primary: #1c0a00;
-    --bg-secondary: #2d1b0e;
-    --bg-tertiary: #3d2417;
-    --text-primary: #fed7aa;
-    --text-secondary: #fdba74;
-    --border-color: #7c2d12;
-    
-    --h1-color: #fb923c;
-    --h2-color: #f97316;
-    --h3-color: #ea580c;
-    --h4-color: #f87171;
-    --h5-color: #fb7185;
-    --h6-color: #f472b6;
-    
-    --link-color: #fb923c;
-    --link-hover: #fdba74;
-    --code-bg: #2d1b0e;
-    --code-text: #fbbf24;
-    --code-block-bg: #1c0a00;
-    --blockquote-border: #f97316;
-    --blockquote-bg: #2d1b0e;
-    --bold-color: #fbbf24;
-    --italic-color: #fb923c;
-    --table-header-bg: #3d2417;
-    --table-border: #7c2d12;
+  --bg-primary: #1c0a00;
+  --bg-secondary: #2d1b0e;
+  --bg-tertiary: #3d2417;
+  --text-primary: #fed7aa;
+  --text-secondary: #fdba74;
+  --border-color: #7c2d12;
+
+  --h1-color: #fb923c;
+  --h2-color: #f97316;
+  --h3-color: #ea580c;
+  --h4-color: #f87171;
+  --h5-color: #fb7185;
+  --h6-color: #f472b6;
+
+  --link-color: #fb923c;
+  --link-hover: #fdba74;
+
+  /* Code Colors */
+  --code-bg: #2d1b0e;
+  --code-text: #fbbf24;
+  --code-block-bg: #1c0a00;
+  --code-border: #7c2d12;
+
+  /* Syntax Highlighting - Comprehensive Token Colors */
+  --syntax-keyword: #fb923c;
+  --syntax-string: #a3e635;
+  --syntax-number: #fbbf24;
+  --syntax-function: #f87171;
+  --syntax-comment: #78716c;
+  --syntax-operator: #fdba74;
+  --syntax-punctuation: #d4d4d4;
+
+  /* Additional Token Types */
+  --syntax-variable: #fcd34d; /* Variables - bright yellow (distinct from text #fed7aa) */
+  --syntax-property: #f87171; /* Properties - coral */
+  --syntax-namespace: #fb923c; /* Namespaces - sunset orange */
+  --syntax-builtin: #f87171; /* Builtins - coral */
+
+  --blockquote-border: #f97316;
+  --blockquote-bg: #2d1b0e;
+  --bold-color: #fbbf24;
+  --italic-color: #fb923c;
+  --table-header-bg: #3d2417;
+  --table-border: #7c2d12;
 }

@@ -1,43 +1,49 @@
 /* Default Dark Theme */
 :root {
-    --bg-primary: #0d1117;
-    --bg-secondary: #161b22;
-    --bg-tertiary: #1c2128;
-    --text-primary: #e6edf3;
-    --text-secondary: #7d8590;
-    --border-color: #30363d;
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #1c2128;
+  --text-primary: #e6edf3;
+  --text-secondary: #7d8590;
+  --border-color: #30363d;
 
-    --h1-color: #58a6ff;
-    --h2-color: #bc8cff;
-    --h3-color: #ff7b72;
-    --h4-color: #3fb950;
-    --h5-color: #ffa657;
-    --h6-color: #d2a8ff;
+  --h1-color: #58a6ff;
+  --h2-color: #bc8cff;
+  --h3-color: #ff7b72;
+  --h4-color: #3fb950;
+  --h5-color: #ffa657;
+  --h6-color: #d2a8ff;
 
-    --link-color: #58a6ff;
-    --link-hover: #79c0ff;
+  --link-color: #58a6ff;
+  --link-hover: #79c0ff;
 
-    --bold-color: #ffa657;
-    --italic-color: #ff7b72;
+  --bold-color: #ffa657;
+  --italic-color: #ff7b72;
 
-    /* Code Colors */
-    --code-text: #ff7b72;
-    --code-bg: #1c2128;
-    --code-block-bg: #0d1117;
-    --code-border: #30363d;
+  /* Code Colors */
+  --code-text: #ff7b72;
+  --code-bg: #1c2128;
+  --code-block-bg: #0d1117;
+  --code-border: #30363d;
 
-    /* Syntax Highlighting */
-    --syntax-keyword: #ff7b72;
-    --syntax-string: #a5e844;
-    --syntax-number: #79c0ff;
-    --syntax-function: #d2a8ff;
-    --syntax-comment: #8b949e;
-    --syntax-operator: #ff7b72;
-    --syntax-punctuation: #7d8590;
+  /* Syntax Highlighting */
+  --syntax-keyword: #ff7b72;
+  --syntax-string: #a5e844;
+  --syntax-number: #79c0ff;
+  --syntax-function: #d2a8ff;
+  --syntax-comment: #8b949e;
+  --syntax-operator: #ff7b72;
+  --syntax-punctuation: #7d8590;
 
-    --blockquote-border: #bc8cff;
-    --blockquote-bg: #161b22;
+  /* Additional Token Types */
+  --syntax-variable: #79c0ff; /* Variables - blue (distinct from text #e6edf3) */
+  --syntax-property: #d2a8ff; /* Properties - purple */
+  --syntax-namespace: #ff7b72; /* Namespaces - red */
+  --syntax-builtin: #d2a8ff; /* Builtins - purple */
 
-    --table-header-bg: #21262d;
-    --table-border: #30363d;
+  --blockquote-border: #bc8cff;
+  --blockquote-bg: #161b22;
+
+  --table-header-bg: #21262d;
+  --table-border: #30363d;
 }
