@@ -145,8 +145,101 @@ function configureMarkedExtensions() {
     return;
   }
 
+  // Add LaTeX environment extensions
   marked.use({
     extensions: [
+      {
+        name: 'latexEnvironment',
+        level: 'block',
+        start(src) {
+          return src.match(/^\\begin\{/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\\begin\{([^}]+)\}([\s\S]*?)\\end\{\1\}/);
+          if (match) {
+            return {
+              type: 'latexEnvironment',
+              raw: match[0],
+              text: match[0],
+            };
+          }
+        },
+        renderer(token) {
+          try {
+            const rendered = katex.renderToString(token.text, {
+              displayMode: true,
+              throwOnError: false,
+              trust: true,
+              strict: false,
+            });
+            return `<div class="katex-display">${rendered}</div>`;
+          } catch (e) {
+            console.warn('KaTeX environment render error:', e);
+            return `<div style="color: red; padding: 10px;">LaTeX Error: ${e.message}</div>`;
+          }
+        },
+      },
+      {
+        name: 'latexDisplayBracket',
+        level: 'block',
+        start(src) {
+          return src.match(/^\\\[/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\\\[([\s\S]*?)\\\]/);
+          if (match) {
+            return {
+              type: 'latexDisplayBracket',
+              raw: match[0],
+              text: match[1].trim(),
+            };
+          }
+        },
+        renderer(token) {
+          try {
+            const rendered = katex.renderToString(token.text, {
+              displayMode: true,
+              throwOnError: false,
+              trust: true,
+              strict: false,
+            });
+            return `<div class="katex-display">${rendered}</div>`;
+          } catch (e) {
+            console.warn('KaTeX bracket render error:', e);
+            return `<div style="color: red; padding: 10px;">LaTeX Error: ${e.message}</div>`;
+          }
+        },
+      },
+      {
+        name: 'latexInlineParen',
+        level: 'inline',
+        start(src) {
+          return src.match(/\\\(/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\\\(([\s\S]*?)\\\)/);
+          if (match) {
+            return {
+              type: 'latexInlineParen',
+              raw: match[0],
+              text: match[1].trim(),
+            };
+          }
+        },
+        renderer(token) {
+          try {
+            return katex.renderToString(token.text, {
+              displayMode: false,
+              throwOnError: false,
+              trust: true,
+              strict: false,
+            });
+          } catch (e) {
+            console.warn('KaTeX paren render error:', e);
+            return `<span style="color: red;">LaTeX Error</span>`;
+          }
+        },
+      },
       {
         name: 'mathBlock',
         level: 'block',
@@ -228,10 +321,50 @@ function configureMarkedExtensions() {
           }
         },
       },
+      {
+        name: 'subscript',
+        level: 'inline',
+        start(src) {
+          return src.match(/~/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^~([^~\s]+)~/);
+          if (match) {
+            return {
+              type: 'subscript',
+              raw: match[0],
+              text: match[1],
+            };
+          }
+        },
+        renderer(token) {
+          return `<sub>${token.text}</sub>`;
+        },
+      },
+      {
+        name: 'superscript',
+        level: 'inline',
+        start(src) {
+          return src.match(/\^/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\^([^^\s]+)\^/);
+          if (match) {
+            return {
+              type: 'superscript',
+              raw: match[0],
+              text: match[1],
+            };
+          }
+        },
+        renderer(token) {
+          return `<sup>${token.text}</sup>`;
+        },
+      },
     ],
   });
 
-  console.log('✅ Marked.js configured with KaTeX extension');
+  console.log('✅ Marked.js configured with all extensions (LaTeX, subscript, superscript)');
 }
 
 // Initialize Mermaid using MermaidService
@@ -370,12 +503,152 @@ graph TD
     return textarea.value;
   }
 
+  // Add LaTeX environment extensions that render directly with KaTeX
+  marked.use({
+    extensions: [
+      {
+        name: 'latexEnvironment',
+        level: 'block',
+        start(src) {
+          return src.match(/^\\begin\{/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\\begin\{([^}]+)\}([\s\S]*?)\\end\{\1\}/);
+          if (match) {
+            return {
+              type: 'latexEnvironment',
+              raw: match[0],
+              text: match[0],
+            };
+          }
+        },
+        renderer(token) {
+          try {
+            const rendered = katex.renderToString(token.text, {
+              displayMode: true,
+              throwOnError: false,
+              trust: true,
+              strict: false,
+            });
+            return `<div class="katex-display">${rendered}</div>`;
+          } catch (e) {
+            console.warn('KaTeX environment render error:', e);
+            return `<div style="color: red; padding: 10px;">LaTeX Error: ${e.message}</div>`;
+          }
+        },
+      },
+      {
+        name: 'latexDisplayBracket',
+        level: 'block',
+        start(src) {
+          return src.match(/^\\\[/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\\\[([\s\S]*?)\\\]/);
+          if (match) {
+            return {
+              type: 'latexDisplayBracket',
+              raw: match[0],
+              text: match[1].trim(),
+            };
+          }
+        },
+        renderer(token) {
+          try {
+            const rendered = katex.renderToString(token.text, {
+              displayMode: true,
+              throwOnError: false,
+              trust: true,
+              strict: false,
+            });
+            return `<div class="katex-display">${rendered}</div>`;
+          } catch (e) {
+            console.warn('KaTeX bracket render error:', e);
+            return `<div style="color: red; padding: 10px;">LaTeX Error: ${e.message}</div>`;
+          }
+        },
+      },
+      {
+        name: 'latexInlineParen',
+        level: 'inline',
+        start(src) {
+          return src.match(/\\\(/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\\\(([\s\S]*?)\\\)/);
+          if (match) {
+            return {
+              type: 'latexInlineParen',
+              raw: match[0],
+              text: match[1].trim(),
+            };
+          }
+        },
+        renderer(token) {
+          try {
+            return katex.renderToString(token.text, {
+              displayMode: false,
+              throwOnError: false,
+              trust: true,
+              strict: false,
+            });
+          } catch (e) {
+            console.warn('KaTeX paren render error:', e);
+            return `<span style="color: red;">LaTeX Error</span>`;
+          }
+        },
+      },
+      {
+        name: 'subscript',
+        level: 'inline',
+        start(src) {
+          return src.match(/~/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^~([^~\s]+)~/);
+          if (match) {
+            return {
+              type: 'subscript',
+              raw: match[0],
+              text: match[1],
+            };
+          }
+        },
+        renderer(token) {
+          return `<sub>${token.text}</sub>`;
+        },
+      },
+      {
+        name: 'superscript',
+        level: 'inline',
+        start(src) {
+          return src.match(/\^/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^\^([^^\s]+)\^/);
+          if (match) {
+            return {
+              type: 'superscript',
+              raw: match[0],
+              text: match[1],
+            };
+          }
+        },
+        renderer(token) {
+          return `<sup>${token.text}</sup>`;
+        },
+      },
+    ],
+  });
+
+  console.log('✅ LaTeX environments, subscript, and superscript enabled');
+
   // Render markdown
   function renderMarkdown() {
     try {
       const markdownText = editor.value;
 
-      // Parse markdown with math extension handling math automatically
+      // Parse markdown with all extensions
       let html = marked.parse(markdownText);
 
       // Replace mermaid code blocks
@@ -412,13 +685,11 @@ graph TD
       // Apply Prism syntax highlighting using PrismService
       prismService.highlightAll(preview);
 
-      // Apply KaTeX auto-render for LaTeX environments (\begin{align}, \[...\], etc.)
+      // Apply KaTeX auto-render only for any remaining $...$ syntax
       if (typeof renderMathInElement !== 'undefined') {
         try {
           renderMathInElement(preview, {
             delimiters: [
-              { left: '\\[', right: '\\]', display: true },
-              { left: '\\(', right: '\\)', display: false },
               { left: '$$', right: '$$', display: true },
               { left: '$', right: '$', display: false },
             ],
@@ -426,7 +697,6 @@ graph TD
             trust: true,
             strict: false,
           });
-          console.log('✅ LaTeX environments rendered');
         } catch (e) {
           console.warn('KaTeX auto-render error:', e);
         }
