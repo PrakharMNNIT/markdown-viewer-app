@@ -23,20 +23,49 @@
   --code-block-bg: #ffedd5; /* Light orange background */
   --code-border: #fdba74;
 
-  /* Syntax Highlighting - Comprehensive Token Colors */
-  --syntax-keyword: #ea580c;
-  --syntax-string: #16a34a;
-  --syntax-number: #f59e0b;
-  --syntax-function: #dc2626;
-  --syntax-comment: #78716c;
-  --syntax-operator: #c2410c;
-  --syntax-punctuation: #57534e;
+  /* Syntax Highlighting - Production-Grade Token Colors (Based on One Dark Architecture) */
 
-  /* Additional Token Types for Full Customization */
-  --syntax-variable: #ea580c; /* Variables - sunset orange */
-  --syntax-property: #dc2626; /* Properties - red */
-  --syntax-namespace: #f97316; /* Namespaces - bright orange */
-  --syntax-builtin: #dc2626; /* Builtins - red */
+  /* Core hue-1: Cyan (187°) - URLs, special strings */
+  --syntax-url: #14b8a6; /* Teal/cyan for URLs */
+
+  /* Core hue-2: Blue (207°) - Functions, variables, operators */
+  --syntax-function: #3b82f6; /* Bright blue for functions */
+  --syntax-variable: #0ea5e9; /* Sky blue for variables */
+
+  /* Core hue-3: Purple (286°) - Keywords */
+  --syntax-keyword: #a855f7; /* Vibrant purple for keywords (if, final, sealed) */
+
+  /* Core hue-4: Green (95°) - Strings, builtins, inserted */
+  --syntax-string: #10b981; /* Emerald green for strings */
+  --syntax-builtin: #059669; /* Darker green for builtins (String, List, Array) */
+  --syntax-char: #10b981; /* Same as strings */
+  --syntax-regex: #10b981; /* Same as strings */
+  --syntax-inserted: #10b981; /* For diff highlights */
+
+  /* Core hue-5: Red (355°) - Properties, tags, deleted, important */
+  --syntax-property: #ef4444; /* Red for properties */
+  --syntax-tag: #ef4444; /* Red for HTML tags */
+  --syntax-deleted: #ef4444; /* For diff highlights */
+  --syntax-important: #ef4444; /* For !important */
+
+  /* Core hue-6: Orange (29°) - Class names, constants, numbers, atrules */
+  --syntax-class-name: #f97316; /* Orange for class/type names (Rectangle, Shape) */
+  --syntax-number: #fb923c; /* Bright orange for numbers */
+  --syntax-constant: #ea580c; /* Burnt orange for constants */
+  --syntax-boolean: #fb923c; /* Same as numbers */
+  --syntax-atrule: #fb923c; /* CSS @ rules */
+
+  /* Neutral colors */
+  --syntax-comment: #a8a29e; /* Muted stone for comments */
+  --syntax-punctuation: #64748b; /* Slate for punctuation */
+  --syntax-operator: #fb7185; /* Coral rose for operators */
+
+  /* Markup specific */
+  --syntax-attr-name: #f97316; /* Orange like class-name */
+  --syntax-attr-value: #10b981; /* Green like strings */
+  --syntax-namespace: #a855f7; /* Purple like keywords */
+  --syntax-entity: #64748b; /* Neutral */
+  --syntax-selector: #ef4444; /* Red like properties */
 
   --blockquote-border: #f97316;
   --blockquote-bg: #ffedd5;
@@ -44,4 +73,87 @@
   --italic-color: #e11d48;
   --table-header-bg: #fed7aa;
   --table-border: #fdba74;
+
+  /* === MERMAID COMPREHENSIVE CONFIGURATION === */
+
+  /* Core Global */
+  --mermaid-background: #fff7ed;
+  --mermaid-text-color: #431407;
+  --mermaid-line-color: #f97316;
+  --mermaid-main-bkg: #fed7aa;
+
+  /* Primary Set */
+  --mermaid-primary-color: #fed7aa;
+  --mermaid-primary-text-color: #431407;
+  --mermaid-primary-border-color: #ea580c;
+
+  /* Secondary Set */
+  --mermaid-secondary-color: #ffedd5;
+  --mermaid-secondary-text-color: #431407;
+  --mermaid-secondary-border-color: #f97316;
+
+  /* Tertiary Set */
+  --mermaid-tertiary-color: #fff7ed;
+  --mermaid-tertiary-text-color: #431407;
+  --mermaid-tertiary-border-color: #fb923c;
+
+  /* Flowchart */
+  --mermaid-node-border: #ea580c;
+  --mermaid-cluster-bkg: #ffedd5;
+  --mermaid-cluster-border: #f97316;
+  --mermaid-default-link-color: #f97316;
+  --mermaid-title-color: #431407;
+  --mermaid-edge-label-background: #fff7ed;
+  --mermaid-node-text-color: #431407;
+
+  /* Sequence Diagram */
+  --mermaid-actor-bkg: #fed7aa;
+  --mermaid-actor-border: #ea580c;
+  --mermaid-actor-text-color: #431407;
+  --mermaid-actor-line-color: #ea580c;
+  --mermaid-signal-color: #f97316;
+  --mermaid-signal-text-color: #431407;
+  --mermaid-label-box-bkg-color: #fed7aa;
+  --mermaid-label-box-border-color: #ea580c;
+  --mermaid-label-text-color: #431407;
+  --mermaid-loop-text-color: #431407;
+  --mermaid-activation-border-color: #f97316;
+  --mermaid-activation-bkg-color: #ffedd5;
+  --mermaid-sequence-number-color: #431407;
+
+  /* Pie Chart */
+  --mermaid-pie1: #ea580c;
+  --mermaid-pie2: #f97316;
+  --mermaid-pie3: #fb923c;
+  --mermaid-pie4: #dc2626;
+  --mermaid-pie5: #e11d48;
+  --mermaid-pie6: #db2777;
+  --mermaid-pie7: #c2410c;
+  --mermaid-pie8: #14b8a6;
+  --mermaid-pie9: #3b82f6;
+  --mermaid-pie10: #a855f7;
+  --mermaid-pie11: #ef4444;
+  --mermaid-pie12: #10b981;
+  --mermaid-pie-title-text-color: #431407;
+  --mermaid-pie-section-text-color: #fff7ed; /* Light on vibrant slices */
+  --mermaid-pie-legend-text-color: #431407;
+  --mermaid-pie-stroke-color: #ea580c;
+  --mermaid-pie-outer-stroke-color: #ea580c;
+
+  /* State Diagram */
+  --mermaid-label-color: #431407;
+  --mermaid-alt-background: #ffedd5;
+
+  /* Class Diagram */
+  --mermaid-class-text: #431407;
+
+  /* User Journey */
+  --mermaid-fill-type0: #ea580c;
+  --mermaid-fill-type1: #f97316;
+  --mermaid-fill-type2: #fb923c;
+  --mermaid-fill-type3: #dc2626;
+  --mermaid-fill-type4: #e11d48;
+  --mermaid-fill-type5: #db2777;
+  --mermaid-fill-type6: #c2410c;
+  --mermaid-fill-type7: #14b8a6;
 }

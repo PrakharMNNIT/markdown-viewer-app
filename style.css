@@ -297,68 +297,119 @@ body {
   padding: 0;
 }
 
-/* Syntax Highlighting with Custom Variables - Comprehensive Token Coverage */
-#markdown-preview .token.keyword {
-  color: var(--syntax-keyword, #c792ea) !important;
+/* ==================== PRISM SYNTAX HIGHLIGHTING - PRODUCTION GRADE ==================== */
+/* Based on One Dark theme architecture - comprehensive token coverage */
+
+/* Group 1: Comments and documentation */
+#markdown-preview .token.comment,
+#markdown-preview .token.prolog,
+#markdown-preview .token.cdata {
+  color: var(--syntax-comment, #7f85a3);
+  font-style: italic;
 }
 
-#markdown-preview .token.string {
-  color: var(--syntax-string, #a5e844) !important;
+/* Group 2: Neutral tokens (inherit or subtle) */
+#markdown-preview .token.doctype,
+#markdown-preview .token.punctuation,
+#markdown-preview .token.entity {
+  color: var(--syntax-punctuation, #64748b);
 }
 
-#markdown-preview .token.number,
-#markdown-preview .token.boolean {
-  color: var(--syntax-number, #ffcb6b) !important;
-}
-
-#markdown-preview .token.function,
-#markdown-preview .token.function-variable,
-#markdown-preview .token.method,
-#markdown-preview .token.method-variable {
-  color: var(--syntax-function, #82aaff) !important;
-  font-weight: 600;
-}
-
-#markdown-preview .token.comment {
-  color: var(--syntax-comment, #7f85a3) !important;
-}
-
-#markdown-preview .token.operator {
-  color: var(--syntax-operator, #89ddff) !important;
-}
-
-#markdown-preview .token.punctuation {
-  color: var(--syntax-punctuation, #89ddff) !important;
-}
-
+/* Group 3: Orange hue - Class names, constants, numbers, booleans, atrules */
+#markdown-preview .token.attr-name,
 #markdown-preview .token.class-name,
-#markdown-preview .token.type-class-name {
-  color: var(--syntax-keyword, #ffcb6b) !important;
+#markdown-preview .token.boolean,
+#markdown-preview .token.constant,
+#markdown-preview .token.number,
+#markdown-preview .token.atrule {
+  color: var(--syntax-class-name, #f97316);
   font-weight: 600;
 }
 
-/* Variables and Parameters - NEW */
-#markdown-preview .token.parameter,
-#markdown-preview .token.variable,
-#markdown-preview .token.plain {
-  color: var(--syntax-variable, var(--text-primary)) !important;
-  font-weight: 500;
+/* Group 4: Purple hue - Keywords (distinct from class names!) */
+#markdown-preview .token.keyword {
+  color: var(--syntax-keyword, #a855f7);
+  font-weight: 700;
 }
 
-/* Properties and Namespaces - NEW */
+/* Group 5: Red hue - Properties, tags, symbols, deleted, important */
 #markdown-preview .token.property,
-#markdown-preview .token.property-access {
-  color: var(--syntax-property, var(--syntax-function)) !important;
+#markdown-preview .token.tag,
+#markdown-preview .token.symbol,
+#markdown-preview .token.deleted,
+#markdown-preview .token.important {
+  color: var(--syntax-property, #ef4444);
+  font-weight: 600;
 }
 
+/* Group 6: Green hue - Strings, chars, builtins, inserted, regex, selectors */
+#markdown-preview .token.selector,
+#markdown-preview .token.string,
+#markdown-preview .token.char,
+#markdown-preview .token.builtin,
+#markdown-preview .token.inserted,
+#markdown-preview .token.regex,
+#markdown-preview .token.attr-value {
+  color: var(--syntax-string, #10b981);
+}
+
+/* Nested attr-value punctuation (quotes) */
+#markdown-preview .token.attr-value > .token.punctuation {
+  color: var(--syntax-string, #10b981);
+}
+
+/* Group 7: Blue hue - Variables, operators, functions */
+#markdown-preview .token.variable,
+#markdown-preview .token.operator,
+#markdown-preview .token.function {
+  color: var(--syntax-function, #3b82f6);
+  font-weight: 600;
+}
+
+/* Group 8: Cyan hue - URLs */
+#markdown-preview .token.url {
+  color: var(--syntax-url, #14b8a6);
+}
+
+/* ==================== LANGUAGE-SPECIFIC OVERRIDES ==================== */
+
+/* JavaScript overrides */
+#markdown-preview .language-javascript .token.operator {
+  color: var(--syntax-keyword, #a855f7);
+}
+
+/* CSS overrides */
+#markdown-preview .language-css .token.selector {
+  color: var(--syntax-property, #ef4444);
+}
+
+#markdown-preview .language-css .token.property {
+  color: var(--text-primary);
+}
+
+/* JSON overrides */
+#markdown-preview .language-json .token.operator {
+  color: var(--syntax-punctuation, #64748b);
+}
+
+#markdown-preview .language-json .token.null.keyword {
+  color: var(--syntax-number, #fb923c);
+}
+
+/* ==================== VISUAL ENHANCEMENTS ==================== */
+
+/* Bold/italic styling */
+#markdown-preview .token.bold {
+  font-weight: bold;
+}
+
+#markdown-preview .token.italic {
+  font-style: italic;
+}
+
+/* Namespace opacity */
 #markdown-preview .token.namespace {
-  color: var(--syntax-namespace, var(--syntax-keyword)) !important;
-  font-weight: 500;
-}
-
-#markdown-preview .token.builtin {
-  color: var(--syntax-builtin, var(--syntax-function)) !important;
-  font-weight: 500;
+  opacity: 0.8;
 }
 
 #markdown-preview blockquote {

@@ -26,24 +26,184 @@
   --code-block-bg: #f6f8fa;
   --code-border: #d0d7de;
 
-  /* Syntax Highlighting - Comprehensive Token Colors */
-  --syntax-keyword: #cf222e;
-  --syntax-string: #1a7f37;
-  --syntax-number: #0550ae;
-  --syntax-function: #8250df;
-  --syntax-comment: #636c76;
-  --syntax-operator: #cf222e;
-  --syntax-punctuation: #636c76;
+  /* Syntax Highlighting - Production-Grade Token Colors (One Dark Architecture) */
 
-  /* Additional Token Types for Full Customization */
-  --syntax-variable: #0550ae; /* Variables, parameters */
-  --syntax-property: #1a7f37; /* Properties, attributes */
-  --syntax-namespace: #cf222e; /* Namespaces */
-  --syntax-builtin: #8250df; /* Built-in functions */
+  /* Core hue-1: Cyan - URLs */
+  --syntax-url: #0969da; /* GitHub blue for URLs */
+
+  /* Core hue-2: Blue - Functions, variables */
+  --syntax-function: #8250df; /* Purple-blue for functions */
+  --syntax-variable: #0550ae; /* Deep blue for variables */
+
+  /* Core hue-3: Red - Keywords */
+  --syntax-keyword: #cf222e; /* GitHub red for keywords (final, sealed, class) */
+
+  /* Core hue-4: Green - Strings, builtins */
+  --syntax-string: #1a7f37; /* GitHub green for strings */
+  --syntax-builtin: #116329; /* Darker green for builtins (String, List) */
+  --syntax-char: #1a7f37; /* Same as strings */
+  --syntax-regex: #1a7f37; /* Same as strings */
+  --syntax-inserted: #1a7f37; /* For diff */
+
+  /* Core hue-5: Orange/Brown - Properties, tags */
+  --syntax-property: #bc4c00; /* Orange-brown for properties */
+  --syntax-tag: #cf222e; /* Red for tags */
+  --syntax-deleted: #cf222e; /* For diff */
+  --syntax-important: #bc4c00; /* For !important */
+
+  /* Core hue-6: Blue - Class names, constants, numbers */
+  --syntax-class-name: #0969da; /* Bright blue for class names (Rectangle, Shape) */
+  --syntax-number: #0550ae; /* Deep blue for numbers */
+  --syntax-constant: #0969da; /* Bright blue for constants */
+  --syntax-boolean: #0550ae; /* Same as numbers */
+  --syntax-atrule: #8250df; /* Purple for CSS @ rules */
+
+  /* Neutral colors */
+  --syntax-comment: #636c76; /* GitHub gray for comments */
+  --syntax-punctuation: #636c76; /* Gray for punctuation */
+  --syntax-operator: #cf222e; /* Red for operators */
+
+  /* Markup specific */
+  --syntax-attr-name: #0969da; /* Blue like class-name */
+  --syntax-attr-value: #1a7f37; /* Green like strings */
+  --syntax-namespace: #8250df; /* Purple */
+  --syntax-entity: #636c76; /* Neutral */
+  --syntax-selector: #bc4c00; /* Orange like properties */
 
   --blockquote-border: #0969da;
   --blockquote-bg: #ddf4ff;
 
   --table-header-bg: #f6f8fa;
   --table-border: #d0d7de;
+
+  /* === MERMAID COMPREHENSIVE CONFIGURATION === */
+
+  /* Core Global */
+  --mermaid-background: #ffffff;
+  --mermaid-text-color: #1f2328;
+  --mermaid-line-color: #0969da;
+  --mermaid-main-bkg: #eaeef2;
+
+  /* Primary Set */
+  --mermaid-primary-color: #eaeef2;
+  --mermaid-primary-text-color: #1f2328;
+  --mermaid-primary-border-color: #0969da;
+
+  /* Secondary Set */
+  --mermaid-secondary-color: #f6f8fa;
+  --mermaid-secondary-text-color: #1f2328;
+  --mermaid-secondary-border-color: #8250df;
+
+  /* Tertiary Set */
+  --mermaid-tertiary-color: #ffffff;
+  --mermaid-tertiary-text-color: #1f2328;
+  --mermaid-tertiary-border-color: #cf222e;
+
+  /* Flowchart */
+  --mermaid-node-border: #0969da;
+  --mermaid-cluster-bkg: #f6f8fa;
+  --mermaid-cluster-border: #8250df;
+  --mermaid-default-link-color: #0969da;
+  --mermaid-title-color: #1f2328;
+  --mermaid-edge-label-background: #ffffff;
+  --mermaid-node-text-color: #1f2328;
+
+  /* Sequence Diagram */
+  --mermaid-actor-bkg: #eaeef2;
+  --mermaid-actor-border: #0969da;
+  --mermaid-actor-text-color: #1f2328;
+  --mermaid-actor-line-color: #0969da;
+  --mermaid-signal-color: #8250df;
+  --mermaid-signal-text-color: #1f2328;
+  --mermaid-label-box-bkg-color: #eaeef2;
+  --mermaid-label-box-border-color: #0969da;
+  --mermaid-label-text-color: #1f2328;
+  --mermaid-loop-text-color: #1f2328;
+  --mermaid-activation-border-color: #8250df;
+  --mermaid-activation-bkg-color: #f6f8fa;
+  --mermaid-sequence-number-color: #1f2328;
+
+  /* Pie Chart */
+  --mermaid-pie1: #0969da;
+  --mermaid-pie2: #8250df;
+  --mermaid-pie3: #cf222e;
+  --mermaid-pie4: #1a7f37;
+  --mermaid-pie5: #bc4c00;
+  --mermaid-pie6: #0550ae;
+  --mermaid-pie7: #116329;
+  --mermaid-pie8: #0969da;
+  --mermaid-pie9: #8250df;
+  --mermaid-pie10: #cf222e;
+  --mermaid-pie11: #1a7f37;
+  --mermaid-pie12: #bc4c00;
+  --mermaid-pie-title-text-color: #1f2328;
+  --mermaid-pie-section-text-color: #ffffff; /* White on vibrant slices */
+  --mermaid-pie-legend-text-color: #1f2328;
+  --mermaid-pie-stroke-color: #0969da;
+  --mermaid-pie-outer-stroke-color: #0969da;
+
+  /* State Diagram */
+  --mermaid-label-color: #1f2328;
+  --mermaid-alt-background: #f6f8fa;
+
+  /* Class Diagram */
+  --mermaid-class-text: #1f2328;
+
+  /* User Journey */
+  --mermaid-fill-type0: #0969da;
+  --mermaid-fill-type1: #8250df;
+  --mermaid-fill-type2: #cf222e;
+  --mermaid-fill-type3: #1a7f37;
+  --mermaid-fill-type4: #bc4c00;
+  --mermaid-fill-type5: #0550ae;
+  --mermaid-fill-type6: #116329;
+  --mermaid-fill-type7: #0969da;
+
+  /* Gantt Chart */
+  --mermaid-section-bkg-color: #eaeef2;
+  --mermaid-alt-section-bkg-color: #f6f8fa;
+  --mermaid-section-bkg-color2: #eaeef2;
+  --mermaid-task-text-color: #1f2328;
+  --mermaid-task-text-light-color: #1f2328;
+  --mermaid-task-text-outside-color: #1f2328;
+  --mermaid-task-text-clickable-color: #0969da;
+  --mermaid-active-task-bkg-color: #0969da;
+  --mermaid-active-task-border-color: #0969da;
+  --mermaid-done-task-bkg-color: #1a7f37;
+  --mermaid-done-task-border-color: #1a7f37;
+  --mermaid-crit-border-color: #cf222e;
+  --mermaid-crit-bkg-color: #cf222e;
+  --mermaid-today-line-color: #cf222e;
+  --mermaid-grid-color: #d0d7de;
+  --mermaid-section-text-color: #1f2328;
+  --mermaid-task-border-color: #0969da;
+
+  /* ER Diagram */
+  --mermaid-attribute-background-color-odd: #f6f8fa;
+  --mermaid-attribute-background-color-even: #ffffff;
+  --mermaid-relationship-label-background: #ffffff;
+  --mermaid-relationship-label-color: #1f2328;
+  --mermaid-entity-background: #eaeef2;
+  --mermaid-entity-border-color: #0969da;
+
+  /* Git Graph */
+  --mermaid-git0: #0969da;
+  --mermaid-git1: #8250df;
+  --mermaid-git2: #cf222e;
+  --mermaid-git3: #1a7f37;
+  --mermaid-git4: #bc4c00;
+  --mermaid-git5: #0550ae;
+  --mermaid-git6: #116329;
+  --mermaid-git7: #0969da;
+  --mermaid-git-inv0: #ffffff;
+  --mermaid-git-branch-label0: #1f2328;
+  --mermaid-git-branch-label1: #1f2328;
+  --mermaid-git-branch-label2: #1f2328;
+  --mermaid-git-branch-label3: #1f2328;
+  --mermaid-git-branch-label4: #1f2328;
+  --mermaid-commit-label-color: #1f2328;
+  --mermaid-commit-label-background: #ffffff;
+  --mermaid-tag-label-color: #1f2328;
+  --mermaid-tag-label-background: #eaeef2;
+  --mermaid-tag-label-border: #0969da;
 }

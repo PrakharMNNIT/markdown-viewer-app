@@ -20,9 +20,20 @@ const folderBrowserService = new FolderBrowserService(storageManager);
 const currentFolderFiles = [];
 const currentFileHandle = null;
 
-// Configure theme change listener to update Mermaid
+// Global render function reference (will be set in setupEditor)
+let globalRenderMarkdown = null;
+
+// Configure theme change listener to update Mermaid and force re-render
 themeManager.setThemeChangeListener(() => {
   mermaidService.reinitialize();
+
+  // Force re-render of markdown to apply new Mermaid colors
+  setTimeout(() => {
+    if (globalRenderMarkdown) {
+      console.log('🔄 Re-rendering diagrams with new theme colors');
+      globalRenderMarkdown();
+    }
+  }, 200);
 });
 
 // Wait for all scripts to load
@@ -77,8 +88,8 @@ function initializeApp() {
   // Configure marked.js extensions
   configureMarkedExtensions();
 
-  // Initialize Mermaid with theme-aware configuration
-  initMermaidTheme();
+  // DON'T initialize Mermaid here - let saved theme load first
+  // Mermaid will initialize after theme loads in setupEditor()
 
   setupEditor();
 }
@@ -461,7 +472,7 @@ graph TD
 
   console.log('✅ Subscript and superscript enabled (LaTeX environments display as-is)');
 
-  // Render markdown
+  // Render markdown (expose globally for theme changes)
   function renderMarkdown() {
     try {
       const markdownText = editor.value;
@@ -520,8 +531,16 @@ graph TD
   async function changeTheme(themeName) {
     await themeManager.loadTheme(themeName);
 
-    // Re-render to apply new Mermaid theme (observer already handles reinit)
+    // Wait for theme to load, then reinitialize Mermaid and force re-render
     setTimeout(() => {
+      // Clear existing Mermaid diagrams to force fresh render with new colors
+      const mermaidElements = preview.querySelectorAll('.mermaid');
+      mermaidElements.forEach(el => {
+        // Reset to original code to force re-render
+        el.innerHTML = el.dataset.originalCode || '';
+      });
+
+      // Re-render markdown with new theme
       renderMarkdown();
     }, 100);
   }
@@ -969,24 +988,36 @@ graph TD
   // Initialize visibility
   updateSyncScrollVisibility();
 
-  // Load saved theme using ThemeManager
+  // Load saved theme FIRST, then initialize Mermaid with correct colors
   const savedTheme = storageManager.get('selectedTheme');
   if (savedTheme) {
-    // Load theme first, then sync dropdown only on success
+    // Load theme first, then sync dropdown and reinit Mermaid
     themeManager
       .loadTheme(savedTheme)
       .then(() => {
         // Theme loaded successfully - sync dropdown
         themeSelector.value = savedTheme;
         console.log(`✅ Theme restored: ${savedTheme}`);
+
+        // NOW initialize Mermaid with correct theme colors
+        mermaidService.initialize();
+
+        // Re-render to apply theme
+        renderMarkdown();
       })
       .catch(err => {
         console.error('Failed to load saved theme:', err);
         // Fallback to default-light on error
         themeManager.loadTheme('default-light').then(() => {
           themeSelector.value = 'default-light';
+          mermaidService.initialize();
+          renderMarkdown();
         });
       });
+  } else {
+    // No saved theme - initialize with default-light
+    mermaidService.initialize();
+    renderMarkdown();
   }
 
   // Zoom functionality
@@ -1332,6 +1363,9 @@ graph TD
     console.log(`✅ Loaded file: ${fileItem.name} (${result.size} bytes)`);
   }
 
-  // Initial render
-  renderMarkdown();
+  // Expose renderMarkdown globally for theme changes
+  globalRenderMarkdown = renderMarkdown;
+
+  // DON'T render immediately - wait for theme to load
+  // renderMarkdown will be called after theme loads above
 }
