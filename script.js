@@ -737,33 +737,62 @@ graph TD
     }
   });
 
-  // Editor scroll handler
+  // Editor scroll handler with smooth sync
   editor.addEventListener('scroll', () => {
     if (!syncScrollEnabled || syncScrolling) return;
 
     syncScrolling = true;
-    const scrollPercent = editor.scrollTop / (editor.scrollHeight - editor.clientHeight);
-    const previewScrollHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
-    previewContainer.scrollTop = scrollPercent * previewScrollHeight;
 
-    setTimeout(() => {
-      syncScrolling = false;
-    }, 50);
+    requestAnimationFrame(() => {
+      const editorHeight = editor.scrollHeight - editor.clientHeight;
+      const previewHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
+
+      // Handle edge cases for perfect alignment
+      if (editor.scrollTop <= 0) {
+        // At top
+        previewContainer.scrollTop = 0;
+      } else if (editor.scrollTop >= editorHeight) {
+        // At bottom
+        previewContainer.scrollTop = previewHeight;
+      } else {
+        // Middle - proportional scroll
+        const scrollPercent = editor.scrollTop / editorHeight;
+        previewContainer.scrollTop = scrollPercent * previewHeight;
+      }
+
+      setTimeout(() => {
+        syncScrolling = false;
+      }, 10); // Reduced from 50ms for more responsive feel
+    });
   });
 
-  // Preview container scroll handler (preview itself doesn't scroll, container does)
+  // Preview container scroll handler with smooth sync
   previewContainer.addEventListener('scroll', () => {
     if (!syncScrollEnabled || syncScrolling) return;
 
     syncScrolling = true;
-    const scrollPercent =
-      previewContainer.scrollTop / (previewContainer.scrollHeight - previewContainer.clientHeight);
-    const editorScrollHeight = editor.scrollHeight - editor.clientHeight;
-    editor.scrollTop = scrollPercent * editorScrollHeight;
 
-    setTimeout(() => {
-      syncScrolling = false;
-    }, 50);
+    requestAnimationFrame(() => {
+      const editorHeight = editor.scrollHeight - editor.clientHeight;
+      const previewHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
+
+      // Handle edge cases for perfect alignment
+      if (previewContainer.scrollTop <= 0) {
+        // At top
+        editor.scrollTop = 0;
+      } else if (previewContainer.scrollTop >= previewHeight) {
+        // At bottom
+        editor.scrollTop = editorHeight;
+      } else {
+        // Middle - proportional scroll
+        const scrollPercent = previewContainer.scrollTop / previewHeight;
+        editor.scrollTop = scrollPercent * editorHeight;
+      }
+
+      setTimeout(() => {
+        syncScrolling = false;
+      }, 10); // Reduced from 50ms for more responsive feel
+    });
   });
 
   // View mode button event listeners with sync button update
