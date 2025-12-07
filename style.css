@@ -283,6 +283,10 @@ body {
   padding: 16px;
   overflow-x: auto;
   margin: 1.5em 0;
+  color: var(
+    --syntax-variable,
+    var(--text-primary)
+  ); /* Default color for plain text in code blocks */
 }
 
 #markdown-preview pre code {
