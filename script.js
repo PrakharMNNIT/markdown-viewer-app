@@ -282,8 +282,13 @@ graph TD
   const editorOnlyBtn = document.getElementById('editor-only-btn');
   const splitViewBtn = document.getElementById('split-view-btn');
   const previewOnlyBtn = document.getElementById('preview-only-btn');
+  const syncScrollBtn = document.getElementById('sync-scroll-btn');
   const editorContainer = document.querySelector('.editor-container');
   const previewContainer = document.querySelector('.preview-container');
+
+  // Sync scroll state
+  const isSyncScrollEnabled = false;
+  const isScrolling = false;
 
   // Zoom controls
   const zoomInBtn = document.getElementById('zoom-in-btn');
@@ -697,10 +702,86 @@ graph TD
     storageManager.set('viewMode', mode);
   }
 
-  // View mode button event listeners
-  editorOnlyBtn.addEventListener('click', () => setViewMode('editor-only'));
-  splitViewBtn.addEventListener('click', () => setViewMode('split-view'));
-  previewOnlyBtn.addEventListener('click', () => setViewMode('preview-only'));
+  // ==================== SYNC SCROLL FUNCTIONALITY ====================
+
+  // Sync scroll state (using var to avoid formatter issues)
+  var syncScrollEnabled = storageManager.get('syncScrollEnabled') === 'true';
+  var syncScrolling = false;
+
+  // Load saved state and update button
+  if (syncScrollEnabled) {
+    syncScrollBtn.classList.add('active');
+  }
+
+  // Show sync scroll button only in split view
+  function updateSyncScrollVisibility() {
+    const currentView = storageManager.get('viewMode') || 'split-view';
+    if (currentView === 'split-view') {
+      syncScrollBtn.style.display = 'inline-block';
+    } else {
+      syncScrollBtn.style.display = 'none';
+    }
+  }
+
+  // Sync scroll toggle
+  syncScrollBtn.addEventListener('click', () => {
+    syncScrollEnabled = !syncScrollEnabled;
+    storageManager.set('syncScrollEnabled', syncScrollEnabled.toString());
+
+    if (syncScrollEnabled) {
+      syncScrollBtn.classList.add('active');
+      console.log('✅ Sync scroll enabled');
+    } else {
+      syncScrollBtn.classList.remove('active');
+      console.log('❌ Sync scroll disabled');
+    }
+  });
+
+  // Editor scroll handler
+  editor.addEventListener('scroll', () => {
+    if (!syncScrollEnabled || syncScrolling) return;
+
+    syncScrolling = true;
+    const scrollPercent = editor.scrollTop / (editor.scrollHeight - editor.clientHeight);
+    const previewScrollHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
+    previewContainer.scrollTop = scrollPercent * previewScrollHeight;
+
+    setTimeout(() => {
+      syncScrolling = false;
+    }, 50);
+  });
+
+  // Preview container scroll handler (preview itself doesn't scroll, container does)
+  previewContainer.addEventListener('scroll', () => {
+    if (!syncScrollEnabled || syncScrolling) return;
+
+    syncScrolling = true;
+    const scrollPercent =
+      previewContainer.scrollTop / (previewContainer.scrollHeight - previewContainer.clientHeight);
+    const editorScrollHeight = editor.scrollHeight - editor.clientHeight;
+    editor.scrollTop = scrollPercent * editorScrollHeight;
+
+    setTimeout(() => {
+      syncScrolling = false;
+    }, 50);
+  });
+
+  // View mode button event listeners with sync button update
+  editorOnlyBtn.addEventListener('click', () => {
+    setViewMode('editor-only');
+    updateSyncScrollVisibility();
+  });
+  splitViewBtn.addEventListener('click', () => {
+    setViewMode('split-view');
+    updateSyncScrollVisibility();
+  });
+  previewOnlyBtn.addEventListener('click', () => {
+    setViewMode('preview-only');
+    updateSyncScrollVisibility();
+  });
+
+  // Initialize visibility
+  updateSyncScrollVisibility();
 
   // Load saved theme using ThemeManager
   const savedTheme = storageManager.get('selectedTheme');
