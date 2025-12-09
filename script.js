@@ -193,14 +193,21 @@ function configureMarkedExtensions() {
         },
         tokenizer(src) {
           // Robust regex for LaTeX environments (tolerant to whitespace)
-          // Capture group 1: The full environment content (including begin/end)
-          // Capture group 2: The environment name (e.g., multline)
+          // Capture group 1: Full content, Group 2: Env Name, Group 3: Inner Content
           const match = src.match(/^\s*(\\begin\s*\{([a-zA-Z]+\*?)\}([\s\S]*?)\\end\s*\{\2\})/);
           if (match) {
+            let text = match[1];
+            const env = match[2];
+            // Shim 'multline' (not supported by KaTeX core) to 'gathered'
+            if (env === 'multline' || env === 'multline*') {
+              console.warn('Shimming multline to gathered for KaTeX compatibility');
+              text = '\\begin{gathered}' + match[3] + '\\end{gathered}';
+            }
+
             return {
               type: 'mathEnvironment',
               raw: match[0],
-              text: match[1],
+              text: text,
             };
           }
         },
