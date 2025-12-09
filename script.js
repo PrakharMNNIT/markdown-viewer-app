@@ -193,7 +193,9 @@ function configureMarkedExtensions() {
         },
         tokenizer(src) {
           // Robust regex for LaTeX environments (tolerant to whitespace)
-          const match = src.match(/^\s*(\\begin\s*\{\s*([a-zA-Z]+\*?)\s*\}\s*([\s\S]*?)\s*\\end\s*\{\s*\2\s*\})/);
+          // Capture group 1: The full environment content (including begin/end)
+          // Capture group 2: The environment name (e.g., multline)
+          const match = src.match(/^\s*(\\begin\s*\{([a-zA-Z]+\*?)\}([\s\S]*?)\\end\s*\{\2\})/);
           if (match) {
             return {
               type: 'mathEnvironment',
