@@ -2,12 +2,40 @@
 
 // Import constants, utilities, services, and core modules
 import DOMPurify from 'dompurify';
+import html2pdf from 'html2pdf.js';
+import katex from 'katex';
+import 'katex/dist/katex.min.css'; // Import KaTeX CSS
+import { marked } from 'marked';
+import markedFootnote from 'marked-footnote';
+import mermaid from 'mermaid';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-c';
+import 'prismjs/components/prism-cpp';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-markdown';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/themes/prism-tomorrow.css'; // Import Prism CSS
+
 import { StorageManager } from './src/js/core/StorageManager.js';
 import { ThemeManager } from './src/js/core/ThemeManager.js';
 import { FolderBrowserService } from './src/js/services/FolderBrowserService.js';
 import { MermaidService } from './src/js/services/MermaidService.js';
 import { PDFService } from './src/js/services/PDFService.js';
 import { PrismService } from './src/js/services/PrismService.js';
+
+// Make libraries available globally for services if needed (backward compatibility)
+window.marked = marked;
+window.Prism = Prism;
+window.mermaid = mermaid;
+window.katex = katex;
+window.html2pdf = html2pdf;
+window.markedFootnote = markedFootnote;
 
 // Initialize services and managers
 const storageManager = new StorageManager();
@@ -36,61 +64,18 @@ themeManager.setThemeChangeListener(() => {
   }
 });
 
-// Wait for all scripts to load
+// Wait for DOM to be ready
 window.addEventListener('DOMContentLoaded', () => {
   initializeApp();
 });
 
 function initializeApp() {
-  // Check if libraries are loaded
-  if (
-    typeof marked === 'undefined' ||
-    typeof Prism === 'undefined' ||
-    typeof mermaid === 'undefined'
-  ) {
-    console.error('Required libraries not loaded. Retrying...');
-    setTimeout(initializeApp, 100);
-    return;
-  }
-
-  // Wait for html2pdf to load before setting up editor
-  if (typeof html2pdf === 'undefined') {
-    console.log('Waiting for html2pdf library...');
-    setTimeout(initializeApp, 100);
-    return;
-  }
-
-  // Wait for KaTeX to load
-  if (typeof katex === 'undefined') {
-    console.log('Waiting for KaTeX library...');
-    setTimeout(initializeApp, 100);
-    return;
-  }
-
-  // Wait for KaTeX auto-render to load
-  if (typeof renderMathInElement === 'undefined') {
-    console.log('Waiting for KaTeX auto-render...');
-    setTimeout(initializeApp, 100);
-    return;
-  }
-
-  console.log('All libraries loaded successfully');
-
-  // Configure Prism autoloader with correct CDN path
-  if (typeof Prism !== 'undefined' && Prism.plugins && Prism.plugins.autoloader) {
-    Prism.plugins.autoloader.languages_path =
-      'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
-    console.log('✅ Prism autoloader configured - 200+ languages available');
-  }
-
-  console.log('✅ KaTeX loaded - Math formula rendering available');
+  console.log('🚀 Initializing Enterprise Markdown Viewer...');
 
   // Configure marked.js extensions
   configureMarkedExtensions();
 
-  // DON'T initialize Mermaid here - let saved theme load first
-  // Mermaid will initialize after theme loads in setupEditor()
-
+  // Setup the editor
   setupEditor();
 }
 
@@ -114,10 +99,8 @@ function debounce(func, wait) {
 // Configure marked.js extensions (math + footnotes + admonitions)
 function configureMarkedExtensions() {
   // Enable footnote support
-  if (typeof markedFootnote !== 'undefined') {
-    marked.use(markedFootnote());
-    console.log('✅ Footnotes enabled');
-  }
+  marked.use(markedFootnote());
+  console.log('✅ Footnotes enabled');
 
   // Add GitHub-style admonitions
   marked.use({
@@ -167,11 +150,7 @@ function configureMarkedExtensions() {
   });
   console.log('✅ GitHub admonitions enabled');
 
-  // Configure math formulas
-  if (typeof katex === 'undefined') {
-    console.warn('KaTeX not loaded, math rendering unavailable');
-    return;
-  }
+  // Configure math formulas (KaTeX is now imported at top level)
 
   // Add inline math and text formatting extensions only
   // LaTeX environments (align, gather, etc.) are not supported by KaTeX

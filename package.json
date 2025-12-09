@@ -42,6 +42,11 @@
   },
   "dependencies": {
     "dompurify": "3.3.1",
-    "marked-footnote": "1.4.0"
+    "html2pdf.js": "0.12.1",
+    "katex": "0.16.27",
+    "marked": "17.0.1",
+    "marked-footnote": "1.4.0",
+    "mermaid": "11.12.2",
+    "prismjs": "1.30.0"
   }
 }
