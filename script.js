@@ -199,10 +199,11 @@ function configureMarkedExtensions() {
         name: 'mathEnvironment',
         level: 'block',
         start(src) {
-          return src.match(/^\\begin/)?.index;
+          // Allow whitespace before \begin
+          return src.match(/^\s*\\begin/)?.[0]?.length ? src.search(/\S/) : undefined;
         },
         tokenizer(src) {
-          const match = src.match(/^(\\begin\{([a-zA-Z]+\*?)\}([\s\S]*?)\\end\{\2\})/);
+          const match = src.match(/^\s*(\\begin\{([a-zA-Z]+\*?)\}([\s\S]*?)\\end\{\2\})/);
           if (match) {
             return {
               type: 'mathEnvironment',
