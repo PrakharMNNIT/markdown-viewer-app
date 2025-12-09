@@ -13,13 +13,18 @@ import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-c';
 import 'prismjs/components/prism-cpp';
 import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-go';
 import 'prismjs/components/prism-java';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-markdown';
 import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-r';
+import 'prismjs/components/prism-rust';
+import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-sql';
 import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-yaml';
 import 'prismjs/themes/prism-tomorrow.css'; // Import Prism CSS
 
 import { StorageManager } from './src/js/core/StorageManager.js';
@@ -180,12 +185,47 @@ function configureMarkedExtensions() {
                 displayMode: true,
                 throwOnError: false,
                 output: 'html',
+                trust: true, // Allow custom styling
               }) +
               '</div>'
             );
           } catch (e) {
             console.warn('KaTeX display math error:', e);
             return `<div style="color: red; padding: 10px;">Math Error: ${e.message}</div>`;
+          }
+        },
+      },
+      {
+        name: 'mathEnvironment',
+        level: 'block',
+        start(src) {
+          return src.match(/^\\begin/)?.index;
+        },
+        tokenizer(src) {
+          const match = src.match(/^(\\begin\{([a-zA-Z]+\*?)\}([\s\S]*?)\\end\{\2\})/);
+          if (match) {
+            return {
+              type: 'mathEnvironment',
+              raw: match[0],
+              text: match[1], // Capture the inner content or full block? KaTeX needs full block for environments
+            };
+          }
+        },
+        renderer(token) {
+          try {
+            return (
+              '<div style="margin: 1.5em 0;">' +
+              katex.renderToString(token.text, {
+                displayMode: true,
+                throwOnError: false,
+                output: 'html',
+                trust: true,
+              }) +
+              '</div>'
+            );
+          } catch (e) {
+            console.warn('KaTeX environment error:', e);
+            return `<div style="color: red;">LaTeX Error: ${e.message}</div>`;
           }
         },
       },
