@@ -104,6 +104,7 @@ export class PDFService {
 
     // Create container with theme styles
     const container = document.createElement('div');
+    container.className = 'html2pdf__container pdf-export-mode';
     container.style.fontFamily =
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif';
     container.style.maxWidth = '800px';

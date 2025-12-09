@@ -1116,3 +1116,27 @@ body {
 }
 
 /* ==================== END ==================== */
+
+/* ==================== PDF EXPORT OVERRIDES ==================== */
+/* Fixes html2pdf error "Attempting to parse an unsupported color function" */
+/* Forces solid colors instead of color-mix() during export */
+
+.pdf-export-mode .btn {
+  background-color: var(--bg-tertiary) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.pdf-export-mode ::-webkit-scrollbar-thumb {
+  background-color: var(--text-secondary) !important;
+}
+
+.pdf-export-mode ::-webkit-scrollbar-track {
+  background-color: transparent !important;
+}
+
+/* Ensure no other color-mix bleeds in */
+.pdf-export-mode * {
+  /* No generic override, trusting other elements are safe */
+}
