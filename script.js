@@ -1019,7 +1019,32 @@ graph TD
     updateSyncScrollVisibility();
   });
 
+  // Mobile Tabs Logic
+  const mobileTabBtns = document.querySelectorAll('.mobile-tab-btn');
+  // Re-select containers to ensure we have the right elements
+  const editorContainerEl = document.querySelector('.editor-container');
+  const previewContainerEl = document.querySelector('.preview-container');
+
+  mobileTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      mobileTabBtns.forEach(b => b.classList.remove('active'));
+      // Add active to clicked
+      btn.classList.add('active');
+
+      const tab = btn.dataset.tab;
+      if (tab === 'editor') {
+        editorContainerEl.classList.add('mobile-visible');
+        previewContainerEl.classList.remove('mobile-visible');
+      } else {
+        editorContainerEl.classList.remove('mobile-visible');
+        previewContainerEl.classList.add('mobile-visible');
+      }
+    });
+  });
+
   // Initialize visibility
+
   updateSyncScrollVisibility();
 
   // Load saved theme FIRST, then initialize Mermaid with correct colors

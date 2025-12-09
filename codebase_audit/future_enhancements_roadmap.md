@@ -4,6 +4,12 @@ This document outlines the strategic roadmap to transform the `markdown-viewer-a
 
 ---
 
+## ✅ Completed Enhancements (Phase 1.5 Polish)
+*   **UI/UX:** Implemented Glassmorphism transparency on Toolbar and Modals (`color-mix` + `backdrop-filter`).
+*   **Mobile Experience:** Added "Mobile Tabs" (Edit/Preview toggle) to replace awkward vertical stacking.
+*   **Animations:** Added subtle keyframe animations for Modals and Fade-ins.
+*   **Syntax Highlighting:** Fully future-proofed with `vite-plugin-prismjs`.
+
 ## 🏗️ Phase 1: Robust Application Architecture (Modernization)
 
 To support enterprise scale, we must move beyond the "Vanilla JS" constraints suitable for prototypes and adopt a robust, type-safe ecosystem.

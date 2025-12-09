@@ -193,8 +193,14 @@
           </div>
         </div>
 
+        <!-- Mobile Tabs (Visible only on < 768px) -->
+        <div class="mobile-tabs">
+          <button class="mobile-tab-btn active" data-tab="editor">📝 Editor</button>
+          <button class="mobile-tab-btn" data-tab="preview">👁️ Preview</button>
+        </div>
+
         <!-- Editor -->
-        <div class="editor-container">
+        <div class="editor-container mobile-visible">
           <div class="editor-header">MARKDOWN EDITOR</div>
           <textarea id="markdown-editor" placeholder="Type your markdown here..."></textarea>
         </div>

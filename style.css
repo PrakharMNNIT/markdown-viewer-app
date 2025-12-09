@@ -24,13 +24,19 @@ body {
 
 /* ==================== TOOLBAR ==================== */
 .toolbar {
-  background-color: var(--bg-secondary);
+  background-color: color-mix(in srgb, var(--bg-secondary) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
 }
 
 .toolbar h1 {
@@ -485,14 +491,28 @@ body {
 }
 
 .modal-content {
-  background-color: var(--bg-primary);
-  border-radius: 12px;
+  background-color: color-mix(in srgb, var(--bg-primary) 95%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
   padding: 30px;
   max-width: 800px;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   width: 90%;
+  border: 1px solid var(--border-color);
+  animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-header {
@@ -637,10 +657,50 @@ body {
 }
 
 /* ==================== RESPONSIVE DESIGN ==================== */
+/* ==================== RESPONSIVE DESIGN & MOBILE TABS ==================== */
+.mobile-tabs {
+  display: none;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 10px;
+}
+
+.mobile-tab-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.mobile-tab-btn.active {
+  color: var(--h1-color);
+  border-bottom-color: var(--h1-color);
+}
+
 @media (max-width: 768px) {
   .main-content {
     flex-direction: column;
   }
+
+  .mobile-tabs {
+    display: flex;
+  }
+
+  /* Mobile Tab Logic: Hide/Show based on active class */
+  .editor-container, .preview-container {
+    display: none !important; /* Override flex */
+    height: calc(100vh - 120px); /* Adjust for toolbar + footer + tabs */
+  }
+
+  .editor-container.mobile-visible, .preview-container.mobile-visible {
+    display: flex !important;
+  }
+
 
   .editor-container {
     border-right: none;
