@@ -1,20 +1,25 @@
 import { copyFileSync, mkdirSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { defineConfig } from 'vite';
+import prism from 'vite-plugin-prismjs';
 
 export default defineConfig({
   root: './',
   base: '/markdown-viewer-app/',
   build: {
     outDir: 'dist',
-    // Note: marked, prismjs, and mermaid are loaded via CDN in index.html
-    // No need for manualChunks as they are not npm dependencies
   },
   server: {
     port: 3000,
     open: true,
   },
   plugins: [
+    prism({
+      languages: 'all', // Load ALL languages for future-proofing
+      plugins: ['line-numbers', 'copy-to-clipboard'],
+      theme: 'tomorrow',
+      css: true,
+    }),
     {
       name: 'copy-themes',
       closeBundle() {

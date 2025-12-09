@@ -9,26 +9,9 @@ import { marked } from 'marked';
 import markedFootnote from 'marked-footnote';
 import mermaid from 'mermaid';
 import Prism from 'prismjs';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-batch';
-import 'prismjs/components/prism-c';
-import 'prismjs/components/prism-cpp';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-diff';
-import 'prismjs/components/prism-go';
-import 'prismjs/components/prism-ini';
-import 'prismjs/components/prism-java';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-markdown';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-r';
-import 'prismjs/components/prism-rust';
-import 'prismjs/components/prism-scss';
-import 'prismjs/components/prism-sql';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-yaml';
-import 'prismjs/themes/prism-tomorrow.css'; // Import Prism CSS
+
+// PrismJS is now handled by vite-plugin-prismjs
+// which automatically loads all languages and themes
 
 import { StorageManager } from './src/js/core/StorageManager.js';
 import { ThemeManager } from './src/js/core/ThemeManager.js';
@@ -189,6 +172,9 @@ function configureMarkedExtensions() {
                 throwOnError: false,
                 output: 'html',
                 trust: true, // Allow custom styling
+                macros: {
+                  '\\label': '\\phantom', // Hide \label
+                },
               }) +
               '</div>'
             );
@@ -206,8 +192,8 @@ function configureMarkedExtensions() {
           return src.match(/^\s*\\begin/)?.index;
         },
         tokenizer(src) {
-          // Robust regex for LaTeX environments
-          const match = src.match(/^\s*(\\begin\{([a-zA-Z]+\*?)\}([\s\S]*?)\\end\{\2\})/);
+          // Robust regex for LaTeX environments (tolerant to whitespace)
+          const match = src.match(/^\s*(\\begin\s*\{\s*([a-zA-Z]+\*?)\s*\}\s*([\s\S]*?)\s*\\end\s*\{\s*\2\s*\})/);
           if (match) {
             return {
               type: 'mathEnvironment',
@@ -225,6 +211,12 @@ function configureMarkedExtensions() {
                 throwOnError: false,
                 output: 'html',
                 trust: true,
+                macros: {
+                  '\\label': '\\phantom', // Hide \label
+                  '\\eqref': '\\text', // Plain text for refs (or link if needed)
+                  '\\cite': '\\text',
+                  '\\ref': '\\text',
+                },
               }) +
               '</div>'
             );
@@ -269,6 +261,9 @@ function configureMarkedExtensions() {
               displayMode: token.displayMode || false,
               throwOnError: false,
               output: 'html',
+              macros: {
+                '\\label': '\\phantom',
+              },
             });
 
             // Wrap display math in a div for proper spacing
