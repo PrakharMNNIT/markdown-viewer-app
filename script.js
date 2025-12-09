@@ -79,10 +79,9 @@ function initializeApp() {
 function debounce(func, wait) {
   let timeout;
   return function truncated(...args) {
-    const context = this;
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      func.apply(context, args);
+      func.apply(this, args);
     }, wait);
   };
 }
@@ -1179,11 +1178,10 @@ graph TD
   // ==================== FOLDER BROWSER FUNCTIONALITY ====================
 
   // Folder browser DOM elements
-  // Folder browser DOM elements
   const fileBrowser = document.getElementById('file-browser');
   const openFolderBtn = document.getElementById('open-folder-btn');
-  const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
-  const closeBrowserBtn = document.getElementById('close-browser-btn');
+  const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn'); // Toolbar button
+  const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn'); // Sidebar header button
   const resizeHandle = document.getElementById('resize-handle');
   const fileTree = document.getElementById('file-tree');
   const currentFolderNameEl = document.getElementById('current-folder-name');
@@ -1257,8 +1255,8 @@ graph TD
     if (!folderBrowserService.isSupported()) {
       alert(
         'Folder browsing requires File System Access API.\n\n' +
-        'Please use Chrome 86+ or Edge 86+.\n\n' +
-        'Firefox and Safari are not currently supported.'
+          'Please use Chrome 86+ or Edge 86+.\n\n' +
+          'Firefox and Safari are not currently supported.'
       );
       return;
     }
@@ -1298,18 +1296,13 @@ graph TD
     storageManager.set('sidebarCollapsed', isCollapsed);
   }
 
-  // Unified Toggle Button
+  // Attach event listeners to BOTH toggle buttons
   if (sidebarToggleBtn) {
     sidebarToggleBtn.addEventListener('click', toggleSidebar);
   }
 
-  // Handle Close Button inside sidebar
-  if (closeBrowserBtn) {
-    closeBrowserBtn.addEventListener('click', () => {
-      // Just collapse it
-      fileBrowser.classList.add('collapsed');
-      storageManager.set('sidebarCollapsed', 'true');
-    });
+  if (toggleSidebarBtn) {
+    toggleSidebarBtn.addEventListener('click', toggleSidebar);
   }
 
   // Render file tree
