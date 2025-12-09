@@ -544,6 +544,11 @@ graph TD
         const id = element.id;
         const code = decodeURIComponent(element.dataset.code);
 
+        if (!code || !code.trim()) {
+          element.innerHTML = '';
+          return;
+        }
+
         if (typeof mermaid !== 'undefined') {
           mermaid
             .render('mermaid-svg-' + id, code)
@@ -551,7 +556,11 @@ graph TD
               element.innerHTML = result.svg;
             })
             .catch(err => {
-              element.innerHTML = `<p style="color: red;">Mermaid diagram error: ${err.message}</p>`;
+              console.warn('Mermaid error:', err);
+              // Graceful failure: small warning instead of giant red text
+              element.innerHTML = `<div style="color: var(--text-secondary); font-size: 0.8em; text-align: center; border: 1px dashed var(--border-color); padding: 8px; border-radius: 6px; opacity: 0.8; margin: 10px 0;">
+                <span style="font-size: 1.2em;">⚠️</span> Invalid Mermaid Syntax
+              </div>`;
             });
         }
       });
