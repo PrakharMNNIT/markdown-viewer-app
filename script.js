@@ -960,11 +960,14 @@ graph TD
     }
   });
 
-  // Enhanced Scroll Sync (Header-Based)
+  // Enhanced Scroll Sync (Header-Based Layout)
   let scrollMap = [];
+  let isSyncingEditor = false;
+  let isSyncingPreview = false;
+  let syncTimeout = null;
 
   function buildScrollMap() {
-    if (typeof editor === 'undefined' || typeof preview === 'undefined') return;
+    if (!editor || !preview) return;
     const markdown = editor.value;
     const lines = markdown.split('\n');
     const editorHeaders = [];
@@ -979,40 +982,35 @@ graph TD
     // Find headers in Preview
     const previewHeaders = Array.from(preview.querySelectorAll('h1, h2, h3, h4, h5, h6'));
 
-    // Create Map: [EditorLine, PreviewOffset]
     scrollMap = [];
     scrollMap.push([0, 0]); // Start
 
     const count = Math.min(editorHeaders.length, previewHeaders.length);
     for (let i = 0; i < count; i++) {
-      const line = editorHeaders[i].line;
-      const offset = previewHeaders[i].offsetTop;
-      scrollMap.push([line, offset]);
+      scrollMap.push([editorHeaders[i].line, previewHeaders[i].offsetTop]);
     }
 
     scrollMap.push([lines.length, preview.scrollHeight]); // End
   }
 
-  // Update map on render
-  // This is called via setTimeout in renderMarkdown
+  // Update map on render is handled via setTimeout in renderMarkdown
 
-  // Function to sync Preview based on Editor position
   function syncPreview() {
-    if (!syncScrollEnabled || syncScrolling) return;
-
-    syncScrolling = true;
     const editorScrollTop = editor.scrollTop;
     const editorScrollHeight = editor.scrollHeight;
     const editorClientHeight = editor.clientHeight;
-
-    // Estimate current line number
     const totalLines = editor.value.split('\n').length;
+
+    // Prevent divide by zero
+    if (totalLines === 0) return;
+
     const currentLine = (editorScrollTop / (editorScrollHeight - editorClientHeight)) * totalLines;
 
+    let targetScrollTop = 0;
+
     if (scrollMap.length < 2 || isNaN(currentLine)) {
-      // Fallback to simple percentage
       const percentage = editorScrollTop / (editorScrollHeight - editorClientHeight);
-      previewContainer.scrollTop = percentage * (previewContainer.scrollHeight - previewContainer.clientHeight);
+      targetScrollTop = percentage * (previewContainer.scrollHeight - previewContainer.clientHeight);
     } else {
       let start = scrollMap[0];
       let end = scrollMap[scrollMap.length - 1];
@@ -1025,35 +1023,44 @@ graph TD
         }
       }
 
-      // Interpolate
       const lineRange = end[0] - start[0];
       const offsetRange = end[1] - start[1];
 
-      if (lineRange === 0) {
-        previewContainer.scrollTop = start[1];
-      } else {
+      if (lineRange > 0) {
         const progressInBlock = (currentLine - start[0]) / lineRange;
-        previewContainer.scrollTop = start[1] + (progressInBlock * offsetRange);
+        targetScrollTop = start[1] + (progressInBlock * offsetRange);
+      } else {
+        targetScrollTop = start[1];
       }
     }
 
-    setTimeout(() => { syncScrolling = false; }, 10);
+    previewContainer.scrollTop = targetScrollTop;
+  }
+
+  function syncEditor() {
+    const percentage = previewContainer.scrollTop / (previewContainer.scrollHeight - previewContainer.clientHeight);
+    editor.scrollTop = percentage * (editor.scrollHeight - editor.clientHeight);
   }
 
   editor.addEventListener('scroll', () => {
-    if (syncScrollEnabled) {
-      requestAnimationFrame(syncPreview);
-    }
+    if (!syncScrollEnabled || isSyncingEditor) return;
+
+    isSyncingPreview = true;
+    requestAnimationFrame(() => {
+      syncPreview();
+      clearTimeout(syncTimeout);
+      syncTimeout = setTimeout(() => { isSyncingPreview = false; }, 50);
+    });
   });
 
-  // Keep simple percentage sync for Preview -> Editor to avoid complexity
   previewContainer.addEventListener('scroll', () => {
-    if (!syncScrollEnabled || syncScrolling) return;
-    syncScrolling = true;
+    if (!syncScrollEnabled || isSyncingPreview) return;
+
+    isSyncingEditor = true;
     requestAnimationFrame(() => {
-      const percentage = previewContainer.scrollTop / (previewContainer.scrollHeight - previewContainer.clientHeight);
-      editor.scrollTop = percentage * (editor.scrollHeight - editor.clientHeight);
-      setTimeout(() => { syncScrolling = false; }, 10);
+      syncEditor();
+      clearTimeout(syncTimeout);
+      syncTimeout = setTimeout(() => { isSyncingEditor = false; }, 50);
     });
   });
 
