@@ -540,19 +540,29 @@ graph TD
 
       // Render Mermaid diagrams synchronously after DOM update
       const mermaidElements = preview.querySelectorAll('.mermaid-diagram');
-      mermaidElements.forEach(element => {
+      mermaidElements.forEach(async element => {
         const id = element.id;
         const code = decodeURIComponent(element.dataset.code);
 
-        if (typeof mermaid !== 'undefined') {
-          mermaid
-            .render('mermaid-svg-' + id, code)
-            .then(result => {
-              element.innerHTML = result.svg;
-            })
-            .catch(err => {
-              element.innerHTML = `<p style="color: red;">Mermaid diagram error: ${err.message}</p>`;
-            });
+        if (!code || !code.trim()) {
+          element.innerHTML = ''; // Hide empty diagrams
+          return;
+        }
+
+        try {
+          // Attempt to parse first to avoid ugly error SVGs
+          if (await mermaid.parse(code)) {
+            const { svg } = await mermaid.render(id, code);
+            element.innerHTML = svg;
+            element.dataset.processed = 'true';
+          }
+        } catch (err) {
+          console.warn('Mermaid rendering error:', err);
+          // Graceful failure: Show a small icon or nothing instead of giant red text
+          element.innerHTML = `<div style="color: var(--text-secondary); font-size: 0.8em; text-align: center; border: 1px dashed var(--border-color); padding: 10px; border-radius: 8px;">
+            <span style="display: block; font-size: 1.5em; margin-bottom: 5px;">⚠️</span>
+            Invalid Diagram Syntax
+          </div>`;
         }
       });
 
@@ -565,6 +575,9 @@ graph TD
 
       // Save content using StorageManager
       storageManager.set('markdownContent', markdownText);
+
+      // After rendering, build the scroll map for sync scrolling
+      setTimeout(buildScrollMap, 50); // Small delay to ensure DOM is fully updated
     } catch (error) {
       console.error('Render error:', error);
       preview.innerHTML =
@@ -947,61 +960,100 @@ graph TD
     }
   });
 
-  // Editor scroll handler with smooth sync
-  editor.addEventListener('scroll', () => {
+  // Enhanced Scroll Sync (Header-Based)
+  let scrollMap = [];
+
+  function buildScrollMap() {
+    if (typeof editor === 'undefined' || typeof preview === 'undefined') return;
+    const markdown = editor.value;
+    const lines = markdown.split('\n');
+    const editorHeaders = [];
+
+    // Find headers in Editor
+    lines.forEach((line, index) => {
+      if (/^#{1,6}\s/.test(line)) {
+        editorHeaders.push({ line: index, text: line.replace(/^#{1,6}\s/, '').trim() });
+      }
+    });
+
+    // Find headers in Preview
+    const previewHeaders = Array.from(preview.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+
+    // Create Map: [EditorLine, PreviewOffset]
+    scrollMap = [];
+    scrollMap.push([0, 0]); // Start
+
+    const count = Math.min(editorHeaders.length, previewHeaders.length);
+    for (let i = 0; i < count; i++) {
+      const line = editorHeaders[i].line;
+      const offset = previewHeaders[i].offsetTop;
+      scrollMap.push([line, offset]);
+    }
+
+    scrollMap.push([lines.length, preview.scrollHeight]); // End
+  }
+
+  // Update map on render
+  // This is called via setTimeout in renderMarkdown
+
+  // Function to sync Preview based on Editor position
+  function syncPreview() {
     if (!syncScrollEnabled || syncScrolling) return;
 
     syncScrolling = true;
+    const editorScrollTop = editor.scrollTop;
+    const editorScrollHeight = editor.scrollHeight;
+    const editorClientHeight = editor.clientHeight;
 
-    requestAnimationFrame(() => {
-      const editorHeight = editor.scrollHeight - editor.clientHeight;
-      const previewHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
+    // Estimate current line number
+    const totalLines = editor.value.split('\n').length;
+    const currentLine = (editorScrollTop / (editorScrollHeight - editorClientHeight)) * totalLines;
 
-      // Handle edge cases for perfect alignment
-      if (editor.scrollTop <= 0) {
-        // At top
-        previewContainer.scrollTop = 0;
-      } else if (editor.scrollTop >= editorHeight) {
-        // At bottom
-        previewContainer.scrollTop = previewHeight;
-      } else {
-        // Middle - proportional scroll
-        const scrollPercent = editor.scrollTop / editorHeight;
-        previewContainer.scrollTop = scrollPercent * previewHeight;
+    if (scrollMap.length < 2 || isNaN(currentLine)) {
+      // Fallback to simple percentage
+      const percentage = editorScrollTop / (editorScrollHeight - editorClientHeight);
+      previewContainer.scrollTop = percentage * (previewContainer.scrollHeight - previewContainer.clientHeight);
+    } else {
+      let start = scrollMap[0];
+      let end = scrollMap[scrollMap.length - 1];
+
+      for (let i = 0; i < scrollMap.length - 1; i++) {
+        if (currentLine >= scrollMap[i][0] && currentLine <= scrollMap[i + 1][0]) {
+          start = scrollMap[i];
+          end = scrollMap[i + 1];
+          break;
+        }
       }
 
-      setTimeout(() => {
-        syncScrolling = false;
-      }, 10); // Reduced from 50ms for more responsive feel
-    });
+      // Interpolate
+      const lineRange = end[0] - start[0];
+      const offsetRange = end[1] - start[1];
+
+      if (lineRange === 0) {
+        previewContainer.scrollTop = start[1];
+      } else {
+        const progressInBlock = (currentLine - start[0]) / lineRange;
+        previewContainer.scrollTop = start[1] + (progressInBlock * offsetRange);
+      }
+    }
+
+    setTimeout(() => { syncScrolling = false; }, 10);
+  }
+
+  editor.addEventListener('scroll', () => {
+    if (syncScrollEnabled) {
+      requestAnimationFrame(syncPreview);
+    }
   });
 
-  // Preview container scroll handler with smooth sync
+  // Keep simple percentage sync for Preview -> Editor to avoid complexity
   previewContainer.addEventListener('scroll', () => {
     if (!syncScrollEnabled || syncScrolling) return;
-
     syncScrolling = true;
-
     requestAnimationFrame(() => {
-      const editorHeight = editor.scrollHeight - editor.clientHeight;
-      const previewHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
-
-      // Handle edge cases for perfect alignment
-      if (previewContainer.scrollTop <= 0) {
-        // At top
-        editor.scrollTop = 0;
-      } else if (previewContainer.scrollTop >= previewHeight) {
-        // At bottom
-        editor.scrollTop = editorHeight;
-      } else {
-        // Middle - proportional scroll
-        const scrollPercent = previewContainer.scrollTop / previewHeight;
-        editor.scrollTop = scrollPercent * editorHeight;
-      }
-
-      setTimeout(() => {
-        syncScrolling = false;
-      }, 10); // Reduced from 50ms for more responsive feel
+      const percentage = previewContainer.scrollTop / (previewContainer.scrollHeight - previewContainer.clientHeight);
+      editor.scrollTop = percentage * (editor.scrollHeight - editor.clientHeight);
+      setTimeout(() => { syncScrolling = false; }, 10);
     });
   });
 
