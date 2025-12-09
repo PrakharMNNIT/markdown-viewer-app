@@ -10,10 +10,13 @@ import markedFootnote from 'marked-footnote';
 import mermaid from 'mermaid';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-batch';
 import 'prismjs/components/prism-c';
 import 'prismjs/components/prism-cpp';
 import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-diff';
 import 'prismjs/components/prism-go';
+import 'prismjs/components/prism-ini';
 import 'prismjs/components/prism-java';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-json';
@@ -200,15 +203,16 @@ function configureMarkedExtensions() {
         level: 'block',
         start(src) {
           // Allow whitespace before \begin
-          return src.match(/^\s*\\begin/)?.[0]?.length ? src.search(/\S/) : undefined;
+          return src.match(/^\s*\\begin/)?.index;
         },
         tokenizer(src) {
+          // Robust regex for LaTeX environments
           const match = src.match(/^\s*(\\begin\{([a-zA-Z]+\*?)\}([\s\S]*?)\\end\{\2\})/);
           if (match) {
             return {
               type: 'mathEnvironment',
               raw: match[0],
-              text: match[1], // Capture the inner content or full block? KaTeX needs full block for environments
+              text: match[1],
             };
           }
         },
@@ -518,13 +522,15 @@ graph TD
       let html = marked.parse(markdownText);
 
       // Replace mermaid code blocks with placeholders
+      // Use 'mermaid-diagram' class to avoid auto-rendering conflicts
       html = html.replace(
         /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
         (match, code) => {
+          // Decode HTML entities before passing to Mermaid
           const decodedCode = decodeHtmlEntities(code);
           const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
           // Return placeholder div
-          return `<div class="mermaid" id="${id}" data-code="${encodeURIComponent(decodedCode)}">${code}</div>`;
+          return `<div class="mermaid-diagram" id="${id}" data-code="${encodeURIComponent(decodedCode)}">${code}</div>`;
         }
       );
 
@@ -538,7 +544,7 @@ graph TD
       preview.innerHTML = cleanHtml;
 
       // Render Mermaid diagrams synchronously after DOM update
-      const mermaidElements = preview.querySelectorAll('.mermaid');
+      const mermaidElements = preview.querySelectorAll('.mermaid-diagram');
       mermaidElements.forEach(element => {
         const id = element.id;
         const code = decodeURIComponent(element.dataset.code);
