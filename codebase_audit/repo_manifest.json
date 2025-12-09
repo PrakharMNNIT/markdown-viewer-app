@@ -1,0 +1,74 @@
+{
+  "documentation": [
+    "AI_REVIEW.md",
+    "MARKDOWN_TEST.md",
+    "QUICK-REFERENCE.md",
+    "README.md",
+    "docs/01-requirements/folder-browser-feature-plan.md",
+    "docs/01-requirements/math-rendering-feature-plan.md",
+    "docs/01-requirements/pdf-export-plan.md",
+    "docs/01-requirements/pdf-viewer-feature-plan.md",
+    "docs/02-architecture/architecture-review.md",
+    "docs/02-architecture/architecture.md",
+    "docs/02-architecture/mermaid-theme-architecture.md",
+    "docs/02-architecture/phase6-improvements.md",
+    "docs/02-architecture/prism-token-architecture.md",
+    "docs/02-architecture/syntax-highlighting-architecture.md",
+    "docs/05-implementation/implementation-plan.md",
+    "docs/05-implementation/refactoring-guide.md",
+    "docs/05-implementation/refactoring-strategy.md",
+    "docs/05-implementation/week6-final-integration.md",
+    "docs/08-deployment/deployment.md",
+    "docs/08-deployment/github-pages-deployment.md",
+    "memory-bank/activeContext.md",
+    "memory-bank/productContext.md",
+    "memory-bank/progress.md",
+    "memory-bank/projectbrief.md",
+    "memory-bank/systemPatterns.md",
+    "memory-bank/techContext.md"
+  ],
+  "source_code": {
+    "javascript": [
+      "script.js",
+      "src/js/services/MermaidService.js",
+      "src/js/services/FolderBrowserService.js",
+      "src/js/services/PDFService.js",
+      "src/js/services/PrismService.js",
+      "src/js/utils/htmlHelpers.js",
+      "src/js/utils/colorHelpers.js",
+      "src/js/utils/validators.js",
+      "src/js/config/featureFlags.js",
+      "src/js/config/constants.js",
+      "src/js/core/ThemeManager.js",
+      "src/js/core/StorageManager.js"
+    ],
+    "css": [
+      "style.css",
+      "themes/obsidian-light.css",
+      "themes/ocean-light.css",
+      "themes/sunset-light.css",
+      "themes/default-light.css",
+      "themes/obsidian-dark.css",
+      "themes/sunset-dark.css",
+      "themes/neon-light.css",
+      "themes/forest-light.css",
+      "themes/forest-dark.css",
+      "themes/ocean-dark.css",
+      "themes/neon-dark.css",
+      "themes/default-dark.css"
+    ],
+    "html": [
+      "index.html"
+    ]
+  },
+  "config": [
+    ".clinerules",
+    ".eslintrc.js",
+    ".gitignore",
+    ".prettierrc",
+    "package.json",
+    "vite.config.js",
+    "vitest.config.js",
+    "tests/setup.js"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "hld": "The application follows a client-side monolithic architecture with pure vanilla JavaScript, CSS variables for theming, and no backend. It uses a \"Service Layer\" pattern to isolate business logic (Mermaid, Prism) from UI, and an \"Observer Pattern\" for theme changes. Data is persisted solely via browser `localStorage`. Security relies on client-side sanitization (Marked.js) and no external data transmission.",
+  "lld": "The codebase is organized into modular layers: `UI` (HTML), `Application` (script.js controller), `Core` (StorageManager, ThemeManager), `Services` (MermaidService, PrismService), and `Utils` (HTML/Color helpers). The `ThemeManager` handles 12 built-in themes + custom themes using CSS variables. `MermaidService` and `PrismService` wrap external libraries with lazy initialization and error handling. `script.js` acts as the entry point, treating other modules as injected dependencies.",
+  "other": {
+    "folder-browser-plan": "Plan to add a file system sidebar using the File System Access API for local folder navigation.",
+    "math-rendering-plan": "Proposal to integrate KaTeX for LaTeX math rendering ($ and $$ syntax) via marked extension.",
+    "pdf-export-plan": "Design to add PDF export using html2pdf.js, preserving styles and Mermaid diagrams.",
+    "implementation-plan": "6-week refactoring roadmap moving from monolithic script.js to modular ES modules structure (currently in progress/partially complete).",
+    "deployment-guide": "Documentation for deploying to Vercel, Netlify, or GitHub Pages as a static site.",
+    "ai-review": "Recent automated code review log highlighting fixes for theme dropdown sync and architecture documentation additions."
+  }
+}
