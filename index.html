@@ -15,7 +15,15 @@
     <div class="app-container">
       <!-- Toolbar -->
       <div class="toolbar">
-        <h1>📝 Markdown Viewer Pro</h1>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button id="sidebar-toggle-btn" class="btn-icon" title="Toggle Sidebar" aria-label="Toggle File Sidebar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="9" y1="3" x2="9" y2="21"></line>
+                </svg>
+            </button>
+            <h1>📝 Markdown Viewer Pro</h1>
+        </div>
         <div class="toolbar-controls">
           <!-- Folder Browser Toggle - Always visible -->
           <button
@@ -140,18 +148,10 @@
       <!-- Main Content -->
       <div class="main-content">
         <!-- Floating show sidebar button (visible when sidebar is hidden) -->
-        <button
-          class="floating-show-btn"
-          id="floating-show-btn"
-          title="Show File Browser"
-          aria-label="Show File Browser"
-          style="display: none"
-        >
-          ▶
-        </button>
+
 
         <!-- Folder Browser Sidebar (Hidden by default) -->
-        <div class="file-browser" id="file-browser" style="display: none">
+        <div class="file-browser collapsed" id="file-browser">
           <!-- Resize handle for dragging -->
           <div class="resize-handle" id="resize-handle" title="Drag to resize"></div>
 

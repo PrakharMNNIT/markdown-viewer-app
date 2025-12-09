@@ -1179,11 +1179,11 @@ graph TD
   // ==================== FOLDER BROWSER FUNCTIONALITY ====================
 
   // Folder browser DOM elements
+  // Folder browser DOM elements
   const fileBrowser = document.getElementById('file-browser');
   const openFolderBtn = document.getElementById('open-folder-btn');
-  const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+  const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
   const closeBrowserBtn = document.getElementById('close-browser-btn');
-  const floatingShowBtn = document.getElementById('floating-show-btn');
   const resizeHandle = document.getElementById('resize-handle');
   const fileTree = document.getElementById('file-tree');
   const currentFolderNameEl = document.getElementById('current-folder-name');
@@ -1223,8 +1223,8 @@ graph TD
     if (newWidth < collapseThreshold) {
       // Auto-collapse with smooth animation
       fileBrowser.classList.remove('resizing');
-      fileBrowser.style.display = 'none';
-      floatingShowBtn.style.display = 'block';
+      fileBrowser.classList.add('collapsed');
+      storageManager.set('sidebarCollapsed', 'true');
       isResizing = false;
       resizeHandle.classList.remove('dragging');
       document.body.style.cursor = '';
@@ -1277,9 +1277,9 @@ graph TD
     // Store files
     folderFiles = result.files;
 
-    // Show browser sidebar, hide floating button
-    fileBrowser.style.display = 'flex';
-    floatingShowBtn.style.display = 'none';
+    // Show browser sidebar (expand)
+    fileBrowser.classList.remove('collapsed');
+    storageManager.set('sidebarCollapsed', 'false');
 
     // Update UI
     currentFolderNameEl.textContent = result.folderName;
@@ -1291,28 +1291,26 @@ graph TD
     console.log(`✅ Loaded ${result.totalFiles} markdown files from ${result.folderName}`);
   });
 
-  // Toggle sidebar collapse/expand (keeps folder data)
-  toggleSidebarBtn.addEventListener('click', () => {
-    // Hide sidebar, show floating button
-    fileBrowser.style.display = 'none';
-    floatingShowBtn.style.display = 'block';
-  });
+  // Toggle Sidebar
+  function toggleSidebar() {
+    fileBrowser.classList.toggle('collapsed');
+    const isCollapsed = fileBrowser.classList.contains('collapsed');
+    storageManager.set('sidebarCollapsed', isCollapsed);
+  }
 
-  // Floating button - show sidebar
-  floatingShowBtn.addEventListener('click', () => {
-    // Show sidebar, hide floating button
-    fileBrowser.style.display = 'flex';
-    floatingShowBtn.style.display = 'none';
-  });
+  // Unified Toggle Button
+  if (sidebarToggleBtn) {
+    sidebarToggleBtn.addEventListener('click', toggleSidebar);
+  }
 
-  // Close browser handler (clears all folder data)
-  closeBrowserBtn.addEventListener('click', () => {
-    // Hide everything AND clear data
-    fileBrowser.style.display = 'none';
-    floatingShowBtn.style.display = 'none';
-    folderFiles = [];
-    activeFileHandle = null;
-  });
+  // Handle Close Button inside sidebar
+  if (closeBrowserBtn) {
+    closeBrowserBtn.addEventListener('click', () => {
+      // Just collapse it
+      fileBrowser.classList.add('collapsed');
+      storageManager.set('sidebarCollapsed', 'true');
+    });
+  }
 
   // Render file tree
   function renderFileTree(items, container = fileTree, indent = 0) {

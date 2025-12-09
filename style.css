@@ -817,26 +817,7 @@ body {
 /* ==================== FOLDER BROWSER ==================== */
 
 /* Floating show button (appears when sidebar is hidden) - TOP LEFT */
-.floating-show-btn {
-  position: fixed;
-  left: 0;
-  top: 60px;
-  background-color: var(--h1-color);
-  color: white;
-  border: none;
-  border-radius: 0 8px 8px 0;
-  padding: 12px 8px;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 100;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.floating-show-btn:hover {
-  padding-right: 12px;
-  background-color: var(--h2-color);
-}
+/* Obsolete floating button styles removed */
 
 .file-browser {
   width: 280px;
@@ -853,6 +834,15 @@ body {
   position: relative;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 4px 0 12px rgba(0, 0, 0, 0.05); /* Subtle depth */
+}
+
+/* Collapsed state for sidebar */
+.file-browser.collapsed {
+  width: 0 !important;
+  min-width: 0 !important;
+  padding: 0 !important; /* Hide content */
+  border-right: none;
+  opacity: 0;
 }
 
 .file-browser.resizing {
