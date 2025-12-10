@@ -1,0 +1,70 @@
+/* ==================== NEBULA DARK THEME ==================== */
+/* Maps Core Nebula Tokens to App Variables */
+
+:root {
+  /* ==================== BASE COLORS ==================== */
+  --bg-primary: var(--bg-universe);
+  --bg-secondary: var(--bg-glass-heavy);
+  --bg-tertiary: var(--bg-element);
+
+  --text-primary: var(--text-star);
+  --text-secondary: var(--text-stardust);
+
+  --border-color: var(--border-glass);
+
+  /* ==================== ACCENTS & LINKS ==================== */
+  --link-color: var(--accent-cyan);
+  --link-hover: var(--accent-violet);
+
+  /* ==================== CODE & SYNTAX ==================== */
+  --code-bg: rgba(0, 0, 0, 0.3);
+  --code-text: var(--text-star);
+  --code-block-bg: rgba(0, 0, 0, 0.3);
+  --code-border: var(--border-glass);
+
+  --blockquote-border: var(--accent-violet);
+  --blockquote-bg: rgba(188, 19, 254, 0.1);
+
+  --table-header-bg: rgba(255, 255, 255, 0.05);
+  --table-border: var(--border-glass);
+
+  /* ==================== TYPOGRAPHY DEFAULTS ==================== */
+  --h1-color: var(--accent-cyan);
+  --h2-color: var(--text-star);
+  --h3-color: var(--text-star);
+  --h4-color: var(--text-star);
+  --h5-color: var(--text-star);
+  --h6-color: var(--text-stardust);
+
+  --bold-color: var(--accent-cyan);
+  --italic-color: var(--accent-violet);
+
+  /* ==================== SYNTAX TOKENS (Prism Mapped) ==================== */
+  --syntax-comment: #6272a4;
+  --syntax-punctuation: #f8f8f2;
+  --syntax-number: var(--accent-violet);      /* Purple */
+  --syntax-keyword: var(--accent-cyan);       /* Cyan */
+  --syntax-class-name: var(--accent-cyan);
+  --syntax-property: #ff79c6;                 /* Pink */
+  --syntax-tag: #ff79c6;
+  --syntax-string: #f1fa8c;                   /* Yellow */
+  --syntax-function: #50fa7b;                 /* Green */
+  --syntax-variable: #f8f8f2;
+  --syntax-operator: #ff79c6;
+  --syntax-url: var(--link-color);
+}
+
+/* Specific overrides for Nebula feel */
+body {
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(188, 19, 254, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 40%);
+    background-attachment: fixed;
+    backdrop-filter: blur(100px); /* Creates the deep atmosphere */
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-glass); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }

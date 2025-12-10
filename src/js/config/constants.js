@@ -39,6 +39,8 @@ export const STORAGE_KEYS = {
 
 // Theme Names
 export const THEMES = {
+  NEBULA_DARK: 'nebula-dark',
+  NEBULA_LIGHT: 'nebula-light',
   DEFAULT_LIGHT: 'default-light',
   DEFAULT_DARK: 'default-dark',
   OCEAN_LIGHT: 'ocean-light',

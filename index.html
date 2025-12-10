@@ -6,6 +6,9 @@
     <title>Markdown Viewer Pro</title>
 
     <!-- Main Styles -->
+    <link rel="stylesheet" href="variables.css" />
+    <link rel="stylesheet" href="animations.css" />
+    <link rel="stylesheet" href="themes/nebula-elements.css" />
     <link rel="stylesheet" href="style.css" />
 
     <!-- Theme Stylesheet (dynamically loaded) -->
@@ -126,6 +129,8 @@
 
           <select id="theme-selector" class="btn">
             <optgroup label="Default">
+              <option value="nebula-dark">🌌 Nebula Dark (Premium)</option>
+              <option value="nebula-light">❄️ Nebula Light (Premium)</option>
               <option value="default-light" selected>Default Light</option>
               <option value="default-dark">Default Dark</option>
             </optgroup>
@@ -156,8 +161,24 @@
           <button class="btn" id="customize-btn">🎨 Customize Colors</button>
           <button class="btn" id="export-html-btn">💾 Export HTML</button>
           <button class="btn" id="export-pdf-btn">📕 Export PDF</button>
+          <button
+                 class="btn-icon"
+                 id="zen-mode-btn"
+                 title="Enter Zen Mode"
+                 aria-label="Enter Distraction Free Mode"
+                 style="margin-left: 8px;"
+               >
+                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                   <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                 </svg>
+               </button>
         </div>
       </div>
+
+      <!-- Exit Zen Mode Button (Fixed) -->
+      <button id="exit-zen-btn" class="btn floating-exit-btn" title="Exit Zen Mode">
+        Exit Zen Mode
+      </button>
 
       <!-- Main Content -->
       <div class="main-content">

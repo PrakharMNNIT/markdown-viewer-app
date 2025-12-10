@@ -1109,6 +1109,37 @@ graph TD
   const fileBrowser = document.getElementById('file-browser');
   const openFolderBtn = document.getElementById('open-folder-btn');
   const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn'); // Toolbar button
+
+  // Zen Mode Functionality
+  const zenModeBtn = document.getElementById('zen-mode-btn');
+  const exitZenBtn = document.getElementById('exit-zen-btn');
+
+  function toggleZenMode() {
+    document.body.classList.toggle('zen-mode');
+
+    // Auto-resize editor in Zen mode
+    if (document.body.classList.contains('zen-mode')) {
+      // Force refresh editor layout if needed
+      if (typeof editor.refresh === 'function') {
+        editor.refresh();
+      }
+    }
+  }
+
+  if (zenModeBtn) {
+    zenModeBtn.addEventListener('click', toggleZenMode);
+  }
+
+  if (exitZenBtn) {
+    exitZenBtn.addEventListener('click', toggleZenMode);
+  }
+
+  // Escape key to exit Zen Mode
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('zen-mode')) {
+      toggleZenMode();
+    }
+  });
   const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn'); // Sidebar header button
   const resizeHandle = document.getElementById('resize-handle');
   const fileTree = document.getElementById('file-tree');

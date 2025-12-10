@@ -484,42 +484,44 @@ body {
   margin: 1em 0;
 }
 
-/* ==================== MODAL ==================== */
+/* ==================== MODAL STYLES ==================== */
 .modal {
   display: none;
   position: fixed;
-  top: 0;
+  z-index: 1000;
   left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
+  overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.modal.active {
-  display: flex;
+.modal.show {
+  display: block;
+  opacity: 1;
 }
 
 .modal-content {
+  /* Generic Base Styles */
   background-color: var(--bg-primary);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 16px;
-  padding: 30px;
-  max-width: 800px;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-  width: 90%;
+  margin: 10% auto;
+  padding: 32px;
   border: 1px solid var(--border-color);
-  animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: var(--radius-lg, 12px);
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
 }
 
-@keyframes modalSlideIn {
-  from { opacity: 0; transform: translateY(20px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+.modal.show .modal-content {
+  transform: translateY(0);
 }
 
 @keyframes fadeIn {
@@ -527,30 +529,14 @@ body {
   to { opacity: 1; }
 }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.modal-header h2 {
-  color: var(--h1-color);
-  font-size: 24px;
-}
-
 .close-btn {
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
   color: var(--text-secondary);
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+  line-height: 1;
 }
 
 .close-btn:hover {
@@ -620,22 +606,50 @@ body {
 }
 
 /* ==================== SCROLLBAR ==================== */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+/* Base Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-glass, rgba(255,255,255,0.1)); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+/* ==================== BUTTONS & INTERACTIVE ==================== */
+.btn {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: var(--font-primary, sans-serif);
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+.btn:hover {
+  background-color: rgba(0,0,0,0.05);
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 5px;
+.btn:active {
+  transform: translateY(0);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
+.btn-primary {
+  background-color: var(--accent-color, #007bff);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover, #0056b3);
 }
 
 /* ==================== FOOTER ==================== */
@@ -819,21 +833,22 @@ body {
 /* Floating show button (appears when sidebar is hidden) - TOP LEFT */
 /* Obsolete floating button styles removed */
 
+/* ==================== FILE BROWSER (SIDEBAR) ==================== */
 .file-browser {
-  width: 280px;
-  min-width: 100px;
+  width: var(--sidebar-width, 280px);
+  min-width: 200px;
   max-width: 600px;
+
+  /* Generic Base Styles */
   background-color: var(--bg-secondary);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-right: 1px solid var(--border-color);
+
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  flex-shrink: 0;
+  height: 100%;
   position: relative;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.05); /* Subtle depth */
+  transition: transform 0.3s ease, margin-left 0.3s ease;
+  z-index: 40;
 }
 
 /* Collapsed state for sidebar */
@@ -874,23 +889,24 @@ body {
   box-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
 }
 
+/* Header in Sidebar */
 .browser-header {
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--border-color);
+  height: 48px;
+  padding: 0 16px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
   background-color: var(--bg-tertiary);
 }
 
 .browser-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-family: var(--font-primary, sans-serif);
+  font-size: 13px;
   font-weight: 600;
-  color: var(--text-primary);
-  font-size: 14px;
-  flex: 1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
 }
 
 .browser-actions {
@@ -1139,4 +1155,91 @@ body {
 /* Ensure no other color-mix bleeds in */
 .pdf-export-mode * {
   /* No generic override, trusting other elements are safe */
+}
+
+/* ==================== ZEN MODE ==================== */
+body.zen-mode {
+  overflow: hidden; /* Prevent body scroll */
+}
+
+body.zen-mode .toolbar,
+body.zen-mode .file-browser,
+body.zen-mode .app-footer,
+body.zen-mode .mobile-tabs {
+  display: none !important;
+}
+
+body.zen-mode .app-container {
+  height: 100vh;
+  padding: 0;
+  max-width: 100%;
+}
+
+body.zen-mode .main-content {
+  height: 100vh;
+}
+
+/* Zen Editor */
+body.zen-mode .editor-container,
+body.zen-mode .preview-container {
+  border: none;
+  border-radius: 0;
+  max-width: 900px; /* Readability width */
+  margin: 0 auto;
+  padding: 40px;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Editor Focus in Zen Mode */
+body.zen-mode textarea {
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+/* Exit Button (Floating) */
+.floating-exit-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--bg-glass-heavy);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-glass);
+  padding: 12px 24px;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 1000;
+  display: none; /* Hidden by default */
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  font-family: var(--font-primary);
+  opacity: 0;
+  transform: translateY(20px);
+  cursor: pointer;
+}
+
+body.zen-mode .floating-exit-btn {
+  display: flex !important;
+  opacity: 0.4; /* Subtle by default */
+  transform: translateY(0);
+}
+
+body.zen-mode .floating-exit-btn:hover {
+  opacity: 1;
+  background: var(--bg-glass);
+  border-color: var(--accent-cyan);
+  color: var(--text-star);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+}
+
+/* Zen Mode Animation */
+@keyframes zen-enter {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+body.zen-mode .editor-container,
+body.zen-mode .preview-container {
+    animation: zen-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }

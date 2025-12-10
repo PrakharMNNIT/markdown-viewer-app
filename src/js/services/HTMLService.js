@@ -116,36 +116,77 @@ export class HTMLService {
     // Actually relative fetch is best.
 
     try {
-      // Use relative path which works best with <base> or current location
-      const response = await fetch(`themes/${themeName}.css`);
+      // Fetch both the specific theme and the global variables which define the tokens
+      const requestPromises = [
+        fetch(`${baseUrl}themes/${themeName}.css`),
+        fetch(`${baseUrl}variables.css`)
+      ];
 
-      let finalResponse = response;
-      if (!response.ok) {
-        // Fallback to full path construction if relative failed
-        const fullPath = `${baseUrl}themes/${themeName}.css`.replace('//', '/');
-        finalResponse = await fetch(fullPath);
-        if (!finalResponse.ok) throw new Error(`Theme load failed: ${finalResponse.status}`);
+      // If Nebula theme, also fetch the micro-elements styles
+      if (themeName.startsWith('nebula-')) {
+        requestPromises.push(fetch(`${baseUrl}themes/nebula-elements.css`));
       }
 
-      let css = await finalResponse.text();
+      const responses = await Promise.all(requestPromises);
+      const themeRes = responses[0];
+      const variablesRes = responses[1];
+      const nebulaElementsRes = responses[2]; // Undefined if not nebula
 
-      // Handle Vite Dev Server response (JS module instead of raw CSS)
-      if (css.includes('const __vite__css = "')) {
-        const match = css.match(/const __vite__css\s*=\s*"((?:[^"\\]|\\.)*)"/);
-        if (match && match[1]) {
-          try {
-            // Parse JSON string to handle escapes (e.g. \n) correctly
-            css = JSON.parse(`"${match[1]}"`);
-          } catch (e) {
-            console.warn('Failed to parse Vite CSS string', e);
-          }
-        }
+      if (!themeRes.ok) throw new Error(`Failed to load theme: ${themeRes.statusText}`);
+
+      let cssContent = '';
+
+      // Process variables.css
+      if (variablesRes.ok) {
+        const variablesText = await variablesRes.text();
+        cssContent += this.extractCSS(variablesText, baseUrl) + '\n';
+      } else {
+        console.warn('variables.css could not be loaded for export');
       }
-      return css;
-    } catch (e) {
-      console.error('Failed to load theme CSS', e);
-      return '/* Theme Fetch Failed: ' + e.message + ' */';
+
+      // Process Nebula Elements if present
+      if (nebulaElementsRes && nebulaElementsRes.ok) {
+        const nebulaText = await nebulaElementsRes.text();
+        cssContent += this.extractCSS(nebulaText, baseUrl) + '\n';
+      }
+
+      // Process Theme CSS
+      const themeText = await themeRes.text();
+      cssContent += this.extractCSS(themeText, baseUrl);
+
+      return cssContent;
+    } catch (error) {
+      console.warn('Error loading theme CSS:', error);
+      // Fallback: minimal styling
+      return `
+        body { background-color: #fff; color: #333; }
+        code { background-color: #f5f5f5; }
+        pre { background-color: #f5f5f5; border: 1px solid #ddd; }
+        blockquote { border-left: 4px solid #ddd; color: #666; }
+        table { border: 1px solid #ddd; }
+        th, td { border: 1px solid #ddd; }
+      `;
     }
+  }
+
+  /**
+   * Helper to extract CSS from potential Vite module wrapper or raw text
+   */
+  extractCSS(text, baseUrl) {
+    // Vite dev server serves CSS files as JS modules (import ...)
+    // We need to extract the actual CSS string.
+    // Typical format: "import ... \n const css = \"...\" ... export default css"
+    // OR direct CSS in production build.
+
+    // Simple check for Vite JS module wrapper
+    if (text.includes('export default') || text.includes('const css =')) {
+      const match = text.match(/const\s+css\s*=\s*"([\s\S]*?)"/);
+      if (match && match[1]) {
+        // Unescape styling (newlines, etc)
+        return match[1].replace(/\\n/g, '\n').replace(/\\"/g, '"');
+      }
+    }
+    return text;
   }
 
   downloadHTML(blob, filename = 'exported-markdown.html') {

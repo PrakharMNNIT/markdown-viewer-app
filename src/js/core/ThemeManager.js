@@ -80,6 +80,9 @@ export class ThemeManager {
       const baseUrl = import.meta.env.BASE_URL || '/';
       stylesheet.href = `${baseUrl}themes/${themeName}.css`;
 
+      // Set data-theme attribute for CSS selectors (Critical for Nebula themes)
+      document.documentElement.setAttribute('data-theme', themeName);
+
       // Save selection
       this.currentTheme = themeName;
       this.storage.set(STORAGE_KEYS.SELECTED_THEME, themeName);
