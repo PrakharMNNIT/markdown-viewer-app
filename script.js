@@ -152,15 +152,24 @@ function configureMarkedExtensions() {
         name: 'mathBlock',
         level: 'block',
         start(src) {
-          return src.match(/^\$\$/)?.index;
+          return src.match(/^\$\$|\\\[/)?.index;
         },
         tokenizer(src) {
-          const match = src.match(/^\$\$([\s\S]+?)\$\$/);
-          if (match) {
+          const doubleDollar = src.match(/^\$\$([\s\S]+?)\$\$/);
+          if (doubleDollar) {
             return {
               type: 'mathBlock',
-              raw: match[0],
-              text: match[1].trim(),
+              raw: doubleDollar[0],
+              text: doubleDollar[1].trim(),
+            };
+          }
+
+          const bracket = src.match(/^\\\[([\s\S]+?)\\\]/);
+          if (bracket) {
+            return {
+              type: 'mathBlock',
+              raw: bracket[0],
+              text: bracket[1].trim(),
             };
           }
         },
@@ -240,7 +249,7 @@ function configureMarkedExtensions() {
         name: 'mathInline',
         level: 'inline',
         start(src) {
-          return src.match(/\$/)?.index;
+          return src.match(/\$|\\\(/)?.index;
         },
         tokenizer(src) {
           // Try display math first ($$...$$)
@@ -251,6 +260,28 @@ function configureMarkedExtensions() {
               raw: displayMatch[0],
               text: displayMatch[1].trim(),
               displayMode: true,
+            };
+          }
+
+          // Try LaTeX display math (\[...\]) - should be handled by block, but just in case
+          const bracketMatch = src.match(/^\\\[([\s\S]+?)\\\]/);
+          if (bracketMatch) {
+            return {
+              type: 'mathInline',
+              raw: bracketMatch[0],
+              text: bracketMatch[1].trim(),
+              displayMode: true,
+            };
+          }
+
+          // Try LaTeX inline math (\(...\))
+          const parenMatch = src.match(/^\\\(([\s\S]+?)\\\)/);
+          if (parenMatch) {
+            return {
+              type: 'mathInline',
+              raw: parenMatch[0],
+              text: parenMatch[1].trim(),
+              displayMode: false,
             };
           }
 
