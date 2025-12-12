@@ -858,6 +858,87 @@ graph TD
   console.log('PDF Modal:', pdfModal);
   console.log('PDF Service Ready:', pdfService.isReady());
 
+  // Split view resizer
+  const splitResizer = document.getElementById('split-resizer');
+  const mainContent = document.querySelector('.main-content');
+  let isSplitResizing = false;
+  let splitRatio = 0.5; // Default 50/50 split
+
+  // Load saved split ratio
+  const savedSplitRatio = storageManager.get('splitRatio');
+  if (savedSplitRatio) {
+    splitRatio = parseFloat(savedSplitRatio);
+  }
+
+  // Apply split ratio to containers
+  function applySplitRatio() {
+    if (!mainContent.classList.contains('split-view-active')) return;
+
+    const mainContentWidth = mainContent.offsetWidth;
+    const sidebarWidth = document.getElementById('file-browser').offsetWidth || 0;
+    const availableWidth = mainContentWidth - sidebarWidth - 8; // 8px for resizer
+
+    const editorWidth = availableWidth * splitRatio;
+    const previewWidth = availableWidth * (1 - splitRatio);
+
+    editorContainer.style.flex = 'none';
+    editorContainer.style.width = `${editorWidth}px`;
+    previewContainer.style.flex = 'none';
+    previewContainer.style.width = `${previewWidth}px`;
+  }
+
+  // Reset to flex layout (equal split)
+  function resetSplitLayout() {
+    editorContainer.style.flex = '1';
+    editorContainer.style.width = '';
+    previewContainer.style.flex = '1';
+    previewContainer.style.width = '';
+  }
+
+  // Split resizer drag handlers
+  if (splitResizer) {
+    splitResizer.addEventListener('mousedown', (e) => {
+      if (!mainContent.classList.contains('split-view-active')) return;
+
+      isSplitResizing = true;
+      splitResizer.classList.add('dragging');
+      document.body.style.cursor = 'col-resize';
+      document.body.style.userSelect = 'none';
+      e.preventDefault();
+    });
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isSplitResizing) return;
+
+    const mainContentRect = mainContent.getBoundingClientRect();
+    const sidebarWidth = document.getElementById('file-browser').offsetWidth || 0;
+    const availableStart = mainContentRect.left + sidebarWidth;
+    const availableWidth = mainContentRect.width - sidebarWidth - 8; // 8px for resizer
+
+    // Calculate new ratio based on mouse position
+    const mouseX = e.clientX - availableStart;
+    let newRatio = mouseX / availableWidth;
+
+    // Constrain ratio between 20% and 80%
+    newRatio = Math.max(0.2, Math.min(0.8, newRatio));
+
+    splitRatio = newRatio;
+    applySplitRatio();
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (isSplitResizing) {
+      isSplitResizing = false;
+      splitResizer.classList.remove('dragging');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+
+      // Save split ratio
+      storageManager.set('splitRatio', splitRatio.toString());
+    }
+  });
+
   // View mode switching
   function setViewMode(mode) {
     // Remove active class from all buttons
@@ -871,22 +952,36 @@ graph TD
         editorOnlyBtn.classList.add('active');
         editorContainer.style.display = 'flex';
         previewContainer.style.display = 'none';
+        mainContent.classList.remove('split-view-active');
+        resetSplitLayout();
         break;
       case 'split-view':
         splitViewBtn.classList.add('active');
         editorContainer.style.display = 'flex';
         previewContainer.style.display = 'flex';
+        mainContent.classList.add('split-view-active');
+        // Apply saved split ratio after a brief delay to ensure layout is ready
+        setTimeout(() => applySplitRatio(), 0);
         break;
       case 'preview-only':
         previewOnlyBtn.classList.add('active');
         editorContainer.style.display = 'none';
         previewContainer.style.display = 'flex';
+        mainContent.classList.remove('split-view-active');
+        resetSplitLayout();
         break;
     }
 
     // Save view mode preference
     storageManager.set('viewMode', mode);
   }
+
+  // Handle window resize to maintain split ratio
+  window.addEventListener('resize', () => {
+    if (mainContent.classList.contains('split-view-active')) {
+      applySplitRatio();
+    }
+  });
 
   // ==================== SYNC SCROLL FUNCTIONALITY ====================
 
