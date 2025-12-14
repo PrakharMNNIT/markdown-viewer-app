@@ -858,6 +858,11 @@ graph TD
   console.log('PDF Modal:', pdfModal);
   console.log('PDF Service Ready:', pdfService.isReady());
 
+  // Check if mobile view (defined early for setViewMode)
+  function isMobileView() {
+    return window.innerWidth <= 768;
+  }
+
   // Split view resizer
   const splitResizer = document.getElementById('split-resizer');
   const mainContent = document.querySelector('.main-content');
@@ -941,12 +946,19 @@ graph TD
 
   // View mode switching
   function setViewMode(mode) {
+    // Skip view mode changes on mobile - mobile tabs handle this
+    if (isMobileView()) {
+      // Just save the preference for desktop
+      storageManager.set('viewMode', mode);
+      return;
+    }
+
     // Remove active class from all buttons
     editorOnlyBtn.classList.remove('active');
     splitViewBtn.classList.remove('active');
     previewOnlyBtn.classList.remove('active');
 
-    // Apply view mode
+    // Apply view mode (desktop only)
     switch (mode) {
       case 'editor-only':
         editorOnlyBtn.classList.add('active');
@@ -1096,6 +1108,23 @@ graph TD
   const editorContainerEl = document.querySelector('.editor-container');
   const previewContainerEl = document.querySelector('.preview-container');
 
+  // Initialize mobile view state
+  function initializeMobileView() {
+    if (isMobileView()) {
+      // On mobile, default to editor tab
+      const activeTab = document.querySelector('.mobile-tab-btn.active');
+      const tab = activeTab ? activeTab.dataset.tab : 'editor';
+
+      if (tab === 'editor') {
+        editorContainerEl.classList.add('mobile-visible');
+        previewContainerEl.classList.remove('mobile-visible');
+      } else {
+        editorContainerEl.classList.remove('mobile-visible');
+        previewContainerEl.classList.add('mobile-visible');
+      }
+    }
+  }
+
   mobileTabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       // Remove active class from all buttons
@@ -1113,6 +1142,16 @@ graph TD
       }
     });
   });
+
+  // Initialize mobile visibility on page load
+  initializeMobileView();
+
+  // Re-initialize on window resize
+  window.addEventListener('resize', debounce(() => {
+    if (isMobileView()) {
+      initializeMobileView();
+    }
+  }, 250));
 
   // Initialize visibility
 

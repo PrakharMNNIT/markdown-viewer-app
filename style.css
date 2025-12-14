@@ -550,7 +550,8 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.modal.show {
+.modal.show,
+.modal.active {
   display: block;
   opacity: 1;
 }
@@ -570,7 +571,8 @@ body {
   transition: transform 0.3s ease;
 }
 
-.modal.show .modal-content {
+.modal.show .modal-content,
+.modal.active .modal-content {
   transform: translateY(0);
 }
 
@@ -739,6 +741,7 @@ body {
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   padding: 0 10px;
+  flex-shrink: 0;
 }
 
 .mobile-tab-btn {
@@ -759,43 +762,311 @@ body {
 }
 
 @media (max-width: 768px) {
-  .main-content {
+  /* App container fills viewport minus footer */
+  .app-container {
+    height: calc(100vh - 44px);
+    display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
+  /* Toolbar - Compact on mobile */
+  .toolbar {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 12px;
+    flex-shrink: 0;
+  }
+
+  .toolbar h1 {
+    font-size: 16px;
+  }
+
+  .toolbar-controls {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  /* Hide less essential buttons on mobile */
+  .toolbar-controls #customize-btn,
+  .toolbar-controls #zen-mode-btn {
+    display: none;
+  }
+
+  /* CRITICAL: Hide view mode buttons on mobile - use mobile tabs instead */
+  .view-mode-buttons {
+    display: none !important;
+  }
+
+  /* Also hide sync scroll button on mobile */
+  #sync-scroll-btn {
+    display: none !important;
+  }
+
+  /* Smaller buttons on mobile */
+  .toolbar-controls .btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .toolbar-controls .view-btn {
+    padding: 6px 8px;
+  }
+
+  .toolbar-controls .view-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Theme selector smaller */
+  .toolbar-controls #theme-selector {
+    max-width: 130px;
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  /* Main content takes remaining space */
+  .main-content {
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0; /* Important for flex children */
+  }
+
+  /* Mobile tabs */
   .mobile-tabs {
     display: flex;
   }
 
-  /* Mobile Tab Logic: Hide/Show based on active class */
+  /* Hide split resizer on mobile */
+  .split-resizer {
+    display: none;
+  }
+
+  /* Hide file browser on mobile */
+  .file-browser {
+    display: none !important;
+  }
+
+  /* Editor and Preview containers */
   .editor-container, .preview-container {
-    display: none !important; /* Override flex */
-    height: calc(100vh - 120px); /* Adjust for toolbar + footer + tabs */
+    display: none !important;
+    flex: 1;
+    min-height: 0;
+    width: 100% !important;
   }
 
-  .editor-container.mobile-visible, .preview-container.mobile-visible {
+  .editor-container.mobile-visible,
+  .preview-container.mobile-visible {
     display: flex !important;
+    flex-direction: column;
   }
-
 
   .editor-container {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
   }
 
-  .toolbar {
-    flex-direction: column;
-    gap: 10px;
+  /* Editor textarea fills available space */
+  #markdown-editor {
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+  }
+
+  /* Preview fills available space and is scrollable */
+  .preview-container {
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .preview-container.mobile-visible {
+    overflow: auto !important;
+  }
+
+  #markdown-preview {
+    min-height: auto;
+    overflow: visible;
+  }
+
+  #markdown-preview {
     padding: 15px;
+    padding-bottom: 30px;
   }
 
-  .toolbar-controls {
-    width: 100%;
-    flex-wrap: wrap;
+  /* Editor/Preview headers smaller */
+  .editor-header, .preview-header {
+    padding: 8px 12px;
+    font-size: 12px;
+    flex-shrink: 0;
   }
 
+  /* Zoom controls smaller on mobile */
+  .zoom-controls {
+    gap: 4px;
+  }
+
+  .zoom-btn {
+    padding: 3px 6px;
+  }
+
+  .zoom-level {
+    font-size: 11px;
+    min-width: 40px;
+  }
+
+  /* Color grid single column */
   .color-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Modal adjustments for mobile */
+  .modal-content {
+    margin: 5% auto;
+    padding: 20px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  /* PDF modal smaller on mobile */
+  .pdf-preview-container {
+    height: 300px;
+  }
+
+  .pdf-settings-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Footer on mobile - ensure it's visible */
+  .app-footer {
+    padding: 10px 15px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .app-footer a {
+    display: inline;
+  }
+
+  /* Mobile typography improvements */
+  #markdown-preview h1 {
+    font-size: 1.75em;
+    margin: 0.5em 0;
+    padding-bottom: 0.2em;
+  }
+
+  #markdown-preview h2 {
+    font-size: 1.4em;
+    margin: 0.5em 0;
+  }
+
+  #markdown-preview h3 {
+    font-size: 1.2em;
+  }
+
+  #markdown-preview h4,
+  #markdown-preview h5,
+  #markdown-preview h6 {
+    font-size: 1em;
+  }
+
+  #markdown-preview p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0.8em 0;
+  }
+
+  #markdown-preview li {
+    font-size: 14px;
+  }
+
+  #markdown-preview pre {
+    font-size: 12px;
+    padding: 12px;
+    margin: 1em 0;
+  }
+
+  #markdown-preview code {
+    font-size: 12px;
+  }
+
+  #markdown-preview table {
+    font-size: 13px;
+  }
+
+  #markdown-preview th,
+  #markdown-preview td {
+    padding: 8px;
+  }
+
+  #markdown-preview blockquote {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  /* Admonitions on mobile */
+  .admonition {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+
+  .admonition-title {
+    font-size: 13px;
+  }
+}
+
+/* Extra small screens (< 480px) */
+@media (max-width: 480px) {
+  .toolbar h1 {
+    font-size: 14px;
+  }
+
+  .toolbar-controls .btn {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  /* Hide export buttons text, show only icons */
+  .toolbar-controls #export-html-btn,
+  .toolbar-controls #export-pdf-btn {
+    font-size: 0; /* Hide text */
+  }
+
+  .toolbar-controls #export-html-btn::before {
+    content: "💾";
+    font-size: 14px;
+  }
+
+  .toolbar-controls #export-pdf-btn::before {
+    content: "📕";
+    font-size: 14px;
+  }
+
+  .toolbar-controls #open-folder-btn {
+    font-size: 0;
+  }
+
+  .toolbar-controls #open-folder-btn::before {
+    content: "📁";
+    font-size: 14px;
+  }
+
+  /* View mode buttons even smaller */
+  .view-mode-buttons {
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .view-btn {
+    padding: 5px 6px;
+  }
+
+  .view-btn svg {
+    width: 14px;
+    height: 14px;
   }
 }
 
