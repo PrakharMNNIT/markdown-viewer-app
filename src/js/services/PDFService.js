@@ -23,6 +23,71 @@ export class PDFService {
   }
 
   /**
+   * Convert any color format to hex for Safari/html2canvas compatibility
+   * @param {string} color - Color value (rgba, rgb, hex, etc.)
+   * @returns {string} Hex color string
+   * @private
+   */
+  sanitizeColorForSafari(color) {
+    if (!color || typeof color !== 'string') {
+      return '#ffffff'; // Fallback to white
+    }
+
+    color = color.trim();
+
+    // Already a hex color
+    if (color.startsWith('#')) {
+      // Ensure 6-digit hex
+      if (color.length === 4) {
+        return '#' + color[1] + color[1] + color[2] + color[2] + color[3] + color[3];
+      }
+      return color;
+    }
+
+    // Handle rgba/rgb
+    const rgbaMatch = color.match(/rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*[\d.]+)?\s*\)/i);
+    if (rgbaMatch) {
+      const r = parseInt(rgbaMatch[1], 10);
+      const g = parseInt(rgbaMatch[2], 10);
+      const b = parseInt(rgbaMatch[3], 10);
+      return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+
+    // Handle named colors by creating a temporary element
+    try {
+      const tempDiv = document.createElement('div');
+      tempDiv.style.color = color;
+      document.body.appendChild(tempDiv);
+      const computed = getComputedStyle(tempDiv).color;
+      document.body.removeChild(tempDiv);
+
+      const match = computed.match(/rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+      if (match) {
+        const r = parseInt(match[1], 10);
+        const g = parseInt(match[2], 10);
+        const b = parseInt(match[3], 10);
+        return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+      }
+    } catch (e) {
+      console.warn('Color conversion failed for:', color);
+    }
+
+    // Fallback
+    return '#ffffff';
+  }
+
+  /**
+   * Get safe computed color value for Safari
+   * @param {string} cssVar - CSS variable name (e.g., '--bg-primary')
+   * @returns {string} Safe hex color
+   * @private
+   */
+  getSafeColor(cssVar) {
+    const value = getComputedStyle(document.documentElement).getPropertyValue(cssVar).trim();
+    return this.sanitizeColorForSafari(value);
+  }
+
+  /**
    * Get default PDF configuration
    *
    * @returns {Object} Default configuration object
@@ -116,13 +181,9 @@ export class PDFService {
     contentWrapper.style.lineHeight = '1.7';
     contentWrapper.style.fontSize = `${config.fontSize || PDF_CONFIG.FONT_SIZES.DEFAULT}pt`;
 
-    // Apply current theme colors
-    contentWrapper.style.backgroundColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--bg-primary')
-      .trim();
-    contentWrapper.style.color = getComputedStyle(document.documentElement)
-      .getPropertyValue('--text-primary')
-      .trim();
+    // Apply current theme colors (using safe hex colors for Safari compatibility)
+    contentWrapper.style.backgroundColor = this.getSafeColor('--bg-primary');
+    contentWrapper.style.color = this.getSafeColor('--text-primary');
 
     // Handle content as either a Node or a string
     if (typeof content === 'string') {
@@ -138,8 +199,9 @@ export class PDFService {
     // Add Footer
     const footer = document.createElement('div');
     footer.style.marginTop = '40px';
-    const borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim();
-    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
+    // Use safe hex colors for Safari compatibility
+    const borderColor = this.getSafeColor('--border-color');
+    const textColor = this.getSafeColor('--text-secondary');
 
     footer.style.borderTop = `1px solid ${borderColor}`;
     footer.style.paddingTop = '20px';
@@ -178,9 +240,8 @@ export class PDFService {
         scale: 2,
         useCORS: true,
         letterRendering: true,
-        backgroundColor: getComputedStyle(document.documentElement)
-          .getPropertyValue('--bg-primary')
-          .trim(),
+        // Use safe hex color for Safari compatibility
+        backgroundColor: this.getSafeColor('--bg-primary'),
       },
       jsPDF: {
         unit: 'in',
