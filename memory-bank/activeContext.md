@@ -1,10 +1,44 @@
 # Active Context
 
-**Last Updated:** 12/7/2025, 7:55 AM IST
+**Last Updated:** 12/15/2025, 4:54 PM IST
 
 ## Current Focus
 
-**COMPLETED:** LaTeX Environment & Subscript/Superscript Rendering Fix ✅
+**COMPLETED:** File Creation & Folder Refresh Features ✅
+
+Successfully implemented two new features for the folder browser:
+1. Create new markdown files with templates
+2. Refresh folder structure to sync with filesystem changes
+
+### Recent Implementation (This Session)
+
+**Feature 1: Create New Markdown Files**
+- Added "Create New File" button (+ icon) in sidebar header
+- Implemented modal with:
+  - File name input with .md auto-extension
+  - Location dropdown (root folder or subdirectories)
+  - Template selector (empty, basic, readme, notes, blog)
+- Files are persisted to actual filesystem using File System Access API
+- New file automatically loads in editor after creation
+
+**Feature 2: Refresh Folder Structure**
+- Added "Refresh" button (↻ icon) in sidebar header
+- Re-scans current directory to detect:
+  - New files added externally
+  - Deleted files removed externally
+  - File modifications
+- Animated spinner during refresh
+- Toast notifications for success/error feedback
+
+**Files Modified:**
+- `src/js/services/FolderBrowserService.js`: Added methods for file creation, saving, refresh
+- `index.html`: Added UI elements (buttons, modal)
+- `style.css`: Added styling for create file modal and toast notifications
+- `script.js`: Added event handlers and file template definitions
+
+---
+
+**PREVIOUSLY COMPLETED:** LaTeX Environment & Subscript/Superscript Rendering Fix ✅
 
 Successfully implemented preprocessing solution that protects LaTeX content from marked.js escaping.
 

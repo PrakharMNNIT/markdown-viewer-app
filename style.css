@@ -1212,40 +1212,65 @@ body {
 
 /* Header in Sidebar */
 .browser-header {
-  height: 48px;
-  padding: 0 16px;
+  min-height: 40px;
+  padding: 8px 8px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 4px;
   border-bottom: 1px solid var(--border-color);
   background-color: var(--bg-tertiary);
+  flex-wrap: wrap;
 }
 
 .browser-title {
   font-family: var(--font-primary, sans-serif);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
   color: var(--text-secondary);
+  flex: 1;
+  min-width: 0; /* Allow shrinking */
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.browser-title .folder-icon {
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.browser-title #current-folder-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .browser-actions {
   display: flex;
   align-items: center;
-  gap: 4px;
-  order: -1; /* Place at the start (left side) */
+  gap: 2px;
+  flex-shrink: 0;
 }
 
 .btn-icon {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--text-secondary);
-  padding: 4px 8px;
+  padding: 4px 6px;
   border-radius: 4px;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
 }
 
 .btn-icon:hover {
@@ -1253,11 +1278,17 @@ body {
   color: var(--text-primary);
 }
 
+.btn-icon svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 .browser-stats {
-  padding: 8px 12px;
+  padding: 4px 8px;
   background-color: var(--bg-primary);
   border-bottom: 1px solid var(--border-color);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-secondary);
 }
 
@@ -1476,6 +1507,182 @@ body {
 /* Ensure no other color-mix bleeds in */
 .pdf-export-mode * {
   /* No generic override, trusting other elements are safe */
+}
+
+/* ==================== CREATE FILE MODAL ==================== */
+.create-file-modal-content {
+  max-width: 500px;
+}
+
+.create-file-form {
+  margin: 20px 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  transition: all 0.2s ease;
+}
+
+.form-group input[type="text"]:focus {
+  outline: none;
+  border-color: var(--h1-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.form-group input[type="text"]::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: var(--h1-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.form-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* Primary button style */
+.btn.primary {
+  background-color: var(--h1-color);
+  color: white;
+  border-color: var(--h1-color);
+  font-weight: 600;
+}
+
+.btn.primary:hover {
+  background-color: var(--h2-color);
+  border-color: var(--h2-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Refresh button animation */
+.btn-icon.refreshing svg {
+  animation: spin 0.8s linear infinite;
+}
+
+/* Browser action buttons in sidebar header */
+.browser-actions .btn-icon {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.browser-actions .btn-icon:hover {
+  background-color: var(--bg-primary);
+}
+
+.browser-actions .btn-icon:focus {
+  outline: 2px solid var(--h1-color);
+  outline-offset: 2px;
+}
+
+.browser-actions .btn-icon:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.browser-actions .btn-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Very narrow sidebar - stack elements vertically */
+@media (max-width: 200px) {
+  .browser-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 6px 8px;
+  }
+
+  .browser-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* Success/Error toast notifications */
+.toast-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 10000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.toast-notification.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-notification.success {
+  background-color: #10b981;
+  color: white;
+}
+
+.toast-notification.error {
+  background-color: #ef4444;
+  color: white;
+}
+
+.toast-notification.info {
+  background-color: #3b82f6;
+  color: white;
 }
 
 /* ==================== ZEN MODE ==================== */

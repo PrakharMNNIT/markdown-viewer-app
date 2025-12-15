@@ -197,6 +197,31 @@
             <div class="browser-actions">
               <button
                 class="btn-icon"
+                id="refresh-folder-btn"
+                title="Refresh Folder"
+                aria-label="Refresh Folder Structure"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 4v6h-6"></path>
+                  <path d="M1 20v-6h6"></path>
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+              </button>
+              <button
+                class="btn-icon"
+                id="create-file-btn"
+                title="Create New File"
+                aria-label="Create New Markdown File"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="12" y1="18" x2="12" y2="12"></line>
+                  <line x1="9" y1="15" x2="15" y2="15"></line>
+                </svg>
+              </button>
+              <button
+                class="btn-icon"
                 id="toggle-sidebar-btn"
                 title="Hide Sidebar"
                 aria-label="Toggle Sidebar"
@@ -377,6 +402,52 @@
         <div class="modal-actions">
           <button class="btn" id="pdf-preview-btn">👁️ Update Preview</button>
           <button class="btn" id="pdf-download-btn">💾 Download PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create File Modal -->
+    <div id="create-file-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="create-file-modal-title">
+      <div class="modal-content create-file-modal-content">
+        <span class="close-btn" id="close-create-file-modal" role="button" aria-label="Close dialog">&times;</span>
+        <h2 id="create-file-modal-title">📄 Create New Markdown File</h2>
+
+        <div class="create-file-form">
+          <div class="form-group">
+            <label for="new-file-name">File Name</label>
+            <input
+              type="text"
+              id="new-file-name"
+              placeholder="my-document.md"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <small class="form-hint">The .md extension will be added automatically if not provided</small>
+          </div>
+
+          <div class="form-group">
+            <label for="new-file-location">Location</label>
+            <select id="new-file-location">
+              <option value="">📁 Root folder</option>
+              <!-- Subdirectories will be populated dynamically -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="new-file-template">Template</label>
+            <select id="new-file-template">
+              <option value="empty">Empty file</option>
+              <option value="basic">Basic document</option>
+              <option value="readme">README template</option>
+              <option value="notes">Meeting notes</option>
+              <option value="blog">Blog post</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn" id="cancel-create-file-btn">Cancel</button>
+          <button class="btn primary" id="confirm-create-file-btn">Create File</button>
         </div>
       </div>
     </div>

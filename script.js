@@ -1274,6 +1274,17 @@ graph TD
   const fileBrowser = document.getElementById('file-browser');
   const openFolderBtn = document.getElementById('open-folder-btn');
   const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn'); // Toolbar button
+  const refreshFolderBtn = document.getElementById('refresh-folder-btn');
+  const createFileBtn = document.getElementById('create-file-btn');
+
+  // Create file modal elements
+  const createFileModal = document.getElementById('create-file-modal');
+  const closeCreateFileModal = document.getElementById('close-create-file-modal');
+  const cancelCreateFileBtn = document.getElementById('cancel-create-file-btn');
+  const confirmCreateFileBtn = document.getElementById('confirm-create-file-btn');
+  const newFileNameInput = document.getElementById('new-file-name');
+  const newFileLocationSelect = document.getElementById('new-file-location');
+  const newFileTemplateSelect = document.getElementById('new-file-template');
 
   // Zen Mode Functionality
   const zenModeBtn = document.getElementById('zen-mode-btn');
@@ -1412,6 +1423,306 @@ graph TD
 
     console.log(`✅ Loaded ${result.totalFiles} markdown files from ${result.folderName}`);
   });
+
+  // ==================== REFRESH FOLDER FUNCTIONALITY ====================
+  refreshFolderBtn.addEventListener('click', async () => {
+    if (!folderBrowserService.getCurrentFolderName()) {
+      showToast('No folder is open. Please open a folder first.', 'info');
+      return;
+    }
+
+    // Add refreshing animation
+    refreshFolderBtn.classList.add('refreshing');
+
+    const result = await folderBrowserService.refreshFolder();
+
+    // Remove refreshing animation
+    refreshFolderBtn.classList.remove('refreshing');
+
+    if (!result.success) {
+      showToast('Error refreshing folder: ' + result.error, 'error');
+      return;
+    }
+
+    // Update state
+    folderFiles = result.files;
+
+    // Update UI
+    fileCountEl.textContent = `${result.totalFiles} file${result.totalFiles !== 1 ? 's' : ''}`;
+    renderFileTree(result.files);
+
+    showToast(`✅ Folder refreshed: ${result.totalFiles} files found`, 'success');
+    console.log(`🔄 Refreshed folder: ${result.totalFiles} markdown files`);
+  });
+
+  // ==================== CREATE FILE FUNCTIONALITY ====================
+
+  // File templates
+  const fileTemplates = {
+    empty: '',
+    basic: `# Document Title
+
+## Introduction
+
+Write your introduction here...
+
+## Content
+
+Your main content goes here.
+
+## Conclusion
+
+Summarize your points here.
+`,
+    readme: `# Project Name
+
+Brief description of your project.
+
+## Features
+
+- Feature 1
+- Feature 2
+- Feature 3
+
+## Installation
+
+\`\`\`bash
+npm install your-package
+\`\`\`
+
+## Usage
+
+\`\`\`javascript
+import { something } from 'your-package';
+\`\`\`
+
+## License
+
+MIT
+`,
+    notes: `# Meeting Notes
+
+**Date:** ${new Date().toLocaleDateString()}
+**Attendees:**
+
+## Agenda
+
+1. Topic 1
+2. Topic 2
+3. Topic 3
+
+## Discussion
+
+### Topic 1
+
+
+### Topic 2
+
+
+### Topic 3
+
+
+## Action Items
+
+- [ ] Action item 1 - @person
+- [ ] Action item 2 - @person
+
+## Next Meeting
+
+Date: TBD
+`,
+    blog: `---
+title: "Your Blog Post Title"
+date: ${new Date().toISOString().split('T')[0]}
+author: Your Name
+tags: [tag1, tag2]
+---
+
+# Your Blog Post Title
+
+![Featured Image](image-url)
+
+## Introduction
+
+Hook your readers with an engaging introduction...
+
+## Main Content
+
+### Subheading 1
+
+Your content here...
+
+### Subheading 2
+
+More content...
+
+## Conclusion
+
+Wrap up your thoughts and include a call to action.
+
+---
+
+*Thanks for reading! Feel free to share your thoughts in the comments.*
+`,
+  };
+
+  // Open create file modal
+  createFileBtn.addEventListener('click', () => {
+    if (!folderBrowserService.getCurrentFolderName()) {
+      showToast('Please open a folder first before creating files.', 'info');
+      return;
+    }
+
+    // Populate location dropdown with directories
+    populateLocationDropdown();
+
+    // Reset form
+    newFileNameInput.value = '';
+    newFileTemplateSelect.value = 'empty';
+
+    // Show modal
+    createFileModal.classList.add('active');
+
+    // Focus input
+    setTimeout(() => newFileNameInput.focus(), 100);
+  });
+
+  // Close modal handlers
+  closeCreateFileModal.addEventListener('click', () => {
+    createFileModal.classList.remove('active');
+  });
+
+  cancelCreateFileBtn.addEventListener('click', () => {
+    createFileModal.classList.remove('active');
+  });
+
+  createFileModal.addEventListener('click', (e) => {
+    if (e.target === createFileModal) {
+      createFileModal.classList.remove('active');
+    }
+  });
+
+  // Handle Enter key in filename input
+  newFileNameInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      confirmCreateFileBtn.click();
+    }
+  });
+
+  // Confirm create file
+  confirmCreateFileBtn.addEventListener('click', async () => {
+    const filename = newFileNameInput.value.trim();
+
+    if (!filename) {
+      showToast('Please enter a filename.', 'error');
+      newFileNameInput.focus();
+      return;
+    }
+
+    // Get selected directory
+    const locationPath = newFileLocationSelect.value;
+    let targetDir = null;
+
+    if (locationPath) {
+      targetDir = await folderBrowserService.getDirectoryByPath(locationPath);
+      if (!targetDir) {
+        showToast('Could not access the selected directory.', 'error');
+        return;
+      }
+    }
+
+    // Get template content
+    const templateKey = newFileTemplateSelect.value;
+    const content = fileTemplates[templateKey] || '';
+
+    // Disable button while creating
+    confirmCreateFileBtn.disabled = true;
+    confirmCreateFileBtn.textContent = 'Creating...';
+
+    // Create the file
+    const result = await folderBrowserService.createFile(targetDir, filename, content);
+
+    // Re-enable button
+    confirmCreateFileBtn.disabled = false;
+    confirmCreateFileBtn.textContent = 'Create File';
+
+    if (!result.success) {
+      showToast('Error: ' + result.error, 'error');
+      return;
+    }
+
+    // Success - close modal
+    createFileModal.classList.remove('active');
+    showToast(`✅ Created: ${result.filename}`, 'success');
+
+    // Refresh folder to show new file
+    const refreshResult = await folderBrowserService.refreshFolder();
+    if (refreshResult.success) {
+      folderFiles = refreshResult.files;
+      fileCountEl.textContent = `${refreshResult.totalFiles} file${refreshResult.totalFiles !== 1 ? 's' : ''}`;
+      renderFileTree(refreshResult.files);
+    }
+
+    // Load the new file into editor
+    const readResult = await folderBrowserService.readFile(result.fileHandle);
+    if (readResult.success) {
+      editor.value = readResult.content;
+      activeFileHandle = result.fileHandle;
+      renderMarkdown();
+    }
+  });
+
+  // Populate location dropdown with directories from the file tree
+  function populateLocationDropdown() {
+    // Clear existing options except root
+    newFileLocationSelect.innerHTML = '<option value="">📁 Root folder</option>';
+
+    // Recursively add directories
+    function addDirectories(items, path = '', indent = 0) {
+      items.forEach(item => {
+        if (item.type === 'directory') {
+          const fullPath = path ? `${path}/${item.name}` : item.name;
+          const option = document.createElement('option');
+          option.value = fullPath;
+          option.textContent = '  '.repeat(indent) + '📁 ' + item.name;
+          newFileLocationSelect.appendChild(option);
+
+          if (item.children) {
+            addDirectories(item.children, fullPath, indent + 1);
+          }
+        }
+      });
+    }
+
+    addDirectories(folderFiles);
+  }
+
+  // Toast notification helper
+  function showToast(message, type = 'info') {
+    // Remove existing toast
+    const existingToast = document.querySelector('.toast-notification');
+    if (existingToast) {
+      existingToast.remove();
+    }
+
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = `toast-notification ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+      toast.classList.add('show');
+    });
+
+    // Auto-remove after delay
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
 
   // Toggle Sidebar
   function toggleSidebar() {

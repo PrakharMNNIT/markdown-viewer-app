@@ -36,6 +36,7 @@ export class FolderBrowserService {
     this.maxDepth = 10; // Prevent infinite recursion
     this.maxFiles = 1000; // Performance cap
     this.fileCount = 0;
+    this.lastScanResult = null; // Cache for refresh operations
   }
 
   /**
@@ -82,12 +83,15 @@ export class FolderBrowserService {
       // Store permission for future use
       this.storage.set('lastFolderName', dirHandle.name);
 
-      return {
+      // Cache result for refresh
+      this.lastScanResult = {
         success: true,
         files: files,
         folderName: dirHandle.name,
         totalFiles: this.fileCount,
       };
+
+      return this.lastScanResult;
     } catch (error) {
       if (error.name === 'AbortError') {
         // User cancelled - not an error
@@ -344,5 +348,394 @@ export class FolderBrowserService {
   clearFolder() {
     this.currentDirectoryHandle = null;
     this.fileCount = 0;
+    this.lastScanResult = null;
+  }
+
+  /**
+   * Refresh the current folder - re-scan to sync with filesystem changes
+   *
+   * @returns {Promise<Object>} Result with success, files, or error
+   *
+   * @example
+   * const result = await service.refreshFolder();
+   * if (result.success) {
+   *   renderTree(result.files);
+   * }
+   */
+  async refreshFolder() {
+    if (!this.currentDirectoryHandle) {
+      return {
+        success: false,
+        error: 'No folder is currently open. Please open a folder first.',
+        files: [],
+      };
+    }
+
+    try {
+      // Verify we still have permission
+      const permissionStatus = await this.currentDirectoryHandle.queryPermission({ mode: 'read' });
+
+      if (permissionStatus !== 'granted') {
+        // Try to re-request permission
+        const requestStatus = await this.currentDirectoryHandle.requestPermission({ mode: 'read' });
+        if (requestStatus !== 'granted') {
+          return {
+            success: false,
+            error: 'Permission denied. Please re-open the folder.',
+            files: [],
+          };
+        }
+      }
+
+      // Reset file count and re-scan
+      this.fileCount = 0;
+      const files = await this.scanDirectory(this.currentDirectoryHandle);
+
+      // Update cached result
+      this.lastScanResult = {
+        success: true,
+        files: files,
+        folderName: this.currentDirectoryHandle.name,
+        totalFiles: this.fileCount,
+      };
+
+      return this.lastScanResult;
+    } catch (error) {
+      console.error('Folder refresh error:', error);
+      return {
+        success: false,
+        error: error.message,
+        files: [],
+      };
+    }
+  }
+
+  /**
+   * Create a new markdown file in the specified directory
+   *
+   * @param {FileSystemDirectoryHandle} directoryHandle - Directory to create file in (null for root)
+   * @param {string} filename - Name of the file to create
+   * @param {string} content - Initial content for the file
+   * @returns {Promise<Object>} Result with success, fileHandle, or error
+   *
+   * @example
+   * const result = await service.createFile(null, 'notes.md', '# My Notes');
+   * if (result.success) {
+   *   console.log('File created:', result.fileHandle.name);
+   * }
+   */
+  async createFile(directoryHandle, filename, content = '') {
+    if (!this.currentDirectoryHandle) {
+      return {
+        success: false,
+        error: 'No folder is currently open. Please open a folder first.',
+      };
+    }
+
+    // Use provided directory or root
+    const targetDir = directoryHandle || this.currentDirectoryHandle;
+
+    // Validate filename
+    if (!filename || typeof filename !== 'string') {
+      return {
+        success: false,
+        error: 'Invalid filename provided.',
+      };
+    }
+
+    // Ensure .md extension
+    let finalFilename = filename.trim();
+    if (!finalFilename.toLowerCase().endsWith('.md') &&
+      !finalFilename.toLowerCase().endsWith('.markdown')) {
+      finalFilename += '.md';
+    }
+
+    // Sanitize filename (remove dangerous characters)
+    finalFilename = this.sanitizeFilename(finalFilename);
+
+    if (!finalFilename || finalFilename === '.md') {
+      return {
+        success: false,
+        error: 'Invalid filename. Please provide a valid name.',
+      };
+    }
+
+    try {
+      // Check if we need write permission
+      let permissionStatus = await targetDir.queryPermission({ mode: 'readwrite' });
+
+      if (permissionStatus !== 'granted') {
+        // Request write permission
+        permissionStatus = await targetDir.requestPermission({ mode: 'readwrite' });
+        if (permissionStatus !== 'granted') {
+          return {
+            success: false,
+            error: 'Write permission denied. Cannot create file.',
+          };
+        }
+      }
+
+      // Check if file already exists
+      try {
+        await targetDir.getFileHandle(finalFilename, { create: false });
+        return {
+          success: false,
+          error: `File "${finalFilename}" already exists. Please choose a different name.`,
+        };
+      } catch (e) {
+        // File doesn't exist - good, we can create it
+        if (e.name !== 'NotFoundError') {
+          throw e;
+        }
+      }
+
+      // Create the file
+      const fileHandle = await targetDir.getFileHandle(finalFilename, { create: true });
+
+      // Write initial content
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+
+      console.log(`✅ Created file: ${finalFilename}`);
+
+      return {
+        success: true,
+        fileHandle: fileHandle,
+        filename: finalFilename,
+        path: targetDir === this.currentDirectoryHandle ? finalFilename : null,
+      };
+    } catch (error) {
+      console.error('File creation error:', error);
+      return {
+        success: false,
+        error: error.message || 'Failed to create file.',
+      };
+    }
+  }
+
+  /**
+   * Save content to an existing file
+   *
+   * @param {FileSystemFileHandle} fileHandle - File to save to
+   * @param {string} content - Content to write
+   * @returns {Promise<Object>} Result with success or error
+   *
+   * @example
+   * const result = await service.saveFile(fileHandle, '# Updated content');
+   * if (result.success) {
+   *   console.log('File saved!');
+   * }
+   */
+  async saveFile(fileHandle, content) {
+    if (!fileHandle) {
+      return {
+        success: false,
+        error: 'No file handle provided.',
+      };
+    }
+
+    try {
+      // Request write permission if needed
+      let permissionStatus = await fileHandle.queryPermission({ mode: 'readwrite' });
+
+      if (permissionStatus !== 'granted') {
+        permissionStatus = await fileHandle.requestPermission({ mode: 'readwrite' });
+        if (permissionStatus !== 'granted') {
+          return {
+            success: false,
+            error: 'Write permission denied. Cannot save file.',
+          };
+        }
+      }
+
+      // Write content
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+
+      console.log(`✅ Saved file: ${fileHandle.name}`);
+
+      return {
+        success: true,
+        filename: fileHandle.name,
+      };
+    } catch (error) {
+      console.error('File save error:', error);
+      return {
+        success: false,
+        error: error.message || 'Failed to save file.',
+      };
+    }
+  }
+
+  /**
+   * Create a new file using the system file picker
+   * Allows user to choose location and filename
+   *
+   * @param {string} suggestedName - Suggested filename
+   * @param {string} content - Initial content
+   * @returns {Promise<Object>} Result with success, fileHandle, or error
+   */
+  async createFileWithPicker(suggestedName = 'untitled.md', content = '') {
+    if (!this.isSupported()) {
+      return {
+        success: false,
+        error: 'File System Access API not supported.',
+      };
+    }
+
+    try {
+      const fileHandle = await window.showSaveFilePicker({
+        suggestedName: suggestedName,
+        types: [
+          {
+            description: 'Markdown Files',
+            accept: {
+              'text/markdown': ['.md', '.markdown'],
+            },
+          },
+        ],
+      });
+
+      // Write content
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+
+      console.log(`✅ Created file via picker: ${fileHandle.name}`);
+
+      return {
+        success: true,
+        fileHandle: fileHandle,
+        filename: fileHandle.name,
+      };
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        return {
+          success: false,
+          cancelled: true,
+        };
+      }
+
+      console.error('File picker error:', error);
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  }
+
+  /**
+   * Sanitize filename to remove dangerous characters
+   *
+   * @param {string} filename - Filename to sanitize
+   * @returns {string} Sanitized filename
+   * @private
+   */
+  sanitizeFilename(filename) {
+    const MAX_LENGTH = 200; // Safe limit for most filesystems
+    const WINDOWS_RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i;
+
+    // Remove or replace dangerous characters
+    let sanitized = filename
+      .replace(/[<>:"/\\|?*\x00-\x1f]/g, '') // Remove invalid chars
+      .replace(/^\.+/, '') // Remove leading dots
+      .replace(/\.+$/, '') // Remove trailing dots (except extension)
+      .replace(/\s+$/, '') // Remove trailing spaces
+      .trim();
+
+    // Handle Windows reserved names
+    const baseName = sanitized.replace(/\..*$/, '');
+    if (WINDOWS_RESERVED.test(baseName)) {
+      sanitized = '_' + sanitized;
+    }
+
+    // Truncate to safe length
+    return sanitized.slice(0, MAX_LENGTH);
+  }
+
+  /**
+   * Get a subdirectory handle by path
+   *
+   * @param {string} path - Relative path to directory (e.g., 'docs/notes')
+   * @returns {Promise<FileSystemDirectoryHandle|null>} Directory handle or null
+   */
+  async getDirectoryByPath(path) {
+    if (!this.currentDirectoryHandle || !path) {
+      return this.currentDirectoryHandle;
+    }
+
+    try {
+      let currentDir = this.currentDirectoryHandle;
+      const parts = path.split('/').filter(p => p && p !== '');
+
+      for (const part of parts) {
+        currentDir = await currentDir.getDirectoryHandle(part);
+      }
+
+      return currentDir;
+    } catch (error) {
+      console.error(`Failed to get directory: ${path}`, error);
+      return null;
+    }
+  }
+
+  /**
+   * Create a new directory
+   *
+   * @param {FileSystemDirectoryHandle} parentDir - Parent directory (null for root)
+   * @param {string} dirName - Name of directory to create
+   * @returns {Promise<Object>} Result with success, directoryHandle, or error
+   */
+  async createDirectory(parentDir, dirName) {
+    if (!this.currentDirectoryHandle) {
+      return {
+        success: false,
+        error: 'No folder is currently open.',
+      };
+    }
+
+    const targetDir = parentDir || this.currentDirectoryHandle;
+
+    if (!dirName || typeof dirName !== 'string') {
+      return {
+        success: false,
+        error: 'Invalid directory name.',
+      };
+    }
+
+    const sanitizedName = this.sanitizeFilename(dirName);
+
+    try {
+      // Request write permission
+      let permissionStatus = await targetDir.queryPermission({ mode: 'readwrite' });
+
+      if (permissionStatus !== 'granted') {
+        permissionStatus = await targetDir.requestPermission({ mode: 'readwrite' });
+        if (permissionStatus !== 'granted') {
+          return {
+            success: false,
+            error: 'Write permission denied.',
+          };
+        }
+      }
+
+      const directoryHandle = await targetDir.getDirectoryHandle(sanitizedName, { create: true });
+
+      console.log(`✅ Created directory: ${sanitizedName}`);
+
+      return {
+        success: true,
+        directoryHandle: directoryHandle,
+        name: sanitizedName,
+      };
+    } catch (error) {
+      console.error('Directory creation error:', error);
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
   }
 }
