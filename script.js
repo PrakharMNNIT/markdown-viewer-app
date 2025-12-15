@@ -1425,42 +1425,58 @@ graph TD
   });
 
   // ==================== REFRESH FOLDER FUNCTIONALITY ====================
+  // Track refresh state to prevent spam clicks
+  let isRefreshing = false;
+
   refreshFolderBtn.addEventListener('click', async () => {
+    // Debounce: Prevent multiple simultaneous refreshes
+    if (isRefreshing) {
+      console.log('⏳ Refresh already in progress, skipping...');
+      return;
+    }
+
     if (!folderBrowserService.getCurrentFolderName()) {
       showToast('No folder is open. Please open a folder first.', 'info');
       return;
     }
 
-    // Add refreshing animation
+    // Set refreshing state
+    isRefreshing = true;
+    refreshFolderBtn.disabled = true;
     refreshFolderBtn.classList.add('refreshing');
 
-    const result = await folderBrowserService.refreshFolder();
+    try {
+      const result = await folderBrowserService.refreshFolder();
 
-    // Remove refreshing animation
-    refreshFolderBtn.classList.remove('refreshing');
+      if (!result.success) {
+        showToast('Error refreshing folder: ' + result.error, 'error');
+        return;
+      }
 
-    if (!result.success) {
-      showToast('Error refreshing folder: ' + result.error, 'error');
-      return;
+      // Update state
+      folderFiles = result.files;
+
+      // Update UI
+      fileCountEl.textContent = `${result.totalFiles} file${result.totalFiles !== 1 ? 's' : ''}`;
+      renderFileTree(result.files);
+
+      showToast(`✅ Folder refreshed: ${result.totalFiles} files found`, 'success');
+      console.log(`🔄 Refreshed folder: ${result.totalFiles} markdown files`);
+    } finally {
+      // Always reset state, even on error
+      isRefreshing = false;
+      refreshFolderBtn.disabled = false;
+      refreshFolderBtn.classList.remove('refreshing');
     }
-
-    // Update state
-    folderFiles = result.files;
-
-    // Update UI
-    fileCountEl.textContent = `${result.totalFiles} file${result.totalFiles !== 1 ? 's' : ''}`;
-    renderFileTree(result.files);
-
-    showToast(`✅ Folder refreshed: ${result.totalFiles} files found`, 'success');
-    console.log(`🔄 Refreshed folder: ${result.totalFiles} markdown files`);
   });
 
   // ==================== CREATE FILE FUNCTIONALITY ====================
 
-  // File templates
-  const fileTemplates = {
-    empty: '',
-    basic: `# Document Title
+  // File templates - DYNAMIC: returns fresh templates with current date
+  function getFileTemplates() {
+    return {
+      empty: '',
+      basic: `# Document Title
 
 ## Introduction
 
@@ -1474,7 +1490,7 @@ Your main content goes here.
 
 Summarize your points here.
 `,
-    readme: `# Project Name
+      readme: `# Project Name
 
 Brief description of your project.
 
@@ -1500,7 +1516,7 @@ import { something } from 'your-package';
 
 MIT
 `,
-    notes: `# Meeting Notes
+      notes: `# Meeting Notes
 
 **Date:** ${new Date().toLocaleDateString()}
 **Attendees:**
@@ -1531,7 +1547,7 @@ MIT
 
 Date: TBD
 `,
-    blog: `---
+      blog: `---
 title: "Your Blog Post Title"
 date: ${new Date().toISOString().split('T')[0]}
 author: Your Name
@@ -1564,7 +1580,8 @@ Wrap up your thoughts and include a call to action.
 
 *Thanks for reading! Feel free to share your thoughts in the comments.*
 `,
-  };
+    };
+  }
 
   // Open create file modal
   createFileBtn.addEventListener('click', () => {
@@ -1632,20 +1649,29 @@ Wrap up your thoughts and include a call to action.
       }
     }
 
-    // Get template content
+    // Get template content (dynamically generated for fresh dates)
     const templateKey = newFileTemplateSelect.value;
-    const content = fileTemplates[templateKey] || '';
+    const templates = getFileTemplates();
+    const content = templates[templateKey] || '';
 
-    // Disable button while creating
+    // Disable ALL form inputs while creating (prevents double submission)
     confirmCreateFileBtn.disabled = true;
     confirmCreateFileBtn.textContent = 'Creating...';
+    cancelCreateFileBtn.disabled = true;
+    newFileNameInput.disabled = true;
+    newFileLocationSelect.disabled = true;
+    newFileTemplateSelect.disabled = true;
 
-    // Create the file
+    // Small delay to ensure filesystem sync before refresh
     const result = await folderBrowserService.createFile(targetDir, filename, content);
 
-    // Re-enable button
+    // Re-enable ALL form inputs
     confirmCreateFileBtn.disabled = false;
     confirmCreateFileBtn.textContent = 'Create File';
+    cancelCreateFileBtn.disabled = false;
+    newFileNameInput.disabled = false;
+    newFileLocationSelect.disabled = false;
+    newFileTemplateSelect.disabled = false;
 
     if (!result.success) {
       showToast('Error: ' + result.error, 'error');
@@ -1655,6 +1681,9 @@ Wrap up your thoughts and include a call to action.
     // Success - close modal
     createFileModal.classList.remove('active');
     showToast(`✅ Created: ${result.filename}`, 'success');
+
+    // Wait a tick to ensure filesystem sync before refresh
+    await new Promise(resolve => setTimeout(resolve, 100));
 
     // Refresh folder to show new file
     const refreshResult = await folderBrowserService.refreshFolder();
