@@ -18,6 +18,8 @@
  * - Performance: Depth limiting, file count caps
  */
 
+import { ERROR_MESSAGES, getErrorMessage } from '../config/errorMessages.js';
+
 /**
  * @class FolderBrowserService
  * @description Enterprise-grade service for browsing markdown files in folders
@@ -63,7 +65,7 @@ export class FolderBrowserService {
     if (!this.isSupported()) {
       return {
         success: false,
-        error: 'File System Access API not supported. Please use Chrome or Edge browser.',
+        error: ERROR_MESSAGES.API_NOT_SUPPORTED,
         files: [],
       };
     }
@@ -123,13 +125,13 @@ export class FolderBrowserService {
   async scanDirectory(dirHandle, path = '', depth = 0) {
     // Prevent excessive recursion
     if (depth > this.maxDepth) {
-      console.warn(`Max depth ${this.maxDepth} reached at: ${path}`);
+      console.warn(getErrorMessage(ERROR_MESSAGES.MAX_DEPTH_REACHED, this.maxDepth, path));
       return [];
     }
 
     // Prevent scanning too many files
     if (this.fileCount >= this.maxFiles) {
-      console.warn(`Max files ${this.maxFiles} reached`);
+      console.warn(getErrorMessage(ERROR_MESSAGES.MAX_FILES_REACHED, this.maxFiles));
       return [];
     }
 
@@ -366,7 +368,7 @@ export class FolderBrowserService {
     if (!this.currentDirectoryHandle) {
       return {
         success: false,
-        error: 'No folder is currently open. Please open a folder first.',
+        error: ERROR_MESSAGES.NO_FOLDER_OPEN,
         files: [],
       };
     }
@@ -381,7 +383,7 @@ export class FolderBrowserService {
         if (requestStatus !== 'granted') {
           return {
             success: false,
-            error: 'Permission denied. Please re-open the folder.',
+            error: ERROR_MESSAGES.PERMISSION_DENIED,
             files: [],
           };
         }
@@ -428,7 +430,7 @@ export class FolderBrowserService {
     if (!this.currentDirectoryHandle) {
       return {
         success: false,
-        error: 'No folder is currently open. Please open a folder first.',
+        error: ERROR_MESSAGES.NO_FOLDER_OPEN,
       };
     }
 
@@ -439,7 +441,7 @@ export class FolderBrowserService {
     if (!filename || typeof filename !== 'string') {
       return {
         success: false,
-        error: 'Invalid filename provided.',
+        error: ERROR_MESSAGES.INVALID_FILENAME_PROVIDED,
       };
     }
 
@@ -456,7 +458,7 @@ export class FolderBrowserService {
     if (!finalFilename || finalFilename === '.md') {
       return {
         success: false,
-        error: 'Invalid filename. Please provide a valid name.',
+        error: ERROR_MESSAGES.INVALID_FILENAME,
       };
     }
 
@@ -470,7 +472,7 @@ export class FolderBrowserService {
         if (permissionStatus !== 'granted') {
           return {
             success: false,
-            error: 'Write permission denied. Cannot create file.',
+            error: ERROR_MESSAGES.PERMISSION_DENIED_WRITE,
           };
         }
       }
@@ -480,7 +482,7 @@ export class FolderBrowserService {
         await targetDir.getFileHandle(finalFilename, { create: false });
         return {
           success: false,
-          error: `File "${finalFilename}" already exists. Please choose a different name.`,
+          error: getErrorMessage(ERROR_MESSAGES.FILE_EXISTS, finalFilename),
         };
       } catch (e) {
         // File doesn't exist - good, we can create it
@@ -509,7 +511,7 @@ export class FolderBrowserService {
       console.error('File creation error:', error);
       return {
         success: false,
-        error: error.message || 'Failed to create file.',
+        error: error.message || ERROR_MESSAGES.FILE_CREATE_FAILED,
       };
     }
   }
@@ -531,7 +533,7 @@ export class FolderBrowserService {
     if (!fileHandle) {
       return {
         success: false,
-        error: 'No file handle provided.',
+        error: ERROR_MESSAGES.NO_FILE_HANDLE,
       };
     }
 
@@ -544,7 +546,7 @@ export class FolderBrowserService {
         if (permissionStatus !== 'granted') {
           return {
             success: false,
-            error: 'Write permission denied. Cannot save file.',
+            error: ERROR_MESSAGES.PERMISSION_DENIED_SAVE,
           };
         }
       }
@@ -564,7 +566,7 @@ export class FolderBrowserService {
       console.error('File save error:', error);
       return {
         success: false,
-        error: error.message || 'Failed to save file.',
+        error: error.message || ERROR_MESSAGES.FILE_SAVE_FAILED,
       };
     }
   }
@@ -581,7 +583,7 @@ export class FolderBrowserService {
     if (!this.isSupported()) {
       return {
         success: false,
-        error: 'File System Access API not supported.',
+        error: ERROR_MESSAGES.API_NOT_SUPPORTED,
       };
     }
 
@@ -692,7 +694,7 @@ export class FolderBrowserService {
     if (!this.currentDirectoryHandle) {
       return {
         success: false,
-        error: 'No folder is currently open.',
+        error: ERROR_MESSAGES.NO_FOLDER_OPEN,
       };
     }
 
@@ -701,7 +703,7 @@ export class FolderBrowserService {
     if (!dirName || typeof dirName !== 'string') {
       return {
         success: false,
-        error: 'Invalid directory name.',
+        error: ERROR_MESSAGES.INVALID_DIRECTORY_NAME,
       };
     }
 
