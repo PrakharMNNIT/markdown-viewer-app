@@ -10,9 +10,18 @@ describe('PrismService', () => {
   beforeEach(() => {
     service = new PrismService();
 
-    // Mock Prism object
+    // Mock DOM elements FIRST (before Prism mock)
+    mockCodeBlock = document.createElement('code');
+    mockCodeBlock.className = 'language-javascript'; // Add language class
+    mockContainer = document.createElement('div');
+    const pre = document.createElement('pre');
+    pre.appendChild(mockCodeBlock);
+    mockContainer.appendChild(pre);
+
+    // Mock Prism object with highlightAllUnder (what the service actually uses)
     mockPrism = {
       highlightElement: vi.fn(),
+      highlightAllUnder: vi.fn(), // This is what the service actually calls
       languages: {
         javascript: {},
         python: {},
@@ -20,22 +29,21 @@ describe('PrismService', () => {
       },
     };
     global.Prism = mockPrism;
-
-    // Mock DOM elements
-    mockCodeBlock = document.createElement('code');
-    mockContainer = document.createElement('div');
-    const pre = document.createElement('pre');
-    pre.appendChild(mockCodeBlock);
-    mockContainer.appendChild(pre);
   });
 
   describe('highlightAll', () => {
-    it('should highlight all code blocks in container', () => {
+    it('should call Prism.highlightAllUnder on container', () => {
+      service.highlightAll(mockContainer);
+
+      expect(mockPrism.highlightAllUnder).toHaveBeenCalledOnce();
+      expect(mockPrism.highlightAllUnder).toHaveBeenCalledWith(mockContainer);
+    });
+
+    it('should return count of highlighted blocks with language class', () => {
       const count = service.highlightAll(mockContainer);
 
+      // The service counts elements with class*="language-"
       expect(count).toBe(1);
-      expect(mockPrism.highlightElement).toHaveBeenCalledOnce();
-      expect(mockPrism.highlightElement).toHaveBeenCalledWith(mockCodeBlock);
     });
 
     it('should return 0 if Prism not loaded', () => {
@@ -47,10 +55,11 @@ describe('PrismService', () => {
     });
 
     it('should handle multiple code blocks', () => {
-      // Add more code blocks
+      // Add more code blocks with language classes
       for (let i = 0; i < 3; i++) {
         const pre = document.createElement('pre');
         const code = document.createElement('code');
+        code.className = 'language-python';
         pre.appendChild(code);
         mockContainer.appendChild(pre);
       }
@@ -58,24 +67,17 @@ describe('PrismService', () => {
       const count = service.highlightAll(mockContainer);
 
       expect(count).toBe(4); // 1 original + 3 added
-      expect(mockPrism.highlightElement).toHaveBeenCalledTimes(4);
+      expect(mockPrism.highlightAllUnder).toHaveBeenCalledOnce();
     });
 
-    it('should continue if one block fails', () => {
-      // Add another block
-      const pre = document.createElement('pre');
-      const code = document.createElement('code');
-      pre.appendChild(code);
-      mockContainer.appendChild(pre);
-
-      // Make first call fail
-      mockPrism.highlightElement.mockImplementationOnce(() => {
+    it('should return 0 and log error if highlightAllUnder throws', () => {
+      mockPrism.highlightAllUnder.mockImplementation(() => {
         throw new Error('Highlight failed');
       });
 
       const count = service.highlightAll(mockContainer);
 
-      expect(count).toBe(1); // Only second block succeeded
+      expect(count).toBe(0);
     });
   });
 

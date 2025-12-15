@@ -131,8 +131,11 @@ describe('ThemeManager', () => {
       expect(themes).toContain('default-light');
       expect(themes).toContain('ocean-dark');
       expect(themes).toContain('obsidian-dark');
+      expect(themes).toContain('nebula-light');
+      expect(themes).toContain('nebula-dark');
       expect(themes).toContain('custom');
-      expect(themes.length).toBe(13);
+      // 6 base themes × 2 variants (light/dark) + 2 nebula + 1 custom = 15
+      expect(themes.length).toBe(15);
     });
   });
 
