@@ -1246,29 +1246,49 @@ body {
   /* Disable transition during drag for immediate feedback */
 }
 
-/* Resize handle for dragging */
+/* Resize handle for dragging - IMPROVED for better UX */
 .resize-handle {
   position: absolute;
-  right: 0;
+  right: -6px;
+  /* Extend outside sidebar for easier grabbing */
   top: 0;
   bottom: 0;
-  width: 4px;
+  width: 12px;
+  /* Wider grab area */
   background-color: transparent;
   cursor: col-resize;
-  z-index: 10;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 50;
+  /* Higher z-index to be above content */
+  transition: all 0.2s ease;
 }
 
-.resize-handle:hover {
+/* Visual indicator line in center */
+.resize-handle::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 40px;
+  background-color: var(--border-color);
+  border-radius: 2px;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.resize-handle:hover::after {
+  opacity: 1;
+  height: 60px;
   background-color: var(--h1-color);
-  width: 6px;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
 }
 
-.resize-handle.dragging {
+.resize-handle.dragging::after {
+  opacity: 1;
+  height: 80px;
   background-color: var(--h2-color);
-  width: 6px;
-  box-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.6);
 }
 
 /* Header in Sidebar */
