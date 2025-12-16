@@ -9,6 +9,18 @@
 import { MERMAID_CONFIG } from '../config/constants.js';
 import { getCssVariable } from '../utils/colorHelpers.js';
 
+// Default fallback colors (light theme)
+const DEFAULT_COLORS = {
+  bgPrimary: '#ffffff',
+  bgSecondary: '#f5f5f5',
+  bgTertiary: '#e8e8e8',
+  textPrimary: '#1a1a2e',
+  textSecondary: '#666666',
+  h1: '#0969da',
+  h2: '#8250df',
+  h3: '#1a7f37',
+};
+
 /**
  * Calculate relative luminance of a color
  * Used to detect if theme is light or dark
@@ -18,8 +30,18 @@ import { getCssVariable } from '../utils/colorHelpers.js';
  * @private
  */
 function getRelativeLuminance(color) {
+  // Handle empty or invalid colors - default to light theme
+  if (!color || typeof color !== 'string' || color.trim() === '') {
+    return 0.9; // Light theme default
+  }
+
   // Remove # if present
   const hex = color.replace('#', '');
+
+  // Validate hex format
+  if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
+    return 0.9; // Light theme default for invalid hex
+  }
 
   // Convert to RGB
   const r = parseInt(hex.substr(0, 2), 16) / 255;
@@ -48,6 +70,24 @@ function isLightTheme(bgColor) {
 }
 
 /**
+ * Get CSS variable with Safari-safe fallback
+ * Safari sometimes returns empty strings before CSS loads
+ *
+ * @param {string} varName - CSS variable name
+ * @param {string} fallback - Fallback value
+ * @returns {string} Color value
+ * @private
+ */
+function getSafeColor(varName, fallback) {
+  const value = getCssVariable(varName);
+  // Check for empty, undefined, or whitespace-only values
+  if (!value || value.trim() === '' || value === 'undefined') {
+    return fallback;
+  }
+  return value;
+}
+
+/**
  * @class MermaidService
  * @description Service for rendering Mermaid diagrams with theme integration
  *
@@ -69,21 +109,18 @@ export class MermaidService {
    * @returns {void}
    */
   initialize() {
-    // Helper to get variable with fallback
-    const get = (varName, fallback) => {
-      const value = getCssVariable(varName);
-      return value && value.trim() !== '' ? value : fallback;
-    };
+    // Extract core theme colors with Safari-safe fallbacks
+    const bgPri = getSafeColor('--bg-primary', DEFAULT_COLORS.bgPrimary);
+    const bgSec = getSafeColor('--bg-secondary', DEFAULT_COLORS.bgSecondary);
+    const bgTer = getSafeColor('--bg-tertiary', DEFAULT_COLORS.bgTertiary);
+    const txtPri = getSafeColor('--text-primary', DEFAULT_COLORS.textPrimary);
+    const txtSec = getSafeColor('--text-secondary', DEFAULT_COLORS.textSecondary);
+    const h1 = getSafeColor('--h1-color', DEFAULT_COLORS.h1);
+    const h2 = getSafeColor('--h2-color', DEFAULT_COLORS.h2);
+    const h3 = getSafeColor('--h3-color', DEFAULT_COLORS.h3);
 
-    // Extract core theme colors for fallbacks
-    const bgPri = getCssVariable('--bg-primary');
-    const bgSec = getCssVariable('--bg-secondary');
-    const bgTer = getCssVariable('--bg-tertiary');
-    const txtPri = getCssVariable('--text-primary');
-    const txtSec = getCssVariable('--text-secondary');
-    const h1 = getCssVariable('--h1-color');
-    const h2 = getCssVariable('--h2-color');
-    const h3 = getCssVariable('--h3-color');
+    // Helper to get variable with fallback (for Mermaid-specific vars)
+    const get = (varName, fallback) => getSafeColor(varName, fallback);
 
     const isLight = isLightTheme(bgPri);
     const nodeBkg = isLight ? bgTer : bgSec;
