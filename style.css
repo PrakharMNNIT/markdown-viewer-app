@@ -833,6 +833,8 @@ body {
     flex-direction: column;
     overflow: hidden;
     min-height: 0; /* Important for flex children */
+    height: 100%; /* Safari needs explicit height */
+    display: flex; /* Ensure flex container */
   }
 
   /* Mobile tabs */
@@ -856,12 +858,16 @@ body {
     flex: 1;
     min-height: 0;
     width: 100% !important;
+    height: 100%; /* Safari needs explicit height */
   }
 
   .editor-container.mobile-visible,
   .preview-container.mobile-visible {
     display: flex !important;
     flex-direction: column;
+    flex: 1;
+    min-height: 0; /* Allow shrinking */
+    height: 100%; /* Safari compatibility */
   }
 
   .editor-container {
@@ -880,15 +886,24 @@ body {
   .preview-container {
     overflow: auto !important;
     -webkit-overflow-scrolling: touch;
+    height: 100%; /* Safari needs explicit height */
   }
 
   .preview-container.mobile-visible {
     overflow: auto !important;
+    height: 100%; /* Safari needs explicit height */
+    display: flex !important;
+    flex-direction: column;
   }
 
   #markdown-preview {
-    min-height: auto;
+    min-height: 100%; /* Full height for scrolling */
     overflow: visible;
+    flex: 1;
+    /* Reset zoom transform on mobile - causes issues on Safari */
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
   }
 
   #markdown-preview {

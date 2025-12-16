@@ -1121,7 +1121,16 @@ graph TD
       } else {
         editorContainerEl.classList.remove('mobile-visible');
         previewContainerEl.classList.add('mobile-visible');
+        // Force Safari to recalculate layout
+        previewContainerEl.style.display = 'none';
+        void previewContainerEl.offsetHeight; // Trigger reflow
+        previewContainerEl.style.display = '';
       }
+
+      // Reset zoom on mobile (causes issues on Safari iOS)
+      preview.style.transform = 'none';
+      preview.style.width = '100%';
+      preview.style.height = 'auto';
     }
   }
 
@@ -1139,6 +1148,19 @@ graph TD
       } else {
         editorContainerEl.classList.remove('mobile-visible');
         previewContainerEl.classList.add('mobile-visible');
+
+        // Force Safari to recalculate layout (fixes rendering issue on iOS)
+        previewContainerEl.style.display = 'none';
+        void previewContainerEl.offsetHeight; // Trigger reflow
+        previewContainerEl.style.display = '';
+
+        // Reset zoom on mobile
+        preview.style.transform = 'none';
+        preview.style.width = '100%';
+        preview.style.height = 'auto';
+
+        // Scroll to top of preview
+        previewContainerEl.scrollTop = 0;
       }
     });
   });
