@@ -1,21 +1,135 @@
+/**
+ * ESLint Configuration - Enterprise Grade
+ *
+ * Strict rules for production-quality code.
+ * All warnings are errors in CI (--max-warnings 0).
+ */
 module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
   },
-  extends: 'eslint:recommended',
+  extends: ['eslint:recommended'],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   rules: {
-    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
-    'prefer-const': 'error',
-    'no-var': 'error',
+    // ==================== ERRORS (Must Fix) ====================
+
+    // Variables
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+    'no-undef': 'error',
+    'no-use-before-define': ['error', { functions: false, classes: true }],
+    'no-shadow': 'error',
+    'no-redeclare': 'error',
+
+    // Best Practices
     'eqeqeq': ['error', 'always'],
     'curly': ['error', 'all'],
-    'no-magic-numbers': ['warn', { ignore: [0, 1, -1, 2, 10, 100] }]
-  }
+    'no-eval': 'error',
+    'no-implied-eval': 'error',
+    'no-extend-native': 'error',
+    'no-extra-bind': 'error',
+    'no-floating-decimal': 'error',
+    'no-implicit-coercion': 'error',
+    'no-invalid-this': 'error',
+    'no-lone-blocks': 'error',
+    'no-multi-spaces': 'error',
+    'no-new': 'error',
+    'no-new-func': 'error',
+    'no-new-wrappers': 'error',
+    'no-return-assign': 'error',
+    'no-self-compare': 'error',
+    'no-sequences': 'error',
+    'no-throw-literal': 'error',
+    'no-useless-call': 'error',
+    'no-useless-concat': 'error',
+    'no-useless-return': 'error',
+    'prefer-promise-reject-errors': 'error',
+    'radix': 'error',
+
+    // ES6+
+    'prefer-const': 'error',
+    'no-var': 'error',
+    'prefer-template': 'error',
+    'prefer-spread': 'error',
+    'prefer-rest-params': 'error',
+    'no-duplicate-imports': 'error',
+    'no-useless-constructor': 'error',
+    'no-useless-rename': 'error',
+    'object-shorthand': ['error', 'always'],
+    'prefer-arrow-callback': 'error',
+    'arrow-body-style': ['error', 'as-needed'],
+
+    // Security
+    'no-new-func': 'error',
+
+    // ==================== WARNINGS (Fix Before PR) ====================
+
+    // Console logging (allowed: warn, error, log for debugging)
+    'no-console': ['warn', { allow: ['warn', 'error', 'log'] }],
+
+    // Complexity
+    'complexity': ['warn', { max: 15 }],
+    'max-depth': ['warn', { max: 4 }],
+    'max-lines-per-function': ['warn', { max: 100, skipBlankLines: true, skipComments: true }],
+    'max-params': ['warn', { max: 5 }],
+    'max-nested-callbacks': ['warn', { max: 4 }],
+
+    // Documentation
+    'require-jsdoc': [
+      'warn',
+      {
+        require: {
+          FunctionDeclaration: true,
+          MethodDefinition: true,
+          ClassDeclaration: true,
+        },
+      },
+    ],
+    'valid-jsdoc': [
+      'warn',
+      {
+        requireReturn: false,
+        requireParamDescription: false,
+        requireReturnDescription: false,
+      },
+    ],
+
+    // Style (enforced by Prettier, but ESLint catches some)
+    'no-trailing-spaces': 'error',
+    'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1 }],
+    'eol-last': ['error', 'always'],
+    'comma-dangle': ['error', 'always-multiline'],
+    'semi': ['error', 'always'],
+    'quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
+  },
+
+  overrides: [
+    // Test files - relaxed rules
+    {
+      files: ['**/*.test.js', '**/*.spec.js', 'tests/**/*.js'],
+      env: {
+        jest: true,
+      },
+      rules: {
+        'no-magic-numbers': 'off',
+        'max-lines-per-function': 'off',
+        'require-jsdoc': 'off',
+        'valid-jsdoc': 'off',
+        'no-console': 'off',
+      },
+    },
+    // Config files - relaxed rules
+    {
+      files: ['*.config.js', '.eslintrc.js', 'vite.config.js', 'vitest.config.js'],
+      rules: {
+        'no-magic-numbers': 'off',
+        'require-jsdoc': 'off',
+        'valid-jsdoc': 'off',
+      },
+    },
+  ],
 };
