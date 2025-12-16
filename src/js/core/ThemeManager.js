@@ -168,7 +168,6 @@ export class ThemeManager {
    */
   getCurrentColors() {
     const colors = {};
-    const style = getComputedStyle(document.documentElement);
 
     // Extract all theme-related CSS variables
     const cssVarNames = [

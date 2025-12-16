@@ -173,7 +173,7 @@ describe('ERROR_MESSAGES', () => {
 
     it('is a frozen/constant object (immutable pattern)', () => {
       // Verify the object values cannot be accidentally changed
-      const originalValue = ERROR_MESSAGES.NO_FOLDER_OPEN;
+      const _originalValue = ERROR_MESSAGES.NO_FOLDER_OPEN;
       expect(() => {
         ERROR_MESSAGES.NO_FOLDER_OPEN = 'hacked';
       }).not.toThrow(); // ES6 const doesn't prevent mutation, but good practice

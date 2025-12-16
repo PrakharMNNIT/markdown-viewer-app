@@ -48,7 +48,7 @@ describe('ThemeManager', () => {
     it('should fallback to default if custom theme not found', async () => {
       mockStorage.getJSON.mockReturnValue(null);
 
-      const result = await themeManager.loadTheme('custom');
+      await themeManager.loadTheme('custom');
 
       expect(mockStylesheet.href).toContain('default-light');
     });

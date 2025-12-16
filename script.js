@@ -1218,9 +1218,9 @@ graph TD
     preview.style.height = `${10000 / currentZoom}%`;
 
     // Ensure scrollbar remains visible and functional
-    const previewContainerEl = preview.parentElement;
-    if (previewContainerEl) {
-      previewContainerEl.style.overflow = 'auto';
+    const previewParentEl = preview.parentElement;
+    if (previewParentEl) {
+      previewParentEl.style.overflow = 'auto';
     }
 
     // Update display

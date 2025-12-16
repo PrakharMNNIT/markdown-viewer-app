@@ -63,9 +63,6 @@ module.exports = {
     'prefer-arrow-callback': 'error',
     'arrow-body-style': ['error', 'as-needed'],
 
-    // Security
-    'no-new-func': 'error',
-
     // ==================== WARNINGS (Fix Before PR) ====================
 
     // Console logging (allowed: warn, error, log for debugging)

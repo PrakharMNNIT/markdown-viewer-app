@@ -165,14 +165,14 @@ export class FolderBrowserService {
           }
         } else if (entry.kind === 'directory') {
           // Recursively scan subdirectory
-          const children = await this.scanDirectory(entry, `${path + entry.name }/`, depth + 1);
+          const children = await this.scanDirectory(entry, `${path + entry.name}/`, depth + 1);
 
           // Only include folders with markdown files
           if (children.length > 0) {
             items.push({
               type: 'directory',
               name: entry.name,
-              path: `${path + entry.name }/`,
+              path: `${path + entry.name}/`,
               handle: entry,
               children,
               expanded: false,
@@ -638,10 +638,16 @@ export class FolderBrowserService {
   sanitizeFilename(filename) {
     const MAX_LENGTH = 200; // Safe limit for most filesystems
     const WINDOWS_RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i;
+    const INVALID_CHARS = '<>:"/\\|?*';
 
-    // Remove or replace dangerous characters
+    // Remove dangerous characters including control chars (0-31)
     let sanitized = filename
-      .replace(/[<>:"/\\|?*\x00-\x1f]/g, '') // Remove invalid chars
+      .split('')
+      .filter(char => {
+        const code = char.charCodeAt(0);
+        return code >= 32 && !INVALID_CHARS.includes(char);
+      })
+      .join('')
       .replace(/^\.+/, '') // Remove leading dots
       .replace(/\.+$/, '') // Remove trailing dots (except extension)
       .replace(/\s+$/, '') // Remove trailing spaces
@@ -650,7 +656,7 @@ export class FolderBrowserService {
     // Handle Windows reserved names
     const baseName = sanitized.replace(/\..*$/, '');
     if (WINDOWS_RESERVED.test(baseName)) {
-      sanitized = `_${ sanitized}`;
+      sanitized = `_${sanitized}`;
     }
 
     // Truncate to safe length

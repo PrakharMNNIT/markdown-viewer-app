@@ -172,7 +172,7 @@ export class StorageManager {
     try {
       let total = 0;
       for (const key in localStorage) {
-        if (localStorage.hasOwnProperty(key)) {
+        if (Object.hasOwn(localStorage, key)) {
           const value = localStorage.getItem(key);
           total += key.length + (value?.length || 0);
         }
@@ -195,7 +195,7 @@ export class StorageManager {
       localStorage.setItem(test, test);
       localStorage.removeItem(test);
       return true;
-    } catch (error) {
+    } catch {
       return false;
     }
   }

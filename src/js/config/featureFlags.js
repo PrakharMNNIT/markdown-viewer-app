@@ -65,7 +65,7 @@ export function isFeatureEnabled(flagName) {
  * @param {string} flagName - Flag to enable
  */
 export function enableFeature(flagName) {
-  if (FEATURE_FLAGS.hasOwnProperty(flagName)) {
+  if (Object.hasOwn(FEATURE_FLAGS, flagName)) {
     FEATURE_FLAGS[flagName] = true;
     console.log(`✅ Feature enabled: ${flagName}`);
   } else {
@@ -79,7 +79,7 @@ export function enableFeature(flagName) {
  * @param {string} flagName - Flag to disable
  */
 export function disableFeature(flagName) {
-  if (FEATURE_FLAGS.hasOwnProperty(flagName)) {
+  if (Object.hasOwn(FEATURE_FLAGS, flagName)) {
     FEATURE_FLAGS[flagName] = false;
     console.log(`🔄 Feature disabled: ${flagName}`);
   } else {
