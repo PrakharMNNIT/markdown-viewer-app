@@ -1781,23 +1781,26 @@ body.zen-mode .main-content {
   justify-content: center;
 }
 
-/* Zen Preview - Full width centered */
+/* Zen Preview - Full screen coverage */
 body.zen-mode .preview-container {
   display: flex !important;
   flex: 1;
-  max-width: 900px;
-  /* Readability width */
-  margin: 0 auto;
-  padding: 60px 40px;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0;
+  padding: 40px 60px;
   background: var(--bg-primary);
   box-shadow: none;
   border: none;
   border-radius: 0;
   overflow-y: auto;
+  height: 100vh !important;
 }
 
 body.zen-mode .preview-container #markdown-preview {
-  max-width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* Exit Button (Floating) */
