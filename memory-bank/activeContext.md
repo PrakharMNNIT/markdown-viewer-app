@@ -1,400 +1,103 @@
 # Active Context
 
-**Last Updated:** 12/16/2025, 3:05 PM IST
+**Last Updated:** December 16, 2025, 3:50 PM IST
 
 ## Current Focus
 
-**COMPLETED:** Folder Refresh File Content Sync Fix ✅
+**COMPLETED:** Zero Technical Debt Task ✅
 
-### Bug Fix (This Session)
+### Session Summary (December 16, 2025)
 
-**Problem:** When a markdown file was opened via the folder browser and then edited externally (e.g., in VS Code or another IDE), clicking the "Refresh" button would update the file tree (detecting new/deleted files) but the content of the currently opened file would NOT be refreshed with the latest changes from disk.
-
-**Root Cause:** The `refreshFolderBtn` click handler was only:
-1. Re-scanning the directory structure
-2. Updating the file tree UI
-3. Updating the file count
-
-It did NOT re-read the content of the currently active file (`activeFileHandle`), so the editor continued showing stale content.
-
-**Solution:** Added file content reload logic to the refresh handler:
-```javascript
-// Re-read the currently open file to get updated content
-if (activeFileHandle) {
-  const readResult = await folderBrowserService.readFile(activeFileHandle);
-  if (readResult.success) {
-    editor.value = readResult.content;
-    renderMarkdown();
-    console.log(`🔄 Reloaded active file: ${readResult.name}`);
-  } else {
-    // File may have been deleted - warn but don't clear editor
-    console.warn(`⚠️ Could not reload active file: ${readResult.error}`);
-  }
-}
-```
-
-**Files Modified:** `script.js` (refresh folder click handler)
+**Task:** Fix all ESLint errors and increase test coverage to ≥85%
 
 **Results:**
-- ✅ Clicking refresh now reloads the active file's content from disk
-- ✅ External changes (from IDE, text editor, etc.) are now visible
-- ✅ Graceful handling if file was deleted externally
-- ✅ Preview re-renders automatically after content update
+- ESLint: 9 errors → **0 errors** ✅
+- ESLint: 4 warnings (legacy code - deferred)
+- Test Coverage: 70.91% → **95.30%** ✅
+- Tests: 312 → **368 passing** ✅
 
 ---
 
-**PREVIOUSLY COMPLETED:** File Creation & Folder Refresh Features ✅
+## Changes Made
 
-Successfully implemented two new features for the folder browser:
-1. Create new markdown files with templates
-2. Refresh folder structure to sync with filesystem changes
+### ESLint Fixes
 
-### Recent Implementation (This Session)
+| File | Issue | Fix |
+|------|-------|-----|
+| `featureFlags.js` | `hasOwnProperty` | → `Object.hasOwn` |
+| `StorageManager.js` | `hasOwnProperty` + unused var | → `Object.hasOwn` + remove var |
+| `ThemeManager.js` | unused `style` variable | → Removed |
+| `FolderBrowserService.js` | control regex | → Use `charCodeAt` |
+| `errorMessages.test.js` | unused var | → Prefix with `_` |
+| `ThemeManager.test.js` | unused var | → Removed |
+| `FolderBrowserService.test.js` | throw literal | → Proper Error object |
 
-**Feature 1: Create New Markdown Files**
-- Added "Create New File" button (+ icon) in sidebar header
-- Implemented modal with:
-  - File name input with .md auto-extension
-  - Location dropdown (root folder or subdirectories)
-  - Template selector (empty, basic, readme, notes, blog)
-- Files are persisted to actual filesystem using File System Access API
-- New file automatically loads in editor after creation
+### Test Coverage Improvements
 
-**Feature 2: Refresh Folder Structure**
-- Added "Refresh" button (↻ icon) in sidebar header
-- Re-scans current directory to detect:
-  - New files added externally
-  - Deleted files removed externally
-  - File modifications
-- Animated spinner during refresh
-- Toast notifications for success/error feedback
-
-**Files Modified:**
-- `src/js/services/FolderBrowserService.js`: Added methods for file creation, saving, refresh
-- `index.html`: Added UI elements (buttons, modal)
-- `style.css`: Added styling for create file modal and toast notifications
-- `script.js`: Added event handlers and file template definitions
+| File | Before | After | Change |
+|------|--------|-------|--------|
+| FolderBrowserService.js | 49.48% | 99.47% | +50% |
+| StorageManager.js | 71.69% | 96.22% | +25% |
+| **Overall** | 70.91% | 95.30% | +24% |
 
 ---
 
-**PREVIOUSLY COMPLETED:** LaTeX Environment & Subscript/Superscript Rendering Fix ✅
+## Deferred Work
 
-Successfully implemented preprocessing solution that protects LaTeX content from marked.js escaping.
+### Legacy Code Warnings (4)
 
-- Implemented Prism autoloader pattern
-- Simplified from 30+ scripts to 2 scripts
-- Expanded language support from 8 to 200+
-- Achieved 95/100 code review score
+These are **warnings only** (not errors) and have been documented for future refactoring:
 
-## Recent Changes
+| Warning | File | Function | Issue |
+|---------|------|----------|-------|
+| 1 | `script.js:92` | `configureMarkedExtensions()` | 247 lines (max: 100) |
+| 2 | `script.js:370` | `setupEditor()` | 1148 lines (max: 100) |
+| 3 | `FolderBrowserService.js:429` | `createFile()` | Complexity 17 (max: 15) |
+| 4 | `MermaidService.js:139` | `initialize()` | 144 lines (max: 100) |
 
-### Syntax Highlighting Architecture Refactoring (Just Completed)
+**Decision:** Deferred to future sprint. Code works correctly. Risk of breaking changes outweighs benefit.
 
-**Problem:** Code blocks with language identifiers (`cpp,`java, ```csharp, etc.) were not being syntax highlighted.
-
-**Root Causes:**
-
-1. Only 8 languages manually loaded (Java, C++, Python, JavaScript, TypeScript, Rust, Go, SQL)
-2. Race conditions with async `defer` loading
-3. Missing languages: C#, PHP, Ruby, Bash, HTML, CSS, JSON, YAML, Kotlin, Swift, etc.
-4. Custom retry logic fighting against Prism.js design
-
-**Enterprise Solution Implemented:**
-
-1. **Prism Autoloader Pattern** (Industry Standard)
-   - Removed 30+ individual language script tags
-   - Added Prism autoloader plugin
-   - Configured CDN path for automatic loading
-   - Supports 200+ languages out of the box
-
-2. **Simplified PrismService.js**
-   - Removed custom retry logic (80+ lines)
-   - Uses native `Prism.highlightAllUnder()` API
-   - Added `hasAutoloader()` method
-   - Added `getCodeBlockCount()` utility
-   - Improved error handling with emoji indicators
-
-3. **Performance Improvements**
-   - Initial bundle: 250KB → 50KB (**-80%**)
-   - Script tags: 30+ → 2 (**-93%**)
-   - Load time: 2-3s → <500ms (**-83%**)
-   - Languages: 8 → 200+ (**+2400%**)
-
-4. **Comprehensive Documentation**
-   - Created `syntax-highlighting-architecture.md` (376 lines)
-   - Created `local-testing-guide.md` (655 lines)
-   - Created `syntax-highlighting-analysis.md` (363 lines)
-   - Created `syntax-highlighting-test.md` (485 lines)
-   - Created `senior-sde-code-review.md` (comprehensive review)
-
-**Files Modified:**
-
-- `index.html`: Replaced individual scripts with autoloader
-- `script.js`: Added autoloader configuration
-- `src/js/services/PrismService.js`: Refactored to use native APIs
-
-**Technical Excellence:**
-
-- ✅ Uses industry-standard pattern
-- ✅ Zero technical debt
-- ✅ Production-grade code quality
-- ✅ Comprehensive documentation
-- ✅ No breaking changes
-
-**Code Review Grade:** A+ (95/100)
-**Status:** ✅ APPROVED FOR PRODUCTION
-
-**Commit:** `24d25ce` - ♻️ refactor(syntax): implement enterprise-grade Prism autoloader architecture
-
----
-
-### View Mode Toggle Feature (Previously Completed)
-
-**Feature Request:** Add three buttons like StackEdit.io:
-
-- Eye button to view formatted HTML only
-- Pencil button to switch to editor only
-- Split view button for code + formatted version
-
-**Implementation:**
-
-1. HTML Structure with SVG icons
-2. CSS styling with hover effects
-3. JavaScript functionality with LocalStorage persistence
-
-**Commit:** `83f64b9` - ✨ feat(ui): add view mode toggle buttons
-
----
-
-### Mermaid Diagram Fix (Previously Completed)
-
-**Problem:** Mermaid diagrams failing with "Lexical error" even though syntax was valid.
-
-**Root Cause:** HTML entity encoding from `marked.parse()` (e.g., `{` → `&lbrace;`)
-
-**Solution:** Added `decodeHtmlEntities()` helper to decode before passing to Mermaid.
+**Documentation:** `docs/09-temp/legacy-code-refactoring-plan.md`
 
 ---
 
 ## System State
 
 - **Application:** Markdown Viewer Pro
-- **Repository:** <https://github.com/PrakharMNNIT/markdown-viewer-app>
-- **Latest Commit:** `24d25ce` (Syntax highlighting refactoring)
-- **Core Functionality:** ✅ All working
-- **Syntax Highlighting:** ✅ 200+ languages supported
-- **Known Issues:** None
-- **Technical Debt:** Zero
+- **Repository:** https://github.com/PrakharMNNIT/markdown-viewer-app
+- **Latest Commit:** `60ec56c` (Zero technical debt - ESLint + coverage)
+- **ESLint:** 0 errors, 4 warnings
+- **Test Coverage:** 95.30%
+- **Tests:** 368 passing
 - **Status:** Production Ready ✅
 
-## Architecture Decisions
+---
 
-### Syntax Highlighting Architecture
+## Files Modified This Session
 
-**Decision:** Use Prism autoloader plugin instead of manual language loading
+**Source Files:**
+- `src/js/config/featureFlags.js`
+- `src/js/core/StorageManager.js`
+- `src/js/core/ThemeManager.js`
+- `src/js/services/FolderBrowserService.js`
 
-**Rationale:**
+**Test Files:**
+- `tests/unit/config/errorMessages.test.js`
+- `tests/unit/core/ThemeManager.test.js`
+- `tests/unit/core/StorageManager.test.js`
+- `tests/unit/services/FolderBrowserService.test.js`
 
-- Industry-standard pattern recommended by Prism.js maintainers
-- Handles language dependencies automatically (e.g., cpp requires clike)
-- Lazy loading improves performance
-- Supports 200+ languages without configuration
-- Future-proof against Prism updates
+**Documentation:**
+- `docs/09-temp/legacy-code-refactoring-plan.md` (NEW)
+- `memory-bank/progress.md`
+- `memory-bank/activeContext.md`
 
-**Trade-offs:**
-
-- ✅ Pros: Scalability, performance, maintainability, zero configuration
-- ⚠️ Cons: Slight delay on first use of a new language (~200ms for CDN fetch)
-- **Decision:** Pros far outweigh cons - this is the correct architectural choice
-
-**Alternatives Considered:**
-
-1. Loading all languages upfront - Rejected (too heavy, 250KB bundle)
-2. Custom retry logic - Rejected (fights library design, high complexity)
-3. Autoloader pattern - **Selected** (industry standard, proven at scale)
-
-## Recent Fixes (This Session)
-
-### LaTeX Environment Rendering Fix
-
-**Problem:** LaTeX environments like `\begin{align}`, `\begin{gather}`, `\[...\]`, and `\(...\)` were not rendering because marked.js was escaping backslashes before KaTeX could process them.
-
-**Root Cause:** marked.js processes markdown first and escapes special characters, including backslashes in LaTeX syntax, preventing KaTeX auto-render from recognizing the math content.
-
-**Solution Implemented:**
-
-1. **Preprocessing Protection System**
-   - Created `protectLatexEnvironments()` function that runs BEFORE marked.js
-   - Uses placeholder system with Map storage to preserve LaTeX content
-   - Protects: `\begin{...}\end{...}`, `\[...\]`, `\(...\)`
-
-2. **Restoration After Parsing**
-   - Created `restoreLatexEnvironments()` function that runs AFTER marked.js
-   - Replaces placeholders with original LaTeX syntax
-   - KaTeX auto-render can now process the restored content
-
-3. **Subscript/Superscript Support**
-   - Added marked.js extension for `~text~` → `<sub>text</sub>`
-   - Added marked.js extension for `^text^` → `<sup>text</sup>`
-   - Works alongside HTML `<sub>` and `<sup>` tags
-
-**Implementation Details:**
-
-```javascript
-// Three-step rendering process:
-// 1. Protect LaTeX from marked.js
-markdownText = protectLatexEnvironments(markdownText);
-
-// 2. Parse markdown normally
-let html = marked.parse(markdownText);
-
-// 3. Restore LaTeX for KaTeX
-html = restoreLatexEnvironments(html);
-```
-
-**Results:**
-
-- ✅ `\begin{align}...\end{align}` now renders correctly
-- ✅ `\begin{gather}...\end{gather}` now renders correctly
-- ✅ `\[...\]` display math now renders correctly
-- ✅ `\(...\)` inline math now renders correctly
-- ✅ H~2~O renders as H₂O (subscript)
-- ✅ X^2^ renders as X² (superscript)
-- ✅ All 40+ math edge cases in MARKDOWN_TEST.md now working
-
-**Files Modified:**
-
-- `script.js`: Added preprocessing functions and subscript/superscript extensions
-
-**Technical Excellence:**
-
-- ✅ Non-breaking change - all existing math still works
-- ✅ Elegant solution using placeholder pattern
-- ✅ Zero performance impact (<1ms overhead)
-- ✅ Maintains separation of concerns
-
-## Open Questions
-
-None - All issues resolved
-
-## Recent Fixes (Latest Session)
-
-### Theme Dropdown Sync Fix ✅
-
-**Problem:** Theme dropdown showing "Default Light" even when sunset-dark theme was loaded from LocalStorage.
-
-**Root Cause:** Race condition in theme loading - dropdown was being set BEFORE async theme load completed.
-
-**Solution:**
-
-```javascript
-// OLD (buggy):
-if (savedTheme) {
-  themeSelector.value = savedTheme; // Sets immediately
-  themeManager.loadTheme(savedTheme); // Async, not awaited
-}
-
-// NEW (fixed):
-if (savedTheme) {
-  themeManager
-    .loadTheme(savedTheme)
-    .then(() => {
-      themeSelector.value = savedTheme; // Only after successful load
-      console.log(`✅ Theme restored: ${savedTheme}`);
-    })
-    .catch(err => {
-      // Fallback with proper sync
-      themeManager.loadTheme('default-light').then(() => {
-        themeSelector.value = 'default-light';
-      });
-    });
-}
-```
-
-**Key Changes:**
-
-1. Await theme load completion before syncing dropdown
-2. Added success callback for dropdown update
-3. Added error handling with fallback
-4. Added console logging for debugging
-
-**Results:**
-
-- ✅ Dropdown now syncs correctly with all themes
-- ✅ No more race conditions
-- ✅ Proper error handling
-- ✅ Works for all 12 themes (6 theme families × 2 variants)
-
-**Files Modified:** `script.js` (lines 1167-1183)
-
-## Performance Observations
-
-### Syntax Highlighting Performance
-
-- Initial load: <200ms (Prism core + autoloader)
-- Language loading: ~200ms first time, <10ms from cache
-- Highlighting: <50ms for typical documents
-- Memory usage: <10MB additional
-- No memory leaks detected
-
-### Overall Application
-
-- Bundle size: <100KB gzipped
-- First paint: <500ms
-- Time to interactive: <1s
-- Lighthouse score: 95+
-- Zero console errors
+---
 
 ## Next Steps
 
-1. **Immediate (This Session):**
-   - ✅ Syntax highlighting refactoring complete
-   - ✅ Documentation created
-   - ✅ Code review performed
-   - ✅ Changes committed
+None required - project is in stable, production-ready state.
 
-2. **Optional Enhancements (Future):**
-   - Add CDN fallbacks for resilience
-   - Implement Subresource Integrity (SRI) hashes
-   - Add performance monitoring hooks
-   - Create language usage analytics
-   - Add visual loading indicators
-
-3. **Testing (Before Next Release):**
-   - Update unit tests for new PrismService API
-   - Add tests for `hasAutoloader()` method
-   - Add tests for `getCodeBlockCount()` method
-   - Verify backwards compatibility
-
-## Technical Notes
-
-### Key Learnings
-
-1. **Trust the Library** - Don't fight framework design
-2. **Use Battle-Tested APIs** - Prism's autoloader is proven
-3. **Simplify, Don't Complexify** - Removed 80+ lines, gained 192+ languages
-4. **Document Decisions** - Future maintainers will thank you
-5. **Performance Matters** - 80% bundle reduction has real user impact
-
-### Best Practices Applied
-
-- ✅ SOLID principles
-- ✅ DRY (Don't Repeat Yourself)
-- ✅ KISS (Keep It Simple)
-- ✅ YAGNI (You Aren't Gonna Need It)
-- ✅ Clean Code principles
-- ✅ Comprehensive documentation
-- ✅ Graceful error handling
-
-## Codebase Health
-
-**Metrics:**
-
-- Lines of Code: -100 (net reduction)
-- Test Coverage: >85%
-- Linting Errors: 0
-- Technical Debt: 0
-- Documentation: Comprehensive (1,879 new lines)
-- Code Review Score: A+ (95/100)
-
-**Status:** Production-ready with zero technical debt ✅
+**Optional Future Work:**
+- Modularize `script.js` (8-11 hours estimated)
+- See `docs/09-temp/legacy-code-refactoring-plan.md` for detailed plan
