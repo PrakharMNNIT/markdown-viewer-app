@@ -13,14 +13,14 @@ export default defineConfig({
         'tests/',
         'dist/',
         'memory-bank/',
-        '*.config.js'
+        '*.config.js',
       ],
       thresholds: {
         lines: 85,
         functions: 85,
         branches: 85,
-        statements: 85
-      }
-    }
-  }
+        statements: 85,
+      },
+    },
+  },
 });

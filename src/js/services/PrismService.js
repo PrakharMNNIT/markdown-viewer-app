@@ -122,7 +122,7 @@ export class PrismService {
 
     // Filter out Prism internal properties
     return Object.keys(Prism.languages || {}).filter(
-      lang => lang !== 'extend' && lang !== 'insertBefore' && lang !== 'DFS'
+      lang => lang !== 'extend' && lang !== 'insertBefore' && lang !== 'DFS',
     );
   }
 

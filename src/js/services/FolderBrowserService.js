@@ -88,7 +88,7 @@ export class FolderBrowserService {
       // Cache result for refresh
       this.lastScanResult = {
         success: true,
-        files: files,
+        files,
         folderName: dirHandle.name,
         totalFiles: this.fileCount,
       };
@@ -165,16 +165,16 @@ export class FolderBrowserService {
           }
         } else if (entry.kind === 'directory') {
           // Recursively scan subdirectory
-          const children = await this.scanDirectory(entry, path + entry.name + '/', depth + 1);
+          const children = await this.scanDirectory(entry, `${path + entry.name }/`, depth + 1);
 
           // Only include folders with markdown files
           if (children.length > 0) {
             items.push({
               type: 'directory',
               name: entry.name,
-              path: path + entry.name + '/',
+              path: `${path + entry.name }/`,
               handle: entry,
-              children: children,
+              children,
               expanded: false,
               fileCount: this.countFiles(children),
             });
@@ -213,7 +213,7 @@ export class FolderBrowserService {
 
       return {
         success: true,
-        content: content,
+        content,
         name: file.name,
         size: file.size,
         lastModified: new Date(file.lastModified),
@@ -396,7 +396,7 @@ export class FolderBrowserService {
       // Update cached result
       this.lastScanResult = {
         success: true,
-        files: files,
+        files,
         folderName: this.currentDirectoryHandle.name,
         totalFiles: this.fileCount,
       };
@@ -503,7 +503,7 @@ export class FolderBrowserService {
 
       return {
         success: true,
-        fileHandle: fileHandle,
+        fileHandle,
         filename: finalFilename,
         path: targetDir === this.currentDirectoryHandle ? finalFilename : null,
       };
@@ -589,7 +589,7 @@ export class FolderBrowserService {
 
     try {
       const fileHandle = await window.showSaveFilePicker({
-        suggestedName: suggestedName,
+        suggestedName,
         types: [
           {
             description: 'Markdown Files',
@@ -609,7 +609,7 @@ export class FolderBrowserService {
 
       return {
         success: true,
-        fileHandle: fileHandle,
+        fileHandle,
         filename: fileHandle.name,
       };
     } catch (error) {
@@ -650,7 +650,7 @@ export class FolderBrowserService {
     // Handle Windows reserved names
     const baseName = sanitized.replace(/\..*$/, '');
     if (WINDOWS_RESERVED.test(baseName)) {
-      sanitized = '_' + sanitized;
+      sanitized = `_${ sanitized}`;
     }
 
     // Truncate to safe length
@@ -729,7 +729,7 @@ export class FolderBrowserService {
 
       return {
         success: true,
-        directoryHandle: directoryHandle,
+        directoryHandle,
         name: sanitizedName,
       };
     } catch (error) {

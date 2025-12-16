@@ -13,7 +13,7 @@ describe('ERROR_MESSAGES', () => {
     it('defines API_NOT_SUPPORTED message', () => {
       expect(ERROR_MESSAGES.API_NOT_SUPPORTED).toBeDefined();
       expect(ERROR_MESSAGES.API_NOT_SUPPORTED).toBe(
-        'File System Access API not supported. Please use Chrome or Edge browser.'
+        'File System Access API not supported. Please use Chrome or Edge browser.',
       );
     });
   });
@@ -22,7 +22,7 @@ describe('ERROR_MESSAGES', () => {
     it('defines NO_FOLDER_OPEN message', () => {
       expect(ERROR_MESSAGES.NO_FOLDER_OPEN).toBeDefined();
       expect(ERROR_MESSAGES.NO_FOLDER_OPEN).toBe(
-        'No folder is currently open. Please open a folder first.'
+        'No folder is currently open. Please open a folder first.',
       );
     });
 
@@ -34,14 +34,14 @@ describe('ERROR_MESSAGES', () => {
     it('defines PERMISSION_DENIED_WRITE message', () => {
       expect(ERROR_MESSAGES.PERMISSION_DENIED_WRITE).toBeDefined();
       expect(ERROR_MESSAGES.PERMISSION_DENIED_WRITE).toBe(
-        'Write permission denied. Cannot create file.'
+        'Write permission denied. Cannot create file.',
       );
     });
 
     it('defines PERMISSION_DENIED_SAVE message', () => {
       expect(ERROR_MESSAGES.PERMISSION_DENIED_SAVE).toBeDefined();
       expect(ERROR_MESSAGES.PERMISSION_DENIED_SAVE).toBe(
-        'Write permission denied. Cannot save file.'
+        'Write permission denied. Cannot save file.',
       );
     });
   });
@@ -50,7 +50,7 @@ describe('ERROR_MESSAGES', () => {
     it('defines INVALID_FILENAME message', () => {
       expect(ERROR_MESSAGES.INVALID_FILENAME).toBeDefined();
       expect(ERROR_MESSAGES.INVALID_FILENAME).toBe(
-        'Invalid filename. Please provide a valid name.'
+        'Invalid filename. Please provide a valid name.',
       );
     });
 
@@ -66,25 +66,25 @@ describe('ERROR_MESSAGES', () => {
 
     it('FILE_EXISTS returns dynamic message with filename', () => {
       expect(ERROR_MESSAGES.FILE_EXISTS('test.md')).toBe(
-        'File "test.md" already exists. Please choose a different name.'
+        'File "test.md" already exists. Please choose a different name.',
       );
       expect(ERROR_MESSAGES.FILE_EXISTS('README.md')).toBe(
-        'File "README.md" already exists. Please choose a different name.'
+        'File "README.md" already exists. Please choose a different name.',
       );
       expect(ERROR_MESSAGES.FILE_EXISTS('notes/document.md')).toBe(
-        'File "notes/document.md" already exists. Please choose a different name.'
+        'File "notes/document.md" already exists. Please choose a different name.',
       );
     });
 
     it('FILE_EXISTS handles edge cases', () => {
       expect(ERROR_MESSAGES.FILE_EXISTS('')).toBe(
-        'File "" already exists. Please choose a different name.'
+        'File "" already exists. Please choose a different name.',
       );
       expect(ERROR_MESSAGES.FILE_EXISTS('file with spaces.md')).toBe(
-        'File "file with spaces.md" already exists. Please choose a different name.'
+        'File "file with spaces.md" already exists. Please choose a different name.',
       );
       expect(ERROR_MESSAGES.FILE_EXISTS('特殊文字.md')).toBe(
-        'File "特殊文字.md" already exists. Please choose a different name.'
+        'File "特殊文字.md" already exists. Please choose a different name.',
       );
     });
 
@@ -119,10 +119,10 @@ describe('ERROR_MESSAGES', () => {
 
     it('MAX_DEPTH_REACHED returns dynamic message with depth and path', () => {
       expect(ERROR_MESSAGES.MAX_DEPTH_REACHED(10, '/docs/nested')).toBe(
-        'Max depth 10 reached at: /docs/nested'
+        'Max depth 10 reached at: /docs/nested',
       );
       expect(ERROR_MESSAGES.MAX_DEPTH_REACHED(5, '/a/b/c/d/e')).toBe(
-        'Max depth 5 reached at: /a/b/c/d/e'
+        'Max depth 5 reached at: /a/b/c/d/e',
       );
     });
 

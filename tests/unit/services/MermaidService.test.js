@@ -128,7 +128,7 @@ describe('MermaidService', () => {
       mockMermaid.render.mockRejectedValue(new Error('Parse error'));
 
       await expect(service.render('test-id', 'invalid')).rejects.toThrow(
-        'Mermaid diagram error: Parse error'
+        'Mermaid diagram error: Parse error',
       );
     });
 
@@ -137,7 +137,7 @@ describe('MermaidService', () => {
       service.initialized = false;
 
       await expect(service.render('test-id', 'graph TD\n A-->B')).rejects.toThrow(
-        'Mermaid library not loaded'
+        'Mermaid library not loaded',
       );
     });
 

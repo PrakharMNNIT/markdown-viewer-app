@@ -38,9 +38,9 @@ const pdfService = new PDFService();
 const htmlService = new HTMLService();
 const folderBrowserService = new FolderBrowserService(storageManager);
 
-// Folder browser state
-const currentFolderFiles = [];
-const currentFileHandle = null;
+// Folder browser state (these are managed within setupEditor scope)
+const _currentFolderFiles = [];
+const _currentFileHandle = null;
 
 // Global render function reference (will be set in setupEditor)
 let globalRenderMarkdown = null;
@@ -105,7 +105,7 @@ function configureMarkedExtensions() {
         },
         tokenizer(src) {
           const match = src.match(
-            /^> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*\n((?:> .*\n?)*)/
+            /^> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*\n((?:> .*\n?)*)/,
           );
           if (match) {
             const type = match[1];
@@ -176,8 +176,7 @@ function configureMarkedExtensions() {
         renderer(token) {
           try {
             return (
-              '<div style="margin: 1.5em 0;">' +
-              katex.renderToString(token.text, {
+              `<div style="margin: 1.5em 0;">${katex.renderToString(token.text, {
                 displayMode: true,
                 throwOnError: false,
                 output: 'html',
@@ -185,8 +184,8 @@ function configureMarkedExtensions() {
                 macros: {
                   '\\label': '\\phantom', // Hide \label
                 },
-              }) +
-              '</div>'
+              })
+              }</div>`
             );
           } catch (e) {
             console.warn('KaTeX display math error:', e);
@@ -211,21 +210,20 @@ function configureMarkedExtensions() {
             // Shim 'multline' (not supported by KaTeX core) to 'gathered'
             if (env === 'multline' || env === 'multline*') {
               console.warn('Shimming multline to gathered for KaTeX compatibility');
-              text = '\\begin{gathered}' + match[3] + '\\end{gathered}';
+              text = `\\begin{gathered}${match[3]}\\end{gathered}`;
             }
 
             return {
               type: 'mathEnvironment',
               raw: match[0],
-              text: text,
+              text,
             };
           }
         },
         renderer(token) {
           try {
             return (
-              '<div style="margin: 1.5em 0;">' +
-              katex.renderToString(token.text, {
+              `<div style="margin: 1.5em 0;">${katex.renderToString(token.text, {
                 displayMode: true,
                 throwOnError: false,
                 output: 'html',
@@ -236,8 +234,8 @@ function configureMarkedExtensions() {
                   '\\cite': '\\text',
                   '\\ref': '\\text',
                 },
-              }) +
-              '</div>'
+              })
+              }</div>`
             );
           } catch (e) {
             console.warn('KaTeX environment error:', e);
@@ -309,7 +307,7 @@ function configureMarkedExtensions() {
 
             // Wrap display math in a div for proper spacing
             if (token.displayMode) {
-              return '<div style="margin: 1.5em 0;">' + rendered + '</div>';
+              return `<div style="margin: 1.5em 0;">${rendered}</div>`;
             }
             return rendered;
           } catch (e) {
@@ -364,8 +362,8 @@ function configureMarkedExtensions() {
   console.log('✅ Marked.js configured with all extensions (LaTeX, subscript, superscript)');
 }
 
-// Initialize Mermaid using MermaidService
-async function initMermaidTheme() {
+// Initialize Mermaid using MermaidService (prefixed to indicate future use)
+async function _initMermaidTheme() {
   await mermaidService.initialize();
 }
 
@@ -468,7 +466,7 @@ graph TD
   const closeModal = document.getElementById('close-modal');
   const resetBtn = document.getElementById('reset-btn');
   const saveThemeBtn = document.getElementById('save-theme-btn');
-  const themeStylesheet = document.getElementById('theme-stylesheet');
+  const _themeStylesheet = document.getElementById('theme-stylesheet');
 
   // View mode buttons
   const editorOnlyBtn = document.getElementById('editor-only-btn');
@@ -478,9 +476,9 @@ graph TD
   const editorContainer = document.querySelector('.editor-container');
   const previewContainer = document.querySelector('.preview-container');
 
-  // Sync scroll state
-  const isSyncScrollEnabled = false;
-  const isScrolling = false;
+  // Sync scroll state (unused placeholders for future features)
+  const _isSyncScrollEnabled = false;
+  const _isScrolling = false;
 
   // Zoom controls
   const zoomInBtn = document.getElementById('zoom-in-btn');
@@ -564,10 +562,10 @@ graph TD
         (match, code) => {
           // Decode HTML entities before passing to Mermaid
           const decodedCode = decodeHtmlEntities(code);
-          const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
+          const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
           // Return placeholder div
           return `<div class="mermaid-diagram" id="${id}" data-code="${encodeURIComponent(decodedCode)}">${code}</div>`;
-        }
+        },
       );
 
       // Sanitize HTML using DOMPurify
@@ -592,7 +590,7 @@ graph TD
 
         if (typeof mermaid !== 'undefined') {
           mermaid
-            .render('mermaid-svg-' + id, code)
+            .render(`mermaid-svg-${id}`, code)
             .then(result => {
               element.innerHTML = result.svg;
             })
@@ -618,7 +616,7 @@ graph TD
     } catch (error) {
       console.error('Render error:', error);
       preview.innerHTML =
-        '<p style="color: red;">Error rendering markdown: ' + error.message + '</p>';
+        `<p style="color: red;">Error rendering markdown: ${error.message}</p>`;
     }
   }
 
@@ -632,7 +630,7 @@ graph TD
   function initColorInputs() {
     document.querySelectorAll('.color-control input[type="color"]').forEach(input => {
       const varName = input.dataset.var;
-      const textInput = document.getElementById(input.id + '-text');
+      const textInput = document.getElementById(`${input.id}-text`);
       const currentValue = getComputedStyle(document.documentElement)
         .getPropertyValue(varName)
         .trim();
@@ -664,7 +662,7 @@ graph TD
       console.log('✅ HTML Export successful');
     } catch (error) {
       console.error('HTML Export failed:', error);
-      alert('Failed to export HTML: ' + error.message);
+      alert(`Failed to export HTML: ${error.message}`);
     } finally {
       exportHtmlBtn.textContent = originalText;
       exportHtmlBtn.disabled = false;
@@ -787,7 +785,7 @@ graph TD
       pdfPreviewBtn.disabled = false;
     } catch (error) {
       console.error('PDF preview error:', error);
-      alert('Error generating preview: ' + error.message);
+      alert(`Error generating preview: ${error.message}`);
       pdfPreviewBtn.textContent = '👁️ Update Preview';
       pdfPreviewBtn.disabled = false;
     }
@@ -811,7 +809,7 @@ graph TD
       pdfDownloadBtn.disabled = false;
     } catch (error) {
       console.error('PDF download error:', error);
-      alert('Error downloading PDF: ' + error.message);
+      alert(`Error downloading PDF: ${error.message}`);
       pdfDownloadBtn.textContent = '💾 Download PDF';
       pdfDownloadBtn.disabled = false;
     }
@@ -877,7 +875,7 @@ graph TD
 
   // Apply split ratio to containers
   function applySplitRatio() {
-    if (!mainContent.classList.contains('split-view-active')) return;
+    if (!mainContent.classList.contains('split-view-active')) { return; }
 
     const mainContentWidth = mainContent.offsetWidth;
     const sidebarWidth = document.getElementById('file-browser').offsetWidth || 0;
@@ -903,7 +901,7 @@ graph TD
   // Split resizer drag handlers
   if (splitResizer) {
     splitResizer.addEventListener('mousedown', (e) => {
-      if (!mainContent.classList.contains('split-view-active')) return;
+      if (!mainContent.classList.contains('split-view-active')) { return; }
 
       isSplitResizing = true;
       splitResizer.classList.add('dragging');
@@ -914,7 +912,7 @@ graph TD
   }
 
   document.addEventListener('mousemove', (e) => {
-    if (!isSplitResizing) return;
+    if (!isSplitResizing) { return; }
 
     const mainContentRect = mainContent.getBoundingClientRect();
     const sidebarWidth = document.getElementById('file-browser').offsetWidth || 0;
@@ -998,8 +996,8 @@ graph TD
   // ==================== SYNC SCROLL FUNCTIONALITY ====================
 
   // Sync scroll state (using var to avoid formatter issues)
-  var syncScrollEnabled = storageManager.get('syncScrollEnabled') === 'true';
-  var syncScrolling = false;
+  let syncScrollEnabled = storageManager.get('syncScrollEnabled') === 'true';
+  let syncScrolling = false;
 
   // Load saved state and update button
   if (syncScrollEnabled) {
@@ -1032,7 +1030,7 @@ graph TD
 
   // Editor scroll handler with smooth sync
   editor.addEventListener('scroll', () => {
-    if (!syncScrollEnabled || syncScrolling) return;
+    if (!syncScrollEnabled || syncScrolling) { return; }
 
     syncScrolling = true;
 
@@ -1061,7 +1059,7 @@ graph TD
 
   // Preview container scroll handler with smooth sync
   previewContainer.addEventListener('scroll', () => {
-    if (!syncScrollEnabled || syncScrolling) return;
+    if (!syncScrollEnabled || syncScrolling) { return; }
 
     syncScrolling = true;
 
@@ -1220,9 +1218,9 @@ graph TD
     preview.style.height = `${10000 / currentZoom}%`;
 
     // Ensure scrollbar remains visible and functional
-    const previewContainer = preview.parentElement;
-    if (previewContainer) {
-      previewContainer.style.overflow = 'auto';
+    const previewContainerEl = preview.parentElement;
+    if (previewContainerEl) {
+      previewContainerEl.style.overflow = 'auto';
     }
 
     // Update display
@@ -1367,7 +1365,7 @@ graph TD
   });
 
   document.addEventListener('mousemove', e => {
-    if (!isResizing) return;
+    if (!isResizing) { return; }
 
     const newWidth = e.clientX;
 
@@ -1429,7 +1427,7 @@ graph TD
       alert(
         'Folder browsing requires File System Access API.\n\n' +
         'Please use Chrome 86+ or Edge 86+.\n\n' +
-        'Firefox and Safari are not currently supported.'
+        'Firefox and Safari are not currently supported.',
       );
       return;
     }
@@ -1441,7 +1439,7 @@ graph TD
     }
 
     if (!result.success) {
-      alert('Error opening folder: ' + result.error);
+      alert(`Error opening folder: ${result.error}`);
       return;
     }
 
@@ -1458,6 +1456,9 @@ graph TD
 
     // Render tree
     renderFileTree(result.files);
+
+    // Update expand button visibility
+    updateExpandButtonVisibility();
 
     console.log(`✅ Loaded ${result.totalFiles} markdown files from ${result.folderName}`);
   });
@@ -1487,7 +1488,7 @@ graph TD
       const result = await folderBrowserService.refreshFolder();
 
       if (!result.success) {
-        showToast('Error refreshing folder: ' + result.error, 'error');
+        showToast(`Error refreshing folder: ${result.error}`, 'error');
         return;
       }
 
@@ -1726,7 +1727,7 @@ Wrap up your thoughts and include a call to action.
     newFileTemplateSelect.disabled = false;
 
     if (!result.success) {
-      showToast('Error: ' + result.error, 'error');
+      showToast(`Error: ${result.error}`, 'error');
       return;
     }
 
@@ -1766,7 +1767,7 @@ Wrap up your thoughts and include a call to action.
           const fullPath = path ? `${path}/${item.name}` : item.name;
           const option = document.createElement('option');
           option.value = fullPath;
-          option.textContent = '  '.repeat(indent) + '📁 ' + item.name;
+          option.textContent = `${'  '.repeat(indent)}📁 ${item.name}`;
           newFileLocationSelect.appendChild(option);
 
           if (item.children) {
@@ -1805,11 +1806,43 @@ Wrap up your thoughts and include a call to action.
     }, 3000);
   }
 
+  // Expand sidebar button
+  const expandSidebarBtn = document.getElementById('expand-sidebar-btn');
+
+  // Update expand button visibility based on folder state and sidebar state
+  function updateExpandButtonVisibility() {
+    const hasFolderOpen = folderBrowserService.getCurrentFolderName() !== null;
+    const isCollapsed = fileBrowser.classList.contains('collapsed');
+
+    if (hasFolderOpen && isCollapsed) {
+      expandSidebarBtn.classList.add('visible');
+    } else {
+      expandSidebarBtn.classList.remove('visible');
+    }
+  }
+
+  // Expand sidebar button click handler
+  if (expandSidebarBtn) {
+    expandSidebarBtn.addEventListener('click', () => {
+      fileBrowser.classList.remove('collapsed');
+      storageManager.set('sidebarCollapsed', 'false');
+      updateExpandButtonVisibility();
+
+      // Recalculate layout after expansion
+      if (mainContent.classList.contains('split-view-active')) {
+        setTimeout(() => {
+          applySplitRatio();
+        }, 350);
+      }
+    });
+  }
+
   // Toggle Sidebar
   function toggleSidebar() {
     fileBrowser.classList.toggle('collapsed');
     const isCollapsed = fileBrowser.classList.contains('collapsed');
     storageManager.set('sidebarCollapsed', isCollapsed.toString());
+    updateExpandButtonVisibility();
 
     // When sidebar collapses/expands, we need to recalculate the layout
     // First, reset to flex layout to let containers fill available space
@@ -1875,7 +1908,7 @@ Wrap up your thoughts and include a call to action.
   function createFolderElement(item, indent) {
     const div = document.createElement('div');
     div.className = 'tree-item folder';
-    div.style.paddingLeft = indent * 20 + 12 + 'px';
+    div.style.paddingLeft = `${indent * 20 + 12}px`;
 
     const icon = item.expanded ? '📂' : '📁';
     const folderIcon = document.createElement('span');
@@ -1906,7 +1939,7 @@ Wrap up your thoughts and include a call to action.
   function createFileElement(item, indent) {
     const div = document.createElement('div');
     div.className = 'tree-item file';
-    div.style.paddingLeft = indent * 20 + 12 + 'px';
+    div.style.paddingLeft = `${indent * 20 + 12}px`;
 
     // Mark as active if this is the current file
     if (activeFileHandle === item.handle) {
@@ -1943,7 +1976,7 @@ Wrap up your thoughts and include a call to action.
     const result = await folderBrowserService.readFile(fileItem.handle);
 
     if (!result.success) {
-      alert('Error loading file: ' + result.error);
+      alert(`Error loading file: ${result.error}`);
       return;
     }
 
@@ -1964,6 +1997,9 @@ Wrap up your thoughts and include a call to action.
 
   // Expose renderMarkdown globally for theme changes
   globalRenderMarkdown = renderMarkdown;
+
+  // Initialize expand button visibility on load
+  updateExpandButtonVisibility();
 
   // DON'T render immediately - wait for theme to load
   // renderMarkdown will be called after theme loads above

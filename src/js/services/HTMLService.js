@@ -119,7 +119,7 @@ export class HTMLService {
       // Fetch both the specific theme and the global variables which define the tokens
       const requestPromises = [
         fetch(`${baseUrl}themes/${themeName}.css`),
-        fetch(`${baseUrl}variables.css`)
+        fetch(`${baseUrl}variables.css`),
       ];
 
       // If Nebula theme, also fetch the micro-elements styles
@@ -132,14 +132,14 @@ export class HTMLService {
       const variablesRes = responses[1];
       const nebulaElementsRes = responses[2]; // Undefined if not nebula
 
-      if (!themeRes.ok) throw new Error(`Failed to load theme: ${themeRes.statusText}`);
+      if (!themeRes.ok) { throw new Error(`Failed to load theme: ${themeRes.statusText}`); }
 
       let cssContent = '';
 
       // Process variables.css
       if (variablesRes.ok) {
         const variablesText = await variablesRes.text();
-        cssContent += this.extractCSS(variablesText, baseUrl) + '\n';
+        cssContent += `${this.extractCSS(variablesText, baseUrl)}\n`;
       } else {
         console.warn('variables.css could not be loaded for export');
       }
@@ -147,7 +147,7 @@ export class HTMLService {
       // Process Nebula Elements if present
       if (nebulaElementsRes && nebulaElementsRes.ok) {
         const nebulaText = await nebulaElementsRes.text();
-        cssContent += this.extractCSS(nebulaText, baseUrl) + '\n';
+        cssContent += `${this.extractCSS(nebulaText, baseUrl)}\n`;
       }
 
       // Process Theme CSS
@@ -172,7 +172,7 @@ export class HTMLService {
   /**
    * Helper to extract CSS from potential Vite module wrapper or raw text
    */
-  extractCSS(text, baseUrl) {
+  extractCSS(text, _baseUrl) {
     // Vite dev server serves CSS files as JS modules (import ...)
     // We need to extract the actual CSS string.
     // Typical format: "import ... \n const css = \"...\" ... export default css"

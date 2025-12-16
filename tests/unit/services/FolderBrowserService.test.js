@@ -106,7 +106,7 @@ describe('FolderBrowserService', () => {
     });
 
     it('truncates long filenames to MAX_LENGTH', () => {
-      const longName = 'a'.repeat(300) + '.md';
+      const longName = `${'a'.repeat(300) }.md`;
       const result = service.sanitizeFilename(longName);
       expect(result.length).toBeLessThanOrEqual(200);
     });

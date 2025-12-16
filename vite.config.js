@@ -37,7 +37,7 @@ export default defineConfig({
             }
           });
           console.log(
-            `✅ All ${files.filter(f => f.endsWith('.css')).length} theme files copied to dist/themes/`
+            `✅ All ${files.filter(f => f.endsWith('.css')).length} theme files copied to dist/themes/`,
           );
         } catch (error) {
           console.error('❌ Error copying themes:', error);
