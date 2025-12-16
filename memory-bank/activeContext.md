@@ -1,10 +1,49 @@
 # Active Context
 
-**Last Updated:** 12/15/2025, 4:54 PM IST
+**Last Updated:** 12/16/2025, 3:05 PM IST
 
 ## Current Focus
 
-**COMPLETED:** File Creation & Folder Refresh Features ✅
+**COMPLETED:** Folder Refresh File Content Sync Fix ✅
+
+### Bug Fix (This Session)
+
+**Problem:** When a markdown file was opened via the folder browser and then edited externally (e.g., in VS Code or another IDE), clicking the "Refresh" button would update the file tree (detecting new/deleted files) but the content of the currently opened file would NOT be refreshed with the latest changes from disk.
+
+**Root Cause:** The `refreshFolderBtn` click handler was only:
+1. Re-scanning the directory structure
+2. Updating the file tree UI
+3. Updating the file count
+
+It did NOT re-read the content of the currently active file (`activeFileHandle`), so the editor continued showing stale content.
+
+**Solution:** Added file content reload logic to the refresh handler:
+```javascript
+// Re-read the currently open file to get updated content
+if (activeFileHandle) {
+  const readResult = await folderBrowserService.readFile(activeFileHandle);
+  if (readResult.success) {
+    editor.value = readResult.content;
+    renderMarkdown();
+    console.log(`🔄 Reloaded active file: ${readResult.name}`);
+  } else {
+    // File may have been deleted - warn but don't clear editor
+    console.warn(`⚠️ Could not reload active file: ${readResult.error}`);
+  }
+}
+```
+
+**Files Modified:** `script.js` (refresh folder click handler)
+
+**Results:**
+- ✅ Clicking refresh now reloads the active file's content from disk
+- ✅ External changes (from IDE, text editor, etc.) are now visible
+- ✅ Graceful handling if file was deleted externally
+- ✅ Preview re-renders automatically after content update
+
+---
+
+**PREVIOUSLY COMPLETED:** File Creation & Folder Refresh Features ✅
 
 Successfully implemented two new features for the folder browser:
 1. Create new markdown files with templates

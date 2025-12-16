@@ -1381,6 +1381,20 @@ graph TD
       resizeHandle.classList.remove('dragging');
       document.body.style.cursor = '';
       document.body.style.userSelect = '';
+
+      // Recalculate split view layout after sidebar collapses
+      if (mainContent.classList.contains('split-view-active')) {
+        // Reset to flex layout to fill available space
+        editorContainer.style.flex = '1';
+        editorContainer.style.width = '';
+        previewContainer.style.flex = '1';
+        previewContainer.style.width = '';
+
+        // After transition completes, re-apply the saved ratio
+        setTimeout(() => {
+          applySplitRatio();
+        }, 350); // Wait for CSS transition (300ms) + buffer
+      }
       return;
     }
 
@@ -1483,6 +1497,20 @@ graph TD
       // Update UI
       fileCountEl.textContent = `${result.totalFiles} file${result.totalFiles !== 1 ? 's' : ''}`;
       renderFileTree(result.files);
+
+      // Re-read the currently open file to get updated content
+      if (activeFileHandle) {
+        const readResult = await folderBrowserService.readFile(activeFileHandle);
+        if (readResult.success) {
+          editor.value = readResult.content;
+          renderMarkdown();
+          console.log(`🔄 Reloaded active file: ${readResult.name}`);
+        } else {
+          // File may have been deleted - clear the editor
+          console.warn(`⚠️ Could not reload active file: ${readResult.error}`);
+          // Don't clear the editor - user may have unsaved changes
+        }
+      }
 
       showToast(`✅ Folder refreshed: ${result.totalFiles} files found`, 'success');
       console.log(`🔄 Refreshed folder: ${result.totalFiles} markdown files`);
