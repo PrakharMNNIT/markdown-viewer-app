@@ -19,7 +19,8 @@ body {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 44px); /* Reserve space for footer */
+  height: calc(100vh - 44px);
+  /* Reserve space for footer */
 }
 
 /* ==================== TOOLBAR ==================== */
@@ -92,7 +93,8 @@ body {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   color: var(--text-primary);
-  border-radius: 8px; /* Softer, more modern radius */
+  border-radius: 8px;
+  /* Softer, more modern radius */
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
@@ -122,8 +124,15 @@ body {
 }
 
 @keyframes slideUpFade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==================== EDITOR ==================== */
@@ -210,7 +219,8 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: auto; /* Single scrollbar for preview container */
+  overflow: auto;
+  /* Single scrollbar for preview container */
   min-width: 200px;
 }
 
@@ -265,9 +275,11 @@ body {
 
 #markdown-preview {
   padding: 30px;
-  padding-bottom: 60px; /* Extra bottom padding for footer clearance */
+  padding-bottom: 60px;
+  /* Extra bottom padding for footer clearance */
   background-color: var(--bg-primary);
-  min-height: 100%; /* Ensure content fills container */
+  min-height: 100%;
+  /* Ensure content fills container */
 }
 
 /* ==================== MARKDOWN PREVIEW STYLES ==================== */
@@ -352,7 +364,8 @@ body {
   padding: 16px;
   overflow-x: auto;
   margin: 1.5em 0;
-  color: var(--syntax-variable); /* Distinct color for code block text */
+  color: var(--syntax-variable);
+  /* Distinct color for code block text */
   box-shadow:
     0 2px 4px rgba(0, 0, 0, 0.1),
     0 4px 8px rgba(0, 0, 0, 0.05),
@@ -422,7 +435,7 @@ body {
 }
 
 /* Nested attr-value punctuation (quotes) */
-#markdown-preview .token.attr-value > .token.punctuation {
+#markdown-preview .token.attr-value>.token.punctuation {
   color: var(--syntax-string, #10b981);
 }
 
@@ -565,7 +578,7 @@ body {
   border-radius: var(--radius-lg, 12px);
   width: 90%;
   max-width: 600px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   position: relative;
   transform: translateY(20px);
   transition: transform 0.3s ease;
@@ -577,8 +590,13 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .close-btn {
@@ -659,10 +677,23 @@ body {
 
 /* ==================== SCROLLBAR ==================== */
 /* Base Scrollbar */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-glass, rgba(255,255,255,0.1)); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-glass, rgba(255, 255, 255, 0.1));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
 
 /* ==================== BUTTONS & INTERACTIVE ==================== */
 .btn {
@@ -684,7 +715,7 @@ body {
 }
 
 .btn:hover {
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   border-color: var(--text-secondary);
   color: var(--text-primary);
 }
@@ -762,6 +793,7 @@ body {
 }
 
 @media (max-width: 768px) {
+
   /* App container fills viewport minus footer */
   .app-container {
     height: calc(100vh - 44px);
@@ -832,9 +864,12 @@ body {
     flex: 1;
     flex-direction: column;
     overflow: hidden;
-    min-height: 0; /* Important for flex children */
-    height: 100%; /* Safari needs explicit height */
-    display: flex; /* Ensure flex container */
+    min-height: 0;
+    /* Important for flex children */
+    height: 100%;
+    /* Safari needs explicit height */
+    display: flex;
+    /* Ensure flex container */
   }
 
   /* Mobile tabs */
@@ -853,12 +888,14 @@ body {
   }
 
   /* Editor and Preview containers */
-  .editor-container, .preview-container {
+  .editor-container,
+  .preview-container {
     display: none !important;
     flex: 1;
     min-height: 0;
     width: 100% !important;
-    height: 100%; /* Safari needs explicit height */
+    height: 100%;
+    /* Safari needs explicit height */
   }
 
   .editor-container.mobile-visible,
@@ -866,8 +903,10 @@ body {
     display: flex !important;
     flex-direction: column;
     flex: 1;
-    min-height: 0; /* Allow shrinking */
-    height: 100%; /* Safari compatibility */
+    min-height: 0;
+    /* Allow shrinking */
+    height: 100%;
+    /* Safari compatibility */
   }
 
   .editor-container {
@@ -886,18 +925,21 @@ body {
   .preview-container {
     overflow: auto !important;
     -webkit-overflow-scrolling: touch;
-    height: 100%; /* Safari needs explicit height */
+    height: 100%;
+    /* Safari needs explicit height */
   }
 
   .preview-container.mobile-visible {
     overflow: auto !important;
-    height: 100%; /* Safari needs explicit height */
+    height: 100%;
+    /* Safari needs explicit height */
     display: flex !important;
     flex-direction: column;
   }
 
   #markdown-preview {
-    min-height: 100%; /* Full height for scrolling */
+    min-height: 100%;
+    /* Full height for scrolling */
     overflow: visible;
     flex: 1;
     /* Reset zoom transform on mobile - causes issues on Safari */
@@ -912,7 +954,8 @@ body {
   }
 
   /* Editor/Preview headers smaller */
-  .editor-header, .preview-header {
+  .editor-header,
+  .preview-header {
     padding: 8px 12px;
     font-size: 12px;
     flex-shrink: 0;
@@ -1047,7 +1090,8 @@ body {
   /* Hide export buttons text, show only icons */
   .toolbar-controls #export-html-btn,
   .toolbar-controls #export-pdf-btn {
-    font-size: 0; /* Hide text */
+    font-size: 0;
+    /* Hide text */
   }
 
   .toolbar-controls #export-html-btn::before {
@@ -1191,13 +1235,15 @@ body {
 .file-browser.collapsed {
   width: 0 !important;
   min-width: 0 !important;
-  padding: 0 !important; /* Hide content */
+  padding: 0 !important;
+  /* Hide content */
   border-right: none;
   opacity: 0;
 }
 
 .file-browser.resizing {
-  transition: none; /* Disable transition during drag for immediate feedback */
+  transition: none;
+  /* Disable transition during drag for immediate feedback */
 }
 
 /* Resize handle for dragging */
@@ -1246,7 +1292,8 @@ body {
   text-transform: uppercase;
   color: var(--text-secondary);
   flex: 1;
-  min-width: 0; /* Allow shrinking */
+  min-width: 0;
+  /* Allow shrinking */
   display: flex;
   align-items: center;
   gap: 4px;
@@ -1318,7 +1365,8 @@ body {
 /* Tree Items */
 .tree-item {
   padding: 8px 12px;
-  margin: 2px 6px; /* Floating items */
+  margin: 2px 6px;
+  /* Floating items */
   border-radius: 6px;
   cursor: pointer;
   display: flex;
@@ -1339,7 +1387,7 @@ body {
 .tree-item.active {
   background-color: var(--h1-color);
   color: white;
-  border-left-color: rgba(255,255,255,0.5);
+  border-left-color: rgba(255, 255, 255, 0.5);
   font-weight: 600;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transform: scale(1.02);
@@ -1475,6 +1523,7 @@ body {
   border-left-color: #cf222e;
   background-color: rgba(207, 34, 46, 0.1);
 }
+
 /* ==================== GLASS SCROLLBARS ==================== */
 ::-webkit-scrollbar {
   width: 12px;
@@ -1701,14 +1750,22 @@ body {
 }
 
 /* ==================== ZEN MODE ==================== */
+/* Zen Mode: Focused reading mode showing ONLY the preview */
 body.zen-mode {
-  overflow: hidden; /* Prevent body scroll */
+  overflow: hidden;
+  /* Prevent body scroll */
 }
 
 body.zen-mode .toolbar,
 body.zen-mode .file-browser,
 body.zen-mode .app-footer,
-body.zen-mode .mobile-tabs {
+body.zen-mode .mobile-tabs,
+body.zen-mode #split-resizer {
+  display: none !important;
+}
+
+/* Hide editor in Zen mode - only show preview */
+body.zen-mode .editor-container {
   display: none !important;
 }
 
@@ -1720,24 +1777,27 @@ body.zen-mode .app-container {
 
 body.zen-mode .main-content {
   height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
-/* Zen Editor */
-body.zen-mode .editor-container,
+/* Zen Preview - Full width centered */
 body.zen-mode .preview-container {
+  display: flex !important;
+  flex: 1;
+  max-width: 900px;
+  /* Readability width */
+  margin: 0 auto;
+  padding: 60px 40px;
+  background: var(--bg-primary);
+  box-shadow: none;
   border: none;
   border-radius: 0;
-  max-width: 900px; /* Readability width */
-  margin: 0 auto;
-  padding: 40px;
-  background: transparent;
-  box-shadow: none;
+  overflow-y: auto;
 }
 
-/* Editor Focus in Zen Mode */
-body.zen-mode textarea {
-    font-size: 1.1em;
-    line-height: 1.8;
+body.zen-mode .preview-container #markdown-preview {
+  max-width: 100%;
 }
 
 /* Exit Button (Floating) */
@@ -1750,9 +1810,10 @@ body.zen-mode textarea {
   border: 1px solid var(--border-glass);
   padding: 12px 24px;
   border-radius: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  display: none; /* Hidden by default */
+  display: none;
+  /* Hidden by default */
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   font-family: var(--font-primary);
@@ -1763,7 +1824,8 @@ body.zen-mode textarea {
 
 body.zen-mode .floating-exit-btn {
   display: flex !important;
-  opacity: 0.4; /* Subtle by default */
+  opacity: 0.4;
+  /* Subtle by default */
   transform: translateY(0);
 }
 
@@ -1778,11 +1840,18 @@ body.zen-mode .floating-exit-btn:hover {
 
 /* Zen Mode Animation */
 @keyframes zen-enter {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 body.zen-mode .editor-container,
 body.zen-mode .preview-container {
-    animation: zen-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: zen-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
