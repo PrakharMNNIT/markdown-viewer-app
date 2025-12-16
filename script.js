@@ -365,8 +365,8 @@ function configureMarkedExtensions() {
 }
 
 // Initialize Mermaid using MermaidService
-function initMermaidTheme() {
-  mermaidService.initialize();
+async function initMermaidTheme() {
+  await mermaidService.initialize();
 }
 
 function setupEditor() {
@@ -1181,35 +1181,32 @@ graph TD
 
   // Load saved theme FIRST, then initialize Mermaid with correct colors
   const savedTheme = storageManager.get('selectedTheme');
-  if (savedTheme) {
-    // Load theme first, then sync dropdown and reinit Mermaid
-    themeManager
-      .loadTheme(savedTheme)
-      .then(() => {
+
+  async function initializeWithTheme() {
+    if (savedTheme) {
+      try {
+        // Load theme first
+        await themeManager.loadTheme(savedTheme);
         // Theme loaded successfully - sync dropdown
         themeSelector.value = savedTheme;
         console.log(`✅ Theme restored: ${savedTheme}`);
-
-        // NOW initialize Mermaid with correct theme colors
-        mermaidService.initialize();
-
-        // Re-render to apply theme
-        renderMarkdown();
-      })
-      .catch(err => {
+      } catch (err) {
         console.error('Failed to load saved theme:', err);
         // Fallback to default-light on error
-        themeManager.loadTheme('default-light').then(() => {
-          themeSelector.value = 'default-light';
-          mermaidService.initialize();
-          renderMarkdown();
-        });
-      });
-  } else {
-    // No saved theme - initialize with default-light
-    mermaidService.initialize();
+        await themeManager.loadTheme('default-light');
+        themeSelector.value = 'default-light';
+      }
+    }
+
+    // NOW initialize Mermaid with correct theme colors (after CSS is loaded)
+    await mermaidService.initialize();
+
+    // Re-render to apply theme
     renderMarkdown();
   }
+
+  // Start async initialization
+  initializeWithTheme();
 
   // Zoom functionality
   function setZoom(zoomLevel) {

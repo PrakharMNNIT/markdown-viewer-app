@@ -70,8 +70,36 @@ function isLightTheme(bgColor) {
 }
 
 /**
- * Get CSS variable with Safari-safe fallback
- * Safari sometimes returns empty strings before CSS loads
+ * Wait for CSS to be fully loaded
+ * Safari loads CSS asynchronously, so CSS variables may not be available immediately
+ *
+ * @returns {Promise<void>} Resolves when CSS is loaded
+ * @private
+ */
+function waitForCSS() {
+  return new Promise(resolve => {
+    const maxAttempts = 50; // Max 500ms wait
+    let attempts = 0;
+
+    const checkCSS = () => {
+      const testColor = getCssVariable('--bg-primary');
+      if (testColor && testColor.trim() !== '') {
+        resolve();
+      } else if (attempts < maxAttempts) {
+        attempts++;
+        requestAnimationFrame(checkCSS);
+      } else {
+        // Timeout - proceed anyway with defaults
+        console.warn('⚠️ CSS loading timeout - using default colors');
+        resolve();
+      }
+    };
+    checkCSS();
+  });
+}
+
+/**
+ * Get CSS variable with safe fallback
  *
  * @param {string} varName - CSS variable name
  * @param {string} fallback - Fallback value
@@ -106,9 +134,12 @@ export class MermaidService {
    * Reads ALL 60+ variables from theme CSS with smart fallbacks
    * Based on official Mermaid.js theming documentation
    *
-   * @returns {void}
+   * @returns {Promise<void>}
    */
-  initialize() {
+  async initialize() {
+    // Wait for CSS to be loaded (Safari compatibility)
+    await waitForCSS();
+
     // Extract core theme colors with Safari-safe fallbacks
     const bgPri = getSafeColor('--bg-primary', DEFAULT_COLORS.bgPrimary);
     const bgSec = getSafeColor('--bg-secondary', DEFAULT_COLORS.bgSecondary);
