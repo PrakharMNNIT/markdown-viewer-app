@@ -1236,9 +1236,17 @@ body {
   width: 0 !important;
   min-width: 0 !important;
   padding: 0 !important;
-  /* Hide content */
   border-right: none;
-  opacity: 0;
+  overflow: hidden;
+  /* Hide resize handle when collapsed */
+}
+
+.file-browser.collapsed .resize-handle {
+  display: none;
+}
+
+.file-browser.collapsed * {
+  visibility: hidden;
 }
 
 .file-browser.resizing {

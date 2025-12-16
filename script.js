@@ -1781,7 +1781,14 @@ Wrap up your thoughts and include a call to action.
   function toggleSidebar() {
     fileBrowser.classList.toggle('collapsed');
     const isCollapsed = fileBrowser.classList.contains('collapsed');
-    storageManager.set('sidebarCollapsed', isCollapsed);
+    storageManager.set('sidebarCollapsed', isCollapsed.toString());
+
+    // Recalculate split view layout after sidebar toggle
+    setTimeout(() => {
+      if (mainContent.classList.contains('split-view-active')) {
+        applySplitRatio();
+      }
+    }, 300); // Wait for CSS transition to complete
   }
 
   // Attach event listeners to BOTH toggle buttons
