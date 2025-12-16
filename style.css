@@ -121,6 +121,8 @@ body {
   flex: 1;
   overflow: hidden;
   animation: slideUpFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  width: 100%;
+  max-width: 100%;
 }
 
 @keyframes slideUpFade {
@@ -1227,26 +1229,30 @@ body {
   flex-direction: column;
   height: 100%;
   position: relative;
-  transition: transform 0.3s ease, margin-left 0.3s ease;
+  transition: width 0.3s ease, min-width 0.3s ease;
   z-index: 40;
+  flex-shrink: 0;
 }
 
 /* Collapsed state for sidebar */
 .file-browser.collapsed {
   width: 0 !important;
   min-width: 0 !important;
+  max-width: 0 !important;
   padding: 0 !important;
   border-right: none;
   overflow: hidden;
-  /* Hide resize handle when collapsed */
+  flex-basis: 0 !important;
 }
 
 .file-browser.collapsed .resize-handle {
-  display: none;
+  display: none !important;
+  pointer-events: none;
 }
 
 .file-browser.collapsed * {
   visibility: hidden;
+  opacity: 0;
 }
 
 .file-browser.resizing {
@@ -1261,13 +1267,20 @@ body {
   /* Extend outside sidebar for easier grabbing */
   top: 0;
   bottom: 0;
-  width: 12px;
-  /* Wider grab area */
+  width: 16px;
+  /* Even wider grab area for better UX */
   background-color: transparent;
   cursor: col-resize;
-  z-index: 50;
-  /* Higher z-index to be above content */
-  transition: all 0.2s ease;
+  z-index: 100;
+  /* Much higher z-index to be above all content */
+  transition: background-color 0.2s ease;
+  touch-action: none;
+  /* Prevent touch scrolling interference */
+}
+
+/* Make resize handle more visible on hover */
+.resize-handle:hover {
+  background-color: rgba(0, 123, 255, 0.1);
 }
 
 /* Visual indicator line in center */

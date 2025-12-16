@@ -1783,12 +1783,20 @@ Wrap up your thoughts and include a call to action.
     const isCollapsed = fileBrowser.classList.contains('collapsed');
     storageManager.set('sidebarCollapsed', isCollapsed.toString());
 
-    // Recalculate split view layout after sidebar toggle
-    setTimeout(() => {
-      if (mainContent.classList.contains('split-view-active')) {
+    // When sidebar collapses/expands, we need to recalculate the layout
+    // First, reset to flex layout to let containers fill available space
+    if (mainContent.classList.contains('split-view-active')) {
+      // Temporarily reset to flex (fills available space)
+      editorContainer.style.flex = '1';
+      editorContainer.style.width = '';
+      previewContainer.style.flex = '1';
+      previewContainer.style.width = '';
+
+      // After transition completes, re-apply the saved ratio
+      setTimeout(() => {
         applySplitRatio();
-      }
-    }, 300); // Wait for CSS transition to complete
+      }, 350); // Wait for CSS transition (300ms) + buffer
+    }
   }
 
   // Attach event listeners to BOTH toggle buttons
