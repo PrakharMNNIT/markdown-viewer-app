@@ -1388,6 +1388,11 @@ graph TD
     if (newWidth >= minWidth && newWidth <= maxWidth) {
       sidebarWidth = newWidth;
       fileBrowser.style.width = `${sidebarWidth}px`;
+
+      // Recalculate split view layout when sidebar is resized
+      if (typeof applySplitRatio === 'function') {
+        applySplitRatio();
+      }
     }
   });
 
