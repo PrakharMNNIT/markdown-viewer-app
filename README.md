@@ -14,23 +14,60 @@
 ### Core Functionality
 
 - 📝 **Real-time Markdown Preview** - Instant rendering as you type
-- 🎨 **10 Beautiful Themes** - 5 themes × 2 variants (light/dark)
-- 🎯 **Syntax Highlighting** - 20+ programming languages supported
+- 🎨 **12 Beautiful Themes** - 6 themes × 2 variants (light/dark) including Nebula theme
+- 🎯 **Syntax Highlighting** - 20+ programming languages supported via PrismJS
 - 📊 **Mermaid Diagrams** - Flowcharts, sequences, class diagrams, and more
+- ➗ **LaTeX Math Support** - Full KaTeX rendering with `$...$`, `$$...$$`, `\(...\)`, and `\[...\]` delimiters
 - 🎨 **Custom Theme Builder** - Create and save your own color schemes
 - 📤 **Export Options** - HTML and PDF with theme preservation
 - 👁️ **View Modes** - Editor-only, split-view, or preview-only
 - 🔍 **Zoom Controls** - Scale preview from 50% to 200%
 - 💾 **Auto-save** - Content automatically saved to localStorage
 
+### 📁 Folder Browser (NEW)
+
+- 📂 **Open Folder** - Browse and open local folders with markdown files
+- 🗂️ **File Tree** - Navigate through nested directories
+- 📄 **Quick File Access** - Click to open any markdown file
+- ➕ **Create Files** - Create new markdown files with templates (empty, basic, readme, notes, blog)
+- 🔄 **Folder Refresh** - Refresh folder contents without reopening
+- 📐 **Resizable Sidebar** - Drag to resize, auto-collapse at edge
+- ➡️ **Expand Button** - Quick sidebar expand with premium animations
+- 💾 **State Persistence** - Sidebar width and collapsed state saved
+
+### 🧘 Zen Mode (NEW)
+
+- 🖥️ **Full Screen Preview** - 100% width and height distraction-free reading
+- 🚫 **Hidden UI** - Toolbar, sidebar, and footer hidden
+- ⌨️ **ESC to Exit** - Press Escape or click exit button to return
+- 📖 **Centered Content** - Max-width 900px for optimal readability
+
+### ↔️ Split View Resizer (NEW)
+
+- 🔀 **Draggable Divider** - Resize editor and preview panels
+- 📏 **Custom Ratio** - Set 20% to 80% split ratio
+- 💾 **Ratio Persistence** - Split position saved across sessions
+- 🎨 **Visual Feedback** - Animated handles on hover/drag
+
+### 🔗 TOC Anchor Navigation (NEW)
+
+- 📑 **Click-to-Navigate** - Click TOC links to smooth scroll to headings
+- 🎯 **Smart Targeting** - 4-priority resolution (exact → normalized → GitHub → fuzzy)
+- 🔙 **Browser History** - Back/forward navigation support
+- ♿ **Accessibility** - Focus management and keyboard navigation
+- 🔤 **Special Characters** - C++ → cpp, C# → csharp handling
+- 🔗 **Deep Linking** - Direct URL hash support
+
 ### Professional Architecture
 
-- 🏗️ **Modular Design** - 7 organized modules with clear separation of concerns
-- 🧪 **Comprehensive Testing** - 155 tests with >85% coverage
+- 🏗️ **Modular Design** - 9 organized modules with clear separation of concerns
+- 🧪 **Comprehensive Testing** - 155+ tests with >85% coverage
 - 🔧 **Modern Tooling** - Vite, Vitest, ESLint, Prettier
 - 📐 **Design Patterns** - Service layer, observer, dependency injection
 - 🎯 **Zero Technical Debt** - Clean, maintainable, production-ready code
 - 🤖 **AI Code Review** - Automated quality checks with every commit
+- 🍎 **Safari Compatible** - Enterprise-grade CSS loading for all browsers
+- 📱 **Mobile Responsive** - Optimized for iPhone/iPad/Android
 
 ---
 
@@ -40,7 +77,9 @@
 markdown-viewer-app/
 ├── index.html                      # Main HTML file
 ├── style.css                       # Base styles
-├── script.js                       # Main application entry
+├── script.js                       # Main application entry (~2300 lines)
+├── animations.css                  # Premium animations
+├── variables.css                   # CSS custom properties
 ├── package.json                    # Dependencies and scripts
 ├── vite.config.js                  # Vite configuration
 ├── vitest.config.js                # Vitest configuration
@@ -50,6 +89,7 @@ markdown-viewer-app/
 ├── src/js/                         # Source modules
 │   ├── config/                     # Configuration files
 │   │   ├── constants.js            # App constants (12 groups)
+│   │   ├── errorMessages.js        # Centralized error messages
 │   │   └── featureFlags.js         # Feature flag system
 │   │
 │   ├── utils/                      # Utility functions
@@ -58,34 +98,57 @@ markdown-viewer-app/
 │   │   └── validators.js           # Input validation (5 functions)
 │   │
 │   ├── services/                   # Business logic services
+│   │   ├── FolderBrowserService.js # File system access (NEW)
+│   │   ├── HTMLService.js          # HTML export
 │   │   ├── MermaidService.js       # Mermaid diagram rendering
+│   │   ├── PDFService.js           # PDF export with preview
 │   │   └── PrismService.js         # Syntax highlighting
 │   │
 │   └── core/                       # Core application modules
 │       ├── StorageManager.js       # LocalStorage abstraction (11 methods)
 │       └── ThemeManager.js         # Theme management (11 methods)
 │
-├── tests/                          # Test suite (155 tests)
+├── tests/                          # Test suite (155+ tests)
 │   ├── setup.js                    # Test configuration
 │   ├── baseline/                   # Baseline functionality tests (98)
 │   │   └── current-functionality.test.js
-│   └── unit/                       # Unit tests (57)
-│       ├── services/               # Service tests (23)
-│       └── core/                   # Core module tests (34)
+│   └── unit/                       # Unit tests (57+)
+│       ├── config/                 # Config tests
+│       │   └── errorMessages.test.js
+│       ├── services/               # Service tests
+│       │   ├── FolderBrowserService.test.js
+│       │   ├── MermaidService.test.js
+│       │   └── PrismService.test.js
+│       ├── core/                   # Core module tests
+│       │   ├── StorageManager.test.js
+│       │   └── ThemeManager.test.js
+│       └── utils/                  # Utility tests
+│           ├── colorHelpers.test.js
+│           └── validators.test.js
 │
-└── themes/                         # Theme files
-    ├── default-light.css           # Professional light theme
-    ├── default-dark.css            # GitHub-inspired dark theme
-    ├── ocean-light.css             # Fresh cyan theme
-    ├── ocean-dark.css              # Deep navy theme
-    ├── neon-light.css              # Vibrant purple theme
-    ├── neon-dark.css               # Cyberpunk theme
-    ├── forest-light.css            # Natural green theme
-    ├── forest-dark.css             # Deep forest theme
-    ├── sunset-light.css            # Warm orange theme
-    ├── sunset-dark.css             # Sunset theme
-    ├── obsidian-light.css          # Clean minimal theme
-    └── obsidian-dark.css           # Dark minimal theme
+├── themes/                         # Theme files (15 files)
+│   ├── default-light.css           # Professional light theme
+│   ├── default-dark.css            # GitHub-inspired dark theme
+│   ├── ocean-light.css             # Fresh cyan theme
+│   ├── ocean-dark.css              # Deep navy theme
+│   ├── neon-light.css              # Vibrant purple theme
+│   ├── neon-dark.css               # Cyberpunk theme
+│   ├── forest-light.css            # Natural green theme
+│   ├── forest-dark.css             # Deep forest theme
+│   ├── sunset-light.css            # Warm orange theme
+│   ├── sunset-dark.css             # Sunset theme
+│   ├── obsidian-light.css          # Clean minimal theme
+│   ├── obsidian-dark.css           # Dark minimal theme
+│   ├── nebula-light.css            # Cosmic purple theme (NEW)
+│   ├── nebula-dark.css             # Deep space theme (NEW)
+│   └── nebula-elements.css         # Shared Nebula elements
+│
+└── docs/                           # Documentation
+    ├── 01-requirements/            # Feature specifications
+    ├── 02-architecture/            # Architecture docs
+    ├── 05-implementation/          # Implementation guides
+    ├── 08-deployment/              # Deployment guides
+    └── 09-temp/                    # Temporary docs
 ```
 
 ---
@@ -95,12 +158,13 @@ markdown-viewer-app/
 ### Prerequisites
 
 - Node.js 18+ and npm
+- Modern browser (Chrome 86+, Firefox 90+, Safari 14+, Edge 86+)
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/PrakharMNNIT/markdown-viewer-app.git
 cd markdown-viewer-app
 
 # Install dependencies
@@ -115,9 +179,20 @@ npm run dev
 1. Open your browser to `http://localhost:5173`
 2. Start typing markdown in the left panel
 3. See live preview on the right
-4. Switch themes from the dropdown
-5. Customize colors with the theme builder
-6. Export to HTML or PDF
+4. **Open Folder** - Click to browse local markdown files
+5. **Zen Mode** - Click for distraction-free reading
+6. Switch themes from the dropdown
+7. Customize colors with the theme builder
+8. Export to HTML or PDF
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl/Cmd + +` | Zoom in |
+| `Ctrl/Cmd + -` | Zoom out |
+| `Ctrl/Cmd + 0` | Reset zoom |
+| `Escape` | Exit Zen Mode |
 
 ---
 
@@ -132,7 +207,7 @@ npm run build        # Build production bundle
 npm run preview      # Preview production build
 
 # Testing
-npm test             # Run all tests (155 tests)
+npm test             # Run all tests (155+ tests)
 npm run test:ui      # Open Vitest UI dashboard
 npm run test:coverage # Generate coverage report
 
@@ -145,7 +220,7 @@ npm run review       # Run AI code review
 ### Development Workflow
 
 1. **Make changes** to source files
-2. **Run tests**: `npm test` (ensure all 155 pass)
+2. **Run tests**: `npm test` (ensure all pass)
 3. **Check quality**: `npm run lint`
 4. **AI review**: `npm run review` (analyze AI_REVIEW.md)
 5. **Commit**: Use conventional commit format
@@ -156,17 +231,19 @@ npm run review       # Run AI code review
 
 ### Design Patterns
 
-- **Service Layer Pattern** - Isolated business logic (MermaidService, PrismService)
+- **Service Layer Pattern** - Isolated business logic (MermaidService, PrismService, FolderBrowserService)
 - **Observer Pattern** - Theme change notifications to dependent services
 - **Dependency Injection** - ThemeManager receives StorageManager instance
 - **Facade Pattern** - Clean API abstractions for complex operations
 - **Strategy Pattern** - Pluggable theme loading strategies
+- **Singleton Pattern** - Anchor navigation heading slug map
 
 ### Module Organization
 
 #### **config/** - Configuration and Constants
 
 - `constants.js`: 12 constant groups (ZOOM, STORAGE_KEYS, THEMES, etc.)
+- `errorMessages.js`: Centralized error message definitions
 - `featureFlags.js`: Feature toggle system for safe rollouts
 
 #### **utils/** - Reusable Utilities
@@ -177,7 +254,10 @@ npm run review       # Run AI code review
 
 #### **services/** - Business Logic
 
+- `FolderBrowserService.js`: File System Access API integration
+- `HTMLService.js`: HTML export with theme embedding
 - `MermaidService.js`: Theme-aware diagram rendering (5 methods)
+- `PDFService.js`: PDF generation with html2pdf.js
 - `PrismService.js`: Syntax highlighting with error recovery (5 methods)
 
 #### **core/** - Core Modules
@@ -193,12 +273,18 @@ import { StorageManager } from './src/js/core/StorageManager.js';
 import { ThemeManager } from './src/js/core/ThemeManager.js';
 import { MermaidService } from './src/js/services/MermaidService.js';
 import { PrismService } from './src/js/services/PrismService.js';
+import { FolderBrowserService } from './src/js/services/FolderBrowserService.js';
+import { PDFService } from './src/js/services/PDFService.js';
+import { HTMLService } from './src/js/services/HTMLService.js';
 
 // Initialize with dependency injection
 const storageManager = new StorageManager();
 const themeManager = new ThemeManager(storageManager);
 const mermaidService = new MermaidService();
 const prismService = new PrismService();
+const folderBrowserService = new FolderBrowserService(storageManager);
+const pdfService = new PDFService();
+const htmlService = new HTMLService();
 
 // Configure observer pattern
 themeManager.setThemeChangeListener(() => {
@@ -212,11 +298,13 @@ themeManager.setThemeChangeListener(() => {
 
 ### Test Coverage
 
-- **Total Tests**: 155 (all passing ✅)
+- **Total Tests**: 155+ (all passing ✅)
 - **Baseline Tests**: 98 (functional integrity)
-- **Unit Tests**: 57 (module-specific)
-  - Services: 23 tests
+- **Unit Tests**: 57+ (module-specific)
+  - Services: 23+ tests
   - Core: 34 tests
+  - Utils: 20+ tests
+  - Config: 5+ tests
 - **Coverage**: >85% across all modules
 
 ### Test Structure
@@ -226,12 +314,18 @@ tests/
 ├── baseline/
 │   └── current-functionality.test.js  # 98 integration tests
 └── unit/
+    ├── config/
+    │   └── errorMessages.test.js
     ├── services/
-    │   ├── MermaidService.test.js      # 11 tests
-    │   └── PrismService.test.js        # 12 tests
-    └── core/
-        ├── StorageManager.test.js      # 18 tests
-        └── ThemeManager.test.js        # 16 tests
+    │   ├── FolderBrowserService.test.js
+    │   ├── MermaidService.test.js
+    │   └── PrismService.test.js
+    ├── core/
+    │   ├── StorageManager.test.js
+    │   └── ThemeManager.test.js
+    └── utils/
+        ├── colorHelpers.test.js
+        └── validators.test.js
 ```
 
 ### Running Tests
@@ -264,6 +358,7 @@ npm test -- --watch
 | **Forest**   | ✅    | ✅   | Environmental content, natural topics |
 | **Sunset**   | ✅    | ✅   | Warm content, personal writing        |
 | **Obsidian** | ✅    | ✅   | Clean minimal design, focus mode      |
+| **Nebula** (NEW) | ✅    | ✅   | Cosmic themes, sci-fi content     |
 
 ### Creating Custom Themes
 
@@ -301,7 +396,45 @@ npm test -- --watch
 
 ---
 
+## 📱 Browser Compatibility
+
+| Browser | Version | Status |
+|---------|---------|--------|
+| Chrome | 86+ | ✅ Full support |
+| Firefox | 90+ | ✅ Full support (no folder browser) |
+| Safari | 14+ | ✅ Full support (enterprise CSS fix) |
+| Edge | 86+ | ✅ Full support |
+| Safari iOS | 14+ | ✅ Mobile optimized |
+
+**Note**: Folder Browser feature requires File System Access API (Chrome/Edge 86+)
+
+---
+
 ## 📚 API Reference
+
+### FolderBrowserService (NEW)
+
+```javascript
+const folderService = new FolderBrowserService(storageManager);
+
+// Check support
+if (folderService.isSupported()) {
+  // Open folder dialog
+  const result = await folderService.openFolder();
+  // result: { success, files, folderName, totalFiles }
+
+  // Read file
+  const fileResult = await folderService.readFile(fileHandle);
+  // fileResult: { success, content, name, size }
+
+  // Create new file
+  const createResult = await folderService.createFile(dirHandle, filename, content);
+  // createResult: { success, filename, fileHandle }
+
+  // Refresh folder
+  const refreshResult = await folderService.refreshFolder();
+}
+```
 
 ### StorageManager
 
@@ -370,21 +503,24 @@ if (mermaidService.isReady()) {
 }
 ```
 
-### PrismService
+### PDFService (NEW)
 
 ```javascript
-const prismService = new PrismService();
+const pdfService = new PDFService();
 
-// Highlight all code blocks in container
-const count = prismService.highlightAll(previewElement);
+// Generate PDF with options
+const blob = await pdfService.generatePDF(previewElement, {
+  pageSize: 'A4',
+  orientation: 'portrait',
+  margins: [10, 10, 10, 10],
+  fontSize: 12
+});
 
-// Highlight single block
-const success = prismService.highlightElement(codeBlock);
+// Preview PDF in iframe
+const url = await pdfService.previewPDF(previewElement, config);
 
-// Check readiness
-if (prismService.isReady()) {
-  const languages = prismService.getSupportedLanguages();
-}
+// Download PDF
+pdfService.downloadPDF();
 ```
 
 ---
@@ -403,7 +539,7 @@ if (prismService.isReady()) {
 ### Commit Message Format
 
 ```
-<type>(<scope>): <description>
+<emoji> <type>(<scope>): <description>
 
 [optional body]
 
@@ -412,17 +548,25 @@ if (prismService.isReady()) {
 
 **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`
 
+**Emojis**:
+- ✨ `feat` - New feature
+- 🐛 `fix` - Bug fix
+- 📝 `docs` - Documentation
+- ♻️ `refactor` - Code refactoring
+- ✅ `test` - Tests
+- 🔧 `chore` - Maintenance
+
 **Example**:
 
 ```
-feat(theme): add Nord theme variant
+✨ feat(browser): add file creation with templates
 
-- Implement light and dark variants
-- Add Nord color palette
-- Update theme selector
-- Add unit tests
+- Implement createFile method in FolderBrowserService
+- Add 5 templates (empty, basic, readme, notes, blog)
+- Add create file modal with form validation
+- Add unit tests for new functionality
 
-Closes #123
+Closes #45
 ```
 
 ### Pull Request Process
@@ -430,7 +574,7 @@ Closes #123
 1. Fork the repository
 2. Create feature branch (`git checkout -b feature/amazing-feature`)
 3. Make changes with tests
-4. Run `npm test` (all 155 must pass)
+4. Run `npm test` (all must pass)
 5. Run `npm run lint` (zero warnings)
 6. Run `npm run review` (address AI feedback)
 7. Commit with conventional format
@@ -475,11 +619,22 @@ npm run build
 - Verify diagram syntax
 - Check browser console for errors
 
+**Folder Browser not working?**
+
+- Requires Chrome 86+ or Edge 86+
+- Firefox/Safari don't support File System Access API
+- Check for permission prompts
+
+**PDF export fails on Safari?**
+
+- This is fixed in the latest version
+- Uses fallback colors for Safari compatibility
+
 ---
 
 ## 📊 Performance
 
-- **Bundle Size**: <100KB (gzipped)
+- **Bundle Size**: <500KB (gzipped) - includes Mermaid, KaTeX, Prism
 - **First Paint**: <500ms
 - **Time to Interactive**: <1s
 - **Lighthouse Score**: 95+
@@ -489,10 +644,11 @@ npm run build
 ## 🔒 Security
 
 - No dependencies with known vulnerabilities
-- Input sanitization on all user content
+- Input sanitization via DOMPurify
 - XSS prevention with proper encoding
 - CSP headers recommended for production
 - Regular security audits with `npm audit`
+- File system access scoped to selected folders only
 
 ---
 
@@ -507,6 +663,9 @@ MIT License - See LICENSE file for details
 - [Marked.js](https://marked.js.org/) - Markdown parsing
 - [Prism.js](https://prismjs.com/) - Syntax highlighting
 - [Mermaid.js](https://mermaid-js.github.io/) - Diagram rendering
+- [KaTeX](https://katex.org/) - LaTeX math rendering
+- [html2pdf.js](https://github.com/eKoopmans/html2pdf.js) - PDF generation
+- [DOMPurify](https://github.com/cure53/DOMPurify) - HTML sanitization
 - [Vite](https://vitejs.dev/) - Build tooling
 - [Vitest](https://vitest.dev/) - Testing framework
 
@@ -514,13 +673,13 @@ MIT License - See LICENSE file for details
 
 ## 📞 Support
 
-- 📖 [Documentation](./DOCS_README.md)
-- 🏗️ [Architecture Guide](./ARCHITECTURE.md)
-- 🐛 [Issue Tracker](https://github.com/yourusername/markdown-viewer-app/issues)
-- 💬 [Discussions](https://github.com/yourusername/markdown-viewer-app/discussions)
+- 📖 [Documentation](./docs/README.md)
+- 🏗️ [Architecture Guide](./docs/02-architecture/architecture.md)
+- 🐛 [Issue Tracker](https://github.com/PrakharMNNIT/markdown-viewer-app/issues)
+- 💬 [Discussions](https://github.com/PrakharMNNIT/markdown-viewer-app/discussions)
 
 ---
 
 **Built with ❤️ using modern JavaScript, comprehensive testing, and scalable architecture.**
 
-**Status**: Production-ready ✅ | Tests: 155/155 passing ✅ | Technical Debt: Zero ✅
+**Status**: Production-ready ✅ | Tests: 155+/155+ passing ✅ | Technical Debt: Zero ✅
