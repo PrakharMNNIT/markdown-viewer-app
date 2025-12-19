@@ -77,12 +77,57 @@ Implement a donation/support system that:
 
 | Location | Type | Priority |
 |----------|------|----------|
-| Web App Footer | "Support" button | **P0 (PRIMARY)** |
+| Web App Footer | "Support" button with smart routing | **P0 (PRIMARY)** |
+| Web App Header | GitHub Sponsors button | **P0 (PRIMARY)** |
 | GitHub Repository | Sponsor button | P1 |
 | README.md | Badge/button with link | P2 (SECONDARY) |
 | RELEASE.md | Acknowledgment section | P3 |
 
-> **Priority Update (Per Sr. Principal SDE Review):** Web App integration is PRIMARY, README is SECONDARY
+> **Priority Update (Per User Feedback):** Web App integration (Header + Footer) is PRIMARY, README is SECONDARY
+
+### FR-4.1: Web App UI Integration
+
+| Component | Content | Behavior |
+|-----------|---------|----------|
+| **Header** | GitHub Sponsors button | Static link to `github.com/sponsors/PrakharMNNIT` |
+| **Footer** | "☕ Support via Ko-fi" OR "🇮🇳 Support via UPI" | IP-based smart routing with fallback |
+| **Footer** | "In India? Use UPI" toggle | Manual override for VPN users |
+| **Modal Popup** | All 3 options (GitHub Sponsors, Ko-fi, Razorpay) | One-time popup after 5 seconds |
+
+### FR-4.2: Support Modal Popup (NEW)
+
+| Requirement | Specification |
+|-------------|---------------|
+| **Trigger** | 5 seconds after page load |
+| **Frequency** | One-time only (use localStorage flag) |
+| **Content** | All 3 donation options |
+| **Dismissal** | Close button (X) or click outside |
+| **Persistence** | Remember dismissal in localStorage |
+
+**Modal Layout:**
+```
+┌─────────────────────────────────────────────┐
+│  ☕ Support Markdown Viewer Pro        [X]  │
+├─────────────────────────────────────────────┤
+│                                             │
+│  If you find this tool useful, consider     │
+│  supporting its development:                │
+│                                             │
+│  ┌─────────────┐ ┌─────────────┐           │
+│  │ ❤️ GitHub   │ │ ☕ Ko-fi    │           │
+│  │  Sponsors   │ │  (Global)   │           │
+│  │   (0% fee)  │ │  (PayPal)   │           │
+│  └─────────────┘ └─────────────┘           │
+│                                             │
+│  ┌─────────────────────────────┐           │
+│  │ 🇮🇳 Razorpay (UPI/Cards)    │           │
+│  │    For Indian supporters    │           │
+│  └─────────────────────────────┘           │
+│                                             │
+│  [ ] Don't show this again                  │
+│                                             │
+└─────────────────────────────────────────────┘
+```
 
 ### FR-5: Multi-Platform Support
 
@@ -712,7 +757,8 @@ async function renderSupportButton(container) {
 |----------|--------|--------|-------|
 | **P0** | Create Ko-fi account | ⏳ Pending | Immediate |
 | **P0** | Create Razorpay account (KYC) | ⏳ Pending | PAN/Aadhaar required |
-| **P0** | Add support button to Web App footer | ⏳ Pending | **PRIMARY** |
+| **P0** | Add GitHub Sponsors button to Web App header | ✅ Complete | **PRIMARY** |
+| **P0** | Add support button to Web App footer | ✅ Complete | **PRIMARY** |
 | **P1** | Apply for GitHub Sponsors | ⏳ Pending | 2-4 week wait |
 | **P2** | Add static badges to README.md | ⏳ Pending | **SECONDARY** (after GH approval) |
 | **P3** | IP-based smart routing in web app | ⏳ Future | Only with fail-safe pattern |
@@ -761,14 +807,16 @@ async function renderSupportButton(container) {
 │                                                                  │
 │  PHASE 1: WEB APP (PRIMARY) - Immediate                          │
 │  ┌───────────────────────────────────────────────────────────┐  │
-│  │  Footer Button: "☕ Support This Project"                  │  │
+│  │  HEADER:                                                   │  │
+│  │  └─ GitHub Sponsors button (static link)                  │  │
 │  │                                                            │  │
-│  │  IP Detection (Fail-Safe):                                 │  │
-│  │  ├─ India → "🇮🇳 Support via UPI" → Razorpay              │  │
-│  │  ├─ Others → "🌏 Support via PayPal" → Ko-fi              │  │
-│  │  └─ Fallback (API fail/timeout) → Ko-fi (Global)          │  │
-│  │                                                            │  │
-│  │  MANDATORY: "Not in India? Click here" toggle              │  │
+│  │  FOOTER:                                                   │  │
+│  │  ├─ Smart Routing Button: "☕ Support This Project"        │  │
+│  │  │  ├─ India → "🇮🇳 Support via UPI" → Razorpay          │  │
+│  │  │  ├─ Others → "🌏 Support via Ko-fi" → Ko-fi            │  │
+│  │  │  └─ Fallback (API fail/timeout) → Ko-fi (Global)       │  │
+│  │  │                                                         │  │
+│  │  └─ Toggle: "In India? Use UPI" (manual override)         │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                  │
 │  PHASE 2: README (SECONDARY) - After GH Sponsors Approval        │

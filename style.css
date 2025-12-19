@@ -2045,6 +2045,128 @@ body {
   color: white;
 }
 
+/* ==================== SUPPORT MODAL ==================== */
+.support-modal .modal-content {
+  max-width: 420px;
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.support-modal h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  color: var(--h1-color);
+}
+
+.support-modal-desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.support-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.support-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+}
+
+.support-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.support-option-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.support-option-title {
+  font-weight: 600;
+  font-size: 15px;
+  display: block;
+}
+
+.support-option-desc {
+  font-size: 12px;
+  opacity: 0.8;
+  display: block;
+}
+
+/* GitHub Sponsors option */
+.support-option--github {
+  background: linear-gradient(135deg, #ea4aaa 0%, #db61a2 100%);
+  color: white;
+}
+
+.support-option--github:hover {
+  background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+/* Ko-fi option */
+.support-option--kofi {
+  background: linear-gradient(135deg, #29ABE0 0%, #1E88E5 100%);
+  color: white;
+}
+
+.support-option--kofi:hover {
+  background: linear-gradient(135deg, #4FC3F7 0%, #42A5F5 100%);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+/* Razorpay option */
+.support-option--razorpay {
+  background: linear-gradient(135deg, #FF9933 0%, #FF6B00 100%);
+  color: white;
+}
+
+.support-option--razorpay:hover {
+  background: linear-gradient(135deg, #FFB366 0%, #FF8533 100%);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.support-modal-footer {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.dont-show-again {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.dont-show-again input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.dont-show-again:hover {
+  color: var(--text-primary);
+}
+
 /* ==================== ZEN MODE ==================== */
 /* Zen Mode: Focused reading mode showing ONLY the preview */
 body.zen-mode {

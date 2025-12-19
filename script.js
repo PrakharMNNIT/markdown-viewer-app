@@ -354,6 +354,81 @@ function initializeApp() {
 
   // Initialize support widget (donation button in footer)
   initSupportWidget();
+
+  // Initialize support modal (one-time popup)
+  initSupportModal();
+}
+
+// ==================== SUPPORT MODAL (ONE-TIME POPUP) ====================
+const SUPPORT_MODAL_SHOWN_KEY = 'support_modal_shown';
+const SUPPORT_MODAL_DELAY_MS = 5000; // 5 seconds
+
+/**
+ * Initialize support modal - shows once after 5 seconds
+ */
+function initSupportModal() {
+  const modal = document.getElementById('support-modal');
+  const closeBtn = document.getElementById('close-support-modal');
+  const dontShowAgainCheckbox = document.getElementById('support-dont-show-again');
+
+  if (!modal || !closeBtn) {
+    console.warn('[SupportModal] Modal elements not found');
+    return;
+  }
+
+  // Check if already shown before
+  const alreadyShown = localStorage.getItem(SUPPORT_MODAL_SHOWN_KEY);
+  if (alreadyShown === 'true') {
+    console.log('[SupportModal] Already shown before, skipping');
+    return;
+  }
+
+  // Show modal after delay
+  setTimeout(() => {
+    modal.classList.add('active');
+    console.log('[SupportModal] Showing support modal');
+  }, SUPPORT_MODAL_DELAY_MS);
+
+  // Close button handler
+  closeBtn.addEventListener('click', () => {
+    closeSupportModal(modal, dontShowAgainCheckbox);
+  });
+
+  // Click outside to close
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeSupportModal(modal, dontShowAgainCheckbox);
+    }
+  });
+
+  // Escape key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeSupportModal(modal, dontShowAgainCheckbox);
+    }
+  });
+
+  // Track clicks on support options
+  modal.querySelectorAll('.support-option').forEach(option => {
+    option.addEventListener('click', () => {
+      // Mark as shown when user clicks a support option
+      localStorage.setItem(SUPPORT_MODAL_SHOWN_KEY, 'true');
+      console.log('[SupportModal] User clicked support option, marking as shown');
+    });
+  });
+}
+
+/**
+ * Close the support modal
+ */
+function closeSupportModal(modal, checkbox) {
+  modal.classList.remove('active');
+
+  // If "Don't show again" is checked, remember it
+  if (checkbox && checkbox.checked) {
+    localStorage.setItem(SUPPORT_MODAL_SHOWN_KEY, 'true');
+    console.log('[SupportModal] User opted out of future modals');
+  }
 }
 
 // ==================== SUPPORT WIDGET (DONATION ROUTER) ====================

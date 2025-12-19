@@ -702,6 +702,42 @@
       </div>
     </div>
 
+    <!-- Support Modal (One-time popup with all 3 options) -->
+    <div id="support-modal" class="modal support-modal" role="dialog" aria-modal="true" aria-labelledby="support-modal-title">
+      <div class="modal-content support-modal-content">
+        <button class="close-btn" id="close-support-modal" aria-label="Close">&times;</button>
+        <h2 id="support-modal-title">☕ Support Markdown Viewer Pro</h2>
+        <p class="support-modal-desc">If you find this tool useful, consider supporting its development:</p>
+
+        <div class="support-options">
+          <a href="https://github.com/sponsors/PrakharMNNIT?ref=webapp_modal" target="_blank" rel="noopener noreferrer" class="support-option support-option--github">
+            <span class="support-option-icon">❤️</span>
+            <span class="support-option-title">GitHub Sponsors</span>
+            <span class="support-option-desc">0% fee • For developers</span>
+          </a>
+
+          <a href="https://ko-fi.com/praxlannister?ref=webapp_modal" target="_blank" rel="noopener noreferrer" class="support-option support-option--kofi">
+            <span class="support-option-icon">☕</span>
+            <span class="support-option-title">Ko-fi</span>
+            <span class="support-option-desc">PayPal • Global</span>
+          </a>
+
+          <a href="https://razorpay.me/@prakharshekharparthasarthi?notes[source]=webapp_modal" target="_blank" rel="noopener noreferrer" class="support-option support-option--razorpay">
+            <span class="support-option-icon">🇮🇳</span>
+            <span class="support-option-title">Razorpay</span>
+            <span class="support-option-desc">UPI/Cards • India</span>
+          </a>
+        </div>
+
+        <div class="support-modal-footer">
+          <label class="dont-show-again">
+            <input type="checkbox" id="support-dont-show-again" />
+            <span>Don't show this again</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
     <!-- Main Script -->
     <script type="module" src="script.js"></script>
   </body>
