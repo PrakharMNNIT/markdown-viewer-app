@@ -789,6 +789,19 @@ body {
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
 }
 
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-separator {
+  color: var(--border-color);
+  font-weight: 300;
+}
+
 .app-footer a {
   color: var(--link-color);
   text-decoration: none;
@@ -799,6 +812,112 @@ body {
 .app-footer a:hover {
   color: var(--link-hover);
   text-decoration: underline;
+}
+
+/* ==================== SUPPORT WIDGET ==================== */
+.support-widget-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  /* CLS mitigation - reserve space before JS loads */
+}
+
+.support-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.support-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+/* Skeleton loader state */
+.support-button--loading {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  color: #888;
+  border: none;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* India UPI style - Orange/Saffron theme */
+.support-button--india {
+  background: linear-gradient(135deg, #FF9933 0%, #FF6B00 100%);
+  color: white;
+  border: none;
+}
+
+.support-button--india:hover {
+  background: linear-gradient(135deg, #FFB366 0%, #FF8533 100%);
+  color: white;
+}
+
+/* Global PayPal style - Blue theme */
+.support-button--global {
+  background: linear-gradient(135deg, #29ABE0 0%, #1E88E5 100%);
+  color: white;
+  border: none;
+}
+
+.support-button--global:hover {
+  background: linear-gradient(135deg, #4FC3F7 0%, #42A5F5 100%);
+  color: white;
+}
+
+/* Region toggle button */
+.support-toggle {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: underline;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0;
+}
+
+.support-toggle:hover {
+  opacity: 1;
+  color: var(--link-color);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-separator {
+    display: none;
+  }
+
+  .support-widget-container {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 /* ==================== MERMAID DIAGRAMS ==================== */

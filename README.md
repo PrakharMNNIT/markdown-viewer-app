@@ -7,6 +7,10 @@
 [![Code Quality](https://img.shields.io/badge/code%20quality-A+-brightgreen)]()
 [![Zero Technical Debt](https://img.shields.io/badge/technical%20debt-zero-brightgreen)]()
 
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4-pink?logo=github)](https://github.com/sponsors/PrakharMNNIT)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-blue?logo=ko-fi)](https://ko-fi.com/praxlannister)
+[![Razorpay](https://img.shields.io/badge/Razorpay-₹_Support-brightgreen)](https://razorpay.me/@prakharshekharparthasarthi)
+
 ---
 
 ## ✨ Features
@@ -677,6 +681,29 @@ MIT License - See LICENSE file for details
 - 🏗️ [Architecture Guide](./docs/02-architecture/architecture.md)
 - 🐛 [Issue Tracker](https://github.com/PrakharMNNIT/markdown-viewer-app/issues)
 - 💬 [Discussions](https://github.com/PrakharMNNIT/markdown-viewer-app/discussions)
+
+---
+
+---
+
+## 💖 Support This Project
+
+If you find Markdown Viewer Pro useful, consider supporting its development:
+
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4-pink?logo=github&style=for-the-badge)](https://github.com/sponsors/PrakharMNNIT)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-blue?logo=ko-fi&style=for-the-badge)](https://ko-fi.com/praxlannister)
+[![Razorpay](https://img.shields.io/badge/Razorpay-₹_UPI-brightgreen?style=for-the-badge)](https://razorpay.me/@prakharshekharparthasarthi)
+
+### Support Tiers
+
+| Tier | Amount (USD) | Amount (INR) | Perks |
+|------|--------------|--------------|-------|
+| ☕ Coffee | $1 | ₹50 | My gratitude! |
+| 🍕 Pizza | $5 | ₹250 | Name in SUPPORTERS.md |
+| 🎉 Patron | $20 | ₹1000 | Name in README |
+| 💎 Champion | $50+ | ₹2500+ | Logo in README |
+
+Your support helps maintain and improve this project. Every contribution is appreciated! 🙏
 
 ---
 

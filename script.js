@@ -351,6 +351,120 @@ function initializeApp() {
 
   // Setup the editor
   setupEditor();
+
+  // Initialize support widget (donation button in footer)
+  initSupportWidget();
+}
+
+// ==================== SUPPORT WIDGET (DONATION ROUTER) ====================
+/**
+ * Enterprise-grade geo-based donation routing
+ * - 300ms timeout with fail-safe to global
+ * - Session caching to avoid repeated API calls
+ * - CLS mitigation via skeleton loader
+ */
+const SUPPORT_TIMEOUT_MS = 300;
+const SUPPORT_FALLBACK_REGION = 'global';
+const SUPPORT_CACHE_KEY = 'support_user_region';
+
+/**
+ * Detect user region with fail-safe pattern
+ * @returns {Promise<string>} 'india' or 'global'
+ */
+async function detectSupportRegion() {
+  // 1. Check session cache first (FR-1.4)
+  const cached = sessionStorage.getItem(SUPPORT_CACHE_KEY);
+  if (cached) {
+    console.log(`[SupportWidget] Using cached region: ${cached}`);
+    return cached;
+  }
+
+  try {
+    // 2. Race: Network vs Timeout (300ms)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), SUPPORT_TIMEOUT_MS);
+
+    const response = await fetch('https://ipapi.co/json/', {
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+
+    const data = await response.json();
+    const region = data.country_code === 'IN' ? 'india' : 'global';
+
+    // 3. Cache result for session
+    sessionStorage.setItem(SUPPORT_CACHE_KEY, region);
+    console.log(`[SupportWidget] Detected region: ${region} (${data.country_code})`);
+    return region;
+  } catch (error) {
+    // 4. Fail open - silent fail to global
+    console.warn('[SupportWidget] Geo-lookup failed/timed-out, defaulting to Global.', error.message);
+    return SUPPORT_FALLBACK_REGION;
+  }
+}
+
+/**
+ * Toggle between India and Global support options
+ */
+function toggleSupportRegion() {
+  const currentRegion = sessionStorage.getItem(SUPPORT_CACHE_KEY) || SUPPORT_FALLBACK_REGION;
+  const newRegion = currentRegion === 'india' ? 'global' : 'india';
+  sessionStorage.setItem(SUPPORT_CACHE_KEY, newRegion);
+  renderSupportWidget(newRegion);
+  console.log(`[SupportWidget] Toggled region: ${currentRegion} → ${newRegion}`);
+}
+
+// Make toggle function globally accessible for onclick
+window.toggleSupportRegion = toggleSupportRegion;
+
+/**
+ * Render support widget based on region
+ * @param {string} region - 'india' or 'global'
+ */
+function renderSupportWidget(region) {
+  const container = document.getElementById('support-widget');
+  if (!container) return;
+
+  const config = region === 'india'
+    ? {
+      text: '🇮🇳 Support via UPI',
+      url: 'https://razorpay.me/@prakharshekharparthasarthi?notes[source]=webapp_footer',
+      className: 'support-button--india',
+      toggleText: 'Not in India?',
+    }
+    : {
+      text: '☕ Support via Ko-fi',
+      url: 'https://ko-fi.com/praxlannister?ref=webapp_footer',
+      className: 'support-button--global',
+      toggleText: 'In India? Use UPI',
+    };
+
+  container.innerHTML = `
+    <a href="${config.url}" target="_blank" rel="noopener noreferrer" class="support-button ${config.className}">
+      ${config.text}
+    </a>
+    <button class="support-toggle" onclick="toggleSupportRegion()">${config.toggleText}</button>
+  `;
+}
+
+/**
+ * Initialize support widget with skeleton loader and geo detection
+ */
+async function initSupportWidget() {
+  const container = document.getElementById('support-widget');
+  if (!container) {
+    console.warn('[SupportWidget] Container not found, skipping initialization');
+    return;
+  }
+
+  console.log('[SupportWidget] Initializing...');
+
+  // Skeleton is already in HTML (CLS mitigation)
+  // Now detect region and hydrate
+  const region = await detectSupportRegion();
+  renderSupportWidget(region);
+
+  console.log(`[SupportWidget] ✅ Initialized with region: ${region}`);
 }
 
 /**
