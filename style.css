@@ -224,6 +224,47 @@ body {
   overflow: auto;
   /* Single scrollbar for preview container */
   min-width: 200px;
+  /* Anchor Navigation - scroll offset for fixed toolbar */
+  scroll-padding-top: var(--scroll-offset, 80px);
+}
+
+/* ==================== ANCHOR NAVIGATION ==================== */
+
+/* Target highlight animation */
+.preview-container :target {
+  animation: anchor-highlight 2s ease-out;
+}
+
+@keyframes anchor-highlight {
+  0% {
+    background-color: rgba(255, 255, 0, 0.3);
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* Focus management - hide outline for mouse clicks */
+.preview-container h1[id]:focus:not(:focus-visible),
+.preview-container h2[id]:focus:not(:focus-visible),
+.preview-container h3[id]:focus:not(:focus-visible),
+.preview-container h4[id]:focus:not(:focus-visible),
+.preview-container h5[id]:focus:not(:focus-visible),
+.preview-container h6[id]:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Keyboard focus gets visible indicator */
+.preview-container h1[id]:focus-visible,
+.preview-container h2[id]:focus-visible,
+.preview-container h3[id]:focus-visible,
+.preview-container h4[id]:focus-visible,
+.preview-container h5[id]:focus-visible,
+.preview-container h6[id]:focus-visible {
+  outline: 2px solid var(--h1-color, #007bff);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .preview-header {

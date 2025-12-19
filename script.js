@@ -29,6 +29,287 @@ window.katex = katex;
 window.html2pdf = html2pdf;
 window.markedFootnote = markedFootnote;
 
+// ==================== ANCHOR NAVIGATION ====================
+// Heading slug tracking (module-level singleton for marked.js singleton)
+const headingSlugMap = new Map();
+
+// Pre-compiled slug replacements (zero GC pressure per render)
+const SLUG_REPLACEMENTS = [
+  [/c\+\+/gi, 'cpp'],
+  [/c#/gi, 'csharp'],
+  [/f#/gi, 'fsharp'],
+  [/\.net/gi, 'dotnet'],
+];
+
+/**
+ * Reset slug map (call before each parse)
+ */
+function resetSlugMap() {
+  headingSlugMap.clear();
+}
+
+/**
+ * Generate URL-safe slug from heading text
+ * @param {string} text - Raw heading text (may include HTML)
+ * @param {Map<string, number>} seen - Duplicate tracking map
+ * @returns {string} URL-safe slug
+ */
+function generateSlug(text, seen = headingSlugMap) {
+  // Strip HTML tags
+  let slug = text.replace(/<[^>]*>/g, '');
+
+  // Normalize Unicode
+  slug = slug.normalize('NFC').toLowerCase();
+
+  // Replace programming terms (pre-compiled patterns)
+  for (const [pattern, replacement] of SLUG_REPLACEMENTS) {
+    slug = slug.replace(pattern, replacement);
+  }
+
+  // Clean up: remove non-word chars, spaces to hyphens, collapse hyphens
+  slug = slug
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  // Fallback for empty result
+  if (!slug) slug = 'section';
+
+  // Handle duplicates (header, header-1, header-2)
+  const baseSlug = slug;
+  const count = seen.get(baseSlug) || 0;
+  if (count > 0) slug = `${baseSlug}-${count}`;
+  seen.set(baseSlug, count + 1);
+
+  return slug;
+}
+
+/**
+ * Anchor Navigation Module
+ * Handles in-document anchor navigation with scoped selection
+ */
+const AnchorNavigation = {
+  container: null,
+  pendingScroll: null,
+
+  /**
+   * Initialize anchor navigation
+   * @param {HTMLElement} previewContainer - Scrollable preview container
+   */
+  init(previewContainer) {
+    this.container = previewContainer;
+
+    // Event delegation for anchor clicks
+    this.container.addEventListener('click', this.handleClick.bind(this));
+
+    // Browser back/forward navigation
+    window.addEventListener('hashchange', this.handleHashChange.bind(this));
+
+    // Initial page load with hash
+    if (window.location.hash) {
+      requestAnimationFrame(() => {
+        this.scrollToHash(window.location.hash.slice(1), false);
+      });
+    }
+
+    console.log('✅ Anchor navigation initialized');
+  },
+
+  /**
+   * Handle click events (delegated)
+   */
+  handleClick(event) {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    // Ignore external links
+    if (link.hostname && link.hostname !== window.location.hostname) return;
+
+    event.preventDefault();
+
+    const hash = link.getAttribute('href').slice(1);
+    this.scrollToHash(hash, true);
+
+    // Update URL without triggering hashchange
+    history.pushState(null, '', `#${hash}`);
+  },
+
+  /**
+   * Handle hashchange (browser back/forward)
+   */
+  handleHashChange() {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      this.scrollToHash(hash, true);
+    } else {
+      this.scrollToTop(true);
+    }
+  },
+
+  /**
+   * Scroll to element by hash
+   * @param {string} hash - URL hash (without #)
+   * @param {boolean} smooth - Use smooth scrolling
+   */
+  scrollToHash(hash, smooth = true) {
+    // Cancel pending scroll (handle concurrent clicks)
+    if (this.pendingScroll) {
+      clearTimeout(this.pendingScroll);
+      this.pendingScroll = null;
+    }
+
+    if (!hash) {
+      this.scrollToTop(smooth);
+      return;
+    }
+
+    const target = this.resolveTarget(hash);
+    if (!target) return;
+
+    target.scrollIntoView({
+      behavior: smooth ? 'smooth' : 'instant',
+      block: 'start',
+    });
+
+    this.manageFocus(target, smooth);
+  },
+
+  /**
+   * Scroll to top of container
+   */
+  scrollToTop(smooth = true) {
+    this.container.scrollTo({
+      top: 0,
+      behavior: smooth ? 'smooth' : 'instant',
+    });
+  },
+
+  /**
+   * Resolve target element - SCOPED to container (prevents app shell collision)
+   * @param {string} hash - URL hash
+   * @returns {Element|null} Target element or null
+   */
+  resolveTarget(hash) {
+    if (!hash) return null;
+
+    // Decode URI components safely
+    let decodedHash;
+    try {
+      decodedHash = decodeURIComponent(hash);
+    } catch {
+      decodedHash = hash;
+    }
+
+    // Priority 1: Exact ID (SCOPED to container)
+    let target = this.container.querySelector(`#${CSS.escape(decodedHash)}`);
+    if (target) return target;
+
+    // Priority 2: Normalized ID with our custom replacements (C++ → cpp)
+    const normalized = this.normalizeHash(decodedHash);
+    target = this.container.querySelector(`#${CSS.escape(normalized)}`);
+    if (target) return target;
+
+    // Priority 3: GitHub-style normalization (C++ → c, keeps double hyphens)
+    const githubStyle = this.normalizeHashGitHub(decodedHash);
+    target = this.container.querySelector(`#${CSS.escape(githubStyle)}`);
+    if (target) return target;
+
+    // Priority 4: Try all headings for fuzzy match (last resort)
+    const fuzzyTarget = this.fuzzyMatchHeading(decodedHash);
+    if (fuzzyTarget) return fuzzyTarget;
+
+    console.warn(`[AnchorNav] Target not found: "${hash}"`);
+    return null;
+  },
+
+  /**
+   * Normalize hash with our custom replacements (C++ → cpp)
+   * @param {string} hash - Raw hash string
+   * @returns {string} Normalized hash
+   */
+  normalizeHash(hash) {
+    let slug = hash.normalize('NFC').toLowerCase();
+
+    // Apply our custom transformations (C++ → cpp, etc.)
+    for (const [pattern, replacement] of SLUG_REPLACEMENTS) {
+      slug = slug.replace(pattern, replacement);
+    }
+
+    return slug
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'section';
+  },
+
+  /**
+   * GitHub-style normalization (more lenient, keeps structure)
+   * @param {string} hash - Raw hash string
+   * @returns {string} GitHub-style normalized hash
+   */
+  normalizeHashGitHub(hash) {
+    // GitHub algorithm: lowercase, remove non-alphanumeric except hyphens
+    // Does NOT collapse multiple hyphens, does NOT replace C++ with cpp
+    return hash
+      .normalize('NFC')
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'section';
+  },
+
+  /**
+   * Fuzzy match heading by text content similarity
+   * @param {string} hash - Hash to find
+   * @returns {Element|null} Matching heading or null
+   */
+  fuzzyMatchHeading(hash) {
+    const headings = this.container.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
+    const normalizedSearch = hash.toLowerCase().replace(/[^\w]/g, '');
+
+    for (const heading of headings) {
+      const headingId = heading.id.toLowerCase().replace(/[^\w]/g, '');
+      // Check if the search term is contained in the ID or vice versa
+      if (headingId.includes(normalizedSearch) || normalizedSearch.includes(headingId)) {
+        console.log(`[AnchorNav] Fuzzy matched "${hash}" → "${heading.id}"`);
+        return heading;
+      }
+    }
+    return null;
+  },
+
+  /**
+   * Manage focus after scroll (accessibility)
+   * @param {Element} target - Target element
+   * @param {boolean} smooth - Was smooth scroll used
+   */
+  manageFocus(target, smooth) {
+    const focusTarget = () => {
+      // Make heading focusable if not already
+      if (!target.hasAttribute('tabindex')) {
+        target.setAttribute('tabindex', '-1');
+      }
+      target.focus({ preventScroll: true });
+    };
+
+    if (!smooth) {
+      focusTarget();
+      return;
+    }
+
+    // Modern browsers: use scrollend event
+    if ('onscrollend' in this.container) {
+      this.container.addEventListener('scrollend', focusTarget, { once: true });
+    } else {
+      // Fallback: estimate scroll duration (max 1000ms for safety)
+      const distance = Math.abs(target.getBoundingClientRect().top);
+      const duration = Math.min(Math.max(distance / 2, 300), 1000);
+      this.pendingScroll = setTimeout(focusTarget, duration + 50);
+    }
+  },
+};
+
 // Initialize services and managers
 const storageManager = new StorageManager();
 const themeManager = new ThemeManager(storageManager);
@@ -360,6 +641,19 @@ function configureMarkedExtensions() {
   });
 
   console.log('✅ Marked.js configured with all extensions (LaTeX, subscript, superscript)');
+
+  // Custom heading renderer with ID generation for anchor navigation
+  marked.use({
+    renderer: {
+      heading(token) {
+        const text = this.parser.parseInline(token.tokens);
+        const level = token.depth;
+        const slug = generateSlug(text, headingSlugMap);
+        return `<h${level} id="${slug}">${text}</h${level}>\n`;
+      }
+    }
+  });
+  console.log('✅ Custom heading renderer enabled (anchor navigation IDs)');
 }
 
 // Initialize Mermaid using MermaidService (prefixed to indicate future use)
@@ -550,6 +844,9 @@ graph TD
   // Render markdown (expose globally for theme changes)
   function renderMarkdown() {
     try {
+      // Reset slug map before parsing (singleton-safe pattern)
+      resetSlugMap();
+
       const markdownText = editor.value;
 
       // Parse markdown with all extensions
@@ -2000,6 +2297,9 @@ Wrap up your thoughts and include a call to action.
 
   // Initialize expand button visibility on load
   updateExpandButtonVisibility();
+
+  // Initialize anchor navigation for TOC links
+  AnchorNavigation.init(previewContainer);
 
   // DON'T render immediately - wait for theme to load
   // renderMarkdown will be called after theme loads above

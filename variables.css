@@ -11,13 +11,18 @@
   /* ==================== NEBULA DARK (Default) ==================== */
 
   /* Core Backgrounds */
-  --bg-universe: #050508;     /* The void */
-  --bg-element: #0f1123;      /* Solid panels if needed */
+  --bg-universe: #050508;
+  /* The void */
+  --bg-element: #0f1123;
+  /* Solid panels if needed */
 
   /* Glass System */
-  --bg-glass: rgba(15, 17, 35, 0.6);        /* Main panels */
-  --bg-glass-heavy: rgba(10, 12, 25, 0.85); /* Sidebar/Modals */
-  --bg-glass-light: rgba(255, 255, 255, 0.05); /* Hover states */
+  --bg-glass: rgba(15, 17, 35, 0.6);
+  /* Main panels */
+  --bg-glass-heavy: rgba(10, 12, 25, 0.85);
+  /* Sidebar/Modals */
+  --bg-glass-light: rgba(255, 255, 255, 0.05);
+  /* Hover states */
 
   /* Borders */
   --border-glass: rgba(255, 255, 255, 0.08);
@@ -44,6 +49,10 @@
   --radius-lg: 16px;
   --radius-md: 12px;
   --radius-sm: 8px;
+
+  /* Anchor Navigation */
+  --scroll-padding: 20px;
+  --scroll-offset: calc(var(--header-height) + var(--scroll-padding));
 }
 
 /* ==================== NEBULA LIGHT ==================== */
