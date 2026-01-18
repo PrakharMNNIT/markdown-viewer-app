@@ -55,7 +55,17 @@ export class CodeBlockCopyService {
         e.stopPropagation();
 
         const codeElement = pre.querySelector('code');
-        const textToCopy = codeElement ? codeElement.textContent : pre.textContent;
+        let textToCopy;
+
+        if (codeElement) {
+          textToCopy = codeElement.textContent;
+        } else {
+          // Clone and remove button to get pure text
+          const clone = pre.cloneNode(true);
+          const btn = clone.querySelector('.code-copy-btn');
+          if (btn) btn.remove();
+          textToCopy = clone.textContent;
+        }
 
         try {
           await navigator.clipboard.writeText(textToCopy);
