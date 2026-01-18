@@ -42,8 +42,11 @@ describe('slugHelpers', () => {
   });
 
   it('should handle empty or invalid input', () => {
+    resetSlugMap();
     expect(generateSlug('')).toBe('section');
+    resetSlugMap();
     expect(generateSlug('   ')).toBe('section');
+    resetSlugMap();
     expect(generateSlug('!!!')).toBe('section');
   });
 });
