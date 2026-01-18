@@ -35,6 +35,8 @@ export const STORAGE_KEYS = {
   CUSTOM_THEME: 'customTheme',
   VIEW_MODE: 'viewMode',
   PREVIEW_ZOOM: 'previewZoom',
+  SUPPORT_MODAL_SHOWN: 'support_modal_shown',
+  SUPPORT_USER_REGION: 'support_user_region',
 };
 
 // Theme Names
@@ -94,6 +96,13 @@ export const MERMAID_CONFIG = {
   START_ON_LOAD: false,
   THEME: 'base',
   RENDER_TIMEOUT: 100, // ms
+};
+
+// Support Widget Configuration
+export const SUPPORT_CONFIG = {
+  TIMEOUT_MS: 300,
+  FALLBACK_REGION: 'global',
+  MODAL_DELAY_MS: 5000,
 };
 
 // App Initialization

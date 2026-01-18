@@ -10,12 +10,6 @@ import markedFootnote from 'marked-footnote';
 import mermaid from 'mermaid';
 import Prism from 'prismjs';
 
-// Import constants and configuration
-import { DEFAULT_MARKDOWN, STORAGE_KEYS, SUPPORT_CONFIG } from './src/js/config/constants.js';
-
-// Import utilities
-import { generateSlug, resetSlugMap } from './src/js/utils/slugHelpers.js';
-
 // PrismJS is now handled by vite-plugin-prismjs
 // which automatically loads all languages and themes
 
@@ -38,7 +32,60 @@ window.html2pdf = html2pdf;
 window.markedFootnote = markedFootnote;
 
 // ==================== ANCHOR NAVIGATION ====================
-// Slug generation logic moved to src/js/utils/slugHelpers.js
+// Heading slug tracking (module-level singleton for marked.js singleton)
+const headingSlugMap = new Map();
+
+// Pre-compiled slug replacements (zero GC pressure per render)
+const SLUG_REPLACEMENTS = [
+  [/c\+\+/gi, 'cpp'],
+  [/c#/gi, 'csharp'],
+  [/f#/gi, 'fsharp'],
+  [/\.net/gi, 'dotnet'],
+];
+
+/**
+ * Reset slug map (call before each parse)
+ */
+function resetSlugMap() {
+  headingSlugMap.clear();
+}
+
+/**
+ * Generate URL-safe slug from heading text
+ * @param {string} text - Raw heading text (may include HTML)
+ * @param {Map<string, number>} seen - Duplicate tracking map
+ * @returns {string} URL-safe slug
+ */
+function generateSlug(text, seen = headingSlugMap) {
+  // Strip HTML tags
+  let slug = text.replace(/<[^>]*>/g, '');
+
+  // Normalize Unicode
+  slug = slug.normalize('NFC').toLowerCase();
+
+  // Replace programming terms (pre-compiled patterns)
+  for (const [pattern, replacement] of SLUG_REPLACEMENTS) {
+    slug = slug.replace(pattern, replacement);
+  }
+
+  // Clean up: remove non-word chars, spaces to hyphens, collapse hyphens
+  slug = slug
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  // Fallback for empty result
+  if (!slug) slug = 'section';
+
+  // Handle duplicates (header, header-1, header-2)
+  const baseSlug = slug;
+  const count = seen.get(baseSlug) || 0;
+  if (count > 0) slug = `${baseSlug}-${count}`;
+  seen.set(baseSlug, count + 1);
+
+  return slug;
+}
 
 /**
  * Anchor Navigation Module
@@ -325,8 +372,8 @@ function initializeApp() {
 }
 
 // ==================== SUPPORT MODAL (ONE-TIME POPUP) ====================
-const SUPPORT_MODAL_SHOWN_KEY = STORAGE_KEYS.SUPPORT_MODAL_SHOWN;
-const SUPPORT_MODAL_DELAY_MS = SUPPORT_CONFIG.MODAL_DELAY_MS;
+const SUPPORT_MODAL_SHOWN_KEY = 'support_modal_shown';
+const SUPPORT_MODAL_DELAY_MS = 5000; // 5 seconds
 
 /**
  * Initialize support modal - shows once after 5 seconds
@@ -403,9 +450,9 @@ function closeSupportModal(modal, checkbox) {
  * - Session caching to avoid repeated API calls
  * - CLS mitigation via skeleton loader
  */
-const SUPPORT_TIMEOUT_MS = SUPPORT_CONFIG.TIMEOUT_MS;
-const SUPPORT_FALLBACK_REGION = SUPPORT_CONFIG.FALLBACK_REGION;
-const SUPPORT_CACHE_KEY = STORAGE_KEYS.SUPPORT_USER_REGION;
+const SUPPORT_TIMEOUT_MS = 300;
+const SUPPORT_FALLBACK_REGION = 'global';
+const SUPPORT_CACHE_KEY = 'support_user_region';
 
 /**
  * Detect user region with fail-safe pattern
@@ -800,7 +847,7 @@ function configureMarkedExtensions() {
       heading(token) {
         const text = this.parser.parseInline(token.tokens);
         const level = token.depth;
-        const slug = generateSlug(text);
+        const slug = generateSlug(text, headingSlugMap);
         return `<h${level} id="${slug}">${text}</h${level}>\n`;
       },
       link(token) {
@@ -848,7 +895,91 @@ async function _initMermaidTheme() {
 
 function setupEditor() {
   // Default markdown content
-  const defaultMarkdown = DEFAULT_MARKDOWN;
+  const defaultMarkdown = `# Welcome to Markdown Viewer Pro! 🚀
+
+This is a powerful markdown viewer with **syntax highlighting**, *italic text*, and much more!
+
+## Features
+
+- ✅ Real-time preview
+- ✅ Syntax highlighting for 20+ languages
+- ✅ Mermaid diagram support
+- ✅ 10 built-in themes (5 themes × 2 variants each)
+- ✅ Custom color customization
+- ✅ Export to HTML
+
+## Code Examples
+
+### Java
+\`\`\`java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+\`\`\`
+
+### C++
+\`\`\`cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, World!" << endl;
+    return 0;
+}
+\`\`\`
+
+### Python
+\`\`\`python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(10))
+\`\`\`
+
+## Mermaid Diagram Example
+
+\`\`\`mermaid
+graph TD
+    A[Start] --> B{Is it working?}
+    B -->|Yes| C[Great!]
+    B -->|No| D[Debug]
+    D --> A
+    C --> E[End]
+\`\`\`
+
+## Tables
+
+| Language | Type | Year |
+|----------|------|------|
+| JavaScript | Dynamic | 1995 |
+| Python | Dynamic | 1991 |
+| Java | Static | 1995 |
+| Rust | Static | 2010 |
+
+## Quotes
+
+> "The best way to predict the future is to invent it." - Alan Kay
+
+## Lists
+
+### Ordered List
+1. First item
+2. Second item
+3. Third item
+
+### Unordered List
+- Bullet point one
+- Bullet point two
+- Bullet point three
+
+---
+
+**Try switching themes** from the dropdown menu! 🎨
+`;
 
   // DOM Elements
   const editor = document.getElementById('markdown-editor');
