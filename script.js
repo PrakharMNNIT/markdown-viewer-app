@@ -17,6 +17,7 @@ import { StorageManager } from './src/js/core/StorageManager.js';
 import { ThemeManager } from './src/js/core/ThemeManager.js';
 import { FolderBrowserService } from './src/js/services/FolderBrowserService.js';
 import { HTMLService } from './src/js/services/HTMLService.js';
+import { LinkNavigationService } from './src/js/services/LinkNavigationService.js';
 import { MermaidService } from './src/js/services/MermaidService.js';
 import { PDFService } from './src/js/services/PDFService.js';
 import { PrismService } from './src/js/services/PrismService.js';
@@ -236,11 +237,13 @@ const AnchorNavigation = {
       slug = slug.replace(pattern, replacement);
     }
 
-    return slug
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-+|-+$/g, '') || 'section';
+    return (
+      slug
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'section'
+    );
   },
 
   /**
@@ -251,12 +254,14 @@ const AnchorNavigation = {
   normalizeHashGitHub(hash) {
     // GitHub algorithm: lowercase, remove non-alphanumeric except hyphens
     // Does NOT collapse multiple hyphens, does NOT replace C++ with cpp
-    return hash
-      .normalize('NFC')
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/^-+|-+$/g, '') || 'section';
+    return (
+      hash
+        .normalize('NFC')
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'section'
+    );
   },
 
   /**
@@ -265,7 +270,9 @@ const AnchorNavigation = {
    * @returns {Element|null} Matching heading or null
    */
   fuzzyMatchHeading(hash) {
-    const headings = this.container.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
+    const headings = this.container.querySelectorAll(
+      'h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]'
+    );
     const normalizedSearch = hash.toLowerCase().replace(/[^\w]/g, '');
 
     for (const heading of headings) {
@@ -318,6 +325,9 @@ const prismService = new PrismService();
 const pdfService = new PDFService();
 const htmlService = new HTMLService();
 const folderBrowserService = new FolderBrowserService(storageManager);
+
+// Link navigation service (callback will be wired in setupEditor)
+let linkNavigationService = null;
 
 // Folder browser state (these are managed within setupEditor scope)
 const _currentFolderFiles = [];
@@ -395,14 +405,14 @@ function initSupportModal() {
   });
 
   // Click outside to close
-  modal.addEventListener('click', (e) => {
+  modal.addEventListener('click', e => {
     if (e.target === modal) {
       closeSupportModal(modal, dontShowAgainCheckbox);
     }
   });
 
   // Escape key to close
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       closeSupportModal(modal, dontShowAgainCheckbox);
     }
@@ -473,7 +483,10 @@ async function detectSupportRegion() {
     return region;
   } catch (error) {
     // 4. Fail open - silent fail to global
-    console.warn('[SupportWidget] Geo-lookup failed/timed-out, defaulting to Global.', error.message);
+    console.warn(
+      '[SupportWidget] Geo-lookup failed/timed-out, defaulting to Global.',
+      error.message
+    );
     return SUPPORT_FALLBACK_REGION;
   }
 }
@@ -500,19 +513,20 @@ function renderSupportWidget(region) {
   const container = document.getElementById('support-widget');
   if (!container) return;
 
-  const config = region === 'india'
-    ? {
-      text: '🇮🇳 Support via UPI',
-      url: 'https://razorpay.me/@prakharshekharparthasarthi?notes[source]=webapp_footer',
-      className: 'support-button--india',
-      toggleText: 'Not in India?',
-    }
-    : {
-      text: '☕ Support via Ko-fi',
-      url: 'https://ko-fi.com/praxlannister?ref=webapp_footer',
-      className: 'support-button--global',
-      toggleText: 'In India? Use UPI',
-    };
+  const config =
+    region === 'india'
+      ? {
+        text: '🇮🇳 Support via UPI',
+        url: 'https://razorpay.me/@prakharshekharparthasarthi?notes[source]=webapp_footer',
+        className: 'support-button--india',
+        toggleText: 'Not in India?',
+      }
+      : {
+        text: '☕ Support via Ko-fi',
+        url: 'https://ko-fi.com/praxlannister?ref=webapp_footer',
+        className: 'support-button--global',
+        toggleText: 'In India? Use UPI',
+      };
 
   container.innerHTML = `
     <a href="${config.url}" target="_blank" rel="noopener noreferrer" class="support-button ${config.className}">
@@ -575,7 +589,7 @@ function configureMarkedExtensions() {
         },
         tokenizer(src) {
           const match = src.match(
-            /^> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*\n((?:> .*\n?)*)/,
+            /^> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*\n((?:> .*\n?)*)/
           );
           if (match) {
             const type = match[1];
@@ -645,18 +659,15 @@ function configureMarkedExtensions() {
         },
         renderer(token) {
           try {
-            return (
-              `<div style="margin: 1.5em 0;">${katex.renderToString(token.text, {
-                displayMode: true,
-                throwOnError: false,
-                output: 'html',
-                trust: true, // Allow custom styling
-                macros: {
-                  '\\label': '\\phantom', // Hide \label
-                },
-              })
-              }</div>`
-            );
+            return `<div style="margin: 1.5em 0;">${katex.renderToString(token.text, {
+              displayMode: true,
+              throwOnError: false,
+              output: 'html',
+              trust: true, // Allow custom styling
+              macros: {
+                '\\label': '\\phantom', // Hide \label
+              },
+            })}</div>`;
           } catch (e) {
             console.warn('KaTeX display math error:', e);
             return `<div style="color: red; padding: 10px;">Math Error: ${e.message}</div>`;
@@ -692,21 +703,18 @@ function configureMarkedExtensions() {
         },
         renderer(token) {
           try {
-            return (
-              `<div style="margin: 1.5em 0;">${katex.renderToString(token.text, {
-                displayMode: true,
-                throwOnError: false,
-                output: 'html',
-                trust: true,
-                macros: {
-                  '\\label': '\\phantom', // Hide \label
-                  '\\eqref': '\\text', // Plain text for refs (or link if needed)
-                  '\\cite': '\\text',
-                  '\\ref': '\\text',
-                },
-              })
-              }</div>`
-            );
+            return `<div style="margin: 1.5em 0;">${katex.renderToString(token.text, {
+              displayMode: true,
+              throwOnError: false,
+              output: 'html',
+              trust: true,
+              macros: {
+                '\\label': '\\phantom', // Hide \label
+                '\\eqref': '\\text', // Plain text for refs (or link if needed)
+                '\\cite': '\\text',
+                '\\ref': '\\text',
+              },
+            })}</div>`;
           } catch (e) {
             console.warn('KaTeX environment error:', e);
             return `<div style="color: red;">LaTeX Error: ${e.message}</div>`;
@@ -839,10 +847,40 @@ function configureMarkedExtensions() {
         const level = token.depth;
         const slug = generateSlug(text, headingSlugMap);
         return `<h${level} id="${slug}">${text}</h${level}>\n`;
-      }
-    }
+      },
+      link(token) {
+        // Extract properties from token object (marked.js v12+ API)
+        const href = token.href;
+        const title = token.title;
+        const text = token.text;
+
+        // Defensive: only catch truly broken cases (null/undefined)
+        if (href == null) {
+          return `<a>${text}</a>`;
+        }
+
+        // Anchor links - unchanged
+        if (href.startsWith('#')) {
+          return `<a href="${href}" title="${title || ''}">${text}</a>`;
+        }
+
+        // External links - open in new tab
+        if (/^https?:\/\//.test(href) || /^\/\//.test(href)) {
+          return `<a href="${href}" target="_blank" rel="noopener noreferrer" title="${title || ''}">${text}</a>`;
+        }
+
+        // Relative markdown file links - add class and data attribute for router
+        if (href.endsWith('.md')) {
+          return `<a href="${href}" class="md-link" data-md-path="${href}" title="${title || ''}">${text}</a>`;
+        }
+
+        // Default - regular link
+        return `<a href="${href}" title="${title || ''}">${text}</a>`;
+      },
+    },
   });
   console.log('✅ Custom heading renderer enabled (anchor navigation IDs)');
+  console.log('✅ Custom link renderer enabled (markdown file navigation)');
 }
 
 // Initialize Mermaid using MermaidService (prefixed to indicate future use)
@@ -1051,7 +1089,7 @@ graph TD
           const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
           // Return placeholder div
           return `<div class="mermaid-diagram" id="${id}" data-code="${encodeURIComponent(decodedCode)}">${code}</div>`;
-        },
+        }
       );
 
       // Sanitize HTML using DOMPurify
@@ -1101,8 +1139,7 @@ graph TD
       storageManager.set('markdownContent', markdownText);
     } catch (error) {
       console.error('Render error:', error);
-      preview.innerHTML =
-        `<p style="color: red;">Error rendering markdown: ${error.message}</p>`;
+      preview.innerHTML = `<p style="color: red;">Error rendering markdown: ${error.message}</p>`;
     }
   }
 
@@ -1361,7 +1398,9 @@ graph TD
 
   // Apply split ratio to containers
   function applySplitRatio() {
-    if (!mainContent.classList.contains('split-view-active')) { return; }
+    if (!mainContent.classList.contains('split-view-active')) {
+      return;
+    }
 
     const mainContentWidth = mainContent.offsetWidth;
     const sidebarWidth = document.getElementById('file-browser').offsetWidth || 0;
@@ -1386,8 +1425,10 @@ graph TD
 
   // Split resizer drag handlers
   if (splitResizer) {
-    splitResizer.addEventListener('mousedown', (e) => {
-      if (!mainContent.classList.contains('split-view-active')) { return; }
+    splitResizer.addEventListener('mousedown', e => {
+      if (!mainContent.classList.contains('split-view-active')) {
+        return;
+      }
 
       isSplitResizing = true;
       splitResizer.classList.add('dragging');
@@ -1397,8 +1438,10 @@ graph TD
     });
   }
 
-  document.addEventListener('mousemove', (e) => {
-    if (!isSplitResizing) { return; }
+  document.addEventListener('mousemove', e => {
+    if (!isSplitResizing) {
+      return;
+    }
 
     const mainContentRect = mainContent.getBoundingClientRect();
     const sidebarWidth = document.getElementById('file-browser').offsetWidth || 0;
@@ -1516,7 +1559,9 @@ graph TD
 
   // Editor scroll handler with smooth sync
   editor.addEventListener('scroll', () => {
-    if (!syncScrollEnabled || syncScrolling) { return; }
+    if (!syncScrollEnabled || syncScrolling) {
+      return;
+    }
 
     syncScrolling = true;
 
@@ -1545,7 +1590,9 @@ graph TD
 
   // Preview container scroll handler with smooth sync
   previewContainer.addEventListener('scroll', () => {
-    if (!syncScrollEnabled || syncScrolling) { return; }
+    if (!syncScrollEnabled || syncScrolling) {
+      return;
+    }
 
     syncScrolling = true;
 
@@ -1653,11 +1700,14 @@ graph TD
   initializeMobileView();
 
   // Re-initialize on window resize
-  window.addEventListener('resize', debounce(() => {
-    if (isMobileView()) {
-      initializeMobileView();
-    }
-  }, 250));
+  window.addEventListener(
+    'resize',
+    debounce(() => {
+      if (isMobileView()) {
+        initializeMobileView();
+      }
+    }, 250)
+  );
 
   // Initialize visibility
 
@@ -1814,7 +1864,7 @@ graph TD
   }
 
   // Escape key to exit Zen Mode
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && document.body.classList.contains('zen-mode')) {
       toggleZenMode();
     }
@@ -1851,7 +1901,9 @@ graph TD
   });
 
   document.addEventListener('mousemove', e => {
-    if (!isResizing) { return; }
+    if (!isResizing) {
+      return;
+    }
 
     const newWidth = e.clientX;
 
@@ -1913,7 +1965,7 @@ graph TD
       alert(
         'Folder browsing requires File System Access API.\n\n' +
         'Please use Chrome 86+ or Edge 86+.\n\n' +
-        'Firefox and Safari are not currently supported.',
+        'Firefox and Safari are not currently supported.'
       );
       return;
     }
@@ -1942,6 +1994,11 @@ graph TD
 
     // Render tree
     renderFileTree(result.files);
+
+    // Build file cache for link navigation
+    if (linkNavigationService && folderBrowserService.currentDirectoryHandle) {
+      await linkNavigationService.buildFileCache(folderBrowserService.currentDirectoryHandle);
+    }
 
     // Update expand button visibility
     updateExpandButtonVisibility();
@@ -2152,14 +2209,14 @@ Wrap up your thoughts and include a call to action.
     createFileModal.classList.remove('active');
   });
 
-  createFileModal.addEventListener('click', (e) => {
+  createFileModal.addEventListener('click', e => {
     if (e.target === createFileModal) {
       createFileModal.classList.remove('active');
     }
   });
 
   // Handle Enter key in filename input
-  newFileNameInput.addEventListener('keydown', (e) => {
+  newFileNameInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       e.preventDefault();
       confirmCreateFileBtn.click();
@@ -2472,6 +2529,11 @@ Wrap up your thoughts and include a call to action.
     // Mark as active file
     activeFileHandle = fileItem.handle;
 
+    // Update link navigation context with current file path
+    if (linkNavigationService && fileItem.path) {
+      linkNavigationService.setCurrentFile(fileItem.path);
+    }
+
     // Re-render tree to update active state
     renderFileTree(folderFiles);
 
@@ -2489,6 +2551,29 @@ Wrap up your thoughts and include a call to action.
 
   // Initialize anchor navigation for TOC links
   AnchorNavigation.init(previewContainer);
+
+  // Initialize Link Navigation Service
+  linkNavigationService = new LinkNavigationService(folderBrowserService, fileData => {
+    // Callback when file should be loaded from link navigation
+    editor.value = fileData.content;
+    renderMarkdown();
+
+    // Highlight file in tree if possible
+    const fileItems = document.querySelectorAll('.file-item');
+    fileItems.forEach(item => {
+      if (item.dataset.name === fileData.name) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    console.log(`[App] Loaded from link: ${fileData.path}`);
+  });
+
+  // Initialize link interceptor on preview container
+  const markdownPreview = document.getElementById('markdown-preview');
+  linkNavigationService.initialize(markdownPreview);
 
   // DON'T render immediately - wait for theme to load
   // renderMarkdown will be called after theme loads above
