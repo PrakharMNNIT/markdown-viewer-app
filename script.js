@@ -15,6 +15,7 @@ import Prism from 'prismjs';
 
 import { StorageManager } from './src/js/core/StorageManager.js';
 import { ThemeManager } from './src/js/core/ThemeManager.js';
+import { CodeBlockCopyService } from './src/js/services/CodeBlockCopyService.js';
 import { FolderBrowserService } from './src/js/services/FolderBrowserService.js';
 import { HTMLService } from './src/js/services/HTMLService.js';
 import { LinkNavigationService } from './src/js/services/LinkNavigationService.js';
@@ -322,6 +323,7 @@ const storageManager = new StorageManager();
 const themeManager = new ThemeManager(storageManager);
 const mermaidService = new MermaidService();
 const prismService = new PrismService();
+const copyButtonService = new CodeBlockCopyService();
 const pdfService = new PDFService();
 const htmlService = new HTMLService();
 const folderBrowserService = new FolderBrowserService(storageManager);
@@ -852,7 +854,10 @@ function configureMarkedExtensions() {
         // Extract properties from token object (marked.js v12+ API)
         const href = token.href;
         const title = token.title;
-        const text = token.text;
+
+        // CRITICAL: Parse nested tokens (e.g., images inside links)
+        // This handles [![img](url)](link) syntax correctly
+        const text = token.tokens ? this.parser.parseInline(token.tokens) : token.text;
 
         // Defensive: only catch truly broken cases (null/undefined)
         if (href == null) {
@@ -1094,8 +1099,21 @@ graph TD
 
       // Sanitize HTML using DOMPurify
       const cleanHtml = DOMPurify.sanitize(html, {
-        ADD_TAGS: ['iframe'],
-        ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'target', 'data-code'], // Add data-code
+        ADD_TAGS: ['iframe', 'img'], // Allow iframe and img tags
+        ADD_ATTR: [
+          'allow',
+          'allowfullscreen',
+          'frameborder',
+          'scrolling',
+          'target',
+          'data-code', // Mermaid diagrams
+          'src',
+          'alt',
+          'title',
+          'width',
+          'height',
+          'loading', // Image attributes
+        ],
         USE_PROFILES: { html: true, svg: true, mathml: true },
       });
 
@@ -1120,16 +1138,17 @@ graph TD
             })
             .catch(err => {
               console.warn('Mermaid error:', err);
-              // Graceful failure: small warning instead of giant red text
-              element.innerHTML = `<div style="color: var(--text-secondary); font-size: 0.8em; text-align: center; border: 1px dashed var(--border-color); padding: 8px; border-radius: 6px; opacity: 0.8; margin: 10px 0;">
-                <span style="font-size: 1.2em;">⚠️</span> Invalid Mermaid Syntax
-              </div>`;
+              // Hide error from UI - just clear the element silently
+              element.style.display = 'none';
             });
         }
       });
 
       // Apply Prism syntax highlighting using PrismService
       prismService.highlightAll(preview);
+
+      // Add modern copy buttons to all code blocks
+      copyButtonService.addCopyButtons(preview);
 
       // NOTE: KaTeX auto-render is DISABLED
       // We handle all math via marked.js extensions ($...$ and $$...$$)
