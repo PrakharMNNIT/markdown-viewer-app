@@ -8,6 +8,7 @@
     <!-- Main Styles -->
     <link rel="stylesheet" href="variables.css" />
     <link rel="stylesheet" href="animations.css" />
+    <link rel="stylesheet" href="src/css/warning-modal.css" />
     <link rel="stylesheet" href="themes/nebula-elements.css" />
     <link rel="stylesheet" href="style.css" />
 
@@ -162,16 +163,23 @@
           <button class="btn" id="export-html-btn">💾 Export HTML</button>
           <button class="btn" id="export-pdf-btn">📕 Export PDF</button>
           <button
-                 class="btn-icon"
-                 id="zen-mode-btn"
-                 title="Enter Zen Mode"
-                 aria-label="Enter Distraction Free Mode"
-                 style="margin-left: 8px;"
-               >
-                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                   <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
-                 </svg>
-               </button>
+            class="btn-icon"
+            id="zen-mode-btn"
+            title="Enter Zen Mode"
+            aria-label="Enter Distraction Free Mode"
+            style="margin-left: 8px"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -189,7 +197,16 @@
           title="Expand Sidebar"
           aria-label="Expand File Browser Sidebar"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
@@ -211,10 +228,19 @@
                 title="Refresh Folder"
                 aria-label="Refresh Folder Structure"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <path d="M23 4v6h-6"></path>
                   <path d="M1 20v-6h6"></path>
-                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                  <path
+                    d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"
+                  ></path>
                 </svg>
               </button>
               <button
@@ -223,7 +249,14 @@
                 title="Create New File"
                 aria-label="Create New Markdown File"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
                   <line x1="12" y1="18" x2="12" y2="12"></line>
@@ -236,7 +269,16 @@
                 title="Hide Sidebar"
                 aria-label="Toggle Sidebar"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
               </button>
@@ -340,15 +382,25 @@
       <div class="footer-content">
         <span>Made with ❤️ by Prax Lannister</span>
         <span class="footer-separator">|</span>
-        <span>Follow me on
-          <a href="https://github.com/PrakharMNNIT" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span
+          >Follow me on
+          <a href="https://github.com/PrakharMNNIT" target="_blank" rel="noopener noreferrer"
+            >GitHub</a
+          >
           &amp;
-          <a href="https://x.com/ByteByByteSrSDE" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+          <a href="https://x.com/ByteByByteSrSDE" target="_blank" rel="noopener noreferrer"
+            >X (Twitter)</a
+          >
         </span>
         <span class="footer-separator">|</span>
         <div class="support-widget-container" id="support-widget">
           <!-- Skeleton loader - will be replaced by JS -->
-          <a href="https://ko-fi.com/praxlannister?ref=webapp_footer" target="_blank" rel="noopener noreferrer" class="support-button support-button--loading">
+          <a
+            href="https://ko-fi.com/praxlannister?ref=webapp_footer"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="support-button support-button--loading"
+          >
             ☕ Support
           </a>
         </div>
@@ -429,9 +481,17 @@
     </div>
 
     <!-- Create File Modal -->
-    <div id="create-file-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="create-file-modal-title">
+    <div
+      id="create-file-modal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="create-file-modal-title"
+    >
       <div class="modal-content create-file-modal-content">
-        <span class="close-btn" id="close-create-file-modal" role="button" aria-label="Close dialog">&times;</span>
+        <span class="close-btn" id="close-create-file-modal" role="button" aria-label="Close dialog"
+          >&times;</span
+        >
         <h2 id="create-file-modal-title">📄 Create New Markdown File</h2>
 
         <div class="create-file-form">
@@ -444,7 +504,9 @@
               autocomplete="off"
               spellcheck="false"
             />
-            <small class="form-hint">The .md extension will be added automatically if not provided</small>
+            <small class="form-hint"
+              >The .md extension will be added automatically if not provided</small
+            >
           </div>
 
           <div class="form-group">
@@ -703,26 +765,49 @@
     </div>
 
     <!-- Support Modal (One-time popup with all 3 options) -->
-    <div id="support-modal" class="modal support-modal" role="dialog" aria-modal="true" aria-labelledby="support-modal-title">
+    <div
+      id="support-modal"
+      class="modal support-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="support-modal-title"
+    >
       <div class="modal-content support-modal-content">
         <button class="close-btn" id="close-support-modal" aria-label="Close">&times;</button>
         <h2 id="support-modal-title">☕ Support Markdown Viewer Pro</h2>
-        <p class="support-modal-desc">If you find this tool useful, consider supporting its development:</p>
+        <p class="support-modal-desc">
+          If you find this tool useful, consider supporting its development:
+        </p>
 
         <div class="support-options">
-          <a href="https://github.com/sponsors/PrakharMNNIT?ref=webapp_modal" target="_blank" rel="noopener noreferrer" class="support-option support-option--github">
+          <a
+            href="https://github.com/sponsors/PrakharMNNIT?ref=webapp_modal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="support-option support-option--github"
+          >
             <span class="support-option-icon">❤️</span>
             <span class="support-option-title">GitHub Sponsors</span>
             <span class="support-option-desc">0% fee • For developers</span>
           </a>
 
-          <a href="https://ko-fi.com/praxlannister?ref=webapp_modal" target="_blank" rel="noopener noreferrer" class="support-option support-option--kofi">
+          <a
+            href="https://ko-fi.com/praxlannister?ref=webapp_modal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="support-option support-option--kofi"
+          >
             <span class="support-option-icon">☕</span>
             <span class="support-option-title">Ko-fi</span>
             <span class="support-option-desc">PayPal • Global</span>
           </a>
 
-          <a href="https://razorpay.me/@prakharshekharparthasarthi?notes[source]=webapp_modal" target="_blank" rel="noopener noreferrer" class="support-option support-option--razorpay">
+          <a
+            href="https://razorpay.me/@prakharshekharparthasarthi?notes[source]=webapp_modal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="support-option support-option--razorpay"
+          >
             <span class="support-option-icon">🇮🇳</span>
             <span class="support-option-title">Razorpay</span>
             <span class="support-option-desc">UPI/Cards • India</span>
