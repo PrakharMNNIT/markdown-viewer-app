@@ -1,160 +1,303 @@
-/* Forest Dark Theme - Deep Jungle Aesthetic */
+/*
+ * FOREST DARK THEME (Enterprise Edition)
+ * Aesthetic: Deep Woods, Night Nature, Serene, Organic
+ * Fonts: Merriweather (Headers), Inter (Body), Fira Mono (Mono)
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap');
+
 :root {
-  --bg-primary: #0a1408; /* Deep forest green with blue undertones */
-  --bg-secondary: #132118; /* Darker moss green */
-  --bg-tertiary: #1e3a29; /* Rich forest green */
-  --text-primary: #d9f99d; /* Bright lime (firefly glow) */
-  --text-secondary: #a3e635; /* Vibrant lime */
-  --border-color: #2d5a3d; /* Forest green border */
+  /* ==================== CORE PALETTE (OKLCH) ==================== */
 
-  --h1-color: #84cc16;
-  --h2-color: #a3e635;
-  --h3-color: #bef264;
-  --h4-color: #4ade80;
-  --h5-color: #22c55e;
-  --h6-color: #16a34a;
+  /* Primary Hues - Deep Woods Palette */
+  --color-primary-base: 60% 0.18 145;
+  /* Bright Leaf Green */
+  --color-secondary-base: 70% 0.15 85;
+  /* Golden Amber */
+  --color-accent-base: 65% 0.14 200;
+  /* Moonlit Teal */
 
-  --link-color: #84cc16;
-  --link-hover: #a3e635;
+  /* Layout Colors */
+  --bg-primary: oklch(15% 0.04 145);
+  /* Deep Forest Green */
+  --bg-secondary: oklch(18% 0.05 145);
+  /* Dark Moss */
+  --bg-tertiary: oklch(22% 0.05 145);
+  /* Lighter Moss */
 
-  /* Code Colors - Organic forest glow */
-  --code-bg: rgba(132, 204, 22, 0.12); /* Lime-tinted background */
-  --code-text: #a3e635;
-  --code-block-bg: #0d1a11; /* Deep forest with blue-green tint */
-  --code-border: rgba(163, 230, 53, 0.3); /* Lime glow border */
+  /* Text Colors */
+  --text-primary: oklch(92% 0.03 145);
+  /* Pale Mist */
+  --text-secondary: oklch(75% 0.05 145);
+  /* Muted Mist */
+  --text-tertiary: oklch(60% 0.05 145);
+  /* Dark Mist */
 
-  /* Syntax Highlighting - Production-Grade Token Colors (One Dark Architecture) */
+  /* Borders */
+  --border-color: oklch(30% 0.05 145);
+  --border-hover: oklch(45% 0.08 145);
 
-  /* Core hue-1: Teal - URLs */
-  --syntax-url: #5eead4; /* Bright teal for URLs */
+  /* Accents */
+  --accent-primary: oklch(var(--color-primary-base));
+  --accent-secondary: oklch(var(--color-secondary-base));
+  --link-color: oklch(70% 0.15 145);
+  --link-hover: oklch(80% 0.18 145);
 
-  /* Core hue-2: Green - Functions, variables */
-  --syntax-function: #4ade80; /* Bright green for functions */
-  --syntax-variable: #22c55e; /* Medium green for variables */
+  /* Typography */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-headings: 'Merriweather', serif;
+  --font-family-mono: 'Fira Mono', monospace;
 
-  /* Core hue-3: Yellow - Keywords */
-  --syntax-keyword: #fbbf24; /* Golden yellow for keywords (final, sealed, class) */
+  /* ==================== SYNTAX HIGHLIGHTING (Forest Night) ==================== */
+  --code-bg: oklch(12% 0.03 145);
+  --code-text: var(--text-primary);
+  --code-border: var(--border-color);
 
-  /* Core hue-4: Lime - Strings, builtins */
-  --syntax-string: #a3e635; /* Bright lime for strings */
-  --syntax-builtin: #84cc16; /* Lime for builtins (String, List) */
-  --syntax-char: #a3e635; /* Same as strings */
-  --syntax-regex: #a3e635; /* Same as strings */
-  --syntax-inserted: #84cc16; /* For diff */
+  /* Tokens */
+  --syntax-comment: oklch(60% 0.05 145);
+  --syntax-keyword: oklch(75% 0.15 145);
+  /* Green */
+  --syntax-string: oklch(80% 0.15 85);
+  /* Gold */
+  --syntax-function: oklch(75% 0.14 240);
+  /* Blue */
+  --syntax-variable: oklch(75% 0.15 30);
+  /* Rust */
+  --syntax-number: oklch(75% 0.15 300);
+  /* Berry */
+  --syntax-class-name: oklch(75% 0.15 180);
+  /* Teal */
+  --syntax-operator: oklch(70% 0.1 145);
+  /* Light Green */
 
-  /* Core hue-5: Orange/Amber - Properties, tags */
-  --syntax-property: #fb923c; /* Orange for properties */
-  --syntax-tag: #f97316; /* Burnt orange for tags */
-  --syntax-deleted: #f87171; /* Coral for diff */
-  --syntax-important: #fb923c; /* Orange for !important */
+  /* ==================== COMPONENT STYLES ==================== */
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 16px;
 
-  /* Core hue-6: Yellow-green - Class names, constants, numbers */
-  --syntax-class-name: #bef264; /* Bright yellow-green for class names (Rectangle, Shape) */
-  --syntax-number: #fde047; /* Bright yellow for numbers */
-  --syntax-constant: #84cc16; /* Lime for constants */
-  --syntax-boolean: #fde047; /* Same as numbers */
-  --syntax-atrule: #a3e635; /* Lime for CSS @ rules */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.6), 0 3px 6px rgba(0, 0, 0, 0.5);
 
-  /* Neutral colors */
-  --syntax-comment: #737373; /* Gray for comments */
-  --syntax-punctuation: #a3a3a3; /* Light gray for punctuation */
-  --syntax-operator: #22c55e; /* Green for operators */
+  /* Scrollbar */
+  --scrollbar-track: var(--bg-secondary);
+  --scrollbar-thumb: oklch(40% 0.08 145);
+  --scrollbar-thumb-hover: oklch(50% 0.1 145);
 
-  /* Markup specific */
-  --syntax-attr-name: #bef264; /* Yellow-green like class-name */
-  --syntax-attr-value: #a3e635; /* Lime like strings */
-  --syntax-namespace: #fbbf24; /* Yellow like keywords */
-  --syntax-entity: #a3a3a3; /* Neutral */
-  --syntax-selector: #fb923c; /* Orange like properties */
+  /* Helper colors for hex-only libs (Mermaid) */
+  --hex-bg-primary: #052e16;
+  --hex-text-primary: #f0fdf4;
+  --hex-accent-primary: #22c55e;
+}
 
-  --blockquote-border: #84cc16;
-  --blockquote-bg: rgba(132, 204, 22, 0.08); /* Lime-tinted blockquote */
-  --bold-color: #fbbf24;
-  --italic-color: #84cc16;
-  --table-header-bg: rgba(74, 222, 128, 0.12); /* Green-tinted table header */
-  --table-border: rgba(45, 90, 61, 0.4); /* Forest-tinted border */
+/* ==================== GLOBAL TYPOGRAPHY ==================== */
+body {
+  font-family: var(--font-family-base);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  line-height: 1.7;
+}
 
-  /* === MERMAID COMPREHENSIVE CONFIGURATION === */
-  /* Complete control over ALL diagram elements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-headings);
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
 
-  /* Core Global */
-  --mermaid-background: #0a1408;
-  --mermaid-text-color: #d9f99d;
-  --mermaid-line-color: #a3e635;
-  --mermaid-main-bkg: #2d5a3d;
+h1 {
+  font-size: 2.25rem;
+  border-bottom: 3px solid var(--border-color);
+  padding-bottom: 0.3em;
+  margin-bottom: 1rem;
+  color: var(--accent-primary);
+}
 
-  /* Primary Set - Main nodes/boxes */
-  --mermaid-primary-color: #2d5a3d;
-  --mermaid-primary-text-color: #d9f99d;
-  --mermaid-primary-border-color: #84cc16;
+h2 {
+  font-size: 1.75rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.2em;
+  color: var(--accent-secondary);
+}
 
-  /* Secondary Set - Clusters/subgraphs */
-  --mermaid-secondary-color: #1e3a29;
-  --mermaid-secondary-text-color: #d9f99d;
-  --mermaid-secondary-border-color: #a3e635;
+h3 {
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+}
 
-  /* Tertiary Set - Edge labels */
-  --mermaid-tertiary-color: #0a1408;
-  --mermaid-tertiary-text-color: #d9f99d;
-  --mermaid-tertiary-border-color: #bef264;
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
 
-  /* Flowchart */
-  --mermaid-node-border: #84cc16;
-  --mermaid-cluster-bkg: #1e3a29;
-  --mermaid-cluster-border: #a3e635;
-  --mermaid-default-link-color: #a3e635;
-  --mermaid-title-color: #d9f99d;
-  --mermaid-edge-label-background: #0a1408;
-  --mermaid-node-text-color: #d9f99d;
+a:hover {
+  color: var(--link-hover);
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--accent-secondary);
+  background-color: oklch(20% 0.05 145);
+}
 
-  /* Sequence Diagram */
-  --mermaid-actor-bkg: #2d5a3d;
-  --mermaid-actor-border: #84cc16;
-  --mermaid-actor-text-color: #d9f99d;
-  --mermaid-actor-line-color: #84cc16;
-  --mermaid-signal-color: #a3e635;
-  --mermaid-signal-text-color: #d9f99d;
-  --mermaid-label-box-bkg-color: #2d5a3d;
-  --mermaid-label-box-border-color: #84cc16;
-  --mermaid-label-text-color: #d9f99d;
-  --mermaid-loop-text-color: #d9f99d;
-  --mermaid-activation-border-color: #a3e635;
-  --mermaid-activation-bkg-color: #1e3a29;
-  --mermaid-sequence-number-color: #d9f99d;
+/* ==================== UI COMPONENTS ==================== */
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid var(--accent-primary);
+  background-color: var(--bg-secondary);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: var(--border-radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-family-headings);
+  font-style: italic;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
 
-  /* Pie Chart - 12 distinct slice colors + text colors */
-  --mermaid-pie1: #4ade80;
-  --mermaid-pie2: #fbbf24;
-  --mermaid-pie3: #fb923c;
-  --mermaid-pie4: #5eead4;
-  --mermaid-pie5: #a3e635;
-  --mermaid-pie6: #22c55e;
-  --mermaid-pie7: #84cc16;
-  --mermaid-pie8: #fde047;
-  --mermaid-pie9: #4ade80;
-  --mermaid-pie10: #fbbf24;
-  --mermaid-pie11: #fb923c;
-  --mermaid-pie12: #5eead4;
-  --mermaid-pie-title-text-color: #d9f99d;
-  --mermaid-pie-section-text-color: #0a1408; /* Dark on vibrant slices */
-  --mermaid-pie-legend-text-color: #d9f99d;
-  --mermaid-pie-stroke-color: #84cc16;
-  --mermaid-pie-outer-stroke-color: #84cc16;
+blockquote::before {
+  content: '"';
+  font-family: serif;
+  font-size: 3rem;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  color: var(--border-color);
+  opacity: 0.3;
+}
 
-  /* State Diagram */
-  --mermaid-label-color: #d9f99d;
-  --mermaid-alt-background: #1e3a29;
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-md);
+}
 
-  /* Class Diagram */
-  --mermaid-class-text: #d9f99d;
+th {
+  background-color: var(--bg-tertiary);
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: var(--accent-primary);
+}
 
-  /* User Journey - 8 distinct colors */
-  --mermaid-fill-type0: #4ade80;
-  --mermaid-fill-type1: #fbbf24;
-  --mermaid-fill-type2: #fb923c;
-  --mermaid-fill-type3: #5eead4;
-  --mermaid-fill-type4: #a3e635;
-  --mermaid-fill-type5: #22c55e;
-  --mermaid-fill-type6: #84cc16;
-  --mermaid-fill-type7: #fde047;
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background-color: var(--bg-tertiary);
+}
+
+/* Inline Code */
+:not(pre)>code {
+  font-family: var(--font-family-mono);
+  background-color: var(--code-bg);
+  color: var(--accent-secondary);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  border: 1px solid var(--border-color);
+}
+
+/* Code Blocks */
+pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: var(--border-radius-md);
+  padding: 1.25rem;
+  overflow-x: auto;
+  box-shadow: var(--shadow-md);
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+pre code {
+  font-family: var(--font-family-mono);
+  color: var(--text-primary);
+  font-size: 0.95em;
+  line-height: 1.6;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Copy Button */
+.code-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: 0.4rem;
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  z-index: 10;
+}
+
+pre:hover .code-copy-btn {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  background: var(--bg-secondary);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Buttons (Global UI) */
+.btn,
+button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 0.5rem 1.2rem;
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:hover {
+  border-color: var(--accent-primary);
+  background-color: var(--bg-tertiary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  color: var(--accent-primary);
+}
+
+/* ==================== MERMAID CONFIGURATION ==================== */
+:root {
+  --mermaid-theme: dark;
+  --mermaid-background: #052e16;
+  --mermaid-primary-color: #064e3b;
+  --mermaid-primary-border-color: #4ade80;
+  --mermaid-line-color: #86efac;
+  --mermaid-text-color: #f0fdf4;
 }
