@@ -145,4 +145,14 @@
   --mermaid-tertiary-color: #625d70;
   --mermaid-tertiary-text-color: #eae6f0;
   --mermaid-tertiary-border-color: #a89ff8;
+
+  /* Hex aliases for Mermaid fallbacks (MermaidService reads these) */
+  --bg-primary-hex: #38334d;
+  --bg-secondary-hex: #4d4663;
+  --bg-tertiary-hex: #625d70;
+  --text-primary-hex: #eae6f0;
+  --text-secondary-hex: #b6b3bc;
+  --h1-color-hex: #ff8fa3;
+  --h2-color-hex: #c3f73a;
+  --h3-color-hex: #a89ff8;
 }
