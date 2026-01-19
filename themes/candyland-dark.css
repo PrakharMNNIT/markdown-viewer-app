@@ -1,0 +1,99 @@
+/* Candyland Dark - Vibrant Night Theme */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Core Colors - Deep Purple Night */
+  --bg-primary: #38334d;
+  /* oklch(0.2303 0.0125 264.2926) */
+  --bg-secondary: #4d4663;
+  /* oklch(0.3210 0.0078 223.6661) - card */
+  --bg-tertiary: #5a5270;
+  --text-primary: #eae6f0;
+  /* oklch(0.9219 0 0) */
+  --text-secondary: #b7b1bd;
+  /* oklch(0.7155 0 0) - muted-foreground */
+  --border-color: #625d70;
+  /* oklch(0.3867 0 0) */
+
+  /* Heading Colors - Electric Candyland */
+  --h1-color: #ff8fa3;
+  /* Pink primary */
+  --h2-color: #c3f73a;
+  /* Lime green secondary */
+  --h3-color: #a89ff8;
+  /* Lavender accent */
+  --h4-color: #ff9d8a;
+  /* Coral */
+  --h5-color: #81e6d9;
+  /* Teal */
+  --h6-color: #f6ad55;
+  /* Orange */
+
+  /* Interactive Colors */
+  --link-color: #ff8fa3;
+  /* oklch(0.8027 0.1355 349.2347) - primary */
+  --link-hover: #ffb3c1;
+
+  /* Emphasis Colors */
+  --bold-color: #f6ad55;
+  --italic-color: #a89ff8;
+
+  /* Code Colors */
+  --code-text: #ff8fa3;
+  --code-bg: rgba(255, 143, 163, 0.12);
+  --code-block-bg: #2a2538;
+  --code-border: #625d70;
+
+  /* Syntax Highlighting - Neon Candyland */
+  --syntax-url: #a89ff8;
+  --syntax-function: #c3f73a;
+  --syntax-variable: #7dd3fc;
+  --syntax-keyword: #ff8fa3;
+  --syntax-string: #c3f73a;
+  --syntax-builtin: #81e6d9;
+  --syntax-char: #aef359;
+  --syntax-regex: #c3f73a;
+  --syntax-inserted: #81e6d9;
+  --syntax-property: #f6ad55;
+  --syntax-tag: #ff9d8a;
+  --syntax-deleted: #e76f51;
+  --syntax-important: #ff8fa3;
+  --syntax-class-name: #a89ff8;
+  --syntax-number: #c084fc;
+  --syntax-constant: #ff8fa3;
+  --syntax-boolean: #a89ff8;
+  --syntax-atrule: #f6ad55;
+  --syntax-comment: #8b869a;
+  --syntax-punctuation: #b7b1bd;
+  --syntax-operator: #ff9d8a;
+  --syntax-attr-name: #c3f73a;
+  --syntax-attr-value: #81e6d9;
+  --syntax-namespace: #a89ff8;
+  --syntax-entity: #8b869a;
+  --syntax-selector: #f6ad55;
+
+  /* UI Elements */
+  --blockquote-border: #c3f73a;
+  --blockquote-bg: #4d4663;
+  --table-header-bg: #4d4663;
+  --table-border: #625d70;
+
+  /* Mermaid Configuration */
+  --mermaid-background: #38334d;
+  --mermaid-text-color: #eae6f0;
+  --mermaid-line-color: #ff8fa3;
+  --mermaid-main-bkg: #4d4663;
+  --mermaid-primary-color: #4d4663;
+  --mermaid-primary-text-color: #eae6f0;
+  --mermaid-primary-border-color: #ff8fa3;
+  --mermaid-secondary-color: #38334d;
+  --mermaid-secondary-text-color: #eae6f0;
+  --mermaid-secondary-border-color: #c3f73a;
+  --mermaid-tertiary-color: #5a5270;
+  --mermaid-tertiary-text-color: #eae6f0;
+  --mermaid-tertiary-border-color: #a89ff8;
+
+  /* Typography - Poppins */
+  --font-family-base: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-code: 'Roboto Mono', 'SF Mono', Monaco, Consolas, monospace;
+}
