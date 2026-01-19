@@ -831,33 +831,33 @@ export class AppController {
         this.storageManager.set('viewMode', mode);
         return;
       }
+
+      // Update button states
       editorOnlyBtn.classList.remove('active');
       splitViewBtn.classList.remove('active');
       previewOnlyBtn.classList.remove('active');
 
+      // Remove all view mode classes
+      mainContent.classList.remove(
+        'editor-only-mode',
+        'split-view-mode',
+        'preview-only-mode',
+        'split-view-active'
+      );
+
+      // Add appropriate class based on mode
       if (mode === 'editor-only') {
         editorOnlyBtn.classList.add('active');
-        editorContainer.style.display = 'flex';
-        previewContainer.style.display = 'none';
-        mainContent.classList.remove('split-view-active');
-        editorContainer.style.flex = '1';
-        editorContainer.style.width = '';
+        mainContent.classList.add('editor-only-mode');
       } else if (mode === 'split-view') {
         splitViewBtn.classList.add('active');
-        editorContainer.style.display = 'flex';
-        previewContainer.style.display = 'flex';
-        mainContent.classList.add('split-view-active');
+        mainContent.classList.add('split-view-mode', 'split-view-active');
         setTimeout(applySplitRatio, 0);
       } else if (mode === 'preview-only') {
         previewOnlyBtn.classList.add('active');
-        editorContainer.style.display = 'none';
-        previewContainer.style.display = 'flex';
-        mainContent.classList.remove('split-view-active');
-        previewContainer.style.flex = '1';
-        previewContainer.style.width = '';
-        editorContainer.style.flex = '';
-        editorContainer.style.width = '';
+        mainContent.classList.add('preview-only-mode');
       }
+
       this.storageManager.set('viewMode', mode);
 
       // Sync scroll visibility

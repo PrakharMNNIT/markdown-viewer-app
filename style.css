@@ -128,6 +128,30 @@ body {
   max-width: 100%;
 }
 
+/* View Mode Classes */
+.main-content.editor-only-mode .editor-container {
+  display: flex;
+  flex: 1;
+}
+
+.main-content.editor-only-mode .preview-container {
+  display: none;
+}
+
+.main-content.split-view-mode .editor-container,
+.main-content.split-view-mode .preview-container {
+  display: flex;
+}
+
+.main-content.preview-only-mode .editor-container {
+  display: none;
+}
+
+.main-content.preview-only-mode .preview-container {
+  display: flex;
+  flex: 1;
+}
+
 @keyframes slideUpFade {
   from {
     opacity: 0;
