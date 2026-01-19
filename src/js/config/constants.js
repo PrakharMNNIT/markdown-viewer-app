@@ -59,6 +59,8 @@ export const THEMES = {
   SUNSET_DARK: 'sunset-dark',
   OBSIDIAN_LIGHT: 'obsidian-light',
   OBSIDIAN_DARK: 'obsidian-dark',
+  NOTEBOOK_LIGHT: 'notebook-light',
+  NOTEBOOK_DARK: 'notebook-dark',
   CUSTOM: 'custom',
 };
 

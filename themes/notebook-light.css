@@ -5,8 +5,6 @@
  * Source: Shadcn 'Notebook' Theme
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
-
 :root {
   /* ==================== CORE PALETTE (OKLCH - Provided) ==================== */
 
@@ -68,12 +66,12 @@
   --link-hover: var(--n-chart-1);
 
   /* Typography */
-  --font-family-base: 'Times New Roman', Times, serif;
-  /* As requested: font-serif */
-  --font-family-headings: 'Architects Daughter', sans-serif;
-  /* As requested: font-sans */
-  --font-family-mono: 'Courier New', Courier, monospace;
-  /* As requested: font-mono */
+  --font-family-base: 'Patrick Hand', cursive;
+  /* Handwritten body text */
+  --font-family-headings: 'Architects Daughter', cursive;
+  /* Handwritten headings */
+  --font-family-mono: 'Fira Code', monospace;
+  /* Tech/Code contrast */
 
   /* ==================== SYNTAX HIGHLIGHTING (Sketchy) ==================== */
   --code-bg: var(--n-card);
@@ -113,8 +111,12 @@
 
   /* Helper colors for hex-only libs (Mermaid) */
   --hex-bg-primary: #fafafa;
+  --hex-bg-secondary: #f4f4f5;
+  --hex-bg-tertiary: #e4e4e7;
   --hex-text-primary: #333333;
+  --hex-text-secondary: #71717a;
   --hex-accent-primary: #444444;
+  --hex-accent-secondary: #fef08a;
 }
 
 /* ==================== GLOBAL TYPOGRAPHY ==================== */
