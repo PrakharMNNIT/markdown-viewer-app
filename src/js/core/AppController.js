@@ -855,6 +855,8 @@ export class AppController {
         mainContent.classList.remove('split-view-active');
         previewContainer.style.flex = '1';
         previewContainer.style.width = '';
+        editorContainer.style.flex = '';
+        editorContainer.style.width = '';
       }
       this.storageManager.set('viewMode', mode);
 
