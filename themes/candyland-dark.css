@@ -1,99 +1,148 @@
-/* Candyland Dark - Vibrant Night Theme */
+/* Candyland Dark - Complete Shadcn Design System */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
 
 :root {
-  /* Core Colors - Deep Purple Night */
-  --bg-primary: #38334d;
-  /* oklch(0.2303 0.0125 264.2926) */
-  --bg-secondary: #4d4663;
-  /* oklch(0.3210 0.0078 223.6661) - card */
-  --bg-tertiary: #5a5270;
-  --text-primary: #eae6f0;
-  /* oklch(0.9219 0 0) */
-  --text-secondary: #b7b1bd;
-  /* oklch(0.7155 0 0) - muted-foreground */
-  --border-color: #625d70;
-  /* oklch(0.3867 0 0) */
+  /* Semantic Color System - OKLCH Dark */
+  --background: oklch(0.2303 0.0125 264.2926);
+  --foreground: oklch(0.9219 0 0);
+  --card: oklch(0.321 0.0078 223.6661);
+  --card-foreground: oklch(0.9219 0 0);
+  --popover: oklch(0.321 0.0078 223.6661);
+  --popover-foreground: oklch(0.9219 0 0);
+  --primary: oklch(0.8027 0.1355 349.2347);
+  --primary-foreground: oklch(0 0 0);
+  --secondary: oklch(0.7395 0.2268 142.8504);
+  --secondary-foreground: oklch(0 0 0);
+  --muted: oklch(0.3867 0 0);
+  --muted-foreground: oklch(0.7155 0 0);
+  --accent: oklch(0.8148 0.0819 225.7537);
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.3867 0 0);
+  --input: oklch(0.3867 0 0);
+  --ring: oklch(0.8027 0.1355 349.2347);
+
+  /* Chart Colors */
+  --chart-1: oklch(0.8027 0.1355 349.2347);
+  --chart-2: oklch(0.7395 0.2268 142.8504);
+  --chart-3: oklch(0.8148 0.0819 225.7537);
+  --chart-4: oklch(0.968 0.211 109.7692);
+  --chart-5: oklch(0.8652 0.1768 90.3816);
+
+  /* Sidebar Colors */
+  --sidebar: oklch(0.2303 0.0125 264.2926);
+  --sidebar-foreground: oklch(0.9219 0 0);
+  --sidebar-primary: oklch(0.8027 0.1355 349.2347);
+  --sidebar-primary-foreground: oklch(0 0 0);
+  --sidebar-accent: oklch(0.8148 0.0819 225.7537);
+  --sidebar-accent-foreground: oklch(0 0 0);
+  --sidebar-border: oklch(0.3867 0 0);
+  --sidebar-ring: oklch(0.8027 0.1355 349.2347);
+
+  /* Typography */
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: 'Roboto Mono', 'SF Mono', Monaco, Consolas, monospace;
+  --font-family-base: var(--font-sans);
+  --font-family-code: var(--font-mono);
+
+  /* Border Radius System */
+  --radius: 0.5rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Shadow System - Elevated for Dark Mode */
+  --shadow-color: oklch(0 0 0);
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+
+  /* Spacing & Tracking */
+  --spacing: 0.25rem;
+  --tracking-normal: 0em;
+
+  /* Legacy Markdown Viewer Mappings */
+  --bg-primary: var(--background);
+  --bg-secondary: var(--card);
+  --bg-tertiary: var(--muted);
+  --text-primary: var(--foreground);
+  --text-secondary: var(--muted-foreground);
+  --border-color: var(--border);
 
   /* Heading Colors - Electric Candyland */
   --h1-color: #ff8fa3;
-  /* Pink primary */
   --h2-color: #c3f73a;
-  /* Lime green secondary */
   --h3-color: #a89ff8;
-  /* Lavender accent */
   --h4-color: #ff9d8a;
-  /* Coral */
   --h5-color: #81e6d9;
-  /* Teal */
   --h6-color: #f6ad55;
-  /* Orange */
 
-  /* Interactive Colors */
-  --link-color: #ff8fa3;
-  /* oklch(0.8027 0.1355 349.2347) - primary */
-  --link-hover: #ffb3c1;
-
-  /* Emphasis Colors */
+  /* Interactive */
+  --link-color: var(--primary);
+  --link-hover: color-mix(in srgb, var(--primary) 120%, white);
   --bold-color: #f6ad55;
-  --italic-color: #a89ff8;
+  --italic-color: var(--accent);
 
-  /* Code Colors */
-  --code-text: #ff8fa3;
-  --code-bg: rgba(255, 143, 163, 0.12);
-  --code-block-bg: #2a2538;
-  --code-border: #625d70;
+  /* Code */
+  --code-text: var(--primary);
+  --code-bg: color-mix(in srgb, var(--primary) 12%, transparent);
+  --code-block-bg: oklch(0.2 0.01 264);
+  --code-border: var(--border);
 
-  /* Syntax Highlighting - Neon Candyland */
-  --syntax-url: #a89ff8;
-  --syntax-function: #c3f73a;
+  /* Syntax Highlighting - Neon */
+  --syntax-url: var(--accent);
+  --syntax-function: var(--secondary);
   --syntax-variable: #7dd3fc;
-  --syntax-keyword: #ff8fa3;
-  --syntax-string: #c3f73a;
+  --syntax-keyword: var(--primary);
+  --syntax-string: var(--secondary);
   --syntax-builtin: #81e6d9;
   --syntax-char: #aef359;
-  --syntax-regex: #c3f73a;
+  --syntax-regex: var(--secondary);
   --syntax-inserted: #81e6d9;
   --syntax-property: #f6ad55;
   --syntax-tag: #ff9d8a;
-  --syntax-deleted: #e76f51;
-  --syntax-important: #ff8fa3;
-  --syntax-class-name: #a89ff8;
+  --syntax-deleted: var(--destructive);
+  --syntax-important: var(--primary);
+  --syntax-class-name: var(--accent);
   --syntax-number: #c084fc;
-  --syntax-constant: #ff8fa3;
-  --syntax-boolean: #a89ff8;
+  --syntax-constant: var(--primary);
+  --syntax-boolean: var(--accent);
   --syntax-atrule: #f6ad55;
-  --syntax-comment: #8b869a;
-  --syntax-punctuation: #b7b1bd;
+  --syntax-comment: var(--muted-foreground);
+  --syntax-punctuation: var(--muted-foreground);
   --syntax-operator: #ff9d8a;
-  --syntax-attr-name: #c3f73a;
+  --syntax-attr-name: var(--secondary);
   --syntax-attr-value: #81e6d9;
-  --syntax-namespace: #a89ff8;
-  --syntax-entity: #8b869a;
+  --syntax-namespace: var(--accent);
+  --syntax-entity: var(--muted-foreground);
   --syntax-selector: #f6ad55;
 
   /* UI Elements */
-  --blockquote-border: #c3f73a;
-  --blockquote-bg: #4d4663;
-  --table-header-bg: #4d4663;
-  --table-border: #625d70;
+  --blockquote-border: var(--secondary);
+  --blockquote-bg: var(--card);
+  --table-header-bg: var(--card);
+  --table-border: var(--border);
 
-  /* Mermaid Configuration */
-  --mermaid-background: #38334d;
-  --mermaid-text-color: #eae6f0;
-  --mermaid-line-color: #ff8fa3;
-  --mermaid-main-bkg: #4d4663;
-  --mermaid-primary-color: #4d4663;
-  --mermaid-primary-text-color: #eae6f0;
-  --mermaid-primary-border-color: #ff8fa3;
-  --mermaid-secondary-color: #38334d;
-  --mermaid-secondary-text-color: #eae6f0;
-  --mermaid-secondary-border-color: #c3f73a;
-  --mermaid-tertiary-color: #5a5270;
-  --mermaid-tertiary-text-color: #eae6f0;
-  --mermaid-tertiary-border-color: #a89ff8;
-
-  /* Typography - Poppins */
-  --font-family-base: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-family-code: 'Roboto Mono', 'SF Mono', Monaco, Consolas, monospace;
+  /* Mermaid */
+  --mermaid-background: var(--background);
+  --mermaid-text-color: var(--foreground);
+  --mermaid-line-color: var(--primary);
+  --mermaid-main-bkg: var(--card);
+  --mermaid-primary-color: var(--card);
+  --mermaid-primary-text-color: var(--foreground);
+  --mermaid-primary-border-color: var(--primary);
+  --mermaid-secondary-color: var(--background);
+  --mermaid-secondary-text-color: var(--foreground);
+  --mermaid-secondary-border-color: var(--secondary);
+  --mermaid-tertiary-color: var(--muted);
+  --mermaid-tertiary-text-color: var(--foreground);
+  --mermaid-tertiary-border-color: var(--accent);
 }
