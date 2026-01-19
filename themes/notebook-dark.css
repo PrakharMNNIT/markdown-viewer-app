@@ -1,0 +1,316 @@
+/*
+ * NOTEBOOK DARK THEME (Enterprise Edition)
+ * Aesthetic: Charcoal Sketchbook, Dark Paper, Chalk
+ * Fonts: Architects Daughter (Headers - Sans), Georgia (Body - Serif), Fira Code (Mono)
+ * Source: Shadcn 'Notebook' Theme (Dark Mode)
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  /* ==================== CORE PALETTE (OKLCH - Provided) ==================== */
+
+  /* Base Shadcn Variables (Dark) */
+  --n-background: oklch(0.2891 0 0);
+  /* Dark Charcoal */
+  --n-foreground: oklch(0.8945 0 0);
+  /* Chalk White */
+  --n-card: oklch(0.3211 0 0);
+  /* Lighter Charcoal */
+  --n-card-foreground: oklch(0.8945 0 0);
+  --n-popover: oklch(0.3211 0 0);
+  --n-popover-foreground: oklch(0.8945 0 0);
+  --n-primary: oklch(0.7572 0 0);
+  /* Light Gray */
+  --n-primary-foreground: oklch(0.2891 0 0);
+  --n-secondary: oklch(0.4676 0 0);
+  /* Mid Gray */
+  --n-secondary-foreground: oklch(0.8078 0 0);
+  --n-muted: oklch(0.3904 0 0);
+  --n-muted-foreground: oklch(0.7058 0 0);
+  --n-accent: oklch(0.9067 0 0);
+  /* Bright White Accent */
+  --n-accent-foreground: oklch(0.3211 0 0);
+  --n-destructive: oklch(0.7915 0.0491 18.241);
+  /* Red tone */
+  --n-destructive-foreground: oklch(0.2891 0 0);
+  --n-border: oklch(0.4276 0 0);
+  --n-input: oklch(0.3211 0 0);
+  --n-ring: oklch(0.8078 0 0);
+
+  /* Charts (Mapped for syntax highlighting) */
+  --n-chart-1: oklch(0.9521 0 0);
+  --n-chart-2: oklch(0.8576 0 0);
+  --n-chart-3: oklch(0.7572 0 0);
+  --n-chart-4: oklch(0.6534 0 0);
+  --n-chart-5: oklch(0.5452 0 0);
+
+  /* Sidebar */
+  --n-sidebar: oklch(0.2478 0 0);
+  --n-sidebar-foreground: oklch(0.8945 0 0);
+
+  /* ==================== APP TOKEN MAPPING ==================== */
+
+  /* Layout Colors */
+  --bg-primary: var(--n-background);
+  --bg-secondary: var(--n-card);
+  --bg-tertiary: var(--n-muted);
+
+  /* Text Colors */
+  --text-primary: var(--n-foreground);
+  --text-secondary: var(--n-muted-foreground);
+  --text-tertiary: var(--n-secondary-foreground);
+
+  /* Borders */
+  --border-color: var(--n-border);
+  --border-hover: var(--n-ring);
+
+  /* Accents */
+  --accent-primary: var(--n-primary);
+  --accent-secondary: var(--n-accent);
+  --link-color: var(--n-chart-1);
+  --link-hover: var(--n-chart-2);
+
+  /* Typography */
+  --font-family-base: 'Georgia', serif;
+  /* As requested: font-serif */
+  --font-family-headings: 'Architects Daughter', sans-serif;
+  /* As requested: font-sans */
+  --font-family-mono: 'Fira Code', 'Courier New', monospace;
+  /* As requested: font-mono */
+
+  /* ==================== SYNTAX HIGHLIGHTING (Chalkboard) ==================== */
+  --code-bg: var(--n-card);
+  --code-text: var(--n-card-foreground);
+  --code-border: var(--n-border);
+
+  /* Tokens - Monochromatic / High Contrast */
+  --syntax-comment: var(--n-muted-foreground);
+  --syntax-keyword: var(--n-chart-1);
+  /* Brightest White */
+  --syntax-string: var(--n-chart-2);
+  /* Light Gray */
+  --syntax-function: var(--n-accent);
+  /* White Accent */
+  --syntax-variable: var(--n-chart-3);
+  /* Gray */
+  --syntax-number: var(--n-destructive);
+  /* Reddish hint */
+  --syntax-class-name: var(--n-chart-1);
+  --syntax-operator: var(--n-ring);
+
+  /* ==================== COMPONENT STYLES ==================== */
+  --border-radius-sm: 4px;
+  --border-radius-md: 0.625rem;
+  --border-radius-lg: 1rem;
+
+  /* Shadows (Inverted/Subtle) */
+  --shadow-sm: 1px 1px 0px rgba(0, 0, 0, 0.5);
+  --shadow-md: 3px 3px 0px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 5px 5px 0px rgba(0, 0, 0, 0.5);
+
+  /* Scrollbar */
+  --scrollbar-track: var(--n-secondary);
+  --scrollbar-thumb: var(--n-primary);
+  --scrollbar-thumb-hover: var(--n-accent);
+
+  /* Helper colors for hex-only libs (Mermaid) */
+  --hex-bg-primary: #1f1f1f;
+  --hex-text-primary: #e0e0e0;
+  --hex-accent-primary: #ffffff;
+}
+
+/* ==================== GLOBAL TYPOGRAPHY ==================== */
+body {
+  font-family: var(--font-family-base);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-headings);
+  color: var(--text-primary);
+  font-weight: 400;
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  border-bottom: 2px dashed var(--border-color);
+  padding-bottom: 0.3em;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 0.2em;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-style: solid;
+  color: var(--n-accent);
+}
+
+/* ==================== UI COMPONENTS ==================== */
+/* Blockquotes */
+blockquote {
+  border-left: 3px solid var(--accent-primary);
+  background: linear-gradient(to right, var(--bg-secondary), transparent);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: var(--border-radius-sm);
+  color: var(--n-accent);
+  font-family: var(--font-family-headings);
+  font-size: 1.1em;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+th {
+  background-color: var(--n-muted);
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: var(--n-foreground);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  font-family: var(--font-family-base);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background-color: var(--n-muted);
+}
+
+/* Inline Code */
+:not(pre)>code {
+  font-family: var(--font-family-mono);
+  background-color: var(--n-muted);
+  border: 1px solid var(--code-border);
+  color: var(--text-primary);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Code Blocks */
+pre {
+  background-color: var(--code-bg);
+  border: 2px solid var(--code-border);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  overflow-x: auto;
+  box-shadow: var(--shadow-md);
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+pre code {
+  font-family: var(--font-family-mono);
+  color: var(--code-text);
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+/* Copy Button */
+.code-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: 0.4rem;
+  font-family: var(--font-family-headings);
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  z-index: 10;
+  font-weight: 700;
+}
+
+pre:hover .code-copy-btn {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  background: var(--n-accent);
+  color: var(--n-accent-foreground);
+  box-shadow: 2px 2px 0 var(--border-color);
+  transform: translate(-1px, -1px);
+}
+
+/* Buttons (Global UI) */
+.btn,
+button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.btn:hover {
+  background-color: var(--n-muted);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--border-color);
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--border-color);
+}
+
+/* ==================== MERMAID CONFIGURATION ==================== */
+:root {
+  --mermaid-theme: dark;
+  --mermaid-background: #1f1f1f;
+  --mermaid-primary-color: #333333;
+  --mermaid-primary-border-color: #555555;
+  --mermaid-line-color: #cccccc;
+  --mermaid-text-color: #ffffff;
+}
