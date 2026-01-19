@@ -1,6 +1,6 @@
 /*
- * OBSIDIAN LIGHT THEME (Enterprise Edition)
- * Aesthetic: Refined, Minimal, Monochromatic, Stark
+ * OBSIDIAN LIGHT THEME (Vibrant Edition)
+ * Aesthetic: Clean, Refined, but with Deep Purple/Violet Accents
  * Fonts: DM Sans (Headers), Inter (Body), IBM Plex Mono (Mono)
  */
 
@@ -8,85 +8,85 @@
 
 :root {
   /* ==================== CORE PALETTE (OKLCH) ==================== */
-  /* Monochromatic Scale with One Accent */
+  /* Obsidian Crystal: White/Gray with Sharp Purple/Indigo Accents */
 
   /* Layout Colors */
-  --bg-primary: oklch(99% 0 0);
-  /* Pure White */
-  --bg-secondary: oklch(96% 0 0);
-  /* Light Gray */
-  --bg-tertiary: oklch(92% 0 0);
-  /* Medium Gray */
+  --bg-primary: oklch(99% 0.01 280);
+  /* Cool White */
+  --bg-secondary: oklch(96% 0.02 270);
+  /* Lavender Mist */
+  --bg-tertiary: oklch(93% 0.04 275);
+  /* Soft Violet Gray */
 
   /* Text Colors */
-  --text-primary: oklch(20% 0 0);
-  /* Almost Black */
-  --text-secondary: oklch(45% 0 0);
-  /* Neutral Gray */
-  --text-tertiary: oklch(70% 0 0);
-  /* Light Gray */
+  --text-primary: oklch(20% 0.05 280);
+  /* Deep Indigo Charcoal */
+  --text-secondary: oklch(45% 0.08 275);
+  /* Muted Violet Gray */
+  --text-tertiary: oklch(65% 0.08 280);
+  /* Soft Purple Gray */
 
   /* Borders */
-  --border-color: oklch(90% 0 0);
-  --border-hover: oklch(70% 0 0);
+  --border-color: oklch(90% 0.05 280);
+  --border-hover: oklch(75% 0.1 275);
 
-  /* Accents */
-  --accent-primary: oklch(25% 0 0);
-  /* Deep Graphite */
-  --accent-secondary: oklch(40% 0 0);
-  /* Soft Graphite */
+  /* Accents - The "Colorfulness" User Requested */
+  --accent-primary: oklch(40% 0.25 290);
+  /* Deep Royal Purple */
+  --accent-secondary: oklch(60% 0.22 280);
+  /* Bright Violet */
 
-  --link-color: oklch(30% 0 0);
-  --link-hover: oklch(10% 0 0);
+  --link-color: oklch(45% 0.2 270);
+  /* Royal Blue/Purple */
+  --link-hover: oklch(35% 0.25 280);
+  /* Deep Violet */
 
-  /* Typography */
+  /* Typography - RETAINED ENTERPRISE FONTS */
   --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-family-headings: 'DM Sans', sans-serif;
   --font-family-mono: 'IBM Plex Mono', monospace;
 
-  /* ==================== SYNTAX HIGHLIGHTING (Minimalist) ==================== */
-  --code-bg: oklch(97% 0 0);
+  /* ==================== SYNTAX HIGHLIGHTING (Vibrant Minimal) ==================== */
+  --code-bg: oklch(98% 0.02 280);
   --code-text: var(--text-primary);
   --code-border: var(--border-color);
 
-  /* Tokens - Minimal color usage */
-  --syntax-comment: oklch(65% 0 0);
-  --syntax-keyword: oklch(30% 0 0);
-  /* Bold Black */
-  --syntax-string: oklch(45% 0 0);
-  /* Gray */
-  --syntax-function: oklch(40% 0 0);
-  /* Gray */
-  --syntax-variable: oklch(35% 0 0);
-  /* Dark Gray */
-  --syntax-number: oklch(30% 0 0);
-  /* Dark Gray */
-  --syntax-class-name: oklch(25% 0 0);
-  /* Black */
-  --syntax-operator: oklch(50% 0 0);
-  /* Gray */
-
-  /* Note: Minimal highlighting relies on font weight/stylistic variation mostly */
+  /* Tokens - Jewel Tones */
+  --syntax-comment: oklch(70% 0.05 280);
+  /* Pale Violet Gray */
+  --syntax-keyword: oklch(35% 0.2 290);
+  /* Deep Purple */
+  --syntax-string: oklch(45% 0.2 150);
+  /* Emerald */
+  --syntax-function: oklch(45% 0.18 240);
+  /* Sapphire Blue */
+  --syntax-variable: oklch(40% 0.15 330);
+  /* Ruby Red */
+  --syntax-number: oklch(50% 0.2 30);
+  /* Topaz Orange */
+  --syntax-class-name: oklch(40% 0.2 280);
+  /* Amethyst */
+  --syntax-operator: oklch(60% 0.15 280);
+  /* Lilac */
 
   /* ==================== COMPONENT STYLES ==================== */
-  --border-radius-sm: 2px;
-  --border-radius-md: 4px;
-  --border-radius-lg: 6px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
 
-  /* Very subtle shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px oklch(30% 0.1 280 / 0.05);
+  --shadow-md: 0 4px 8px -1px oklch(30% 0.1 280 / 0.1);
+  --shadow-lg: 0 10px 15px -3px oklch(30% 0.1 280 / 0.15);
 
   /* Scrollbar */
   --scrollbar-track: var(--bg-primary);
-  --scrollbar-thumb: oklch(85% 0 0);
-  --scrollbar-thumb-hover: oklch(70% 0 0);
+  --scrollbar-thumb: oklch(80% 0.1 280);
+  --scrollbar-thumb-hover: var(--accent-secondary);
 
   /* Helper colors for hex-only libs (Mermaid) */
-  --hex-bg-primary: #ffffff;
-  --hex-text-primary: #18181b;
-  --hex-accent-primary: #27272a;
+  --hex-bg-primary: #fcfaff;
+  --hex-text-primary: #1a1526;
+  --hex-accent-primary: #7b2cbf;
 }
 
 /* ==================== GLOBAL TYPOGRAPHY ==================== */
@@ -105,7 +105,7 @@ h5,
 h6 {
   font-family: var(--font-family-headings);
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 700;
   margin-top: 1.5em;
   margin-bottom: 0.8em;
   letter-spacing: -0.02em;
@@ -116,18 +116,20 @@ h1 {
   padding-bottom: 0.3em;
   margin-bottom: 1.5rem;
   font-weight: 700;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 2px solid var(--accent-secondary);
+  color: var(--accent-primary);
 }
 
 h2 {
   font-size: 1.75rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 h3 {
   font-size: 1.3rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.9em;
@@ -138,25 +140,26 @@ a {
   color: var(--link-color);
   text-decoration: none;
   border-bottom: 1px solid var(--border-color);
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 a:hover {
   border-bottom-color: var(--link-hover);
+  color: var(--link-hover);
+  background: oklch(95% 0.1 280);
 }
 
 /* ==================== UI COMPONENTS ==================== */
 /* Blockquotes */
 blockquote {
-  border-left: 2px solid var(--text-primary);
-  background: transparent;
-  padding: 0 1.5rem;
+  border-left: 3px solid var(--accent-primary);
+  background: var(--bg-secondary);
+  padding: 1rem 1.5rem;
   margin: 2rem 0;
   color: var(--text-secondary);
   font-style: italic;
   font-family: var(--font-family-headings);
-  font-size: 1.25em;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* Tables */
@@ -165,18 +168,22 @@ table {
   border-collapse: collapse;
   margin: 2rem 0;
   font-size: 0.95em;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
 }
 
 th {
-  background-color: transparent;
+  background-color: var(--bg-secondary);
   font-family: var(--font-family-headings);
-  font-weight: 500;
-  border-bottom: 2px solid var(--text-primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-secondary);
   padding: 0.75rem 0.5rem;
   text-align: left;
   text-transform: uppercase;
   font-size: 0.85em;
   letter-spacing: 0.05em;
+  color: var(--accent-primary);
 }
 
 td {
@@ -185,25 +192,24 @@ td {
 }
 
 tr:hover td {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
 }
 
 /* Inline Code */
 :not(pre)>code {
   font-family: var(--font-family-mono);
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  color: var(--accent-primary);
   padding: 0.1em 0.3em;
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 0.85em;
 }
 
 /* Code Blocks */
 pre {
-  background-color: var(--bg-secondary);
-  /* Minimal gray background */
-  border: none;
-  border-radius: 0;
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
   padding: 1.5rem;
   overflow-x: auto;
   margin: 2rem 0;
@@ -222,11 +228,11 @@ pre code {
   position: absolute;
   top: 0;
   right: 0;
-  background: var(--text-primary);
+  background: var(--accent-primary);
   border: none;
-  border-radius: 0 0 0 2px;
+  border-radius: 0 var(--border-radius-md) 0 4px;
   padding: 0.4rem 0.8rem;
-  color: var(--bg-primary);
+  color: white;
   opacity: 0;
   transition: opacity 0.2s ease;
   cursor: pointer;
@@ -248,10 +254,10 @@ pre:hover .code-copy-btn {
 /* Buttons (Global UI) */
 .btn,
 button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
-  background-color: var(--text-primary);
-  color: var(--bg-primary);
+  background-color: var(--accent-primary);
+  color: white;
   border: none;
-  border-radius: 2px;
+  border-radius: var(--border-radius-sm);
   padding: 0.6rem 1.4rem;
   font-family: var(--font-family-headings);
   font-weight: 500;
@@ -263,16 +269,17 @@ button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
 }
 
 .btn:hover {
-  background-color: var(--text-secondary);
+  background-color: var(--accent-secondary);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 /* ==================== MERMAID CONFIGURATION ==================== */
 :root {
   --mermaid-theme: base;
-  --mermaid-background: #ffffff;
-  --mermaid-primary-color: #f4f4f5;
-  --mermaid-primary-border-color: #52525b;
-  --mermaid-line-color: #18181b;
-  --mermaid-text-color: #18181b;
+  --mermaid-background: #fcfaff;
+  --mermaid-primary-color: #eee0ff;
+  --mermaid-primary-border-color: #7b2cbf;
+  --mermaid-line-color: #7b2cbf;
+  --mermaid-text-color: #1a1526;
 }

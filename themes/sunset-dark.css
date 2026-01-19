@@ -1,93 +1,95 @@
 /*
- * SUNSET DARK THEME (Enterprise Edition)
- * Aesthetic: Twilight, Dusky, Warm Dark, Romantic
- * Fonts: Nunito (Headers), Work Sans (Body), Inconsolata (Mono)
+ * SUNSET DARK THEME (Vibrant Edition)
+ * Aesthetic: Synthwave, Dusk, Miami Nights, Neon
+ * Fonts: Nunito (Headers), Source Sans Pro (Body), Inconsolata (Mono)
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Work+Sans:wght@400;500;600&family=Inconsolata:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Source+Sans+Pro:wght@300;400;600&family=Inconsolata:wght@400;500&display=swap');
 
 :root {
   /* ==================== CORE PALETTE (OKLCH) ==================== */
-
-  /* Primary Hues - Twilight Palette */
-  --color-primary-base: 65% 0.2 10;
-  /* Deep Orange/Red */
-  --color-secondary-base: 70% 0.18 340;
-  /* Magenta */
-  --color-accent-base: 75% 0.15 280;
-  /* Deep Purple */
+  /* Deep Dusk: Deep Purples, Hot Pinks, Sunset Oranges */
 
   /* Layout Colors */
-  --bg-primary: oklch(20% 0.05 340);
-  /* Deep Wine Dark */
-  --bg-secondary: oklch(25% 0.06 350);
-  /* Dark Rose */
-  --bg-tertiary: oklch(30% 0.06 350);
-  /* Lighter Rose */
+  --bg-primary: oklch(20% 0.05 280);
+  /* Deep Void Purple */
+  --bg-secondary: oklch(25% 0.1 290);
+  /* Dark Grape */
+  --bg-tertiary: oklch(30% 0.12 300);
+  /* Plum */
 
   /* Text Colors */
-  --text-primary: oklch(95% 0.02 20);
-  /* Warm White */
-  --text-secondary: oklch(80% 0.05 20);
-  /* Soft Peach */
-  --text-tertiary: oklch(60% 0.05 350);
-  /* Muted Mauve */
+  --text-primary: oklch(90% 0.05 300);
+  /* Soft Lilac White */
+  --text-secondary: oklch(80% 0.1 320);
+  /* Pinkish Gray */
+  --text-tertiary: oklch(65% 0.15 340);
+  /* Muted Rose */
 
   /* Borders */
-  --border-color: oklch(40% 0.08 350);
-  --border-hover: oklch(55% 0.1 350);
+  --border-color: oklch(40% 0.15 320);
+  /* Purple Border */
+  --border-hover: oklch(50% 0.2 340);
+  /* Pink Border */
 
   /* Accents */
-  --accent-primary: oklch(var(--color-primary-base));
-  --accent-secondary: oklch(var(--color-secondary-base));
-  --link-color: oklch(75% 0.15 20);
-  --link-hover: oklch(85% 0.15 30);
+  --accent-primary: oklch(65% 0.25 340);
+  /* Hot Pink */
+  --accent-secondary: oklch(70% 0.22 40);
+  /* Sunset Orange */
 
-  /* Typography */
-  --font-family-base: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --link-color: oklch(75% 0.2 300);
+  /* Bright Violet */
+  --link-hover: oklch(85% 0.2 320);
+  /* Neon Pink */
+
+  /* Typography - RETAINED ENTERPRISE FONTS */
+  --font-family-base: 'Source Sans Pro', 'Segoe UI', sans-serif;
   --font-family-headings: 'Nunito', sans-serif;
   --font-family-mono: 'Inconsolata', monospace;
 
-  /* ==================== SYNTAX HIGHLIGHTING (Dusk) ==================== */
-  --code-bg: oklch(15% 0.03 340);
+  /* ==================== SYNTAX HIGHLIGHTING (Synthwave) ==================== */
+  --code-bg: oklch(18% 0.06 280);
+  /* Dark Purple BG */
   --code-text: var(--text-primary);
   --code-border: var(--border-color);
 
-  /* Tokens */
-  --syntax-comment: oklch(60% 0.05 350);
-  --syntax-keyword: oklch(75% 0.18 340);
-  /* Pink */
-  --syntax-string: oklch(80% 0.15 80);
-  /* Gold */
-  --syntax-function: oklch(75% 0.16 30);
-  /* Orange */
-  --syntax-variable: oklch(75% 0.15 280);
+  /* Tokens - Neon */
+  --syntax-comment: oklch(60% 0.1 280);
+  /* Muted Purple */
+  --syntax-keyword: oklch(75% 0.2 340);
+  /* Hot Pink */
+  --syntax-string: oklch(80% 0.2 80);
+  /* Gold/Orange */
+  --syntax-function: oklch(75% 0.18 200);
+  /* Cyan */
+  --syntax-variable: oklch(80% 0.2 300);
   /* Lavender */
-  --syntax-number: oklch(80% 0.18 360);
-  /* Red/Pink */
-  --syntax-class-name: oklch(80% 0.15 200);
-  /* Sky Blue (contrast) */
-  --syntax-operator: oklch(70% 0.1 340);
-  /* Rose */
+  --syntax-number: oklch(80% 0.2 40);
+  /* Tangerine */
+  --syntax-class-name: oklch(75% 0.2 160);
+  /* Mint */
+  --syntax-operator: oklch(85% 0.2 320);
+  /* Pink */
 
   /* ==================== COMPONENT STYLES ==================== */
-  --border-radius-sm: 8px;
+  --border-radius-sm: 6px;
   --border-radius-md: 12px;
-  --border-radius-lg: 20px;
+  --border-radius-lg: 16px;
 
-  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 10px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 15px 20px -5px rgba(0, 0, 0, 0.6);
 
   /* Scrollbar */
   --scrollbar-track: var(--bg-secondary);
-  --scrollbar-thumb: oklch(50% 0.1 350);
-  --scrollbar-thumb-hover: oklch(60% 0.12 350);
+  --scrollbar-thumb: oklch(50% 0.2 300);
+  --scrollbar-thumb-hover: var(--accent-primary);
 
   /* Helper colors for hex-only libs (Mermaid) */
-  --hex-bg-primary: #4c0519;
-  --hex-text-primary: #fff1f2;
-  --hex-accent-primary: #fb7185;
+  --hex-bg-primary: #150a1a;
+  --hex-text-primary: #f0e6f5;
+  --hex-accent-primary: #ff4d94;
 }
 
 /* ==================== GLOBAL TYPOGRAPHY ==================== */
@@ -95,7 +97,7 @@ body {
   font-family: var(--font-family-base);
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 h1,
@@ -109,25 +111,22 @@ h6 {
   font-weight: 800;
   margin-top: 1.5em;
   margin-bottom: 0.6em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
 }
 
 h1 {
-  font-size: 2.5rem;
-  border-bottom: 4px solid var(--border-color);
-  padding-bottom: 0.3em;
-  margin-bottom: 1rem;
-  color: var(--accent-primary);
-  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  font-size: 2.8rem;
+  padding-bottom: 0.2em;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, var(--accent-secondary), var(--accent-primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  border-bottom: 3px solid var(--border-color);
 }
 
 h2 {
-  font-size: 1.8rem;
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 0.2em;
-  color: var(--accent-secondary);
+  font-size: 2rem;
+  color: var(--accent-primary);
 }
 
 h3 {
@@ -138,13 +137,12 @@ h3 {
 a {
   color: var(--link-color);
   text-decoration: none;
-  font-weight: 600;
-  border-bottom: 1px dotted var(--link-color);
+  border-bottom: 2px solid var(--link-color);
   transition: all 0.2s ease;
 }
 
 a:hover {
-  border-bottom-style: solid;
+  border-bottom-color: var(--link-hover);
   color: var(--link-hover);
   text-shadow: 0 0 10px var(--link-hover);
 }
@@ -152,16 +150,14 @@ a:hover {
 /* ==================== UI COMPONENTS ==================== */
 /* Blockquotes */
 blockquote {
-  border-left: 6px solid var(--accent-primary);
-  background: linear-gradient(to right, var(--bg-secondary), transparent);
+  border-left: 5px solid var(--accent-primary);
+  background: linear-gradient(90deg, var(--bg-secondary), transparent);
   padding: 1.5rem;
-  margin: 1.5rem 0;
-  border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+  margin: 2rem 0;
   color: var(--text-secondary);
   font-style: italic;
   font-family: var(--font-family-headings);
-  font-size: 1.1em;
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius-md);
 }
 
 /* Tables */
@@ -169,31 +165,27 @@ table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  margin: 1.5rem 0;
-  overflow: hidden;
-  border-radius: var(--border-radius-md);
+  margin: 2rem 0;
+  font-size: 0.95em;
   border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 th {
-  background-color: var(--bg-tertiary);
+  background-color: var(--bg-secondary);
   font-family: var(--font-family-headings);
   font-weight: 700;
   border-bottom: 2px solid var(--border-color);
-  padding: 1rem;
+  padding: 0.8rem 1rem;
   text-align: left;
-  color: var(--accent-primary);
+  color: var(--accent-secondary);
 }
 
 td {
-  padding: 0.75rem 1rem;
+  padding: 0.8rem 1rem;
   border-bottom: 1px solid var(--border-color);
-}
-
-tr:last-child td {
-  border-bottom: none;
 }
 
 tr:hover td {
@@ -203,51 +195,48 @@ tr:hover td {
 /* Inline Code */
 :not(pre)>code {
   font-family: var(--font-family-mono);
-  background-color: var(--code-bg);
-  color: var(--accent-primary);
-  padding: 0.2em 0.5em;
-  border-radius: 8px;
+  background-color: var(--bg-secondary);
+  color: var(--accent-secondary);
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
   font-size: 0.9em;
   border: 1px solid var(--border-color);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Code Blocks */
 pre {
   background-color: var(--code-bg);
-  border: 1px solid var(--code-border);
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius-lg);
   padding: 1.5rem;
   overflow-x: auto;
-  box-shadow: var(--shadow-md);
-  margin: 1.5rem 0;
+  margin: 2rem 0;
   position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 pre code {
   font-family: var(--font-family-mono);
   color: var(--text-primary);
-  font-size: 0.95em;
   line-height: 1.6;
-  background: transparent;
-  border: none;
-  padding: 0;
 }
 
 /* Copy Button */
 .code-copy-btn {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: var(--bg-secondary);
+  top: 0.6rem;
+  right: 0.6rem;
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-sm);
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   color: var(--text-secondary);
   opacity: 0;
   transition: all 0.2s ease;
   cursor: pointer;
   z-index: 10;
+  font-family: var(--font-family-headings);
+  font-weight: 700;
 }
 
 pre:hover .code-copy-btn {
@@ -255,41 +244,39 @@ pre:hover .code-copy-btn {
 }
 
 .code-copy-btn:hover {
-  background: var(--bg-tertiary);
-  color: var(--accent-primary);
+  background: var(--accent-primary);
+  color: var(--bg-primary);
   border-color: var(--accent-primary);
-  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--accent-primary);
 }
 
 /* Buttons (Global UI) */
 .btn,
 button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  border: 2px solid var(--border-color);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  border: none;
   border-radius: var(--border-radius-lg);
-  padding: 0.6rem 1.5rem;
+  padding: 0.7rem 1.5rem;
   font-family: var(--font-family-headings);
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .btn:hover {
-  border-color: var(--accent-primary);
-  background-color: var(--bg-tertiary);
-  color: var(--accent-primary);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 0 15px var(--accent-primary);
 }
 
 /* ==================== MERMAID CONFIGURATION ==================== */
 :root {
   --mermaid-theme: dark;
-  --mermaid-background: #4c0519;
-  --mermaid-primary-color: #881337;
-  --mermaid-primary-border-color: #fb7185;
-  --mermaid-line-color: #fda4af;
-  --mermaid-text-color: #fff1f2;
+  --mermaid-background: #150a1a;
+  --mermaid-primary-color: #3b1e42;
+  --mermaid-primary-border-color: #ff4d94;
+  --mermaid-line-color: #ffa500;
+  --mermaid-text-color: #f0e6f5;
 }
