@@ -14,13 +14,16 @@ body {
   color: var(--text-primary);
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 44px);
-  /* Reserve space for footer */
+  flex: 1;
+  /* Grow to fill available space, footer auto-sizes */
+  overflow: hidden;
 }
 
 /* ==================== TOOLBAR ==================== */
@@ -321,7 +324,7 @@ body {
 #markdown-preview {
   padding: 30px;
   padding-bottom: 60px;
-  /* Extra bottom padding for footer clearance */
+  /* Extra bottom padding for visual breathing room */
   background-color: var(--bg-primary);
   min-height: 100%;
   /* Ensure content fills container */
@@ -480,7 +483,7 @@ body {
 }
 
 /* Nested attr-value punctuation (quotes) */
-#markdown-preview .token.attr-value > .token.punctuation {
+#markdown-preview .token.attr-value>.token.punctuation {
   color: var(--syntax-string, #10b981);
 }
 
@@ -959,6 +962,7 @@ body {
 }
 
 @media (max-width: 768px) {
+
   /* App container fills viewport minus footer */
   .app-container {
     height: calc(100vh - 44px);
@@ -1448,6 +1452,7 @@ body {
 }
 
 @keyframes expandBtnPulse {
+
   0%,
   100% {
     opacity: 0;
@@ -2370,9 +2375,11 @@ pre:hover .code-copy-btn {
     transform: scale(0);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.2);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2381,13 +2388,16 @@ pre:hover .code-copy-btn {
 
 /* Shake animation for errors */
 @keyframes shake {
+
   0%,
   100% {
     transform: translateX(0);
   }
+
   25% {
     transform: translateX(-4px);
   }
+
   75% {
     transform: translateX(4px);
   }
