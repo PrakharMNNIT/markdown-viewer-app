@@ -1,192 +1,274 @@
-/* 🎨 Obsidian Vibrant Dark Theme */
-/* Modern, colorful, emoji-friendly design inspired by Obsidian */
+/*
+ * OBSIDIAN DARK THEME (Enterprise Edition)
+ * Aesthetic: Volcanic Glass, Refined, Minimal, Stark
+ * Fonts: DM Sans (Headers), Inter (Body), IBM Plex Mono (Mono)
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  /* 🌈 Vibrant Color Palette */
-  --bg-primary: #1e1e2e;
-  --bg-secondary: #2b2d3e;
-  --bg-tertiary: #383a4f;
-  --bg-code: #232635;
+  /* ==================== CORE PALETTE (OKLCH) ==================== */
+  /* Monochromatic Scale */
 
-  /* 🎯 Accent Colors */
-  --color-pink: #ff6b9d;
-  --color-coral: #ff7eb3;
-  --color-yellow: #ffd93d;
-  --color-cyan: #4ecdc4;
-  --color-green: #95e1d3;
-  --color-purple: #c77dff;
-  --color-orange: #ffb86c;
-  --color-blue: #82aaff;
+  /* Layout Colors */
+  --bg-primary: oklch(12% 0 0);
+  /* Deep Graphite */
+  --bg-secondary: oklch(16% 0 0);
+  /* Dark Gray */
+  --bg-tertiary: oklch(20% 0 0);
+  /* Lighter Gray */
 
-  /* 📝 Text Colors */
-  --text-primary: #f5f7ff;
-  --text-secondary: #d2d8ff;
-  --text-muted: #9aa5d6;
-  --text-code: #c8f6c2;
+  /* Text Colors */
+  --text-primary: oklch(95% 0 0);
+  /* White */
+  --text-secondary: oklch(70% 0 0);
+  /* Light Gray */
+  --text-tertiary: oklch(50% 0 0);
+  /* Medium Gray */
 
-  /* 🎯 Semantic Colors */
-  --info: #89dceb;
-  --success: #a6e3a1;
-  --warning: #fab387;
-  --error: #f38ba8;
+  /* Borders */
+  --border-color: oklch(25% 0 0);
+  --border-hover: oklch(35% 0 0);
 
-  /* Heading Colors */
-  --h1-color: #ff6b9d;
-  --h2-color: #ffd93d;
-  --h3-color: #4ecdc4;
-  --h4-color: #c77dff;
-  --h5-color: #ffb86c;
-  --h6-color: #95e1d3;
+  /* Accents */
+  --accent-primary: oklch(100% 0 0);
+  /* Pure White */
+  --accent-secondary: oklch(80% 0 0);
+  /* Lightest Gray */
 
-  /* Link Colors */
-  --link-color: #4ecdc4;
-  --link-hover: #82aaff;
+  --link-color: oklch(90% 0 0);
+  --link-hover: oklch(100% 0 0);
 
-  /* Text Formatting */
-  --bold-color: #f5f7ff;
-  --italic-color: #f5f7ff;
+  /* Typography */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-headings: 'DM Sans', sans-serif;
+  --font-family-mono: 'IBM Plex Mono', monospace;
 
-  /* Code Colors */
-  --code-text: #c8f6c2;
-  --code-bg: rgba(130, 170, 255, 0.15);
-  --code-block-bg: #232635;
-  --code-border: rgba(78, 205, 196, 0.2);
+  /* ==================== SYNTAX HIGHLIGHTING (Minimalist Dark) ==================== */
+  --code-bg: oklch(14% 0 0);
+  --code-text: var(--text-primary);
+  --code-border: var(--border-color);
 
-  /* Syntax Highlighting - Production-Grade Token Colors (One Dark Architecture) */
+  /* Tokens - Monochromatic / Subtle */
+  --syntax-comment: oklch(50% 0 0);
+  --syntax-keyword: oklch(95% 0.05 200);
+  /* Subtle Tint */
+  --syntax-string: oklch(85% 0 0);
+  /* Off White */
+  --syntax-function: oklch(90% 0 0);
+  /* White */
+  --syntax-variable: oklch(75% 0 0);
+  /* Light Gray */
+  --syntax-number: oklch(80% 0 0);
+  /* Light Gray */
+  --syntax-class-name: oklch(95% 0 0);
+  /* White */
+  --syntax-operator: oklch(60% 0 0);
+  /* Medium Gray */
 
-  /* Core hue-1: Cyan - URLs */
-  --syntax-url: #4ecdc4; /* Bright cyan for URLs */
+  /* ==================== COMPONENT STYLES ==================== */
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 6px;
 
-  /* Core hue-2: Blue - Functions, variables */
-  --syntax-function: #82aaff; /* Bright blue for functions */
-  --syntax-variable: #5da9ff; /* Sky blue for variables */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
 
-  /* Core hue-3: Purple - Keywords */
-  --syntax-keyword: #c792ea; /* Lavender purple for keywords (final, sealed, class) */
+  /* Scrollbar */
+  --scrollbar-track: var(--bg-primary);
+  --scrollbar-thumb: oklch(30% 0 0);
+  --scrollbar-thumb-hover: oklch(40% 0 0);
 
-  /* Core hue-4: Green - Strings, builtins */
-  --syntax-string: #95e1d3; /* Mint green for strings */
-  --syntax-builtin: #6bcf7f; /* Vibrant green for builtins (String, List) */
-  --syntax-char: #95e1d3; /* Same as strings */
-  --syntax-regex: #95e1d3; /* Same as strings */
-  --syntax-inserted: #6bcf7f; /* For diff */
+  /* Helper colors for hex-only libs (Mermaid) */
+  --hex-bg-primary: #18181b;
+  --hex-text-primary: #fafafa;
+  --hex-accent-primary: #e4e4e7;
+}
 
-  /* Core hue-5: Pink - Properties, tags */
-  --syntax-property: #ff6b9d; /* Hot pink for properties */
-  --syntax-tag: #ff7eb3; /* Coral pink for tags */
-  --syntax-deleted: #f38ba8; /* Pink-red for diff */
-  --syntax-important: #ff6b9d; /* Hot pink for !important */
+/* ==================== GLOBAL TYPOGRAPHY ==================== */
+body {
+  font-family: var(--font-family-base);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  line-height: 1.6;
+}
 
-  /* Core hue-6: Yellow/Orange - Class names, constants, numbers */
-  --syntax-class-name: #ffb86c; /* Peach orange for class names (Rectangle, Shape) */
-  --syntax-number: #ffd93d; /* Bright yellow for numbers */
-  --syntax-constant: #ffb86c; /* Peach for constants */
-  --syntax-boolean: #ffd93d; /* Same as numbers */
-  --syntax-atrule: #c77dff; /* Purple for CSS @ rules */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-headings);
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  letter-spacing: -0.02em;
+}
 
-  /* Neutral colors */
-  --syntax-comment: #7f85a3; /* Muted blue-gray for comments */
-  --syntax-punctuation: #b8bcc8; /* Light gray for punctuation */
-  --syntax-operator: #89ddff; /* Cyan for operators */
+h1 {
+  font-size: 2.5rem;
+  padding-bottom: 0.3em;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
+}
 
-  /* Markup specific */
-  --syntax-attr-name: #ffb86c; /* Peach like class-name */
-  --syntax-attr-value: #95e1d3; /* Mint like strings */
-  --syntax-namespace: #c792ea; /* Purple like keywords */
-  --syntax-entity: #b8bcc8; /* Neutral */
-  --syntax-selector: #ff6b9d; /* Pink like properties */
+h2 {
+  font-size: 1.75rem;
+  font-weight: 500;
+}
 
-  /* Blockquote */
-  --blockquote-border: #ff6b9d;
-  --blockquote-bg: rgba(255, 107, 157, 0.1);
+h3 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9em;
+  margin-bottom: 1rem;
+}
 
-  /* Table */
-  --table-header-bg: rgba(255, 107, 157, 0.2);
-  --table-border: rgba(255, 255, 255, 0.1);
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.2s ease;
+}
 
-  /* Border */
-  --border-color: rgba(255, 255, 255, 0.1);
+a:hover {
+  border-bottom-color: var(--link-hover);
+}
 
-  /* === MERMAID COMPREHENSIVE CONFIGURATION === */
+/* ==================== UI COMPONENTS ==================== */
+/* Blockquotes */
+blockquote {
+  border-left: 2px solid var(--text-primary);
+  background: transparent;
+  padding: 0 1.5rem;
+  margin: 2rem 0;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-family: var(--font-family-headings);
+  font-size: 1.25em;
+  font-weight: 300;
+}
 
-  /* Core Global */
-  --mermaid-background: #1e1e2e;
-  --mermaid-text-color: #f5f7ff;
-  --mermaid-line-color: #82aaff;
-  --mermaid-main-bkg: #383a4f;
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95em;
+}
 
-  /* Primary Set */
-  --mermaid-primary-color: #383a4f;
-  --mermaid-primary-text-color: #f5f7ff;
-  --mermaid-primary-border-color: #ff6b9d;
+th {
+  background-color: transparent;
+  font-family: var(--font-family-headings);
+  font-weight: 500;
+  border-bottom: 2px solid var(--text-primary);
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+}
 
-  /* Secondary Set */
-  --mermaid-secondary-color: #2b2d3e;
-  --mermaid-secondary-text-color: #f5f7ff;
-  --mermaid-secondary-border-color: #82aaff;
+td {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
 
-  /* Tertiary Set */
-  --mermaid-tertiary-color: #1e1e2e;
-  --mermaid-tertiary-text-color: #f5f7ff;
-  --mermaid-tertiary-border-color: #4ecdc4;
+tr:hover td {
+  background-color: var(--bg-secondary);
+}
 
-  /* Flowchart */
-  --mermaid-node-border: #ff6b9d;
-  --mermaid-cluster-bkg: #2b2d3e;
-  --mermaid-cluster-border: #82aaff;
-  --mermaid-default-link-color: #82aaff;
-  --mermaid-title-color: #f5f7ff;
-  --mermaid-edge-label-background: #1e1e2e;
-  --mermaid-node-text-color: #f5f7ff;
+/* Inline Code */
+:not(pre)>code {
+  font-family: var(--font-family-mono);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+  font-size: 0.85em;
+}
 
-  /* Sequence Diagram */
-  --mermaid-actor-bkg: #383a4f;
-  --mermaid-actor-border: #ff6b9d;
-  --mermaid-actor-text-color: #f5f7ff;
-  --mermaid-actor-line-color: #ff6b9d;
-  --mermaid-signal-color: #82aaff;
-  --mermaid-signal-text-color: #f5f7ff;
-  --mermaid-label-box-bkg-color: #383a4f;
-  --mermaid-label-box-border-color: #ff6b9d;
-  --mermaid-label-text-color: #f5f7ff;
-  --mermaid-loop-text-color: #f5f7ff;
-  --mermaid-activation-border-color: #82aaff;
-  --mermaid-activation-bkg-color: #2b2d3e;
-  --mermaid-sequence-number-color: #f5f7ff;
+/* Code Blocks */
+pre {
+  background-color: var(--bg-secondary);
+  border: none;
+  border-radius: 0;
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+  position: relative;
+  font-size: 0.9rem;
+}
 
-  /* Pie Chart */
-  --mermaid-pie1: #ff6b9d;
-  --mermaid-pie2: #ffd93d;
-  --mermaid-pie3: #4ecdc4;
-  --mermaid-pie4: #c77dff;
-  --mermaid-pie5: #ffb86c;
-  --mermaid-pie6: #95e1d3;
-  --mermaid-pie7: #82aaff;
-  --mermaid-pie8: #ff7eb3;
-  --mermaid-pie9: #c8f6c2;
-  --mermaid-pie10: #89dceb;
-  --mermaid-pie11: #ff6b9d;
-  --mermaid-pie12: #ffd93d;
-  --mermaid-pie-title-text-color: #f5f7ff;
-  --mermaid-pie-section-text-color: #1e1e2e; /* Dark on vibrant slices */
-  --mermaid-pie-legend-text-color: #f5f7ff;
-  --mermaid-pie-stroke-color: #ff6b9d;
-  --mermaid-pie-outer-stroke-color: #ff6b9d;
+pre code {
+  font-family: var(--font-family-mono);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
 
-  /* State Diagram */
-  --mermaid-label-color: #f5f7ff;
-  --mermaid-alt-background: #2b2d3e;
+/* Copy Button */
+.code-copy-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--text-primary);
+  border: none;
+  border-radius: 0 0 0 2px;
+  padding: 0.4rem 0.8rem;
+  color: var(--bg-primary);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  z-index: 10;
+  font-family: var(--font-family-headings);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
-  /* Class Diagram */
-  --mermaid-class-text: #f5f7ff;
+pre:hover .code-copy-btn {
+  opacity: 1;
+}
 
-  /* User Journey */
-  --mermaid-fill-type0: #ff6b9d;
-  --mermaid-fill-type1: #ffd93d;
-  --mermaid-fill-type2: #4ecdc4;
-  --mermaid-fill-type3: #c77dff;
-  --mermaid-fill-type4: #ffb86c;
-  --mermaid-fill-type5: #95e1d3;
-  --mermaid-fill-type6: #82aaff;
-  --mermaid-fill-type7: #ff7eb3;
+.code-copy-btn:hover {
+  background: var(--accent-secondary);
+}
+
+/* Buttons (Global UI) */
+.btn,
+button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 2px;
+  padding: 0.6rem 1.4rem;
+  font-family: var(--font-family-headings);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9em;
+}
+
+.btn:hover {
+  background-color: var(--text-secondary);
+  transform: translateY(-1px);
+}
+
+/* ==================== MERMAID CONFIGURATION ==================== */
+:root {
+  --mermaid-theme: dark;
+  --mermaid-background: #18181b;
+  --mermaid-primary-color: #27272a;
+  --mermaid-primary-border-color: #52525b;
+  --mermaid-line-color: #a1a1aa;
+  --mermaid-text-color: #fafafa;
 }
