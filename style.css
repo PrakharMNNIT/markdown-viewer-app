@@ -357,12 +357,13 @@ body {
 }
 
 #markdown-preview {
+  flex: 1;
   padding: 30px;
   padding-bottom: 60px;
   /* Extra bottom padding for visual breathing room */
   background-color: var(--bg-primary);
-  min-height: 100%;
-  /* Ensure content fills container */
+  overflow-y: auto;
+  /* Allow scrolling within the preview */
 }
 
 /* ==================== MARKDOWN PREVIEW STYLES ==================== */
