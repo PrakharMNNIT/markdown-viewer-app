@@ -8,8 +8,15 @@
 }
 
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: var(--font-family-base,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   height: 100vh;
@@ -158,7 +165,7 @@ body {
 #markdown-editor {
   flex: 1;
   padding: 20px;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: var(--font-family-code, 'Consolas', 'Monaco', 'Courier New', monospace);
   font-size: 14px;
   line-height: 1.6;
   border: none;
@@ -328,6 +335,12 @@ body {
   padding-bottom: 60px;
   /* Extra bottom padding for footer clearance */
   background-color: var(--bg-primary);
+  font-family: var(--font-family-base,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif);
 }
 
 /* ==================== MARKDOWN PREVIEW STYLES ==================== */
