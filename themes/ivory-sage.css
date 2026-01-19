@@ -1,0 +1,87 @@
+/* Ivory Sage - Refined Professional Light Theme */
+:root {
+  /* Core Colors - Warm Ivory Base */
+  --bg-primary: #fdfcf9;
+  --bg-secondary: #f7f5f0;
+  --bg-tertiary: #ede9e0;
+  --text-primary: #2d2520;
+  --text-secondary: #6b6256;
+  --border-color: #d4cfc4;
+
+  /* Heading Colors - Sophisticated Earth Tones */
+  --h1-color: #16a34a;
+  /* Forest green */
+  --h2-color: #059669;
+  /* Emerald */
+  --h3-color: #0d9488;
+  /* Teal */
+  --h4-color: #06b6d4;
+  /* Cyan */
+  --h5-color: #ca8a04;
+  /* Warm gold */
+  --h6-color: #ea580c;
+  /* Rust orange */
+
+  /* Interactive Colors */
+  --link-color: #0d9488;
+  --link-hover: #0f766e;
+
+  /* Emphasis Colors */
+  --bold-color: #b45309;
+  --italic-color: #a16207;
+
+  /* Code Colors */
+  --code-text: #c2410c;
+  --code-bg: rgba(237, 233, 224, 0.5);
+  --code-block-bg: #f7f5f0;
+  --code-border: #d4cfc4;
+
+  /* Syntax Highlighting - Natural Professional Palette */
+  --syntax-url: #0d9488;
+  --syntax-function: #4f46e5;
+  --syntax-variable: #7c3aed;
+  --syntax-keyword: #db2777;
+  --syntax-string: #16a34a;
+  --syntax-builtin: #059669;
+  --syntax-char: #10b981;
+  --syntax-regex: #16a34a;
+  --syntax-inserted: #059669;
+  --syntax-property: #ca8a04;
+  --syntax-tag: #ea580c;
+  --syntax-deleted: #dc2626;
+  --syntax-important: #b45309;
+  --syntax-class-name: #0d9488;
+  --syntax-number: #7c3aed;
+  --syntax-constant: #4f46e5;
+  --syntax-boolean: #db2777;
+  --syntax-atrule: #ca8a04;
+  --syntax-comment: #9ca3af;
+  --syntax-punctuation: #6b7280;
+  --syntax-operator: #ea580c;
+  --syntax-attr-name: #b45309;
+  --syntax-attr-value: #16a34a;
+  --syntax-namespace: #7c3aed;
+  --syntax-entity: #6b7280;
+  --syntax-selector: #ca8a04;
+
+  /* UI Elements */
+  --blockquote-border: #0d9488;
+  --blockquote-bg: #f0fdf4;
+  --table-header-bg: #f7f5f0;
+  --table-border: #d4cfc4;
+
+  /* Mermaid Configuration */
+  --mermaid-background: #fdfcf9;
+  --mermaid-text-color: #2d2520;
+  --mermaid-line-color: #0d9488;
+  --mermaid-main-bkg: #ede9e0;
+  --mermaid-primary-color: #ede9e0;
+  --mermaid-primary-text-color: #2d2520;
+  --mermaid-primary-border-color: #0d9488;
+  --mermaid-secondary-color: #f7f5f0;
+  --mermaid-secondary-text-color: #2d2520;
+  --mermaid-secondary-border-color: #16a34a;
+  --mermaid-tertiary-color: #fdfcf9;
+  --mermaid-tertiary-text-color: #2d2520;
+  --mermaid-tertiary-border-color: #ca8a04;
+}

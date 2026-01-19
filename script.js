@@ -1432,16 +1432,20 @@ graph TD
 
     editorContainer.style.flex = 'none';
     editorContainer.style.width = `${editorWidth}px`;
-    previewContainer.style.flex = 'none';
-    previewContainer.style.width = `${previewWidth}px`;
+
+    // Let CSS handle preview-container flex: 1 layout
+    // previewContainer.style.flex = 'none';
+    // previewContainer.style.width = `${previewWidth}px`;
   }
 
   // Reset to flex layout (equal split)
   function resetSplitLayout() {
     editorContainer.style.flex = '1';
     editorContainer.style.width = '';
-    previewContainer.style.flex = '1';
-    previewContainer.style.width = '';
+
+    // Let CSS handle preview-container flex: 1 layout
+    // previewContainer.style.flex = '1';
+    // previewContainer.style.width = '';
   }
 
   // Split resizer drag handlers
