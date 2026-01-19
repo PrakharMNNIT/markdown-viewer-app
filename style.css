@@ -398,6 +398,129 @@ body {
   margin: 1.33em 0;
 }
 
+/* Mermaid diagram error state */
+.mermaid-diagram.error {
+  display: none;
+}
+
+/* Sync scroll button visibility */
+.sync-scroll-btn {
+  display: none;
+}
+
+.sync-scroll-btn.visible {
+  display: inline-block;
+}
+
+/* Resizing states */
+html.resizing {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+
+/* Zoom transforms */
+#markdown-preview {
+  transform-origin: top left;
+  transition: transform 0.15s ease;
+}
+
+#markdown-preview[data-zoom='50'] {
+  transform: scale(0.5);
+  width: 20000%;
+  height: 20000%;
+}
+
+#markdown-preview[data-zoom='60'] {
+  transform: scale(0.6);
+  width: 16666.67%;
+  height: 16666.67%;
+}
+
+#markdown-preview[data-zoom='70'] {
+  transform: scale(0.7);
+  width: 14285.71%;
+  height: 14285.71%;
+}
+
+#markdown-preview[data-zoom='80'] {
+  transform: scale(0.8);
+  width: 12500%;
+  height: 12500%;
+}
+
+#markdown-preview[data-zoom='90'] {
+  transform: scale(0.9);
+  width: 11111.11%;
+  height: 11111.11%;
+}
+
+#markdown-preview[data-zoom='100'],
+#markdown-preview:not([data-zoom]) {
+  transform: scale(1);
+  width: 100%;
+  height: 100%;
+}
+
+#markdown-preview[data-zoom='110'] {
+  transform: scale(1.1);
+  width: 9090.91%;
+  height: 9090.91%;
+}
+
+#markdown-preview[data-zoom='120'] {
+  transform: scale(1.2);
+  width: 8333.33%;
+  height: 8333.33%;
+}
+
+#markdown-preview[data-zoom='130'] {
+  transform: scale(1.3);
+  width: 7692.31%;
+  height: 7692.31%;
+}
+
+#markdown-preview[data-zoom='140'] {
+  transform: scale(1.4);
+  width: 7142.86%;
+  height: 7142.86%;
+}
+
+#markdown-preview[data-zoom='150'] {
+  transform: scale(1.5);
+  width: 6666.67%;
+  height: 6666.67%;
+}
+
+#markdown-preview[data-zoom='160'] {
+  transform: scale(1.6);
+  width: 6250%;
+  height: 6250%;
+}
+
+#markdown-preview[data-zoom='170'] {
+  transform: scale(1.7);
+  width: 5882.35%;
+  height: 5882.35%;
+}
+
+#markdown-preview[data-zoom='180'] {
+  transform: scale(1.8);
+  width: 5555.56%;
+  height: 5555.56%;
+}
+
+#markdown-preview[data-zoom='190'] {
+  transform: scale(1.9);
+  width: 5263.16%;
+  height: 5263.16%;
+}
+
+#markdown-preview[data-zoom='200'] {
+  transform: scale(2);
+  width: 5000%;
+  height: 5000%;
+}
+
 #markdown-preview h6 {
   color: var(--h6-color);
   font-size: 0.875em;

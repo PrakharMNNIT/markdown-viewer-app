@@ -623,7 +623,7 @@ export class AppController {
               })
               .catch(err => {
                 console.warn('Mermaid error:', err);
-                element.style.display = 'none';
+                element.classList.add('error');
               });
           }
         });
@@ -859,7 +859,7 @@ export class AppController {
       this.storageManager.set('viewMode', mode);
 
       // Sync scroll visibility
-      syncScrollBtn.style.display = mode === 'split-view' ? 'inline-block' : 'none';
+      syncScrollBtn.classList.toggle('visible', mode === 'split-view');
     };
 
     editorOnlyBtn.addEventListener('click', () => setViewMode('editor-only'));
@@ -874,8 +874,7 @@ export class AppController {
         if (!mainContent.classList.contains('split-view-active')) return;
         isSplitResizing = true;
         splitResizer.classList.add('dragging');
-        document.body.style.cursor = 'col-resize';
-        document.body.style.userSelect = 'none';
+        document.documentElement.classList.add('resizing');
         e.preventDefault();
       });
       document.addEventListener('mousemove', e => {
@@ -893,8 +892,7 @@ export class AppController {
         if (isSplitResizing) {
           isSplitResizing = false;
           splitResizer.classList.remove('dragging');
-          document.body.style.cursor = '';
-          document.body.style.userSelect = '';
+          document.documentElement.classList.remove('resizing');
           this.storageManager.set('splitRatio', splitRatio.toString());
         }
       });
@@ -925,10 +923,7 @@ export class AppController {
     // --- Zoom ---
     const setZoom = level => {
       currentZoom = Math.max(50, Math.min(200, level));
-      preview.style.transform = `scale(${currentZoom / 100})`;
-      preview.style.transformOrigin = 'top left';
-      preview.style.width = `${10000 / currentZoom}%`;
-      preview.style.height = `${10000 / currentZoom}%`;
+      preview.dataset.zoom = currentZoom;
       zoomLevelDisplay.textContent = `${currentZoom}%`;
       this.storageManager.set('previewZoom', currentZoom.toString());
     };
