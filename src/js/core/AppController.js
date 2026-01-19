@@ -936,7 +936,9 @@ export class AppController {
     // Helper: Update expand sidebar button visibility
     const updateExpandButtonVisibility = () => {
       if (fileBrowser.classList.contains('collapsed')) {
-        expandSidebarBtn.style.display = this.folderBrowserService.getCurrentFolderName() ? 'flex' : 'none';
+        expandSidebarBtn.style.display = this.folderBrowserService.getCurrentFolderName()
+          ? 'flex'
+          : 'none';
       } else {
         expandSidebarBtn.style.display = 'none';
       }
@@ -1008,7 +1010,9 @@ export class AppController {
     // Open folder
     openFolderBtn.addEventListener('click', async () => {
       if (!this.folderBrowserService.isSupported()) {
-        alert('Folder browsing requires File System Access API.\\n\\nPlease use Chrome 86+ or Edge 86+.\\n\\nFirefox and Safari are not currently supported.');
+        alert(
+          'Folder browsing requires File System Access API.\\n\\nPlease use Chrome 86+ or Edge 86+.\\n\\nFirefox and Safari are not currently supported.'
+        );
         return;
       }
       const result = await this.folderBrowserService.openFolder();
@@ -1053,226 +1057,328 @@ export class AppController {
     // File templates
     const getFileTemplates = () => ({
       empty: '',
-      basic: `# Document Title\\n\\n## Introduction\\n\\nWrite your introduction here...\\n\\n## Content\\n\\nYour main content goes here.\\n\\n## Conclusion\\n\\nSummarize your points here.\\n`,
-      readme: `# Project Name\\n\\nBrief description of your project.\\n\\n## Features\\n\\n- Feature 1\\n- Feature 2\\n- Feature 3\\n\\n## Installation\\n\\n\\`\\`\\`bash\\nnpm install your-package\\n\\`\\`\\`\\n\\n## Usage\\n\\n\\`\\`\\`javascript\\nimport { something } from 'your-package'; \\n\\`\\`\\`\\n\\n## License\\n\\nMIT\\n`,
-        notes: `# Meeting Notes\\n\\n**Date:** ${new Date().toLocaleDateString()}\\n**Attendees:**\\n\\n## Agenda\\n\\n1. Topic 1\\n2. Topic 2\\n3. Topic 3\\n\\n## Discussion\\n\\n### Topic 1\\n\\n\\n### Topic 2\\n\\n\\n### Topic 3\\n\\n\\n## Action Items\\n\\n- [ ] Action item 1 - @person\\n- [ ] Action item 2 - @person\\n\\n## Next Meeting\\n\\nDate: TBD\\n`,
-          blog: `---\\ntitle: \"Your Blog Post Title\"\\ndate: ${new Date().toISOString().split('T')[0]}\\nauthor: Your Name\\ntags: [tag1, tag2]\\n---\\n\\n# Your Blog Post Title\\n\\n![Featured Image](image-url)\\n\\n## Introduction\\n\\nHook your readers with an engaging introduction...\\n\\n## Main Content\\n\\n### Subheading 1\\n\\nYour content here...\\n\\n### Subheading 2\\n\\nMore content...\\n\\n## Conclusion\\n\\nWrap up your thoughts and include a call to action.\\n\\n---\\n\\n*Thanks for reading! Feel free to share your thoughts in the comments.*\\n`,
+      basic: `# Document Title
+
+## Introduction
+
+Write your introduction here...
+
+## Content
+
+Your main content goes here.
+
+## Conclusion
+
+Summarize your points here.
+`,
+      readme: `# Project Name
+
+Brief description of your project.
+
+## Features
+
+- Feature 1
+- Feature 2
+- Feature 3
+
+## Installation
+
+\`\`\`bash
+npm install your-package
+\`\`\`
+
+## Usage
+
+\`\`\`javascript
+import { something } from 'your-package';
+\`\`\`
+
+## License
+
+MIT
+`,
+      notes: `# Meeting Notes
+
+**Date:** ${new Date().toLocaleDateString()}
+**Attendees:**
+
+## Agenda
+
+1. Topic 1
+2. Topic 2
+3. Topic 3
+
+## Discussion
+
+### Topic 1
+
+
+### Topic 2
+
+
+### Topic 3
+
+
+## Action Items
+
+- [ ] Action item 1 - @person
+- [ ] Action item 2 - @person
+
+## Next Meeting
+
+Date: TBD
+`,
+      blog: `---
+title: "Your Blog Post Title"
+date: ${new Date().toISOString().split('T')[0]}
+author: Your Name
+tags: [tag1, tag2]
+---
+
+# Your Blog Post Title
+
+![Featured Image](image-url)
+
+## Introduction
+
+Hook your readers with an engaging introduction...
+
+## Main Content
+
+### Subheading 1
+
+Your content here...
+
+### Subheading 2
+
+More content...
+
+## Conclusion
+
+Wrap up your thoughts and include a call to action.
+
+---
+
+*Thanks for reading! Feel free to share your thoughts in the comments.*
+`,
     });
 
-  // Populate location dropdown
-  const populateLocationDropdown = () => {
-    newFileLocationSelect.innerHTML = '<option value="">📁 Root folder</option>';
-    const addDirs = (items, prefix = '') => {
-      items.forEach(item => {
-        if (item.isDirectory) {
-          const path = prefix ? `${prefix}/${item.name}` : item.name;
-          const opt = document.createElement('option');
-          opt.value = path;
-          opt.textContent = `📁 ${path}`;
-          newFileLocationSelect.appendChild(opt);
-          if (item.children) addDirs(item.children, path);
-        }
-      });
+    // Populate location dropdown
+    const populateLocationDropdown = () => {
+      newFileLocationSelect.innerHTML = '<option value="">📁 Root folder</option>';
+      const addDirs = (items, prefix = '') => {
+        items.forEach(item => {
+          if (item.isDirectory) {
+            const path = prefix ? `${prefix}/${item.name}` : item.name;
+            const opt = document.createElement('option');
+            opt.value = path;
+            opt.textContent = `📁 ${path}`;
+            newFileLocationSelect.appendChild(opt);
+            if (item.children) addDirs(item.children, path);
+          }
+        });
+      };
+      addDirs(folderFiles);
     };
-    addDirs(folderFiles);
-  };
 
     // Create file modal
     createFileBtn.addEventListener('click', () => {
-  if (!this.folderBrowserService.getCurrentFolderName()) return;
-  populateLocationDropdown();
-  newFileNameInput.value = '';
-  newFileTemplateSelect.value = 'empty';
-  createFileModal.classList.add('active');
-  setTimeout(() => newFileNameInput.focus(), 100);
-});
+      if (!this.folderBrowserService.getCurrentFolderName()) return;
+      populateLocationDropdown();
+      newFileNameInput.value = '';
+      newFileTemplateSelect.value = 'empty';
+      createFileModal.classList.add('active');
+      setTimeout(() => newFileNameInput.focus(), 100);
+    });
 
-closeCreateFileModal.addEventListener('click', () => createFileModal.classList.remove('active'));
-cancelCreateFileBtn.addEventListener('click', () => createFileModal.classList.remove('active'));
-createFileModal.addEventListener('click', e => {
-  if (e.target === createFileModal) createFileModal.classList.remove('active');
-});
+    closeCreateFileModal.addEventListener('click', () =>
+      createFileModal.classList.remove('active')
+    );
+    cancelCreateFileBtn.addEventListener('click', () => createFileModal.classList.remove('active'));
+    createFileModal.addEventListener('click', e => {
+      if (e.target === createFileModal) createFileModal.classList.remove('active');
+    });
 
-newFileNameInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    confirmCreateFileBtn.click();
-  }
-});
+    newFileNameInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        confirmCreateFileBtn.click();
+      }
+    });
 
-confirmCreateFileBtn.addEventListener('click', async () => {
-  const filename = newFileNameInput.value.trim();
-  if (!filename) return;
-  const locationPath = newFileLocationSelect.value;
-  let targetDir = null;
-  if (locationPath) {
-    targetDir = await this.folderBrowserService.getDirectoryByPath(locationPath);
-    if (!targetDir) return;
-  }
-  const templateKey = newFileTemplateSelect.value;
-  const templates = getFileTemplates();
-  const content = templates[templateKey] || '';
-  confirmCreateFileBtn.disabled = true;
-  confirmCreateFileBtn.textContent = 'Creating...';
-  const result = await this.folderBrowserService.createFile(targetDir, filename, content);
-  confirmCreateFileBtn.disabled = false;
-  confirmCreateFileBtn.textContent = 'Create File';
-  if (result.success) {
-    createFileModal.classList.remove('active');
-    const refreshResult = await this.folderBrowserService.refreshFolder();
-    if (refreshResult.success) {
-      folderFiles = refreshResult.files;
-      renderFileTree(refreshResult.files);
+    confirmCreateFileBtn.addEventListener('click', async () => {
+      const filename = newFileNameInput.value.trim();
+      if (!filename) return;
+      const locationPath = newFileLocationSelect.value;
+      let targetDir = null;
+      if (locationPath) {
+        targetDir = await this.folderBrowserService.getDirectoryByPath(locationPath);
+        if (!targetDir) return;
+      }
+      const templateKey = newFileTemplateSelect.value;
+      const templates = getFileTemplates();
+      const content = templates[templateKey] || '';
+      confirmCreateFileBtn.disabled = true;
+      confirmCreateFileBtn.textContent = 'Creating...';
+      const result = await this.folderBrowserService.createFile(targetDir, filename, content);
+      confirmCreateFileBtn.disabled = false;
+      confirmCreateFileBtn.textContent = 'Create File';
+      if (result.success) {
+        createFileModal.classList.remove('active');
+        const refreshResult = await this.folderBrowserService.refreshFolder();
+        if (refreshResult.success) {
+          folderFiles = refreshResult.files;
+          renderFileTree(refreshResult.files);
+        }
+        activeFileHandle = result.handle;
+        editor.value = content;
+        renderMarkdown();
+      }
+    });
+
+    // Resizable sidebar
+    if (resizeHandle) {
+      resizeHandle.addEventListener('mousedown', e => {
+        isResizing = true;
+        document.body.style.cursor = 'ew-resize';
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', e => {
+        if (!isResizing) return;
+        const newWidth = e.clientX;
+        if (newWidth >= 200 && newWidth <= 600) {
+          sidebarWidth = newWidth;
+          fileBrowser.style.width = `${sidebarWidth}px`;
+        }
+      });
+      document.addEventListener('mouseup', () => {
+        if (isResizing) {
+          isResizing = false;
+          document.body.style.cursor = '';
+          document.body.style.userSelect = '';
+          this.storageManager.set('sidebarWidth', sidebarWidth.toString());
+        }
+      });
     }
-    activeFileHandle = result.handle;
-    editor.value = content;
-    renderMarkdown();
-  }
-});
 
-// Resizable sidebar
-if (resizeHandle) {
-  resizeHandle.addEventListener('mousedown', e => {
-    isResizing = true;
-    document.body.style.cursor = 'ew-resize';
-    document.body.style.userSelect = 'none';
-    e.preventDefault();
-  });
-  document.addEventListener('mousemove', e => {
-    if (!isResizing) return;
-    const newWidth = e.clientX;
-    if (newWidth >= 200 && newWidth <= 600) {
-      sidebarWidth = newWidth;
-      fileBrowser.style.width = `${sidebarWidth}px`;
-    }
-  });
-  document.addEventListener('mouseup', () => {
-    if (isResizing) {
-      isResizing = false;
-      document.body.style.cursor = '';
-      document.body.style.userSelect = '';
-      this.storageManager.set('sidebarWidth', sidebarWidth.toString());
-    }
-  });
-}
+    // Zen Mode
+    const toggleZenMode = () => {
+      document.body.classList.toggle('zen-mode');
+      if (isSplitResizing) {
+        isSplitResizing = false;
+        splitResizer.classList.remove('dragging');
+        document.documentElement.classList.remove('resizing');
+      }
+    };
+    zenModeBtn.addEventListener('click', toggleZenMode);
+    exitZenBtn.addEventListener('click', toggleZenMode);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && document.body.classList.contains('zen-mode')) {
+        toggleZenMode();
+      }
+    });
 
-// Zen Mode
-const toggleZenMode = () => {
-  document.body.classList.toggle('zen-mode');
-  if (isSplitResizing) {
-    isSplitResizing = false;
-    splitResizer.classList.remove('dragging');
-    document.documentElement.classList.remove('resizing');
-  }
-};
-zenModeBtn.addEventListener('click', toggleZenMode);
-exitZenBtn.addEventListener('click', toggleZenMode);
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.body.classList.contains('zen-mode')) {
-    toggleZenMode();
-  }
-});
+    // Initialize LinkNavigationService
+    this.linkNavigationService = new LinkNavigationService(this.folderBrowserService, fileData => {
+      editor.value = fileData.content;
+      renderMarkdown();
+      // Update active class in tree...
+    });
+    this.linkNavigationService.initialize(preview);
 
-// Initialize LinkNavigationService
-this.linkNavigationService = new LinkNavigationService(this.folderBrowserService, fileData => {
-  editor.value = fileData.content;
-  renderMarkdown();
-  // Update active class in tree...
-});
-this.linkNavigationService.initialize(preview);
+    // Initialize AnchorNavigation
+    AnchorNavigation.init(previewContainer);
 
-// Initialize AnchorNavigation
-AnchorNavigation.init(previewContainer);
-
-// Restore state
-const savedViewMode = this.storageManager.get('viewMode') || 'split-view';
-setViewMode(savedViewMode);
-const savedSplit = this.storageManager.get('splitRatio');
-if (savedSplit) splitRatio = parseFloat(savedSplit);
-const savedZoom = this.storageManager.get('previewZoom');
-if (savedZoom) setZoom(parseInt(savedZoom));
+    // Restore state
+    const savedViewMode = this.storageManager.get('viewMode') || 'split-view';
+    setViewMode(savedViewMode);
+    const savedSplit = this.storageManager.get('splitRatio');
+    if (savedSplit) splitRatio = parseFloat(savedSplit);
+    const savedZoom = this.storageManager.get('previewZoom');
+    if (savedZoom) setZoom(parseInt(savedZoom));
   }
 
-_initSupportWidget() {
-  // ... (logic from script.js)
-  const init = async () => {
-    const region = await this._detectSupportRegion();
-    this._renderSupportWidget(region);
-  };
-  init();
-}
+  _initSupportWidget() {
+    // ... (logic from script.js)
+    const init = async () => {
+      const region = await this._detectSupportRegion();
+      this._renderSupportWidget(region);
+    };
+    init();
+  }
 
   async _detectSupportRegion() {
-  // ... same logic
-  const cached = sessionStorage.getItem(STORAGE_KEYS.SUPPORT_USER_REGION);
-  if (cached) return cached;
-  try {
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), SUPPORT_CONFIG.TIMEOUT_MS);
-    const res = await fetch('https://ipapi.co/json/', { signal: controller.signal });
-    clearTimeout(id);
-    const data = await res.json();
-    const region = data.country_code === 'IN' ? 'india' : 'global';
-    sessionStorage.setItem(STORAGE_KEYS.SUPPORT_USER_REGION, region);
-    return region;
-  } catch {
-    return SUPPORT_CONFIG.FALLBACK_REGION;
+    // ... same logic
+    const cached = sessionStorage.getItem(STORAGE_KEYS.SUPPORT_USER_REGION);
+    if (cached) return cached;
+    try {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), SUPPORT_CONFIG.TIMEOUT_MS);
+      const res = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+      clearTimeout(id);
+      const data = await res.json();
+      const region = data.country_code === 'IN' ? 'india' : 'global';
+      sessionStorage.setItem(STORAGE_KEYS.SUPPORT_USER_REGION, region);
+      return region;
+    } catch {
+      return SUPPORT_CONFIG.FALLBACK_REGION;
+    }
   }
-}
 
-_renderSupportWidget(region) {
-  const container = document.getElementById('support-widget');
-  if (!container) return;
-  const config =
-    region === 'india'
-      ? {
-        text: '🇮🇳 Support via UPI',
-        url: 'https://razorpay.me/@prakharshekharparthasarthi?notes[source]=webapp_footer',
-        className: 'support-button--india',
-        toggleText: 'Not in India?',
-      }
-      : {
-        text: '☕ Support via Ko-fi',
-        url: 'https://ko-fi.com/praxlannister?ref=webapp_footer',
-        className: 'support-button--global',
-        toggleText: 'In India? Use UPI',
-      };
-  container.innerHTML = `<a href="${config.url}" target="_blank" class="support-button ${config.className}">${config.text}</a><button class="support-toggle" onclick="window.toggleSupportRegion()">${config.toggleText}</button>`;
-}
+  _renderSupportWidget(region) {
+    const container = document.getElementById('support-widget');
+    if (!container) return;
+    const config =
+      region === 'india'
+        ? {
+          text: '🇮🇳 Support via UPI',
+          url: 'https://razorpay.me/@prakharshekharparthasarthi?notes[source]=webapp_footer',
+          className: 'support-button--india',
+          toggleText: 'Not in India?',
+        }
+        : {
+          text: '☕ Support via Ko-fi',
+          url: 'https://ko-fi.com/praxlannister?ref=webapp_footer',
+          className: 'support-button--global',
+          toggleText: 'In India? Use UPI',
+        };
+    container.innerHTML = `<a href="${config.url}" target="_blank" class="support-button ${config.className}">${config.text}</a><button class="support-toggle" onclick="window.toggleSupportRegion()">${config.toggleText}</button>`;
+  }
 
-_toggleSupportRegion() {
-  const current =
-    sessionStorage.getItem(STORAGE_KEYS.SUPPORT_USER_REGION) || SUPPORT_CONFIG.FALLBACK_REGION;
-  const newRegion = current === 'india' ? 'global' : 'india';
-  sessionStorage.setItem(STORAGE_KEYS.SUPPORT_USER_REGION, newRegion);
-  this._renderSupportWidget(newRegion);
-}
+  _toggleSupportRegion() {
+    const current =
+      sessionStorage.getItem(STORAGE_KEYS.SUPPORT_USER_REGION) || SUPPORT_CONFIG.FALLBACK_REGION;
+    const newRegion = current === 'india' ? 'global' : 'india';
+    sessionStorage.setItem(STORAGE_KEYS.SUPPORT_USER_REGION, newRegion);
+    this._renderSupportWidget(newRegion);
+  }
 
-_initSupportModal() {
-  // ... same logic
-  const modal = document.getElementById('support-modal');
-  const closeBtn = document.getElementById('close-support-modal');
-  const checkbox = document.getElementById('support-dont-show-again');
-  if (!modal || !closeBtn) return;
+  _initSupportModal() {
+    // ... same logic
+    const modal = document.getElementById('support-modal');
+    const closeBtn = document.getElementById('close-support-modal');
+    const checkbox = document.getElementById('support-dont-show-again');
+    if (!modal || !closeBtn) return;
 
-  const shown = localStorage.getItem(STORAGE_KEYS.SUPPORT_MODAL_SHOWN);
-  if (shown === 'true') return;
+    const shown = localStorage.getItem(STORAGE_KEYS.SUPPORT_MODAL_SHOWN);
+    if (shown === 'true') return;
 
-  setTimeout(() => modal.classList.add('active'), SUPPORT_CONFIG.MODAL_DELAY_MS);
+    setTimeout(() => modal.classList.add('active'), SUPPORT_CONFIG.MODAL_DELAY_MS);
 
-  const close = () => {
-    modal.classList.remove('active');
-    if (checkbox?.checked) localStorage.setItem(STORAGE_KEYS.SUPPORT_MODAL_SHOWN, 'true');
-  };
+    const close = () => {
+      modal.classList.remove('active');
+      if (checkbox?.checked) localStorage.setItem(STORAGE_KEYS.SUPPORT_MODAL_SHOWN, 'true');
+    };
 
-  closeBtn.addEventListener('click', close);
-  modal.addEventListener('click', e => {
-    if (e.target === modal) close();
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') close();
-  });
-}
+    closeBtn.addEventListener('click', close);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) close();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') close();
+    });
+  }
 }
 
 export const appController = new AppController();
