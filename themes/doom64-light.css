@@ -1,0 +1,143 @@
+/* DOOM64 Light - Brutalist Game-Inspired Theme */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap');
+
+:root {
+  /* Semantic Color System - OKLCH */
+  --background: oklch(0.8452 0 0);
+  --foreground: oklch(0.2393 0 0);
+  --card: oklch(0.7572 0 0);
+  --card-foreground: oklch(0.2393 0 0);
+  --popover: oklch(0.7572 0 0);
+  --popover-foreground: oklch(0.2393 0 0);
+  --primary: oklch(0.5016 0.1887 27.4816);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.4955 0.0896 126.1858);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.7826 0 0);
+  --muted-foreground: oklch(0.4091 0 0);
+  --accent: oklch(0.588 0.0993 245.7394);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.7076 0.1975 46.4558);
+  --destructive-foreground: oklch(0 0 0);
+  --border: oklch(0.4313 0 0);
+  --input: oklch(0.4313 0 0);
+  --ring: oklch(0.5016 0.1887 27.4816);
+
+  /* Chart Colors */
+  --chart-1: oklch(0.5016 0.1887 27.4816);
+  --chart-2: oklch(0.4955 0.0896 126.1858);
+  --chart-3: oklch(0.588 0.0993 245.7394);
+  --chart-4: oklch(0.7076 0.1975 46.4558);
+  --chart-5: oklch(0.5656 0.0431 40.4319);
+
+  /* Sidebar Colors */
+  --sidebar: oklch(0.7572 0 0);
+  --sidebar-foreground: oklch(0.2393 0 0);
+  --sidebar-primary: oklch(0.5016 0.1887 27.4816);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.588 0.0993 245.7394);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.4313 0 0);
+  --sidebar-ring: oklch(0.5016 0.1887 27.4816);
+
+  /* Typography - DOOM64 Aesthetic */
+  --font-sans: 'Oxanium', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: 'Source Code Pro', 'SF Mono', Monaco, Consolas, monospace;
+  --font-family-base: var(--font-sans);
+  --font-family-code: var(--font-mono);
+
+  /* Border Radius - BRUTALIST: 0px sharp corners */
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  /* Shadow System - Dramatic */
+  --shadow-color: hsl(0 0% 0%);
+  --shadow-2xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.2);
+  --shadow-xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.2);
+  --shadow-sm: 0px 2px 4px 0px hsl(0 0% 0% / 0.4), 0px 1px 2px -1px hsl(0 0% 0% / 0.4);
+  --shadow: 0px 2px 4px 0px hsl(0 0% 0% / 0.4), 0px 1px 2px -1px hsl(0 0% 0% / 0.4);
+  --shadow-md: 0px 2px 4px 0px hsl(0 0% 0% / 0.4), 0px 2px 4px -1px hsl(0 0% 0% / 0.4);
+  --shadow-lg: 0px 2px 4px 0px hsl(0 0% 0% / 0.4), 0px 4px 6px -1px hsl(0 0% 0% / 0.4);
+  --shadow-xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.4), 0px 8px 10px -1px hsl(0 0% 0% / 0.4);
+  --shadow-2xl: 0px 2px 4px 0px hsl(0 0% 0% / 1);
+
+  /* Spacing & Tracking */
+  --spacing: 0.25rem;
+  --tracking-normal: 0em;
+
+  /* Legacy Markdown Viewer Mappings */
+  --bg-primary: var(--background);
+  --bg-secondary: var(--card);
+  --bg-tertiary: var(--muted);
+  --text-primary: var(--foreground);
+  --text-secondary: var(--muted-foreground);
+  --border-color: var(--border);
+
+  /* Heading Colors - DOOM palette: orange, green, purple, yellow */
+  --h1-color: #db6b1f;
+  --h2-color: #62a350;
+  --h3-color: #7e7cc0;
+  --h4-color: #e6b554;
+  --h5-color: #db6b1f;
+  --h6-color: #62a350;
+
+  /* Interactive */
+  --link-color: var(--primary);
+  --link-hover: #a4490f;
+  --bold-color: #db6b1f;
+  --italic-color: var(--accent);
+
+  /* Code */
+  --code-text: #db6b1f;
+  --code-bg: color-mix(in srgb, var(--primary) 10%, transparent);
+  --code-block-bg: var(--card);
+  --code-border: var(--border);
+
+  /* Syntax Highlighting - DOOM colors */
+  --syntax-keyword: #db6b1f;
+  --syntax-string: #62a350;
+  --syntax-number: #7e7cc0;
+  --syntax-function: #e6b554;
+  --syntax-comment: #686868;
+  --syntax-operator: #db6b1f;
+  --syntax-punctuation: #686868;
+  --syntax-variable: #7e7cc0;
+  --syntax-builtin: #62a350;
+  --syntax-class-name: #e6b554;
+  --syntax-property: #db6b1f;
+
+  /* UI Elements */
+  --blockquote-border: var(--primary);
+  --blockquote-bg: var(--card);
+  --table-header-bg: var(--card);
+  --table-border: var(--border);
+
+  /* Mermaid - Hex colors for compatibility */
+  --mermaid-background: #d8d8d8;
+  --mermaid-text-color: #3d3d3d;
+  --mermaid-line-color: #db6b1f;
+  --mermaid-main-bkg: #c1c1c1;
+  --mermaid-primary-color: #c1c1c1;
+  --mermaid-primary-text-color: #3d3d3d;
+  --mermaid-primary-border-color: #db6b1f;
+  --mermaid-secondary-color: #d8d8d8;
+  --mermaid-secondary-text-color: #3d3d3d;
+  --mermaid-secondary-border-color: #62a350;
+  --mermaid-tertiary-color: #c8c8c8;
+  --mermaid-tertiary-text-color: #3d3d3d;
+  --mermaid-tertiary-border-color: #7e7cc0;
+
+  /* Hex aliases for Mermaid fallbacks */
+  --bg-primary-hex: #d8d8d8;
+  --bg-secondary-hex: #c1c1c1;
+  --bg-tertiary-hex: #c8c8c8;
+  --text-primary-hex: #3d3d3d;
+  --text-secondary-hex: #686868;
+  --h1-color-hex: #db6b1f;
+  --h2-color-hex: #62a350;
+  --h3-color-hex: #7e7cc0;
+}
