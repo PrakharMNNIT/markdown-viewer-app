@@ -1553,9 +1553,18 @@ graph TD
   let syncScrollEnabled = storageManager.get('syncScrollEnabled') === 'true';
   let syncScrolling = false;
 
+  console.log('🔍 [SYNC SCROLL INIT] syncScrollEnabled:', syncScrollEnabled);
+  console.log('🔍 [SYNC SCROLL INIT] editor element:', editor ? 'EXISTS' : 'NULL');
+  console.log(
+    '🔍 [SYNC SCROLL INIT] previewContainer element:',
+    previewContainer ? 'EXISTS' : 'NULL'
+  );
+  console.log('🔍 [SYNC SCROLL INIT] syncScrollBtn element:', syncScrollBtn ? 'EXISTS' : 'NULL');
+
   // Load saved state and update button
   if (syncScrollEnabled) {
     syncScrollBtn.classList.add('active');
+    console.log('✅ [SYNC SCROLL INIT] Button activated');
   }
 
   // Show sync scroll button only in split view
@@ -1570,15 +1579,16 @@ graph TD
 
   // Sync scroll toggle
   syncScrollBtn.addEventListener('click', () => {
+    console.log('🖱️ [SYNC SCROLL] Button clicked!');
     syncScrollEnabled = !syncScrollEnabled;
     storageManager.set('syncScrollEnabled', syncScrollEnabled.toString());
 
     if (syncScrollEnabled) {
       syncScrollBtn.classList.add('active');
-      console.log('✅ Sync scroll enabled');
+      console.log('✅ [SYNC SCROLL] ENABLED - syncScrollEnabled:', true);
     } else {
       syncScrollBtn.classList.remove('active');
-      console.log('❌ Sync scroll disabled');
+      console.log('❌ [SYNC SCROLL] DISABLED - syncScrollEnabled:', false);
     }
   });
 
