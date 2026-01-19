@@ -143,6 +143,17 @@ body {
   display: flex;
 }
 
+/* Split view uses CSS variables for dynamic resizing */
+.main-content.split-view-mode .editor-container {
+  flex: 0 0 auto;
+  width: calc((100% - var(--sidebar-width, 0px) - 8px) * var(--split-ratio, 0.5));
+}
+
+.main-content.split-view-mode .preview-container {
+  flex: 0 0 auto;
+  width: calc((100% - var(--sidebar-width, 0px) - 8px) * (1 - var(--split-ratio, 0.5)));
+}
+
 .main-content.preview-only-mode .editor-container {
   display: none;
 }

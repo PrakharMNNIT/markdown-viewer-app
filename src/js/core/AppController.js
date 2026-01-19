@@ -819,11 +819,9 @@ export class AppController {
     // --- View Mode & Split Resizer ---
     const applySplitRatio = () => {
       if (!mainContent.classList.contains('split-view-active')) return;
-      const totalWidth = mainContent.offsetWidth - (fileBrowser.offsetWidth || 0) - 8;
-      editorContainer.style.flex = 'none';
-      editorContainer.style.width = `${totalWidth * splitRatio}px`;
-      previewContainer.style.flex = 'none';
-      previewContainer.style.width = `${totalWidth * (1 - splitRatio)}px`;
+      const sidebarWidth = fileBrowser.offsetWidth || 0;
+      mainContent.style.setProperty('--split-ratio', splitRatio);
+      mainContent.style.setProperty('--sidebar-width', `${sidebarWidth}px`);
     };
 
     const setViewMode = mode => {
