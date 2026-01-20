@@ -32,19 +32,19 @@ body {
 
 /* ==================== TOOLBAR ==================== */
 .toolbar {
-  background-color: var(--card, var(--bg-secondary));
+  background-color: var(--bg-secondary);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border, var(--border-color));
+  border-bottom: 1px solid var(--border-color);
   padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: var(--shadow-md, 0 4px 20px rgba(0, 0, 0, 0.05));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
 }
 
 .toolbar h1 {
@@ -64,8 +64,8 @@ body {
   display: flex;
   gap: 4px;
   padding: 4px;
-  background-color: var(--muted, rgba(0, 0, 0, 0.05));
-  border-radius: var(--radius-lg, 8px);
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
 }
 
 .view-btn {
@@ -73,12 +73,11 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: var(--radius-md, 6px);
+  transition: all 0.2s ease;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--foreground, inherit);
 }
 
 .view-btn:hover {
@@ -86,9 +85,8 @@ body {
 }
 
 .view-btn.active {
-  background-color: var(--primary, var(--bg-tertiary));
-  color: var(--primary-foreground, white);
-  box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.1));
+  background-color: var(--bg-tertiary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .view-btn svg {
@@ -97,9 +95,8 @@ body {
 
 .btn {
   padding: 8px 16px;
-  border: 1px solid var(--border, var(--border-color));
-  background-color: var(--card, var(--bg-primary));
-  color: var(--card-foreground, inherit);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   color: var(--text-primary);
