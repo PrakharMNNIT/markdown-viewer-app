@@ -1,293 +1,159 @@
-/*
- * SUNSET LIGHT THEME (Enterprise Edition)
- * Aesthetic: Golden Hour, Warm, Nostalgic, Cozy
- * Fonts: Nunito (Headers), Work Sans (Body), Inconsolata (Mono)
- */
-
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Work+Sans:wght@400;500;600&family=Inconsolata:wght@400;500;600&display=swap');
-
+/* Sunset Light Theme */
 :root {
-  /* ==================== CORE PALETTE (OKLCH) ==================== */
+  --bg-primary: #fff7ed;
+  --bg-secondary: #ffedd5;
+  --bg-tertiary: #fed7aa;
+  --text-primary: #431407;
+  --text-secondary: #7c2d12;
+  --border-color: #fdba74;
 
-  /* Primary Hues - Sunset Palette */
-  --color-primary-base: 65% 0.2 40;
-  /* Warm Orange */
-  --color-secondary-base: 70% 0.18 350;
-  /* Soft Pink/Rose */
-  --color-accent-base: 75% 0.16 300;
-  /* Lavender */
+  --h1-color: #ea580c;
+  --h2-color: #f97316;
+  --h3-color: #fb923c;
+  --h4-color: #dc2626;
+  --h5-color: #e11d48;
+  --h6-color: #db2777;
 
-  /* Layout Colors */
-  --bg-primary: oklch(98% 0.02 60);
-  /* Warm Cream */
-  --bg-secondary: oklch(95% 0.03 50);
-  /* Peach White */
-  --bg-tertiary: oklch(92% 0.04 40);
-  /* Soft Orange-White */
+  --link-color: #ea580c;
+  --link-hover: #c2410c;
 
-  /* Text Colors */
-  --text-primary: oklch(30% 0.1 30);
-  /* Deep Brown */
-  --text-secondary: oklch(50% 0.12 30);
-  /* Rust Brown */
-  --text-tertiary: oklch(65% 0.1 30);
-  /* Soft Brown */
+  /* Code Colors */
+  --code-bg: #ffedd5;
+  --code-text: #dc2626;
+  --code-block-bg: #ffedd5; /* Light orange background */
+  --code-border: #fdba74;
 
-  /* Borders */
-  --border-color: oklch(85% 0.08 50);
-  --border-hover: oklch(75% 0.12 40);
+  /* Syntax Highlighting - Production-Grade Token Colors (Based on One Dark Architecture) */
 
-  /* Accents */
-  --accent-primary: oklch(var(--color-primary-base));
-  --accent-secondary: oklch(var(--color-secondary-base));
-  --link-color: oklch(55% 0.18 30);
-  --link-hover: oklch(45% 0.22 30);
+  /* Core hue-1: Cyan (187°) - URLs, special strings */
+  --syntax-url: #14b8a6; /* Teal/cyan for URLs */
 
-  /* Typography */
-  --font-family-base: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-family-headings: 'Nunito', sans-serif;
-  --font-family-mono: 'Inconsolata', monospace;
+  /* Core hue-2: Blue (207°) - Functions, variables, operators */
+  --syntax-function: #3b82f6; /* Bright blue for functions */
+  --syntax-variable: #0ea5e9; /* Sky blue for variables */
 
-  /* ==================== SYNTAX HIGHLIGHTING (Warm Glow) ==================== */
-  --code-bg: oklch(95% 0.03 50);
-  --code-text: var(--text-primary);
-  --code-border: var(--border-color);
+  /* Core hue-3: Purple (286°) - Keywords */
+  --syntax-keyword: #a855f7; /* Vibrant purple for keywords (if, final, sealed) */
 
-  /* Tokens */
-  --syntax-comment: oklch(65% 0.08 60);
-  --syntax-keyword: oklch(60% 0.18 350);
-  /* Rose */
-  --syntax-string: oklch(65% 0.15 140);
-  /* Olive/Green */
-  --syntax-function: oklch(60% 0.16 30);
-  /* Orange */
-  --syntax-variable: oklch(55% 0.15 300);
-  /* Purple */
-  --syntax-number: oklch(60% 0.18 20);
-  /* Deep Red */
-  --syntax-class-name: oklch(60% 0.15 180);
-  /* Teal component */
-  --syntax-operator: oklch(55% 0.12 40);
-  /* Brown */
+  /* Core hue-4: Green (95°) - Strings, builtins, inserted */
+  --syntax-string: #10b981; /* Emerald green for strings */
+  --syntax-builtin: #059669; /* Darker green for builtins (String, List, Array) */
+  --syntax-char: #10b981; /* Same as strings */
+  --syntax-regex: #10b981; /* Same as strings */
+  --syntax-inserted: #10b981; /* For diff highlights */
 
-  /* ==================== COMPONENT STYLES ==================== */
-  --border-radius-sm: 8px;
-  --border-radius-md: 12px;
-  --border-radius-lg: 20px;
+  /* Core hue-5: Red (355°) - Properties, tags, deleted, important */
+  --syntax-property: #ef4444; /* Red for properties */
+  --syntax-tag: #ef4444; /* Red for HTML tags */
+  --syntax-deleted: #ef4444; /* For diff highlights */
+  --syntax-important: #ef4444; /* For !important */
 
-  --shadow-sm: 0 2px 4px 0 rgba(234, 88, 12, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(234, 88, 12, 0.15), 0 2px 4px -2px rgba(234, 88, 12, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(234, 88, 12, 0.15), 0 4px 6px -4px rgba(234, 88, 12, 0.1);
+  /* Core hue-6: Orange (29°) - Class names, constants, numbers, atrules */
+  --syntax-class-name: #f97316; /* Orange for class/type names (Rectangle, Shape) */
+  --syntax-number: #fb923c; /* Bright orange for numbers */
+  --syntax-constant: #ea580c; /* Burnt orange for constants */
+  --syntax-boolean: #fb923c; /* Same as numbers */
+  --syntax-atrule: #fb923c; /* CSS @ rules */
 
-  /* Scrollbar */
-  --scrollbar-track: var(--bg-secondary);
-  --scrollbar-thumb: oklch(80% 0.1 50);
-  --scrollbar-thumb-hover: oklch(70% 0.15 40);
+  /* Neutral colors */
+  --syntax-comment: #a8a29e; /* Muted stone for comments */
+  --syntax-punctuation: #64748b; /* Slate for punctuation */
+  --syntax-operator: #fb7185; /* Coral rose for operators */
 
-  /* Helper colors for hex-only libs (Mermaid) */
-  --hex-bg-primary: #fff7ed;
-  --hex-text-primary: #431407;
-  --hex-accent-primary: #ea580c;
-}
+  /* Markup specific */
+  --syntax-attr-name: #f97316; /* Orange like class-name */
+  --syntax-attr-value: #10b981; /* Green like strings */
+  --syntax-namespace: #a855f7; /* Purple like keywords */
+  --syntax-entity: #64748b; /* Neutral */
+  --syntax-selector: #ef4444; /* Red like properties */
 
-/* ==================== GLOBAL TYPOGRAPHY ==================== */
-body {
-  font-family: var(--font-family-base);
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
-  line-height: 1.7;
-}
+  --blockquote-border: #f97316;
+  --blockquote-bg: #ffedd5;
+  --bold-color: #dc2626;
+  --italic-color: #e11d48;
+  --table-header-bg: #fed7aa;
+  --table-border: #fdba74;
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-family-headings);
-  color: var(--text-primary);
-  font-weight: 800;
-  margin-top: 1.5em;
-  margin-bottom: 0.6em;
-}
+  /* === MERMAID COMPREHENSIVE CONFIGURATION === */
 
-h1 {
-  font-size: 2.5rem;
-  border-bottom: 4px solid var(--border-color);
-  /* Chunky border */
-  padding-bottom: 0.3em;
-  margin-bottom: 1rem;
-  color: var(--accent-primary);
-}
-
-h2 {
-  font-size: 1.8rem;
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 0.2em;
-  color: var(--accent-secondary);
-}
-
-h3 {
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-  font-weight: 600;
-  background: linear-gradient(to top, var(--bg-tertiary) 50%, transparent 50%);
-  background-size: 100% 200%;
-  background-position: top;
-  transition: all 0.2s ease;
-  padding: 0 4px;
-  border-radius: 4px;
-}
-
-a:hover {
-  background-position: bottom;
-  color: var(--text-primary);
-}
-
-/* ==================== UI COMPONENTS ==================== */
-/* Blockquotes */
-blockquote {
-  border-left: 6px solid var(--accent-primary);
-  background-color: var(--bg-secondary);
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
-  color: var(--text-secondary);
-  font-style: italic;
-  font-family: var(--font-family-headings);
-  font-size: 1.1em;
-}
-
-/* Tables */
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 1.5rem 0;
-  overflow: hidden;
-  border-radius: var(--border-radius-md);
-  border: 1px solid var(--border-color);
-  background: var(--bg-primary);
-}
-
-th {
-  background-color: var(--bg-secondary);
-  font-family: var(--font-family-headings);
-  font-weight: 700;
-  border-bottom: 2px solid var(--border-color);
-  padding: 1rem;
-  text-align: left;
-  color: var(--accent-primary);
-}
-
-td {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-tr:last-child td {
-  border-bottom: none;
-}
-
-tr:hover td {
-  background-color: var(--bg-secondary);
-}
-
-/* Inline Code */
-:not(pre)>code {
-  font-family: var(--font-family-mono);
-  background-color: var(--code-bg);
-  color: var(--accent-primary);
-  padding: 0.2em 0.5em;
-  border-radius: 8px;
-  /* Rounded pill shape */
-  font-size: 0.9em;
-  border: 1px solid var(--border-color);
-}
-
-/* Code Blocks */
-pre {
-  background-color: var(--code-bg);
-  border: 1px solid var(--code-border);
-  border-radius: var(--border-radius-lg);
-  padding: 1.5rem;
-  overflow-x: auto;
-  box-shadow: var(--shadow-sm);
-  margin: 1.5rem 0;
-  position: relative;
-}
-
-pre code {
-  font-family: var(--font-family-mono);
-  color: var(--text-primary);
-  font-size: 0.95em;
-  line-height: 1.6;
-  background: transparent;
-  border: none;
-  padding: 0;
-}
-
-/* Copy Button */
-.code-copy-btn {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  padding: 0.5rem;
-  color: var(--text-secondary);
-  opacity: 0;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  z-index: 10;
-}
-
-pre:hover .code-copy-btn {
-  opacity: 1;
-}
-
-.code-copy-btn:hover {
-  background: var(--bg-secondary);
-  color: var(--accent-primary);
-  border-color: var(--accent-primary);
-  transform: scale(1.05);
-}
-
-/* Buttons (Global UI) */
-.btn,
-button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-lg);
-  padding: 0.6rem 1.5rem;
-  font-family: var(--font-family-headings);
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
-}
-
-.btn:hover {
-  border-color: var(--accent-primary);
-  background-color: var(--bg-secondary);
-  color: var(--accent-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-/* ==================== MERMAID CONFIGURATION ==================== */
-:root {
-  --mermaid-theme: base;
+  /* Core Global */
   --mermaid-background: #fff7ed;
-  --mermaid-primary-color: #ffedd5;
-  --mermaid-primary-border-color: #fdba74;
-  --mermaid-line-color: #c2410c;
-  --mermaid-text-color: #7c2d12;
+  --mermaid-text-color: #431407;
+  --mermaid-line-color: #f97316;
+  --mermaid-main-bkg: #fed7aa;
+
+  /* Primary Set */
+  --mermaid-primary-color: #fed7aa;
+  --mermaid-primary-text-color: #431407;
+  --mermaid-primary-border-color: #ea580c;
+
+  /* Secondary Set */
+  --mermaid-secondary-color: #ffedd5;
+  --mermaid-secondary-text-color: #431407;
+  --mermaid-secondary-border-color: #f97316;
+
+  /* Tertiary Set */
+  --mermaid-tertiary-color: #fff7ed;
+  --mermaid-tertiary-text-color: #431407;
+  --mermaid-tertiary-border-color: #fb923c;
+
+  /* Flowchart */
+  --mermaid-node-border: #ea580c;
+  --mermaid-cluster-bkg: #ffedd5;
+  --mermaid-cluster-border: #f97316;
+  --mermaid-default-link-color: #f97316;
+  --mermaid-title-color: #431407;
+  --mermaid-edge-label-background: #fff7ed;
+  --mermaid-node-text-color: #431407;
+
+  /* Sequence Diagram */
+  --mermaid-actor-bkg: #fed7aa;
+  --mermaid-actor-border: #ea580c;
+  --mermaid-actor-text-color: #431407;
+  --mermaid-actor-line-color: #ea580c;
+  --mermaid-signal-color: #f97316;
+  --mermaid-signal-text-color: #431407;
+  --mermaid-label-box-bkg-color: #fed7aa;
+  --mermaid-label-box-border-color: #ea580c;
+  --mermaid-label-text-color: #431407;
+  --mermaid-loop-text-color: #431407;
+  --mermaid-activation-border-color: #f97316;
+  --mermaid-activation-bkg-color: #ffedd5;
+  --mermaid-sequence-number-color: #431407;
+
+  /* Pie Chart */
+  --mermaid-pie1: #ea580c;
+  --mermaid-pie2: #f97316;
+  --mermaid-pie3: #fb923c;
+  --mermaid-pie4: #dc2626;
+  --mermaid-pie5: #e11d48;
+  --mermaid-pie6: #db2777;
+  --mermaid-pie7: #c2410c;
+  --mermaid-pie8: #14b8a6;
+  --mermaid-pie9: #3b82f6;
+  --mermaid-pie10: #a855f7;
+  --mermaid-pie11: #ef4444;
+  --mermaid-pie12: #10b981;
+  --mermaid-pie-title-text-color: #431407;
+  --mermaid-pie-section-text-color: #fff7ed; /* Light on vibrant slices */
+  --mermaid-pie-legend-text-color: #431407;
+  --mermaid-pie-stroke-color: #ea580c;
+  --mermaid-pie-outer-stroke-color: #ea580c;
+
+  /* State Diagram */
+  --mermaid-label-color: #431407;
+  --mermaid-alt-background: #ffedd5;
+
+  /* Class Diagram */
+  --mermaid-class-text: #431407;
+
+  /* User Journey */
+  --mermaid-fill-type0: #ea580c;
+  --mermaid-fill-type1: #f97316;
+  --mermaid-fill-type2: #fb923c;
+  --mermaid-fill-type3: #dc2626;
+  --mermaid-fill-type4: #e11d48;
+  --mermaid-fill-type5: #db2777;
+  --mermaid-fill-type6: #c2410c;
+  --mermaid-fill-type7: #14b8a6;
 }
