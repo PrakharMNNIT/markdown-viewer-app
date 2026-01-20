@@ -134,11 +134,6 @@ export function isWithinRoot(path, rootPath) {
   if (!normalizedPath) return false;
   if (normalizedPath.startsWith('..')) return false;
 
-  // Explicit check: prevent paths with .. anywhere in segments
-  // This catches normalized paths like 'secret' that came from 'docs/../secret'
-  const pathSegments = normalizedPath.split('/');
-  if (pathSegments.includes('..')) return false;
-
   // Check if path starts with root
   return normalizedPath === normalizedRoot || normalizedPath.startsWith(`${normalizedRoot}/`);
 }

@@ -9,7 +9,7 @@ import {
   isExternalUrl,
   isMarkdownFile,
   normalizePath,
-  resolveRelativePath,
+  resolveRelativePath
 } from '../utils/pathHelpers.js';
 
 /**
@@ -271,78 +271,12 @@ export class LinkNavigationService {
   }
 
   /**
-   * Show warning message with custom modal
+   * Show warning message
    * @param {string} title - Warning title
    * @param {string} message - Warning message
    */
   showWarning(title, message) {
-    // Create modal if it doesn't exist
-    let modal = document.getElementById('link-nav-warning-modal');
-
-    if (!modal) {
-      modal = this.createWarningModal();
-      document.body.appendChild(modal);
-    }
-
-    // Update content
-    const titleElement = modal.querySelector('.warning-modal-title');
-    const messageElement = modal.querySelector('.warning-modal-message');
-
-    if (titleElement) titleElement.textContent = title;
-    if (messageElement) titleElement.textContent = message;
-
-    // Show modal with animation
-    requestAnimationFrame(() => {
-      modal.classList.add('active');
-    });
-
-    // Auto-dismiss after 4 seconds
-    setTimeout(() => {
-      modal.classList.remove('active');
-    }, 4000);
-  }
-
-  /**
-   * Create warning modal element
-   * @private
-   * @returns {HTMLElement} Modal element
-   */
-  createWarningModal() {
-    const modal = document.createElement('div');
-    modal.id = 'link-nav-warning-modal';
-    modal.className = 'warning-modal';
-    modal.innerHTML = `
-      <div class="warning-modal-content">
-        <div class="warning-modal-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="12"></line>
-            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-          </svg>
-        </div>
-        <h3 class="warning-modal-title"></h3>
-        <p class="warning-modal-message"></p>
-        <button class="warning-modal-close" aria-label="Close warning">Got it</button>
-      </div>
-    `;
-
-    // Close button handler
-    const closeBtn = modal.querySelector('.warning-modal-close');
-    closeBtn?.addEventListener('click', () => modal.classList.remove('active'));
-
-    // Click outside to close
-    modal.addEventListener('click', e => {
-      if (e.target === modal) modal.classList.remove('active');
-    });
-
-    // Escape key to close
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        modal.classList.remove('active');
-      }
-    });
-
-    return modal;
+    alert(`${title}\n\n${message}`);
   }
 
   /**
