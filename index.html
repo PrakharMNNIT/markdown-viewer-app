@@ -37,29 +37,12 @@
     <link rel="stylesheet" href="src/css/warning-modal.css" />
     <link rel="stylesheet" href="src/css/code-copy-buttons.css" />
     <link rel="stylesheet" href="themes/nebula-elements.css" />
-    <link rel="stylesheet" href="themes/header-toggle.css" />
     <link rel="stylesheet" href="style.css" />
 
     <!-- Theme Stylesheet (dynamically loaded) -->
     <link rel="stylesheet" href="themes/default-light.css" id="theme-stylesheet" />
   </head>
   <body>
-    <!-- Zen Mode Reveal Trigger -->
-    <div id="header-reveal-trigger" class="header-reveal-trigger hidden" title="Show Header">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M19 9l-7 7-7-7" />
-      </svg>
-    </div>
-
     <div class="app-container">
       <!-- Toolbar -->
       <div class="toolbar">
@@ -87,15 +70,6 @@
           <h1>📝 Markdown Viewer Pro</h1>
         </div>
         <div class="toolbar-controls">
-          <!-- Zen Mode Toggle -->
-          <div class="zen-toggle-wrapper" title="Toggle Zen Mode">
-            <label class="switch">
-              <input type="checkbox" id="header-toggle" />
-              <span class="slider round"></span>
-            </label>
-            <span class="toggle-label">Zen</span>
-          </div>
-
           <!-- Folder Browser Toggle - Always visible -->
           <button
             class="btn"
@@ -182,10 +156,6 @@
           </div>
 
           <select id="theme-selector" class="btn">
-            <optgroup label="Notebook 📓">
-              <option value="notebook-light">📝 Notebook Light</option>
-              <option value="notebook-dark">📓 Notebook Dark</option>
-            </optgroup>
             <optgroup label="Default">
               <option value="nebula-dark">🌌 Nebula Dark (Premium)</option>
               <option value="nebula-light">❄️ Nebula Light (Premium)</option>
