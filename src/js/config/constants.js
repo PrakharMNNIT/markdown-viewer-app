@@ -47,8 +47,6 @@ export const THEMES = {
   CANDYLAND_DARK: 'candyland-dark',
   CORPORATE_MIDNIGHT: 'corporate-midnight',
   IVORY_SAGE: 'ivory-sage',
-  DOOM64_LIGHT: 'doom64-light',
-  DOOM64_DARK: 'doom64-dark',
   OCEAN_LIGHT: 'ocean-light',
   OCEAN_DARK: 'ocean-dark',
   NEON_LIGHT: 'neon-light',
