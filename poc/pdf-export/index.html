@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Export POC - OKLCH Colors</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- html2pdf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
+  <style>
+    /* ============================================
+       OKLCH COLOR SYSTEM - Candyland Theme
+       ============================================ */
+    :root {
+      /* Primary Colors (OKLCH) */
+      --candy-coral: oklch(0.8677 0.0735 7.0855);
+      --candy-mint: oklch(0.8854 0.0571 172.8547);
+      --candy-lemon: oklch(0.9597 0.0692 100.2424);
+      --candy-blueberry: oklch(0.7131 0.0909 259.9926);
+      --candy-grape: oklch(0.7662 0.0675 327.2478);
+      
+      /* Background & Text */
+      --bg-cream: oklch(0.9809 0.0025 228.7836);
+      --bg-sugar: oklch(0.9944 0.0014 247.3284);
+      --text-dark: oklch(0.2724 0.0232 264.1824);
+      --text-muted: oklch(0.5528 0.0121 261.4679);
+      
+      /* Syntax Highlighting (OKLCH) */
+      --syntax-keyword: oklch(0.7131 0.0909 259.9926);
+      --syntax-string: oklch(0.8854 0.0571 172.8547);
+      --syntax-function: oklch(0.8677 0.0735 7.0855);
+      --syntax-comment: oklch(0.5528 0.0121 261.4679);
+      
+      /* HEX Fallbacks for comparison */
+      --hex-coral: #ffb3a7;
+      --hex-mint: #a7e8d2;
+      --hex-lemon: #fff4a3;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-cream);
+      color: var(--text-dark);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    
+    /* ============================================
+       CONTROL PANEL (Not exported)
+       ============================================ */
+    .control-panel {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .control-panel h2 {
+      width: 100%;
+      margin-bottom: 0.5rem;
+      color: var(--candy-blueberry);
+    }
+    
+    button {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-primary {
+      background: var(--candy-coral);
+      color: var(--text-dark);
+    }
+    
+    .btn-secondary {
+      background: var(--candy-mint);
+      color: var(--text-dark);
+    }
+    
+    .btn-tertiary {
+      background: var(--candy-blueberry);
+      color: white;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .status {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      background: var(--bg-sugar);
+    }
+    
+    /* ============================================
+       PREVIEW CONTENT (This gets exported)
+       ============================================ */
+    #preview-content {
+      background: var(--bg-sugar);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    .preview-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--candy-lemon);
+    }
+    
+    .preview-header h1 {
+      color: var(--candy-coral);
+      font-size: 2rem;
+    }
+    
+    .badge {
+      background: var(--candy-mint);
+      color: var(--text-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    /* Markdown-style content */
+    .prose h2 {
+      color: var(--candy-blueberry);
+      margin: 1.5rem 0 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .prose h3 {
+      color: var(--candy-grape);
+      margin: 1.25rem 0 0.75rem;
+      font-size: 1.25rem;
+    }
+    
+    .prose p {
+      margin-bottom: 1rem;
+    }
+    
+    .prose strong {
+      color: var(--candy-coral);
+    }
+    
+    /* Blockquote */
+    .prose blockquote {
+      background: linear-gradient(135deg, var(--candy-lemon) 0%, var(--candy-mint) 100%);
+      border-left: 4px solid var(--candy-coral);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+    }
+    
+    /* Code Block */
+    .prose pre {
+      background: var(--text-dark);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+    
+    .prose pre .keyword { color: var(--syntax-keyword); }
+    .prose pre .string { color: var(--syntax-string); }
+    .prose pre .function { color: var(--syntax-function); }
+    .prose pre .comment { color: var(--syntax-comment); }
+    
+    /* Inline Code */
+    .prose code {
+      background: var(--candy-lemon);
+      color: var(--text-dark);
+      padding: 0.125rem 0.5rem;
+      border-radius: 6px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.875em;
+    }
+    
+    .prose pre code {
+      background: transparent;
+      padding: 0;
+    }
+    
+    /* Table */
+    .prose table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .prose th {
+      background: var(--candy-blueberry);
+      color: white;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    
+    .prose td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--candy-mint);
+    }
+    
+    .prose tr:nth-child(even) {
+      background: var(--bg-cream);
+    }
+    
+    .prose tr:hover {
+      background: var(--candy-lemon);
+    }
+    
+    /* List */
+    .prose ul, .prose ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    
+    .prose li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .prose li::marker {
+      color: var(--candy-coral);
+    }
+    
+    /* Color Swatches Test */
+    .color-swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    
+    .swatch {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .swatch-coral { background: var(--candy-coral); }
+    .swatch-mint { background: var(--candy-mint); }
+    .swatch-lemon { background: var(--candy-lemon); }
+    .swatch-blueberry { background: var(--candy-blueberry); color: white; }
+    .swatch-grape { background: var(--candy-grape); color: white; }
+    
+    /* Mermaid Placeholder */
+    .mermaid-placeholder {
+      background: linear-gradient(135deg, var(--bg-cream) 0%, var(--candy-mint) 50%, var(--candy-lemon) 100%);
+      border: 2px dashed var(--candy-blueberry);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin: 1rem 0;
+    }
+    
+    .mermaid-placeholder svg {
+      max-width: 100%;
+    }
+    
+    /* ============================================
+       PRINT STYLES (@media print)
+       ============================================ */
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+      
+      .control-panel {
+        display: none !important;
+      }
+      
+      #preview-content {
+        box-shadow: none;
+        border-radius: 0;
+        padding: 1cm;
+      }
+      
+      .prose pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      
+      /* Force colors in print */
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+    
+    /* Results Panel */
+    .results-panel {
+      margin-top: 2rem;
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    .results-panel h3 {
+      color: var(--candy-blueberry);
+      margin-bottom: 1rem;
+    }
+    
+    .result-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .result-item.pass {
+      background: rgba(167, 232, 210, 0.3);
+    }
+    
+    .result-item.fail {
+      background: rgba(255, 179, 167, 0.3);
+    }
+    
+    .result-icon {
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Control Panel (Not exported) -->
+  <div class="control-panel">
+    <h2>🧪 PDF Export POC - OKLCH Color Testing</h2>
+    <button class="btn-primary" onclick="exportWithHtml2Pdf()">
+      📄 Export with html2pdf.js
+    </button>
+    <button class="btn-secondary" onclick="window.print()">
+      🖨️ Export with window.print()
+    </button>
+    <button class="btn-tertiary" onclick="runColorTest()">
+      🎨 Run Color Test
+    </button>
+    <span class="status" id="status">Ready</span>
+  </div>
+  
+  <!-- Preview Content (This gets exported) -->
+  <div id="preview-content">
+    <header class="preview-header">
+      <h1>📝 Sample Document</h1>
+      <span class="badge">OKLCH Colors</span>
+    </header>
+    
+    <article class="prose">
+      <h2>Color System Test</h2>
+      <p>This document tests <strong>OKLCH color export</strong> compatibility with various PDF generation methods.</p>
+      
+      <div class="color-swatches">
+        <div class="swatch swatch-coral">Coral</div>
+        <div class="swatch swatch-mint">Mint</div>
+        <div class="swatch swatch-lemon">Lemon</div>
+        <div class="swatch swatch-blueberry">Blue</div>
+        <div class="swatch swatch-grape">Grape</div>
+      </div>
+      
+      <h2>Blockquote Test</h2>
+      <blockquote>
+        "This blockquote uses a gradient background from OKLCH Lemon to OKLCH Mint. If you see the gradient, OKLCH gradients work!"
+      </blockquote>
+      
+      <h2>Code Block Test</h2>
+      <pre><code><span class="comment">// Syntax highlighting with OKLCH colors</span>
+<span class="keyword">function</span> <span class="function">calculateSum</span>(a, b) {
+  <span class="keyword">const</span> result = a + b;
+  <span class="keyword">return</span> <span class="string">`The sum is ${result}`</span>;
+}
+
+<span class="function">calculateSum</span>(<span class="string">10</span>, <span class="string">20</span>);</code></pre>
+      
+      <h2>Table Test</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Color Name</th>
+            <th>OKLCH Value</th>
+            <th>Expected Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Candy Coral</td>
+            <td><code>oklch(0.8677 0.0735 7.0855)</code></td>
+            <td>Warm pink/coral</td>
+          </tr>
+          <tr>
+            <td>Candy Mint</td>
+            <td><code>oklch(0.8854 0.0571 172.8547)</code></td>
+            <td>Fresh mint green</td>
+          </tr>
+          <tr>
+            <td>Candy Blueberry</td>
+            <td><code>oklch(0.7131 0.0909 259.9926)</code></td>
+            <td>Rich blue</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h2>Diagram Placeholder</h2>
+      <div class="mermaid-placeholder">
+        <p>📊 Mermaid Diagram Would Render Here</p>
+        <p style="font-size: 0.875rem; color: var(--text-muted);">
+          (Testing gradient background export)
+        </p>
+      </div>
+      
+      <h2>List Test</h2>
+      <ul>
+        <li><strong>Primary Colors:</strong> Coral, Mint, Lemon</li>
+        <li><strong>Accent Colors:</strong> Blueberry, Grape</li>
+        <li><strong>Background:</strong> Cream, Sugar</li>
+      </ul>
+    </article>
+  </div>
+  
+  <!-- Results Panel -->
+  <div class="results-panel" id="results-panel" style="display: none;">
+    <h3>🔬 Test Results</h3>
+    <div id="results-list"></div>
+  </div>
+  
+  <script>
+    // Update status
+    function setStatus(message, isError = false) {
+      const status = document.getElementById('status');
+      status.textContent = message;
+      status.style.background = isError ? 'var(--candy-coral)' : 'var(--candy-mint)';
+    }
+    
+    // Export with html2pdf.js
+    async function exportWithHtml2Pdf() {
+      setStatus('Generating PDF...');
+      
+      const element = document.getElementById('preview-content');
+      const opt = {
+        margin: 10,
+        filename: 'oklch-test-html2pdf.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2,
+          useCORS: true,
+          logging: true
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      
+      try {
+        await html2pdf().set(opt).from(element).save();
+        setStatus('✅ PDF saved! Check colors manually.');
+        logResult('html2pdf.js Export', true, 'File generated - manual color verification needed');
+      } catch (error) {
+        setStatus('❌ Export failed: ' + error.message, true);
+        logResult('html2pdf.js Export', false, error.message);
+      }
+    }
+    
+    // Run color computation test
+    function runColorTest() {
+      const resultsPanel = document.getElementById('results-panel');
+      const resultsList = document.getElementById('results-list');
+      resultsPanel.style.display = 'block';
+      resultsList.innerHTML = '';
+      
+      // Test 1: Check if browser supports OKLCH
+      const testDiv = document.createElement('div');
+      testDiv.style.cssText = 'background: oklch(0.5 0.1 180)';
+      document.body.appendChild(testDiv);
+      const computedBg = getComputedStyle(testDiv).backgroundColor;
+      document.body.removeChild(testDiv);
+      
+      const oklchSupported = computedBg !== '' && computedBg !== 'rgba(0, 0, 0, 0)';
+      logResult('Browser OKLCH Support', oklchSupported, `Computed: ${computedBg}`);
+      
+      // Test 2: Check computed colors on swatches
+      const swatches = document.querySelectorAll('.swatch');
+      swatches.forEach((swatch, i) => {
+        const bg = getComputedStyle(swatch).backgroundColor;
+        const hasColor = bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent';
+        logResult(`Swatch ${i + 1} Color`, hasColor, bg);
+      });
+      
+      // Test 3: Check gradient
+      const blockquote = document.querySelector('blockquote');
+      const gradient = getComputedStyle(blockquote).backgroundImage;
+      const hasGradient = gradient.includes('gradient') || gradient.includes('rgb');
+      logResult('Gradient Background', hasGradient, gradient.substring(0, 50) + '...');
+      
+      setStatus('✅ Tests complete');
+    }
+    
+    // Log result to panel
+    function logResult(testName, passed, details) {
+      const resultsList = document.getElementById('results-list');
+      const item = document.createElement('div');
+      item.className = `result-item ${passed ? 'pass' : 'fail'}`;
+      item.innerHTML = `
+        <span class="result-icon">${passed ? '✅' : '❌'}</span>
+        <span><strong>${testName}:</strong> ${details}</span>
+      `;
+      resultsList.appendChild(item);
+    }
+    
+    // Log initial info
+    console.log('PDF Export POC Loaded');
+    console.log('Browser:', navigator.userAgent);
+  </script>
+</body>
+</html>

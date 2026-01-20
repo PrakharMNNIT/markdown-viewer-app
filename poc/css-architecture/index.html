@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Architecture POC - Theme Containment</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       CSS LAYERS - Theme Containment Strategy
+       ============================================
+       
+       Layer Order (lowest to highest priority):
+       1. base     - Reset, typography defaults
+       2. theme.app   - Brand theme (Candyland)
+       3. theme.preview - Preview themes (GitHub, etc.)
+       4. components   - UI components
+       5. utilities    - Override utilities
+       
+    */
+    @layer base, theme.app, theme.preview, components, utilities;
+    
+    /* ============================================
+       LAYER: BASE
+       ============================================ */
+    @layer base {
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      
+      body {
+        min-height: 100vh;
+      }
+    }
+    
+    /* ============================================
+       LAYER: THEME.APP (Brand Theme - Candyland)
+       ============================================ */
+    @layer theme.app {
+      :root {
+        /* Brand Colors (OKLCH) */
+        --brand-primary: oklch(0.8677 0.0735 7.0855);
+        --brand-secondary: oklch(0.8854 0.0571 172.8547);
+        --brand-accent: oklch(0.7131 0.0909 259.9926);
+        
+        /* Background */
+        --brand-bg: oklch(0.9809 0.0025 228.7836);
+        --brand-surface: oklch(0.9944 0.0014 247.3284);
+        
+        /* Text */
+        --brand-text: oklch(0.2724 0.0232 264.1824);
+        --brand-text-muted: oklch(0.5528 0.0121 261.4679);
+        
+        /* Borders & Shadows */
+        --brand-border: oklch(0.9 0.01 260);
+        --brand-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        
+        /* Spacing */
+        --brand-radius: 12px;
+        --brand-radius-lg: 16px;
+      }
+      
+      /* Dark mode variant */
+      :root.dark {
+        --brand-bg: oklch(0.2 0.02 260);
+        --brand-surface: oklch(0.25 0.02 260);
+        --brand-text: oklch(0.95 0.01 260);
+        --brand-text-muted: oklch(0.7 0.02 260);
+        --brand-border: oklch(0.35 0.02 260);
+      }
+      
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: var(--brand-bg);
+        color: var(--brand-text);
+      }
+      
+      /* App Chrome Styles */
+      .app-header {
+        background: var(--brand-surface);
+        border-bottom: 1px solid var(--brand-border);
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--brand-shadow);
+      }
+      
+      .app-header h1 {
+        color: var(--brand-primary);
+        font-size: 1.5rem;
+      }
+      
+      .app-toolbar {
+        background: var(--brand-surface);
+        padding: 0.75rem 2rem;
+        border-bottom: 1px solid var(--brand-border);
+        display: flex;
+        gap: 0.5rem;
+      }
+      
+      .app-sidebar {
+        background: var(--brand-surface);
+        width: 280px;
+        padding: 1rem;
+        border-right: 1px solid var(--brand-border);
+        height: 100%;
+      }
+      
+      .app-main {
+        display: flex;
+        height: calc(100vh - 120px);
+      }
+      
+      .app-editor {
+        flex: 1;
+        background: var(--brand-surface);
+        padding: 1rem;
+        border-right: 1px solid var(--brand-border);
+      }
+      
+      .app-editor textarea {
+        width: 100%;
+        height: 100%;
+        background: var(--brand-bg);
+        color: var(--brand-text);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--brand-radius);
+        padding: 1rem;
+        font-family: 'Roboto Mono', monospace;
+        font-size: 0.875rem;
+        resize: none;
+      }
+      
+      /* Brand Button */
+      .btn-brand {
+        background: var(--brand-primary);
+        color: var(--brand-text);
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: var(--brand-radius);
+        font-family: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      
+      .btn-brand:hover {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+      }
+      
+      .btn-brand-secondary {
+        background: var(--brand-secondary);
+      }
+      
+      .btn-brand-accent {
+        background: var(--brand-accent);
+        color: white;
+      }
+      
+      /* Modal (Brand themed) */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+      }
+      
+      .modal {
+        background: var(--brand-surface);
+        border-radius: var(--brand-radius-lg);
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      }
+      
+      .modal h2 {
+        color: var(--brand-accent);
+        margin-bottom: 1rem;
+      }
+    }
+    
+    /* ============================================
+       LAYER: THEME.PREVIEW (User-Selected Themes)
+       ============================================ */
+    @layer theme.preview {
+      /* 
+         CRITICAL: These styles ONLY apply inside .preview-container
+         They should NOT leak to app chrome
+      */
+      
+      /* Default Preview Theme (Candyland) */
+      .preview-container {
+        --preview-bg: var(--brand-surface);
+        --preview-text: var(--brand-text);
+        --preview-heading: var(--brand-accent);
+        --preview-link: var(--brand-primary);
+        --preview-code-bg: var(--brand-bg);
+        --preview-blockquote-bg: oklch(0.95 0.02 100);
+        --preview-table-header: var(--brand-accent);
+      }
+      
+      /* GitHub Light Theme */
+      .preview-container[data-theme="github-light"] {
+        --preview-bg: #ffffff;
+        --preview-text: #24292e;
+        --preview-heading: #1f2328;
+        --preview-link: #0969da;
+        --preview-code-bg: #f6f8fa;
+        --preview-blockquote-bg: #f6f8fa;
+        --preview-blockquote-border: #d0d7de;
+        --preview-table-header: #f6f8fa;
+      }
+      
+      /* GitHub Dark Theme */
+      .preview-container[data-theme="github-dark"] {
+        --preview-bg: #0d1117;
+        --preview-text: #c9d1d9;
+        --preview-heading: #f0f6fc;
+        --preview-link: #58a6ff;
+        --preview-code-bg: #161b22;
+        --preview-blockquote-bg: #161b22;
+        --preview-blockquote-border: #3b434b;
+        --preview-table-header: #21262d;
+      }
+      
+      /* Dracula Theme */
+      .preview-container[data-theme="dracula"] {
+        --preview-bg: #282a36;
+        --preview-text: #f8f8f2;
+        --preview-heading: #bd93f9;
+        --preview-link: #8be9fd;
+        --preview-code-bg: #44475a;
+        --preview-blockquote-bg: #44475a;
+        --preview-blockquote-border: #6272a4;
+        --preview-table-header: #44475a;
+      }
+      
+      /* Nord Theme */
+      .preview-container[data-theme="nord"] {
+        --preview-bg: #2e3440;
+        --preview-text: #eceff4;
+        --preview-heading: #88c0d0;
+        --preview-link: #81a1c1;
+        --preview-code-bg: #3b4252;
+        --preview-blockquote-bg: #3b4252;
+        --preview-blockquote-border: #4c566a;
+        --preview-table-header: #3b4252;
+      }
+      
+      /* Preview Content Styling */
+      .preview-container {
+        background: var(--preview-bg);
+        color: var(--preview-text);
+        padding: 2rem;
+        overflow-y: auto;
+        flex: 1;
+      }
+      
+      .preview-container h1,
+      .preview-container h2,
+      .preview-container h3 {
+        color: var(--preview-heading);
+      }
+      
+      .preview-container h1 { font-size: 2rem; margin: 1.5rem 0 1rem; }
+      .preview-container h2 { font-size: 1.5rem; margin: 1.25rem 0 0.75rem; }
+      .preview-container h3 { font-size: 1.25rem; margin: 1rem 0 0.5rem; }
+      
+      .preview-container p {
+        margin-bottom: 1rem;
+      }
+      
+      .preview-container a {
+        color: var(--preview-link);
+        text-decoration: none;
+      }
+      
+      .preview-container a:hover {
+        text-decoration: underline;
+      }
+      
+      .preview-container code {
+        background: var(--preview-code-bg);
+        padding: 0.125rem 0.375rem;
+        border-radius: 4px;
+        font-family: 'Roboto Mono', monospace;
+        font-size: 0.875em;
+      }
+      
+      .preview-container pre {
+        background: var(--preview-code-bg);
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 1rem 0;
+      }
+      
+      .preview-container pre code {
+        padding: 0;
+        background: transparent;
+      }
+      
+      .preview-container blockquote {
+        background: var(--preview-blockquote-bg);
+        border-left: 4px solid var(--preview-blockquote-border, var(--preview-link));
+        padding: 1rem 1.5rem;
+        margin: 1rem 0;
+        border-radius: 0 8px 8px 0;
+      }
+      
+      .preview-container table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+      }
+      
+      .preview-container th {
+        background: var(--preview-table-header);
+        padding: 0.75rem;
+        text-align: left;
+        border: 1px solid var(--preview-blockquote-border, #ddd);
+      }
+      
+      .preview-container td {
+        padding: 0.75rem;
+        border: 1px solid var(--preview-blockquote-border, #ddd);
+      }
+    }
+    
+    /* ============================================
+       LAYER: COMPONENTS
+       ============================================ */
+    @layer components {
+      .theme-selector {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        padding: 0.5rem;
+        background: var(--brand-bg);
+        border-radius: var(--brand-radius);
+      }
+      
+      .theme-selector select {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--brand-border);
+        background: var(--brand-surface);
+        color: var(--brand-text);
+        font-family: inherit;
+        cursor: pointer;
+      }
+      
+      .split-handle {
+        width: 8px;
+        background: var(--brand-border);
+        cursor: col-resize;
+        transition: background 0.2s;
+      }
+      
+      .split-handle:hover {
+        background: var(--brand-primary);
+      }
+      
+      .test-panel {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        background: var(--brand-surface);
+        border-radius: var(--brand-radius-lg);
+        padding: 1rem;
+        box-shadow: var(--brand-shadow);
+        max-width: 400px;
+        z-index: 50;
+      }
+      
+      .test-panel h3 {
+        color: var(--brand-accent);
+        margin-bottom: 0.75rem;
+      }
+      
+      .test-result {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 6px;
+        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+      }
+      
+      .test-result.pass { background: rgba(167, 232, 210, 0.3); }
+      .test-result.fail { background: rgba(255, 179, 167, 0.3); }
+    }
+    
+    /* ============================================
+       LAYER: UTILITIES
+       ============================================ */
+    @layer utilities {
+      .hidden { display: none !important; }
+      .flex { display: flex; }
+      .items-center { align-items: center; }
+      .gap-2 { gap: 0.5rem; }
+      .gap-4 { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- App Header (Brand Theme) -->
+  <header class="app-header">
+    <h1>🍬 Markdown Preview EE</h1>
+    <div class="flex items-center gap-4">
+      <button class="btn-brand" onclick="toggleDarkMode()">🌙 Toggle Dark</button>
+      <button class="btn-brand-accent" onclick="runTests()">🧪 Run Tests</button>
+    </div>
+  </header>
+  
+  <!-- App Toolbar (Brand Theme) -->
+  <div class="app-toolbar">
+    <button class="btn-brand">📁 Open</button>
+    <button class="btn-brand-secondary">💾 Save</button>
+    <button class="btn-brand">📤 Export</button>
+    <div class="theme-selector">
+      <label>Preview Theme:</label>
+      <select id="theme-select" onchange="changePreviewTheme(this.value)">
+        <option value="">Candyland (Default)</option>
+        <option value="github-light">GitHub Light</option>
+        <option value="github-dark">GitHub Dark</option>
+        <option value="dracula">Dracula</option>
+        <option value="nord">Nord</option>
+      </select>
+    </div>
+  </div>
+  
+  <!-- Main Content Area -->
+  <main class="app-main">
+    <!-- Editor Pane (Brand Theme) -->
+    <div class="app-editor">
+      <textarea id="editor" placeholder="Type markdown here...">
+# Hello World
+
+This is a **test document** to verify theme isolation.
+
+## Code Example
+
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+```
+
+> This is a blockquote to test styling.
+
+| Column 1 | Column 2 |
+|----------|----------|
+| Cell A   | Cell B   |
+| Cell C   | Cell D   |
+
+[Link Example](https://example.com)
+      </textarea>
+    </div>
+    
+    <!-- Split Handle (Brand Theme) -->
+    <div class="split-handle"></div>
+    
+    <!-- Preview Pane (Preview Theme) -->
+    <div class="preview-container" id="preview-container">
+      <h1>Hello World</h1>
+      <p>This is a <strong>test document</strong> to verify theme isolation.</p>
+      
+      <h2>Code Example</h2>
+      <pre><code>function greet(name) {
+  return `Hello, ${name}!`;
+}</code></pre>
+      
+      <blockquote>This is a blockquote to test styling.</blockquote>
+      
+      <table>
+        <thead>
+          <tr><th>Column 1</th><th>Column 2</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cell A</td><td>Cell B</td></tr>
+          <tr><td>Cell C</td><td>Cell D</td></tr>
+        </tbody>
+      </table>
+      
+      <p><a href="#">Link Example</a></p>
+    </div>
+  </main>
+  
+  <!-- Test Results Panel -->
+  <div class="test-panel" id="test-panel" style="display: none;">
+    <h3>🔬 Theme Isolation Tests</h3>
+    <div id="test-results"></div>
+  </div>
+  
+  <!-- Modal Test (Brand Theme) -->
+  <div class="modal-overlay hidden" id="modal-test">
+    <div class="modal">
+      <h2>📤 Export Settings</h2>
+      <p>This modal should always use the Brand Theme (Candyland), regardless of preview theme selection.</p>
+      <button class="btn-brand" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+  
+  <script>
+    // Toggle dark mode
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+    }
+    
+    // Change preview theme
+    function changePreviewTheme(theme) {
+      const preview = document.getElementById('preview-container');
+      preview.setAttribute('data-theme', theme);
+    }
+    
+    // Open modal
+    function openModal() {
+      document.getElementById('modal-test').classList.remove('hidden');
+    }
+    
+    // Close modal
+    function closeModal() {
+      document.getElementById('modal-test').classList.add('hidden');
+    }
+    
+    // Run isolation tests
+    function runTests() {
+      const panel = document.getElementById('test-panel');
+      const results = document.getElementById('test-results');
+      panel.style.display = 'block';
+      results.innerHTML = '';
+      
+      // Test 1: App header uses brand color
+      const header = document.querySelector('.app-header h1');
+      const headerColor = getComputedStyle(header).color;
+      const headerUsesBrand = headerColor.includes('rgb'); // OKLCH gets computed to rgb
+      logTest('Header uses brand color', headerUsesBrand, headerColor);
+      
+      // Test 2: Preview uses preview theme color
+      const previewH1 = document.querySelector('.preview-container h1');
+      const previewColor = getComputedStyle(previewH1).color;
+      logTest('Preview H1 has color', previewColor !== '', previewColor);
+      
+      // Test 3: Changing preview theme doesn't affect toolbar
+      const toolbar = document.querySelector('.app-toolbar');
+      const toolbarBg1 = getComputedStyle(toolbar).backgroundColor;
+      changePreviewTheme('dracula');
+      const toolbarBg2 = getComputedStyle(toolbar).backgroundColor;
+      const toolbarIsolated = toolbarBg1 === toolbarBg2;
+      logTest('Toolbar isolated from preview theme', toolbarIsolated, `Before: ${toolbarBg1}, After: ${toolbarBg2}`);
+      
+      // Test 4: Preview background changes with theme
+      const preview = document.getElementById('preview-container');
+      const previewBg1 = getComputedStyle(preview).backgroundColor;
+      changePreviewTheme('nord');
+      const previewBg2 = getComputedStyle(preview).backgroundColor;
+      const previewChanges = previewBg1 !== previewBg2;
+      logTest('Preview background changes with theme', previewChanges, `Dracula: ${previewBg1}, Nord: ${previewBg2}`);
+      
+      // Test 5: Editor textarea uses brand colors
+      const editor = document.querySelector('.app-editor textarea');
+      const editorBg = getComputedStyle(editor).backgroundColor;
+      logTest('Editor uses brand background', editorBg !== '', editorBg);
+      
+      // Reset theme
+      document.getElementById('theme-select').value = '';
+      changePreviewTheme('');
+    }
+    
+    // Log test result
+    function logTest(name, passed, details) {
+      const results = document.getElementById('test-results');
+      const div = document.createElement('div');
+      div.className = `test-result ${passed ? 'pass' : 'fail'}`;
+      div.innerHTML = `${passed ? '✅' : '❌'} <strong>${name}</strong><br><small>${details}</small>`;
+      results.appendChild(div);
+    }
+  </script>
+</body>
+</html>

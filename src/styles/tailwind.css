@@ -1,0 +1,390 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Markdown Preview EE — Global Theme System
+   Tailwind v3 + CSS Custom Properties
+
+   Themes: Candyland (default), Doom64
+   Global themes applied via data-theme attribute on html
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CANDYLAND THEME (Default) — Sweet playful candy aesthetic
+   Source: https://tweakcn.com/r/themes/cmkkwew1d000204l82gl90tb3
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root,
+[data-theme="candyland"] {
+  --background: #f7f9fa;
+  --foreground: #333333;
+  --card: #ffffff;
+  --card-foreground: #333333;
+  --popover: #ffffff;
+  --popover-foreground: #333333;
+  --primary: #ffc0cb;
+  --primary-foreground: #000000;
+  --secondary: #87ceeb;
+  --secondary-foreground: #000000;
+  --muted: #ddd9c4;
+  --muted-foreground: #6e6e6e;
+  --accent: #ffff00;
+  --accent-foreground: #000000;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #d4d4d4;
+  --input: #d4d4d4;
+  --ring: #ffc0cb;
+  --chart-1: #ffc0cb;
+  --chart-2: #87ceeb;
+  --chart-3: #ffff00;
+  --chart-4: #ff99cc;
+  --chart-5: #33cc33;
+  --success: #33cc33;
+  --sidebar: #f7f9fa;
+  --sidebar-foreground: #333333;
+  --sidebar-primary: #ffc0cb;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #ffff00;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #d4d4d4;
+  --sidebar-ring: #ffc0cb;
+  --font-sans: Poppins, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Roboto Mono", monospace;
+  --radius: 0.5rem;
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+}
+
+/* Candyland Dark */
+[data-theme="candyland"].dark,
+.dark[data-theme="candyland"],
+.dark:not([data-theme="doom64"]) {
+  --background: #1a1d23;
+  --foreground: #e5e5e5;
+  --card: #2f3436;
+  --card-foreground: #e5e5e5;
+  --popover: #2f3436;
+  --popover-foreground: #e5e5e5;
+  --primary: #ff99cc;
+  --primary-foreground: #000000;
+  --secondary: #33cc33;
+  --secondary-foreground: #000000;
+  --muted: #444444;
+  --muted-foreground: #a3a3a3;
+  --accent: #87ceeb;
+  --accent-foreground: #000000;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #444444;
+  --input: #444444;
+  --ring: #ff99cc;
+  --chart-1: #ff99cc;
+  --chart-2: #33cc33;
+  --chart-3: #87ceeb;
+  --chart-4: #ffff00;
+  --chart-5: #ffcc00;
+  --success: #33cc33;
+  --sidebar: #1a1d23;
+  --sidebar-foreground: #e5e5e5;
+  --sidebar-primary: #ff99cc;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #87ceeb;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #444444;
+  --sidebar-ring: #ff99cc;
+  --font-sans: Poppins, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Roboto Mono", monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DOOM64 THEME — Industrial dark with blood-red accents
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[data-theme="doom64"] {
+  --background: #cccccc;
+  --foreground: #1f1f1f;
+  --card: #b0b0b0;
+  --card-foreground: #1f1f1f;
+  --popover: #b0b0b0;
+  --popover-foreground: #1f1f1f;
+  --primary: #b71c1c;
+  --primary-foreground: #ffffff;
+  --secondary: #556b2f;
+  --secondary-foreground: #ffffff;
+  --muted: #b8b8b8;
+  --muted-foreground: #4a4a4a;
+  --accent: #4682b4;
+  --accent-foreground: #ffffff;
+  --destructive: #ff6f00;
+  --destructive-foreground: #000000;
+  --border: #505050;
+  --input: #505050;
+  --ring: #b71c1c;
+  --success: #556b2f;
+  --sidebar: #b0b0b0;
+  --sidebar-foreground: #1f1f1f;
+  --sidebar-primary: #b71c1c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #4682b4;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #505050;
+  --font-sans: "Oxanium", sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Source Code Pro", monospace;
+  --radius: 0px;
+}
+
+[data-theme="doom64"].dark,
+.dark[data-theme="doom64"] {
+  --background: #1a1a1a;
+  --foreground: #e0e0e0;
+  --card: #2a2a2a;
+  --card-foreground: #e0e0e0;
+  --popover: #2a2a2a;
+  --popover-foreground: #e0e0e0;
+  --primary: #e53935;
+  --primary-foreground: #ffffff;
+  --secondary: #689f38;
+  --secondary-foreground: #000000;
+  --muted: #252525;
+  --muted-foreground: #a0a0a0;
+  --accent: #64b5f6;
+  --accent-foreground: #000000;
+  --destructive: #ffa000;
+  --destructive-foreground: #000000;
+  --border: #4a4a4a;
+  --input: #4a4a4a;
+  --ring: #e53935;
+  --success: #689f38;
+  --sidebar: #141414;
+  --sidebar-foreground: #e0e0e0;
+  --sidebar-primary: #e53935;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #64b5f6;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #4a4a4a;
+  --font-sans: "Oxanium", sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Source Code Pro", monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base Layer — Apply Fonts & Core Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans) !important;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans) !important;
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono) !important;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  * {
+    border-color: var(--border);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Component Layer
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* Theme Switch (Sun/Moon toggle) */
+  .theme-switch {
+    @apply inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors;
+    background-color: var(--input);
+  }
+
+  .theme-switch-thumb {
+    @apply pointer-events-none flex items-center justify-center rounded-full shadow-lg ring-0 transition-transform;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: var(--background);
+  }
+
+  .theme-switch[data-state="unchecked"] .theme-switch-thumb {
+    transform: translateX(0);
+  }
+
+  .theme-switch[data-state="checked"] .theme-switch-thumb {
+    transform: translateX(1.25rem);
+  }
+
+  /* Button Icon */
+  .btn-icon {
+    @apply flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-150 active:scale-95;
+    color: var(--muted-foreground);
+    background-color: transparent;
+  }
+
+  .btn-icon:hover {
+    background-color: var(--muted);
+    color: var(--foreground);
+  }
+
+  /* Preview Content Typography */
+  .preview-content {
+    @apply leading-relaxed text-base;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans) !important;
+  }
+
+  .preview-content h1 {
+    @apply text-3xl font-bold mt-8 mb-4;
+    color: var(--foreground);
+  }
+
+  .preview-content h2 {
+    @apply text-2xl font-semibold mt-6 mb-3 pb-2;
+    color: var(--foreground);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .preview-content h3 {
+    @apply text-xl font-semibold mt-4 mb-2;
+    color: var(--foreground);
+  }
+
+  .preview-content p {
+    @apply mb-4;
+  }
+
+  .preview-content strong {
+    @apply font-semibold;
+  }
+
+  .preview-content code {
+    @apply text-sm px-1.5 py-0.5 rounded;
+    font-family: var(--font-mono) !important;
+    background-color: var(--muted);
+    color: var(--primary);
+  }
+
+  .preview-content pre {
+    @apply text-sm p-4 rounded-lg my-4 overflow-x-auto;
+    font-family: var(--font-mono) !important;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+  }
+
+  .preview-content pre code {
+    @apply p-0;
+    background-color: transparent;
+    color: var(--foreground);
+  }
+
+  .preview-content blockquote {
+    @apply pl-4 my-4 italic py-2 rounded-r;
+    border-left: 4px solid var(--primary);
+    color: var(--muted-foreground);
+    background-color: color-mix(in srgb, var(--muted) 30%, transparent);
+  }
+
+  .preview-content a {
+    @apply underline underline-offset-2 transition-colors;
+    color: var(--accent);
+  }
+
+  .preview-content a:hover {
+    color: var(--primary);
+  }
+
+  .preview-content hr {
+    @apply my-8;
+    border-top: 1px solid var(--border);
+  }
+
+  .preview-content ul,
+  .preview-content ol {
+    @apply pl-6 mb-4;
+  }
+
+  .preview-content li {
+    @apply mb-1;
+  }
+
+  .preview-content li::marker {
+    color: var(--primary);
+  }
+
+  .preview-content table {
+    @apply w-full my-4 text-sm border-collapse;
+  }
+
+  .preview-content th,
+  .preview-content td {
+    @apply px-4 py-2 text-left;
+    border: 1px solid var(--border);
+  }
+
+  .preview-content th {
+    @apply font-semibold;
+    background-color: var(--muted);
+  }
+
+  .preview-content tr:nth-child(even) {
+    background-color: var(--card);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Doom64 Theme Special Effects (Red Glow on headings)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[data-theme="doom64"] .preview-content h1,
+[data-theme="doom64"] .preview-content h2,
+[data-theme="doom64"] .preview-content h3 {
+  color: var(--primary);
+  text-shadow: 0 0 8px var(--primary);
+}
+
+[data-theme="doom64"] .preview-content code {
+  color: var(--secondary);
+  background: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Print Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media print {
+  .app-header,
+  .app-toolbar,
+  .app-sidebar,
+  .app-editor {
+    display: none !important;
+  }
+
+  .preview-container {
+    position: absolute !important;
+    inset: 0 !important;
+    padding: 1.5cm !important;
+    overflow: visible !important;
+  }
+}
