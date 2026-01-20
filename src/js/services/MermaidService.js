@@ -141,30 +141,14 @@ export class MermaidService {
     await waitForCSS();
 
     // Extract core theme colors with Safari-safe fallbacks
-    // IMPORTANT: Prefer -hex variants to avoid OKLCH format (Mermaid doesn't support OKLCH)
-    const bgPri = getSafeColor(
-      '--bg-primary-hex',
-      getSafeColor('--bg-primary', DEFAULT_COLORS.bgPrimary)
-    );
-    const bgSec = getSafeColor(
-      '--bg-secondary-hex',
-      getSafeColor('--bg-secondary', DEFAULT_COLORS.bgSecondary)
-    );
-    const bgTer = getSafeColor(
-      '--bg-tertiary-hex',
-      getSafeColor('--bg-tertiary', DEFAULT_COLORS.bgTertiary)
-    );
-    const txtPri = getSafeColor(
-      '--text-primary-hex',
-      getSafeColor('--text-primary', DEFAULT_COLORS.textPrimary)
-    );
-    const txtSec = getSafeColor(
-      '--text-secondary-hex',
-      getSafeColor('--text-secondary', DEFAULT_COLORS.textSecondary)
-    );
-    const h1 = getSafeColor('--h1-color-hex', getSafeColor('--h1-color', DEFAULT_COLORS.h1));
-    const h2 = getSafeColor('--h2-color-hex', getSafeColor('--h2-color', DEFAULT_COLORS.h2));
-    const h3 = getSafeColor('--h3-color-hex', getSafeColor('--h3-color', DEFAULT_COLORS.h3));
+    const bgPri = getSafeColor('--bg-primary', DEFAULT_COLORS.bgPrimary);
+    const bgSec = getSafeColor('--bg-secondary', DEFAULT_COLORS.bgSecondary);
+    const bgTer = getSafeColor('--bg-tertiary', DEFAULT_COLORS.bgTertiary);
+    const txtPri = getSafeColor('--text-primary', DEFAULT_COLORS.textPrimary);
+    const txtSec = getSafeColor('--text-secondary', DEFAULT_COLORS.textSecondary);
+    const h1 = getSafeColor('--h1-color', DEFAULT_COLORS.h1);
+    const h2 = getSafeColor('--h2-color', DEFAULT_COLORS.h2);
+    const h3 = getSafeColor('--h3-color', DEFAULT_COLORS.h3);
 
     // Helper to get variable with fallback (for Mermaid-specific vars)
     const get = (varName, fallback) => getSafeColor(varName, fallback);
