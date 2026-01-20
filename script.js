@@ -114,6 +114,8 @@ const AnchorNavigation = {
         this.scrollToHash(window.location.hash.slice(1), false);
       });
     }
+
+    console.log('✅ Anchor navigation initialized');
   },
 
   /**
@@ -343,6 +345,7 @@ themeManager.setThemeChangeListener(() => {
   // Force re-render of markdown to apply new Mermaid colors
   // No timeout needed - waiting for next microtask is sufficient
   if (globalRenderMarkdown) {
+    console.log('🔄 Re-rendering diagrams with new theme colors');
     globalRenderMarkdown();
   }
 });
@@ -353,6 +356,8 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeApp() {
+  console.log('🚀 Initializing Enterprise Markdown Viewer...');
+
   // Zen Mode (Header Toggle) Implementation
   const zenToggle = document.getElementById('header-toggle');
   const zenRevealTrigger = document.getElementById('header-reveal-trigger');
@@ -419,12 +424,14 @@ function initSupportModal() {
   // Check if already shown before
   const alreadyShown = localStorage.getItem(SUPPORT_MODAL_SHOWN_KEY);
   if (alreadyShown === 'true') {
+    console.log('[SupportModal] Already shown before, skipping');
     return;
   }
 
   // Show modal after delay
   setTimeout(() => {
     modal.classList.add('active');
+    console.log('[SupportModal] Showing support modal');
   }, SUPPORT_MODAL_DELAY_MS);
 
   // Close button handler
@@ -451,6 +458,7 @@ function initSupportModal() {
     option.addEventListener('click', () => {
       // Mark as shown when user clicks a support option
       localStorage.setItem(SUPPORT_MODAL_SHOWN_KEY, 'true');
+      console.log('[SupportModal] User clicked support option, marking as shown');
     });
   });
 }
@@ -464,6 +472,7 @@ function closeSupportModal(modal, checkbox) {
   // If "Don't show again" is checked, remember it
   if (checkbox && checkbox.checked) {
     localStorage.setItem(SUPPORT_MODAL_SHOWN_KEY, 'true');
+    console.log('[SupportModal] User opted out of future modals');
   }
 }
 
@@ -486,6 +495,7 @@ async function detectSupportRegion() {
   // 1. Check session cache first (FR-1.4)
   const cached = sessionStorage.getItem(SUPPORT_CACHE_KEY);
   if (cached) {
+    console.log(`[SupportWidget] Using cached region: ${cached}`);
     return cached;
   }
 
@@ -504,6 +514,7 @@ async function detectSupportRegion() {
 
     // 3. Cache result for session
     sessionStorage.setItem(SUPPORT_CACHE_KEY, region);
+    console.log(`[SupportWidget] Detected region: ${region} (${data.country_code})`);
     return region;
   } catch (error) {
     // 4. Fail open - silent fail to global
@@ -523,6 +534,7 @@ function toggleSupportRegion() {
   const newRegion = currentRegion === 'india' ? 'global' : 'india';
   sessionStorage.setItem(SUPPORT_CACHE_KEY, newRegion);
   renderSupportWidget(newRegion);
+  console.log(`[SupportWidget] Toggled region: ${currentRegion} → ${newRegion}`);
 }
 
 // Make toggle function globally accessible for onclick
@@ -569,10 +581,14 @@ async function initSupportWidget() {
     return;
   }
 
+  console.log('[SupportWidget] Initializing...');
+
   // Skeleton is already in HTML (CLS mitigation)
   // Now detect region and hydrate
   const region = await detectSupportRegion();
   renderSupportWidget(region);
+
+  console.log(`[SupportWidget] ✅ Initialized with region: ${region}`);
 }
 
 /**
@@ -595,6 +611,7 @@ function debounce(func, wait) {
 function configureMarkedExtensions() {
   // Enable footnote support
   marked.use(markedFootnote());
+  console.log('✅ Footnotes enabled');
 
   // Add GitHub-style admonitions
   marked.use({
@@ -642,6 +659,7 @@ function configureMarkedExtensions() {
       },
     ],
   });
+  console.log('✅ GitHub admonitions enabled');
 
   // Configure math formulas (KaTeX is now imported at top level)
 

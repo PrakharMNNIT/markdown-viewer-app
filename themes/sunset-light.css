@@ -91,12 +91,8 @@
 
   /* Helper colors for hex-only libs (Mermaid) */
   --hex-bg-primary: #fff8f5;
-  --hex-bg-secondary: #fff1f2;
-  --hex-bg-tertiary: #ffe4e6;
   --hex-text-primary: #4a2c2a;
-  --hex-text-secondary: #9f1239;
   --hex-accent-primary: #ff7f50;
-  --hex-accent-secondary: #be185d;
 }
 
 /* ==================== GLOBAL TYPOGRAPHY ==================== */
@@ -127,7 +123,6 @@ h1 {
   margin-bottom: 1.5rem;
   background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
   -webkit-background-clip: text;
-  background-clip: text;
   -webkit-text-fill-color: transparent;
   border-bottom: 3px solid var(--bg-tertiary);
 }

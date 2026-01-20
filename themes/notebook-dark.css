@@ -5,6 +5,8 @@
  * Source: Shadcn 'Notebook' Theme (Dark Mode)
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Fira+Code:wght@400;500&display=swap');
+
 :root {
   /* ==================== CORE PALETTE (OKLCH - Provided) ==================== */
 
@@ -70,12 +72,12 @@
   --link-hover: var(--n-chart-2);
 
   /* Typography */
-  --font-family-base: 'Patrick Hand', cursive;
-  /* Handwritten body text */
-  --font-family-headings: 'Architects Daughter', cursive;
-  /* Handwritten headings */
-  --font-family-mono: 'Fira Code', monospace;
-  /* Tech/Code contrast */
+  --font-family-base: 'Georgia', serif;
+  /* As requested: font-serif */
+  --font-family-headings: 'Architects Daughter', sans-serif;
+  /* As requested: font-sans */
+  --font-family-mono: 'Fira Code', 'Courier New', monospace;
+  /* As requested: font-mono */
 
   /* ==================== SYNTAX HIGHLIGHTING (Chalkboard) ==================== */
   --code-bg: var(--n-card);
@@ -114,12 +116,8 @@
 
   /* Helper colors for hex-only libs (Mermaid) */
   --hex-bg-primary: #1f1f1f;
-  --hex-bg-secondary: #27272a;
-  --hex-bg-tertiary: #3f3f46;
   --hex-text-primary: #e0e0e0;
-  --hex-text-secondary: #a1a1aa;
   --hex-accent-primary: #ffffff;
-  --hex-accent-secondary: #fafafa;
 }
 
 /* ==================== GLOBAL TYPOGRAPHY ==================== */

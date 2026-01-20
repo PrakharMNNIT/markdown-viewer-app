@@ -329,6 +329,14 @@ export class MermaidService {
       });
 
       this.initialized = true;
+
+      // Debug: Log sample of loaded variables
+      console.log(`✅ Mermaid initialized`);
+      console.log(`  - Background: ${get('--mermaid-background', bgPri)}`);
+      console.log(`  - Text: ${get('--mermaid-text-color', txtPri)}`);
+      console.log(`  - Line: ${get('--mermaid-line-color', h2)}`);
+      console.log(`  - Primary: ${get('--mermaid-primary-color', nodeBkg)}`);
+      console.log(`  - Pie1: ${get('--mermaid-pie1', h1)}`);
     } else {
       console.warn('Mermaid library not loaded');
     }

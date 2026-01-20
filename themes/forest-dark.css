@@ -86,12 +86,8 @@
 
   /* Helper colors for hex-only libs (Mermaid) */
   --hex-bg-primary: #0f1f14;
-  --hex-bg-secondary: #14532d;
-  --hex-bg-tertiary: #166534;
   --hex-text-primary: #e0f2e0;
-  --hex-text-secondary: #86efac;
   --hex-accent-primary: #4ade80;
-  --hex-accent-secondary: #facc15;
 }
 
 /* ==================== GLOBAL TYPOGRAPHY ==================== */
