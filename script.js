@@ -358,39 +358,6 @@ window.addEventListener('DOMContentLoaded', () => {
 function initializeApp() {
   console.log('🚀 Initializing Enterprise Markdown Viewer...');
 
-  // Zen Mode (Header Toggle) Implementation
-  const zenToggle = document.getElementById('header-toggle');
-  const zenRevealTrigger = document.getElementById('header-reveal-trigger');
-
-  // Load saved state (default to false if not set)
-  const savedZenState = localStorage.getItem('zenMode') === 'true';
-
-  // Function to apply Zen Mode state
-  const setZenMode = active => {
-    document.body.classList.toggle('zen-active', active);
-    if (zenToggle) zenToggle.checked = active;
-    localStorage.setItem('zenMode', active);
-  };
-
-  // Apply initial state
-  if (savedZenState) {
-    setZenMode(true);
-  }
-
-  // Toggle Listener
-  if (zenToggle) {
-    zenToggle.addEventListener('change', e => {
-      setZenMode(e.target.checked);
-    });
-  }
-
-  // Reveal Trigger Listener
-  if (zenRevealTrigger) {
-    zenRevealTrigger.addEventListener('click', () => {
-      setZenMode(false);
-    });
-  }
-
   // Configure marked.js extensions
   configureMarkedExtensions();
 
