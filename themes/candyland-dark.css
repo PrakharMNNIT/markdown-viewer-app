@@ -131,18 +131,18 @@
   --table-header-bg: var(--card);
   --table-border: var(--border);
 
-  /* Mermaid - Hex colors for compatibility */
-  --mermaid-background: #38334d;
-  --mermaid-text-color: #eae6f0;
-  --mermaid-line-color: #ff8fa3;
-  --mermaid-main-bkg: #4d4663;
-  --mermaid-primary-color: #4d4663;
-  --mermaid-primary-text-color: #eae6f0;
-  --mermaid-primary-border-color: #ff8fa3;
-  --mermaid-secondary-color: #38334d;
-  --mermaid-secondary-text-color: #eae6f0;
-  --mermaid-secondary-border-color: #c3f73a;
-  --mermaid-tertiary-color: #625d70;
-  --mermaid-tertiary-text-color: #eae6f0;
-  --mermaid-tertiary-border-color: #a89ff8;
+  /* Mermaid */
+  --mermaid-background: var(--background);
+  --mermaid-text-color: var(--foreground);
+  --mermaid-line-color: var(--primary);
+  --mermaid-main-bkg: var(--card);
+  --mermaid-primary-color: var(--card);
+  --mermaid-primary-text-color: var(--foreground);
+  --mermaid-primary-border-color: var(--primary);
+  --mermaid-secondary-color: var(--background);
+  --mermaid-secondary-text-color: var(--foreground);
+  --mermaid-secondary-border-color: var(--secondary);
+  --mermaid-tertiary-color: var(--muted);
+  --mermaid-tertiary-text-color: var(--foreground);
+  --mermaid-tertiary-border-color: var(--accent);
 }

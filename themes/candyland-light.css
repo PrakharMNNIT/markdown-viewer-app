@@ -131,18 +131,18 @@
   --table-header-bg: var(--card);
   --table-border: var(--border);
 
-  /* Mermaid - Hex colors for compatibility */
-  --mermaid-background: #faf9fd;
-  --mermaid-text-color: #524142;
-  --mermaid-line-color: #ff7b8a;
-  --mermaid-main-bkg: #ffffff;
-  --mermaid-primary-color: #ffffff;
-  --mermaid-primary-text-color: #524142;
-  --mermaid-primary-border-color: #ff7b8a;
-  --mermaid-secondary-color: #faf9fd;
-  --mermaid-secondary-text-color: #524142;
-  --mermaid-secondary-border-color: #a89ff8;
-  --mermaid-tertiary-color: #f7f2f5;
-  --mermaid-tertiary-text-color: #524142;
-  --mermaid-tertiary-border-color: #c3f73a;
+  /* Mermaid */
+  --mermaid-background: var(--background);
+  --mermaid-text-color: var(--foreground);
+  --mermaid-line-color: var(--primary);
+  --mermaid-main-bkg: var(--card);
+  --mermaid-primary-color: var(--card);
+  --mermaid-primary-text-color: var(--foreground);
+  --mermaid-primary-border-color: var(--primary);
+  --mermaid-secondary-color: var(--background);
+  --mermaid-secondary-text-color: var(--foreground);
+  --mermaid-secondary-border-color: var(--secondary);
+  --mermaid-tertiary-color: var(--muted);
+  --mermaid-tertiary-text-color: var(--foreground);
+  --mermaid-tertiary-border-color: var(--accent);
 }
