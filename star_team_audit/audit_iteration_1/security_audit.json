@@ -1,0 +1,31 @@
+[
+  {
+    "component": "Content Rendering",
+    "threat": "Cross-Site Scripting (XSS)",
+    "status": "Mitigated",
+    "details": "DOMPurify is used before injecting Markdown HTML. `noopener noreferrer` is properly applied to external links.",
+    "risk_level": "LOW"
+  },
+  {
+    "component": "Mermaid Diagrams",
+    "threat": "Lib-XSS",
+    "status": "Accepted Risk",
+    "details": "Mermaid SVG output is injected directly via innerHTML. We rely on Mermaid.js security. Consider running DOMPurify on the generated SVG as a defense-in-depth measure.",
+    "risk_level": "MEDIUM"
+  },
+  {
+    "component": "Infrastructure",
+    "threat": "CSP Missing",
+    "status": "Vulnerable",
+    "details": "No Content Security Policy (CSP) meta tag in index.html. Allows unrestricted script loading.",
+    "risk_level": "HIGH",
+    "recommendation": "Implement strict CSP allowing only 'self' and trusted CDNs (Google Fonts)."
+  },
+  {
+    "component": "Storage",
+    "threat": "Insecure Storage",
+    "status": "Info",
+    "details": "User content is stored in localStorage in plain text. Standard for client-side apps but implies no confidentiality on shared devices.",
+    "risk_level": "LOW"
+  }
+]

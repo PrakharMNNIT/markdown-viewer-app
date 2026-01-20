@@ -1,0 +1,30 @@
+[
+  {
+    "category": "Design System",
+    "feature": "Color Space",
+    "status": "Advanced",
+    "details": "Uses `oklch()` for perceptually uniform colors. Includes Hex fallbacks for legacy tools (Mermaid). Excellent architectural choice.",
+    "rating": "A+"
+  },
+  {
+    "category": "Accessibility",
+    "feature": "Contrast",
+    "status": "Compliant",
+    "details": "High contrast ratios in default themes (Dark text on White bg).",
+    "rating": "Pass"
+  },
+  {
+    "category": "Accessibility",
+    "feature": "Focus Management",
+    "status": "Implemented",
+    "details": "`AnchorNavigation` explicitly handles focus after scrolling. `tabindex` is managed.",
+    "rating": "Pass"
+  },
+  {
+    "category": "Responsiveness",
+    "feature": "Mobile View",
+    "status": "Custom Implementation",
+    "details": "Logic in `script.js` detects mobile width and toggles classes. This is fragile compared to CSS Media Queries but allows for specific JS behavior.",
+    "rating": "B"
+  }
+]
