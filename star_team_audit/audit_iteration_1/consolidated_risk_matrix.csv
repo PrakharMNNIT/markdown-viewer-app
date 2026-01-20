@@ -1,8 +1,0 @@
-Category,Risk,Impact,Likelihood,Severity,Mitigation Strategy
-Architecture,God Object (script.js),High,Certain,CRITICAL,Refactor into modular Controllers (App, UI, Editor).
-Security,Missing CSP,High,High,CRITICAL,Implement strict Content Security Policy in index.html.
-Documentation,"Hidden" Build Tool (Vite),High,Certain,HIGH,Update techContext.md to reflect reality and document build commands.
-Security,Mermaid SVG Injection,Medium,Low,MEDIUM,Sanitize SVG output or audit Mermaid version regularly.
-Maintainability,Hardcoded Templates,Medium,Certain,MEDIUM,Move templates to external config/JSON file.
-Testing,0% Coverage on Core Logic,High,Certain,HIGH,Implement E2E tests for script.js logic until refactor allows unit tests.
-Process,Manual Deployment,Medium,Medium,MEDIUM,Implement CI/CD pipeline (GitHub Actions).
