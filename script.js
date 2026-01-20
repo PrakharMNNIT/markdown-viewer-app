@@ -15,7 +15,6 @@ import Prism from 'prismjs';
 
 import { StorageManager } from './src/js/core/StorageManager.js';
 import { ThemeManager } from './src/js/core/ThemeManager.js';
-import { CodeBlockCopyService } from './src/js/services/CodeBlockCopyService.js';
 import { FolderBrowserService } from './src/js/services/FolderBrowserService.js';
 import { HTMLService } from './src/js/services/HTMLService.js';
 import { LinkNavigationService } from './src/js/services/LinkNavigationService.js';
