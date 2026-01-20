@@ -1,310 +1,383 @@
-# 🎨 Markdown Preview EE - Brand Theme Document
+# 🍬 Candyland Design System
 
-## Theme Name: Candyland
-
-**Source:** [TweakCN - Candyland Theme](https://tweakcn.com/r/themes/candyland.json)  
-**Color Space:** OKLCH (Perceptually Uniform)  
-**Framework Compatibility:** shadcn/ui, Tailwind CSS v4
+## A Bold, Playful-Yet-Professional Aesthetic for Markdown Preview EE
 
 ---
 
-## 📋 Table of Contents
+## 🎯 Design Philosophy
 
-1. [Theme Overview](#1-theme-overview)
-2. [Color Palette](#2-color-palette)
-3. [Typography](#3-typography)
-4. [Spacing & Radius](#4-spacing--radius)
-5. [Shadows](#5-shadows)
-6. [Installation](#6-installation)
-7. [CSS Variables Reference](#7-css-variables-reference)
+### The Vision
+
+**Aesthetic Direction:** "Soft Maximalism" — Playful abundance with refined restraint.
+
+Think: A high-end candy shop designed by a Swiss minimalist. Bright colors, but never garish. Playful, but never childish. Every element feels intentional, like a perfectly wrapped bonbon.
+
+### What Makes This UNFORGETTABLE?
+
+> **The one thing users will remember:** The unexpected warmth. 
+> 
+> In a sea of cold, corporate markdown editors (dark grays, muted blues, sterile whites), Candyland wraps you in coral pinks, lime accents, and cream yellows — like stepping into a sunlit bakery instead of a server room.
+
+### Design Principles
+
+| Principle | Execution |
+|-----------|-----------|
+| **Warm over Cold** | Lavender-tinted backgrounds, coral primaries, cream muted tones |
+| **Vibrant over Muted** | OKLCH colors with high chroma (not washed out) |
+| **Soft over Sharp** | Rounded corners (0.5rem), gentle shadows, no hard edges |
+| **Playful over Serious** | Lime/yellow accents that pop, pink focus rings |
+| **Confident over Timid** | Bold color contrasts, not safe gradients |
 
 ---
 
-## 1. Theme Overview
-
-### Design Philosophy
-
-**Candyland** is a playful yet professional theme that combines:
-- **Soft pastels** for backgrounds (lavender-tinted whites)
-- **Warm coral/pink** as primary accent
-- **Cool sky blue** as secondary accent
-- **Bright lime/yellow** for highlights
-- **High contrast** dark mode with vibrant accents
+## 🎨 Color Architecture
 
 ### Why OKLCH?
 
-OKLCH (Oklch Lightness Chroma Hue) provides:
-- **Perceptual uniformity** - colors look equally bright at same lightness
-- **Predictable lightness** - easy to create accessible color scales
-- **Vivid colors** - wider gamut than HSL on modern displays
-- **Better gradients** - smoother transitions between colors
+We use **OKLCH** (Oklch Lightness Chroma Hue) because:
+- **Perceptual uniformity** — Colors look equally vibrant at the same lightness
+- **Wider gamut** — More vivid colors on modern displays than sRGB
+- **Predictable mixing** — Gradients flow smoothly without muddy midpoints
 
-### Color Personality
+### Light Mode: "Sugar Rush"
 
-| Mode | Vibe | Primary | Secondary | Accent |
-|------|------|---------|-----------|--------|
-| Light | Soft, warm, approachable | Coral pink | Sky blue | Bright lime |
-| Dark | Rich, vibrant, modern | Hot pink | Emerald green | Sky blue |
-
----
-
-## 2. Color Palette
-
-### Light Mode Colors
-
-#### Core Colors (Visual Reference)
+The default experience. Soft, welcoming, energetic.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         LIGHT MODE PALETTE                                   │
+│                    🌸 LIGHT MODE: "SUGAR RUSH" 🌸                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│  BACKGROUND           FOREGROUND          PRIMARY             SECONDARY     │
-│  ┌──────────┐        ┌──────────┐        ┌──────────┐        ┌──────────┐  │
-│  │          │        │          │        │          │        │          │  │
-│  │ Lavender │        │   Dark   │        │  Coral   │        │   Sky    │  │
-│  │  White   │        │   Gray   │        │   Pink   │        │   Blue   │  │
-│  │          │        │          │        │          │        │          │  │
-│  └──────────┘        └──────────┘        └──────────┘        └──────────┘  │
-│  oklch(0.98)         oklch(0.32)         oklch(0.87)         oklch(0.81)   │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                      │   │
+│  │    BACKGROUND              FOREGROUND              PRIMARY          │   │
+│  │    ┌──────────┐           ┌──────────┐           ┌──────────┐      │   │
+│  │    │░░░░░░░░░░│           │██████████│           │▓▓▓▓▓▓▓▓▓▓│      │   │
+│  │    │░ Lavender│           │█ Charcoal│           │▓  Coral  ▓│      │   │
+│  │    │░  Mist  ░│           │██████████│           │▓  Blush  ▓│      │   │
+│  │    │░░░░░░░░░░│           │          │           │▓▓▓▓▓▓▓▓▓▓│      │   │
+│  │    └──────────┘           └──────────┘           └──────────┘      │   │
+│  │    oklch(0.98)            oklch(0.32)            oklch(0.87)       │   │
+│  │                                                                      │   │
+│  │    SECONDARY               ACCENT                 MUTED             │   │
+│  │    ┌──────────┐           ┌──────────┐           ┌──────────┐      │   │
+│  │    │▒▒▒▒▒▒▒▒▒▒│           │▓▓▓▓▓▓▓▓▓▓│           │░░░░░░░░░░│      │   │
+│  │    │▒  Sky   ▒│           │▓  Lime  ▓│           │░ Cream  ░│      │   │
+│  │    │▒  Petal ▒│           │▓  Fizz  ▓│           │░ Butter ░│      │   │
+│  │    │▒▒▒▒▒▒▒▒▒▒│           │▓▓▓▓▓▓▓▓▓▓│           │░░░░░░░░░░│      │   │
+│  │    └──────────┘           └──────────┘           └──────────┘      │   │
+│  │    oklch(0.81)            oklch(0.97)            oklch(0.88)       │   │
+│  │                                                                      │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
-│  ACCENT               MUTED               DESTRUCTIVE         BORDER        │
-│  ┌──────────┐        ┌──────────┐        ┌──────────┐        ┌──────────┐  │
-│  │          │        │          │        │          │        │          │  │
-│  │  Bright  │        │  Cream   │        │   Red    │        │  Light   │  │
-│  │   Lime   │        │  Yellow  │        │          │        │   Gray   │  │
-│  │          │        │          │        │          │        │          │  │
-│  └──────────┘        └──────────┘        └──────────┘        └──────────┘  │
-│  oklch(0.97)         oklch(0.88)         oklch(0.64)         oklch(0.87)   │
+│  FEELING: Warm bakery morning | Optimistic | Approachable | Fresh          │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#### Light Mode OKLCH Values
+**Light Mode Palette:**
 
-| Token | OKLCH Value | Description |
-|-------|-------------|-------------|
-| `--background` | `oklch(0.9809 0.0025 228.7836)` | Subtle lavender-tinted white |
-| `--foreground` | `oklch(0.3211 0 0)` | Near-black for text |
-| `--card` | `oklch(1.0000 0 0)` | Pure white cards |
-| `--card-foreground` | `oklch(0.3211 0 0)` | Dark text on cards |
-| `--popover` | `oklch(1.0000 0 0)` | White popovers |
-| `--popover-foreground` | `oklch(0.3211 0 0)` | Dark text |
-| `--primary` | `oklch(0.8677 0.0735 7.0855)` | Coral pink (warm) |
-| `--primary-foreground` | `oklch(0 0 0)` | Black text on primary |
-| `--secondary` | `oklch(0.8148 0.0819 225.7537)` | Sky blue (cool) |
-| `--secondary-foreground` | `oklch(0 0 0)` | Black text on secondary |
-| `--muted` | `oklch(0.8828 0.0285 98.1033)` | Cream/yellow tint |
-| `--muted-foreground` | `oklch(0.5382 0 0)` | Gray text |
-| `--accent` | `oklch(0.9680 0.2110 109.7692)` | Bright lime/yellow |
-| `--accent-foreground` | `oklch(0 0 0)` | Black text on accent |
-| `--destructive` | `oklch(0.6368 0.2078 25.3313)` | Red for errors |
-| `--destructive-foreground` | `oklch(1.0000 0 0)` | White text on red |
-| `--border` | `oklch(0.8699 0 0)` | Light gray borders |
-| `--input` | `oklch(0.8699 0 0)` | Input borders |
-| `--ring` | `oklch(0.8677 0.0735 7.0855)` | Focus ring (coral) |
-
-#### Chart Colors (Light)
-
-| Token | OKLCH Value | Use Case |
-|-------|-------------|----------|
-| `--chart-1` | `oklch(0.8677 0.0735 7.0855)` | Coral pink |
-| `--chart-2` | `oklch(0.8148 0.0819 225.7537)` | Sky blue |
-| `--chart-3` | `oklch(0.9680 0.2110 109.7692)` | Bright lime |
-| `--chart-4` | `oklch(0.8027 0.1355 349.2347)` | Hot pink |
-| `--chart-5` | `oklch(0.7395 0.2268 142.8504)` | Emerald green |
+| Role | Name | OKLCH | Hex Approx | Feel |
+|------|------|-------|------------|------|
+| Background | Lavender Mist | `oklch(0.9809 0.0025 228.7836)` | #f8f7fc | Soft, slightly cool |
+| Foreground | Charcoal | `oklch(0.3211 0 0)` | #4a4a4a | Confident, readable |
+| Primary | Coral Blush | `oklch(0.8677 0.0735 7.0855)` | #f5b5a8 | Warm, inviting |
+| Secondary | Sky Petal | `oklch(0.8148 0.0819 225.7537)` | #a8d4f5 | Cool complement |
+| Accent | Lime Fizz | `oklch(0.9680 0.2110 109.7692)` | #e8ff6b | Electric pop |
+| Muted | Cream Butter | `oklch(0.8828 0.0285 98.1033)` | #f5f0d8 | Neutral warmth |
+| Destructive | Cherry | `oklch(0.6368 0.2078 25.3313)` | #d94545 | Alert, urgent |
 
 ---
 
-### Dark Mode Colors
+### Dark Mode: "Midnight Confetti"
 
-#### Dark Mode Visual Reference
+For night owls. Rich, vibrant, sophisticated.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                          DARK MODE PALETTE                                   │
+│                   🌙 DARK MODE: "MIDNIGHT CONFETTI" 🌙                       │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│  BACKGROUND           FOREGROUND          PRIMARY             SECONDARY     │
-│  ┌──────────┐        ┌──────────┐        ┌──────────┐        ┌──────────┐  │
-│  │          │        │          │        │          │        │          │  │
-│  │   Deep   │        │   Off    │        │   Hot    │        │ Emerald  │  │
-│  │   Navy   │        │  White   │        │   Pink   │        │  Green   │  │
-│  │          │        │          │        │          │        │          │  │
-│  └──────────┘        └──────────┘        └──────────┘        └──────────┘  │
-│  oklch(0.23)         oklch(0.92)         oklch(0.80)         oklch(0.74)   │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                      │   │
+│  │    BACKGROUND              FOREGROUND              PRIMARY          │   │
+│  │    ┌──────────┐           ┌──────────┐           ┌──────────┐      │   │
+│  │    │██████████│           │░░░░░░░░░░│           │▓▓▓▓▓▓▓▓▓▓│      │   │
+│  │    │█  Deep  █│           │░  Ghost ░│           │▓   Hot  ▓│      │   │
+│  │    │█  Navy  █│           │░  White ░│           │▓  Pink  ▓│      │   │
+│  │    │██████████│           │░░░░░░░░░░│           │▓▓▓▓▓▓▓▓▓▓│      │   │
+│  │    └──────────┘           └──────────┘           └──────────┘      │   │
+│  │    oklch(0.23)            oklch(0.92)            oklch(0.80)       │   │
+│  │                                                                      │   │
+│  │    SECONDARY               ACCENT                 MUTED             │   │
+│  │    ┌──────────┐           ┌──────────┐           ┌──────────┐      │   │
+│  │    │▓▓▓▓▓▓▓▓▓▓│           │▒▒▒▒▒▒▒▒▒▒│           │██████████│      │   │
+│  │    │▓ Emerald▓│           │▒  Azure ▒│           │█ Graphite│      │   │
+│  │    │▓  Glow  ▓│           │▒  Spark ▒│           │█  Smoke █│      │   │
+│  │    │▓▓▓▓▓▓▓▓▓▓│           │▒▒▒▒▒▒▒▒▒▒│           │██████████│      │   │
+│  │    └──────────┘           └──────────┘           └──────────┘      │   │
+│  │    oklch(0.74)            oklch(0.81)            oklch(0.39)       │   │
+│  │                                                                      │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
-│  ACCENT               MUTED               DESTRUCTIVE         BORDER        │
-│  ┌──────────┐        ┌──────────┐        ┌──────────┐        ┌──────────┐  │
-│  │          │        │          │        │          │        │          │  │
-│  │   Sky    │        │   Dark   │        │   Red    │        │   Dark   │  │
-│  │   Blue   │        │   Gray   │        │          │        │   Gray   │  │
-│  │          │        │          │        │          │        │          │  │
-│  └──────────┘        └──────────┘        └──────────┘        └──────────┘  │
-│  oklch(0.81)         oklch(0.39)         oklch(0.64)         oklch(0.39)   │
+│  FEELING: Late-night cafe | Creative | Sophisticated | Electric            │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#### Dark Mode OKLCH Values
+**Dark Mode Palette:**
 
-| Token | OKLCH Value | Description |
-|-------|-------------|-------------|
-| `--background` | `oklch(0.2303 0.0125 264.2926)` | Deep navy blue |
-| `--foreground` | `oklch(0.9219 0 0)` | Off-white text |
-| `--card` | `oklch(0.3210 0.0078 223.6661)` | Slightly lighter navy |
-| `--primary` | `oklch(0.8027 0.1355 349.2347)` | Hot pink (vibrant) |
-| `--secondary` | `oklch(0.7395 0.2268 142.8504)` | Emerald green |
-| `--muted` | `oklch(0.3867 0 0)` | Dark gray |
-| `--muted-foreground` | `oklch(0.7155 0 0)` | Medium gray text |
-| `--accent` | `oklch(0.8148 0.0819 225.7537)` | Sky blue |
-| `--destructive` | `oklch(0.6368 0.2078 25.3313)` | Red |
-| `--border` | `oklch(0.3867 0 0)` | Dark gray borders |
-| `--ring` | `oklch(0.8027 0.1355 349.2347)` | Hot pink focus ring |
+| Role | Name | OKLCH | Hex Approx | Feel |
+|------|------|-------|------------|------|
+| Background | Deep Navy | `oklch(0.2303 0.0125 264.2926)` | #1a1d2e | Rich, not black |
+| Foreground | Ghost White | `oklch(0.9219 0 0)` | #ebebeb | Easy on eyes |
+| Primary | Hot Pink | `oklch(0.8027 0.1355 349.2347)` | #ff6b9d | Bold statement |
+| Secondary | Emerald Glow | `oklch(0.7395 0.2268 142.8504)` | #2dd4bf | Vibrant complement |
+| Accent | Azure Spark | `oklch(0.8148 0.0819 225.7537)` | #7dd3fc | Cool highlight |
+| Muted | Graphite Smoke | `oklch(0.3867 0 0)` | #5c5c5c | Subtle depth |
+| Destructive | Cherry | `oklch(0.6368 0.2078 25.3313)` | #d94545 | Consistent warning |
 
 ---
 
-## 3. Typography
+## ✍️ Typography System
 
-### Font Stack
+### The Font Stack
+
+**CRITICAL:** No Inter. No Roboto. No System UI fallbacks as primary.
 
 ```css
---font-sans: Poppins, sans-serif;
---font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
---font-mono: Roboto Mono, monospace;
+--font-sans: 'Poppins', sans-serif;        /* Geometric, friendly, modern */
+--font-serif: 'Fraunces', Georgia, serif;  /* Optional: editorial headings */
+--font-mono: 'Roboto Mono', monospace;     /* Code: crisp, technical */
 ```
+
+### Why Poppins?
+
+- **Geometric circles** — Matches the soft, rounded aesthetic
+- **Friendly weight distribution** — Not too corporate, not too casual
+- **Excellent readability** — Works at both small UI labels and large headings
+- **Full weight range** — 400-700 covers all needs
+
+### Type Scale
+
+| Level | Size | Weight | Use |
+|-------|------|--------|-----|
+| Display | 3rem (48px) | 700 | Hero headings |
+| H1 | 2.25rem (36px) | 600 | Page titles |
+| H2 | 1.5rem (24px) | 600 | Section headers |
+| H3 | 1.25rem (20px) | 500 | Subsections |
+| Body | 1rem (16px) | 400 | Paragraphs |
+| Small | 0.875rem (14px) | 400 | Labels, captions |
+| Tiny | 0.75rem (12px) | 500 | Badges, tags |
 
 ### Font Import
 
 ```html
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 ```
-
-### Usage Guidelines
-
-| Context | Font | Weight | Example |
-|---------|------|--------|---------|
-| Headings | Poppins | 600-700 | Page titles, section headers |
-| Body | Poppins | 400-500 | Paragraphs, UI labels |
-| Code | Roboto Mono | 400-500 | Code blocks, inline code |
-| Editor | Roboto Mono | 400 | Markdown editing |
-| Preview | Poppins | 400 | Rendered markdown |
 
 ---
 
-## 4. Spacing & Radius
+## 🎭 Motion & Animation
+
+### Philosophy
+
+> "One well-orchestrated page load beats a hundred scattered micro-interactions."
+
+### Animation Tokens
+
+```css
+/* Timing */
+--duration-instant: 50ms;    /* Hover color changes */
+--duration-fast: 150ms;      /* Button feedback */
+--duration-base: 250ms;      /* Modal transitions */
+--duration-slow: 400ms;      /* Page reveals */
+--duration-slower: 600ms;    /* Complex sequences */
+
+/* Easing */
+--ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);   /* Playful overshoot */
+--ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);      /* Elegant slide */
+--ease-snappy: cubic-bezier(0.4, 0, 0.2, 1);        /* Quick response */
+```
+
+### Signature Animations
+
+**1. Page Load: Staggered Candy Drop**
+```css
+@keyframes candyDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-candy-drop {
+  animation: candyDrop 400ms var(--ease-bounce) backwards;
+}
+
+/* Stagger children */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 60ms; }
+.stagger > *:nth-child(3) { animation-delay: 120ms; }
+.stagger > *:nth-child(4) { animation-delay: 180ms; }
+.stagger > *:nth-child(5) { animation-delay: 240ms; }
+```
+
+**2. Button Hover: Subtle Lift**
+```css
+.btn-lift {
+  transition: transform 150ms var(--ease-bounce), 
+              box-shadow 150ms ease-out;
+}
+
+.btn-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px oklch(0 0 0 / 0.15);
+}
+
+.btn-lift:active {
+  transform: translateY(0);
+}
+```
+
+**3. Focus Ring: Coral Glow**
+```css
+:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--ring);
+}
+```
+
+---
+
+## 🏗️ Spatial Composition
+
+### Layout Philosophy
+
+- **Generous padding** — Let elements breathe (minimum 16px touch targets)
+- **Consistent gaps** — Use spacing scale, not random values
+- **Soft edges** — Everything gets `border-radius: 0.5rem`
+- **Subtle depth** — Cards float with soft shadows, not flat
+
+### Spacing Scale (4px Base)
+
+```css
+--spacing: 0.25rem;  /* Base: 4px */
+
+/* Scale */
+--space-1: 0.25rem;   /*  4px */
+--space-2: 0.5rem;    /*  8px */
+--space-3: 0.75rem;   /* 12px */
+--space-4: 1rem;      /* 16px */
+--space-5: 1.25rem;   /* 20px */
+--space-6: 1.5rem;    /* 24px */
+--space-8: 2rem;      /* 32px */
+--space-10: 2.5rem;   /* 40px */
+--space-12: 3rem;     /* 48px */
+--space-16: 4rem;     /* 64px */
+```
 
 ### Border Radius
 
 ```css
---radius: 0.5rem;           /* 8px - base unit */
---radius-sm: calc(var(--radius) - 4px);   /* 4px */
---radius-md: calc(var(--radius) - 2px);   /* 6px */
---radius-lg: var(--radius);               /* 8px */
---radius-xl: calc(var(--radius) + 4px);   /* 12px */
+--radius: 0.5rem;    /* Base: 8px */
+--radius-sm: 4px;    /* Small elements */
+--radius-md: 6px;    /* Input fields */
+--radius-lg: 8px;    /* Buttons, cards */
+--radius-xl: 12px;   /* Modals, dialogs */
+--radius-full: 9999px; /* Pills, avatars */
 ```
-
-### Spacing Scale
-
-```css
---spacing: 0.25rem;  /* 4px base unit */
-```
-
-Tailwind spacing utilities map to this base:
-- `space-1` = 0.25rem (4px)
-- `space-2` = 0.5rem (8px)
-- `space-4` = 1rem (16px)
-- `space-8` = 2rem (32px)
 
 ---
 
-## 5. Shadows
+## 🌈 Shadow System
 
 ### Shadow Scale
 
-| Token | Value | Use Case |
-|-------|-------|----------|
-| `--shadow-2xs` | `0 1px 3px 0px hsl(0 0% 0% / 0.05)` | Subtle elevation |
-| `--shadow-xs` | `0 1px 3px 0px hsl(0 0% 0% / 0.05)` | Buttons |
-| `--shadow-sm` | `0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10)` | Cards |
-| `--shadow` | Same as sm | Default |
-| `--shadow-md` | `0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10)` | Dropdowns |
-| `--shadow-lg` | `0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10)` | Modals |
-| `--shadow-xl` | `0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10)` | Floating elements |
-| `--shadow-2xl` | `0 1px 3px 0px hsl(0 0% 0% / 0.25)` | Maximum elevation |
-
-### Shadow Customization
+Soft, diffused shadows that feel like morning light, not harsh noon.
 
 ```css
---shadow-x: 0;
---shadow-y: 1px;
---shadow-blur: 3px;
---shadow-spread: 0px;
---shadow-opacity: 0.1;
---shadow-color: oklch(0 0 0);
+--shadow-2xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
+--shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
+--shadow-sm: 
+  0 1px 3px 0px oklch(0 0 0 / 0.10), 
+  0 1px 2px -1px oklch(0 0 0 / 0.10);
+--shadow: 
+  0 1px 3px 0px oklch(0 0 0 / 0.10), 
+  0 1px 2px -1px oklch(0 0 0 / 0.10);
+--shadow-md: 
+  0 1px 3px 0px oklch(0 0 0 / 0.10), 
+  0 2px 4px -1px oklch(0 0 0 / 0.10);
+--shadow-lg: 
+  0 1px 3px 0px oklch(0 0 0 / 0.10), 
+  0 4px 6px -1px oklch(0 0 0 / 0.10);
+--shadow-xl: 
+  0 1px 3px 0px oklch(0 0 0 / 0.10), 
+  0 8px 10px -1px oklch(0 0 0 / 0.10);
+--shadow-2xl: 0 1px 3px 0px oklch(0 0 0 / 0.25);
 ```
 
 ---
 
-## 6. Installation
+## 📋 Complete CSS Variables
 
-### Option 1: shadcn CLI (Recommended)
-
-```bash
-pnpm dlx shadcn@latest add https://tweakcn.com/r/themes/candyland.json
-```
-
-### Option 2: Manual Installation
-
-1. **Create globals.css** with the CSS variables below
-2. **Import fonts** in your HTML or CSS
-3. **Configure Tailwind** to use the CSS variables
-
----
-
-## 7. CSS Variables Reference
-
-### Complete Light Mode
+### Light Mode (`:root`)
 
 ```css
 :root {
-  /* ============================================
-     CORE COLORS
-     ============================================ */
+  /* ═══════════════════════════════════════════════════════════════
+     CANDYLAND LIGHT: "SUGAR RUSH"
+     ═══════════════════════════════════════════════════════════════ */
+  
+  /* Core */
   --background: oklch(0.9809 0.0025 228.7836);
   --foreground: oklch(0.3211 0 0);
   --card: oklch(1.0000 0 0);
   --card-foreground: oklch(0.3211 0 0);
   --popover: oklch(1.0000 0 0);
   --popover-foreground: oklch(0.3211 0 0);
+  
+  /* Primary: Coral Blush */
   --primary: oklch(0.8677 0.0735 7.0855);
   --primary-foreground: oklch(0 0 0);
+  
+  /* Secondary: Sky Petal */
   --secondary: oklch(0.8148 0.0819 225.7537);
   --secondary-foreground: oklch(0 0 0);
+  
+  /* Muted: Cream Butter */
   --muted: oklch(0.8828 0.0285 98.1033);
   --muted-foreground: oklch(0.5382 0 0);
+  
+  /* Accent: Lime Fizz */
   --accent: oklch(0.9680 0.2110 109.7692);
   --accent-foreground: oklch(0 0 0);
+  
+  /* Destructive */
   --destructive: oklch(0.6368 0.2078 25.3313);
   --destructive-foreground: oklch(1.0000 0 0);
+  
+  /* Borders */
   --border: oklch(0.8699 0 0);
   --input: oklch(0.8699 0 0);
   --ring: oklch(0.8677 0.0735 7.0855);
-
-  /* ============================================
-     CHART COLORS
-     ============================================ */
+  
+  /* Charts */
   --chart-1: oklch(0.8677 0.0735 7.0855);
   --chart-2: oklch(0.8148 0.0819 225.7537);
   --chart-3: oklch(0.9680 0.2110 109.7692);
   --chart-4: oklch(0.8027 0.1355 349.2347);
   --chart-5: oklch(0.7395 0.2268 142.8504);
-
-  /* ============================================
-     SIDEBAR COLORS
-     ============================================ */
+  
+  /* Sidebar */
   --sidebar: oklch(0.9809 0.0025 228.7836);
   --sidebar-foreground: oklch(0.3211 0 0);
   --sidebar-primary: oklch(0.8677 0.0735 7.0855);
@@ -313,30 +386,18 @@ pnpm dlx shadcn@latest add https://tweakcn.com/r/themes/candyland.json
   --sidebar-accent-foreground: oklch(0 0 0);
   --sidebar-border: oklch(0.8699 0 0);
   --sidebar-ring: oklch(0.8677 0.0735 7.0855);
-
-  /* ============================================
-     TYPOGRAPHY
-     ============================================ */
-  --font-sans: Poppins, sans-serif;
+  
+  /* Typography */
+  --font-sans: 'Poppins', sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: Roboto Mono, monospace;
-
-  /* ============================================
-     SPACING & RADIUS
-     ============================================ */
+  --font-mono: 'Roboto Mono', monospace;
+  
+  /* Spacing & Radius */
   --radius: 0.5rem;
   --spacing: 0.25rem;
   --tracking-normal: 0em;
-
-  /* ============================================
-     SHADOWS
-     ============================================ */
-  --shadow-x: 0;
-  --shadow-y: 1px;
-  --shadow-blur: 3px;
-  --shadow-spread: 0px;
-  --shadow-opacity: 0.1;
-  --shadow-color: oklch(0 0 0);
+  
+  /* Shadows */
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
@@ -348,45 +409,55 @@ pnpm dlx shadcn@latest add https://tweakcn.com/r/themes/candyland.json
 }
 ```
 
-### Complete Dark Mode
+### Dark Mode (`.dark`)
 
 ```css
 .dark {
-  /* ============================================
-     CORE COLORS
-     ============================================ */
+  /* ═══════════════════════════════════════════════════════════════
+     CANDYLAND DARK: "MIDNIGHT CONFETTI"
+     ═══════════════════════════════════════════════════════════════ */
+  
+  /* Core */
   --background: oklch(0.2303 0.0125 264.2926);
   --foreground: oklch(0.9219 0 0);
   --card: oklch(0.3210 0.0078 223.6661);
   --card-foreground: oklch(0.9219 0 0);
   --popover: oklch(0.3210 0.0078 223.6661);
   --popover-foreground: oklch(0.9219 0 0);
+  
+  /* Primary: Hot Pink */
   --primary: oklch(0.8027 0.1355 349.2347);
   --primary-foreground: oklch(0 0 0);
+  
+  /* Secondary: Emerald Glow */
   --secondary: oklch(0.7395 0.2268 142.8504);
   --secondary-foreground: oklch(0 0 0);
+  
+  /* Muted: Graphite Smoke */
   --muted: oklch(0.3867 0 0);
   --muted-foreground: oklch(0.7155 0 0);
+  
+  /* Accent: Azure Spark */
   --accent: oklch(0.8148 0.0819 225.7537);
   --accent-foreground: oklch(0 0 0);
+  
+  /* Destructive */
   --destructive: oklch(0.6368 0.2078 25.3313);
   --destructive-foreground: oklch(1.0000 0 0);
+  
+  /* Borders */
   --border: oklch(0.3867 0 0);
   --input: oklch(0.3867 0 0);
   --ring: oklch(0.8027 0.1355 349.2347);
-
-  /* ============================================
-     CHART COLORS
-     ============================================ */
+  
+  /* Charts */
   --chart-1: oklch(0.8027 0.1355 349.2347);
   --chart-2: oklch(0.7395 0.2268 142.8504);
   --chart-3: oklch(0.8148 0.0819 225.7537);
   --chart-4: oklch(0.9680 0.2110 109.7692);
   --chart-5: oklch(0.8652 0.1768 90.3816);
-
-  /* ============================================
-     SIDEBAR COLORS
-     ============================================ */
+  
+  /* Sidebar */
   --sidebar: oklch(0.2303 0.0125 264.2926);
   --sidebar-foreground: oklch(0.9219 0 0);
   --sidebar-primary: oklch(0.8027 0.1355 349.2347);
@@ -395,36 +466,6 @@ pnpm dlx shadcn@latest add https://tweakcn.com/r/themes/candyland.json
   --sidebar-accent-foreground: oklch(0 0 0);
   --sidebar-border: oklch(0.3867 0 0);
   --sidebar-ring: oklch(0.8027 0.1355 349.2347);
-
-  /* ============================================
-     TYPOGRAPHY (same as light)
-     ============================================ */
-  --font-sans: Poppins, sans-serif;
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: Roboto Mono, monospace;
-
-  /* ============================================
-     SPACING & RADIUS (same as light)
-     ============================================ */
-  --radius: 0.5rem;
-
-  /* ============================================
-     SHADOWS (same as light)
-     ============================================ */
-  --shadow-x: 0;
-  --shadow-y: 1px;
-  --shadow-blur: 3px;
-  --shadow-spread: 0px;
-  --shadow-opacity: 0.1;
-  --shadow-color: oklch(0 0 0);
-  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
-  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
-  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
 }
 ```
 
@@ -432,7 +473,6 @@ pnpm dlx shadcn@latest add https://tweakcn.com/r/themes/candyland.json
 
 ```css
 @theme inline {
-  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -466,18 +506,15 @@ pnpm dlx shadcn@latest add https://tweakcn.com/r/themes/candyland.json
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Typography */
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
 
-  /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Shadows */
   --shadow-2xs: var(--shadow-2xs);
   --shadow-xs: var(--shadow-xs);
   --shadow-sm: var(--shadow-sm);
@@ -491,38 +528,56 @@ pnpm dlx shadcn@latest add https://tweakcn.com/r/themes/candyland.json
 
 ---
 
-## 🎨 Usage Examples
+## 🚀 Installation
 
-### Button Primary
-
-```html
-<button class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-4 py-2 shadow-sm">
-  Primary Button
-</button>
-```
-
-### Card Component
-
-```html
-<div class="bg-card text-card-foreground rounded-lg border border-border shadow-md p-6">
-  <h2 class="font-sans font-semibold">Card Title</h2>
-  <p class="text-muted-foreground">Card content goes here</p>
-</div>
-```
-
-### Sidebar
-
-```html
-<aside class="bg-sidebar text-sidebar-foreground border-r border-sidebar-border w-64">
-  <nav class="p-4">
-    <a class="text-sidebar-primary hover:bg-sidebar-accent rounded-md px-3 py-2 block">
-      Active Item
-    </a>
-  </nav>
-</aside>
+```bash
+pnpm dlx shadcn@latest add https://tweakcn.com/r/themes/candyland.json
 ```
 
 ---
 
-*Brand Theme Document - Candyland*  
-*Last Updated: 2026-01-20*
+## 🎯 What Makes This Different
+
+| Generic Design System | Candyland |
+|----------------------|-----------|
+| Gray backgrounds | Lavender-tinted backgrounds |
+| Blue primary | Coral/Hot Pink primary |
+| Muted accents | Electric Lime/Azure accents |
+| Inter/Roboto fonts | Poppins (geometric, friendly) |
+| Corporate feel | Bakery-shop warmth |
+| Safe, predictable | Bold, memorable |
+
+**The Memory Test:**
+
+> "Close your eyes. Picture the app. What do you see?"
+> 
+> ❌ Generic: "Uh... gray? Blue buttons?"
+> 
+> ✅ Candyland: "Warm coral, that electric lime pop, the deep navy at night!"
+
+---
+
+## 📝 Summary
+
+**Candyland** is a design system that dares to be different:
+
+| Aspect | Decision | Why |
+|--------|----------|-----|
+| **Direction** | "Soft Maximalism" | Playful + Professional |
+| **Light Primary** | Coral Blush | Warmth over corporate blue |
+| **Dark Primary** | Hot Pink | Bold statement, not boring |
+| **Accent** | Lime Fizz / Azure | Electric pop that's memorable |
+| **Typography** | Poppins | Geometric, friendly, readable |
+| **Motion** | Bounce easing, staggered loads | Playful personality |
+| **Shadows** | Soft, diffused | Morning light, not harsh |
+
+**The Candyland Promise:**
+
+> "You'll know you're not in another gray markdown editor. You're somewhere warm, creative, and joyful — a place where writing feels good."
+
+---
+
+*Candyland Design System v1.0*  
+*Created: 2026-01-20*  
+*Aesthetic: Soft Maximalism*  
+*Compatible with: shadcn/ui, Tailwind CSS v4*
