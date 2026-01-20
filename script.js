@@ -1594,108 +1594,62 @@ graph TD
 
   // Editor scroll handler with smooth sync
   editor.addEventListener('scroll', () => {
-    if (!syncScrollEnabled) {
-      console.log('⏭️ [EDITOR SCROLL] Skipped - sync disabled');
-      return;
-    }
-    if (syncScrolling) {
-      console.log('🔒 [EDITOR SCROLL] Skipped - already syncing');
+    if (!syncScrollEnabled || syncScrolling) {
       return;
     }
 
-    console.log('📜 [EDITOR SCROLL] Processing...');
     syncScrolling = true;
 
     requestAnimationFrame(() => {
       const editorHeight = editor.scrollHeight - editor.clientHeight;
       const previewHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
 
-      console.log(
-        '📊 [EDITOR→PREVIEW] editor height:',
-        editorHeight,
-        'preview height:',
-        previewHeight
-      );
-      console.log('📊 [EDITOR→PREVIEW] editor scrollTop:', editor.scrollTop);
-
       // Handle edge cases for perfect alignment
       if (editor.scrollTop <= 0) {
         // At top
         previewContainer.scrollTop = 0;
-        console.log('⬆️ [EDITOR→PREVIEW] At TOP');
       } else if (editor.scrollTop >= editorHeight) {
         // At bottom
         previewContainer.scrollTop = previewHeight;
-        console.log('⬇️ [EDITOR→PREVIEW] At BOTTOM');
       } else {
         // Middle - proportional scroll
         const scrollPercent = editor.scrollTop / editorHeight;
         previewContainer.scrollTop = scrollPercent * previewHeight;
-        console.log(
-          '🎯 [EDITOR→PREVIEW] Middle scroll - percent:',
-          (scrollPercent * 100).toFixed(1) + '%',
-          'preview scrollTop:',
-          previewContainer.scrollTop.toFixed(0)
-        );
       }
 
       setTimeout(() => {
         syncScrolling = false;
-        console.log('🔓 [EDITOR SCROLL] Lock released');
       }, 10); // Reduced from 50ms for more responsive feel
     });
   });
 
   // Preview container scroll handler with smooth sync
   previewContainer.addEventListener('scroll', () => {
-    if (!syncScrollEnabled) {
-      console.log('⏭️ [PREVIEW SCROLL] Skipped - sync disabled');
-      return;
-    }
-    if (syncScrolling) {
-      console.log('🔒 [PREVIEW SCROLL] Skipped - already syncing');
+    if (!syncScrollEnabled || syncScrolling) {
       return;
     }
 
-    console.log('📜 [PREVIEW SCROLL] Processing...');
     syncScrolling = true;
 
     requestAnimationFrame(() => {
       const editorHeight = editor.scrollHeight - editor.clientHeight;
       const previewHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
 
-      console.log(
-        '📊 [PREVIEW→EDITOR] editor height:',
-        editorHeight,
-        'preview height:',
-        previewHeight
-      );
-      console.log('📊 [PREVIEW→EDITOR] preview scrollTop:', previewContainer.scrollTop);
-
       // Handle edge cases for perfect alignment
       if (previewContainer.scrollTop <= 0) {
         // At top
         editor.scrollTop = 0;
-        console.log('⬆️ [PREVIEW→EDITOR] At TOP');
       } else if (previewContainer.scrollTop >= previewHeight) {
         // At bottom
         editor.scrollTop = editorHeight;
-        console.log('⬇️ [PREVIEW→EDITOR] At BOTTOM');
       } else {
         // Middle - proportional scroll
         const scrollPercent = previewContainer.scrollTop / previewHeight;
         editor.scrollTop = scrollPercent * editorHeight;
-        console.log(
-          '🎯 [PREVIEW→EDITOR] Middle scroll - percent:',
-          (scrollPercent * 100).toFixed(1) + '%',
-          'editor scrollTop:',
-          editor.scrollTop.toFixed(0)
-        );
       }
 
       setTimeout(() => {
         syncScrolling = false;
-        console.log('🔓 [PREVIEW SCROLL] Lock released');
       }, 10); // Reduced from 50ms for more responsive feel
     });
   });
