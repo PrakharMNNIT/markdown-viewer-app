@@ -1000,8 +1000,7 @@ graph TD
   const previewOnlyBtn = document.getElementById('preview-only-btn');
   const syncScrollBtn = document.getElementById('sync-scroll-btn');
   const editorContainer = document.querySelector('.editor-container');
-  const previewContainer = document.querySelector('.preview-container'); // FIXED: Back to wrapper for layout
-  const previewContent = document.getElementById('markdown-preview'); // New: For scrolling/content
+  const previewContainer = document.getElementById('markdown-preview'); // FIXED: Use actual scrollable element
 
   // Sync scroll state (unused placeholders for future features)
   const _isSyncScrollEnabled = false;
@@ -1609,7 +1608,7 @@ graph TD
 
     requestAnimationFrame(() => {
       const editorHeight = editor.scrollHeight - editor.clientHeight;
-      const previewHeight = previewContent.scrollHeight - previewContent.clientHeight;
+      const previewHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
 
       console.log(
         '📊 [EDITOR→PREVIEW] editor height:',
@@ -1622,21 +1621,21 @@ graph TD
       // Handle edge cases for perfect alignment
       if (editor.scrollTop <= 0) {
         // At top
-        previewContent.scrollTop = 0;
+        previewContainer.scrollTop = 0;
         console.log('⬆️ [EDITOR→PREVIEW] At TOP');
       } else if (editor.scrollTop >= editorHeight) {
         // At bottom
-        previewContent.scrollTop = previewHeight;
+        previewContainer.scrollTop = previewHeight;
         console.log('⬇️ [EDITOR→PREVIEW] At BOTTOM');
       } else {
         // Middle - proportional scroll
         const scrollPercent = editor.scrollTop / editorHeight;
-        previewContent.scrollTop = scrollPercent * previewHeight;
+        previewContainer.scrollTop = scrollPercent * previewHeight;
         console.log(
           '🎯 [EDITOR→PREVIEW] Middle scroll - percent:',
           (scrollPercent * 100).toFixed(1) + '%',
           'preview scrollTop:',
-          previewContent.scrollTop.toFixed(0)
+          previewContainer.scrollTop.toFixed(0)
         );
       }
 
@@ -1648,7 +1647,7 @@ graph TD
   });
 
   // Preview container scroll handler with smooth sync
-  previewContent.addEventListener('scroll', () => {
+  previewContainer.addEventListener('scroll', () => {
     if (!syncScrollEnabled) {
       console.log('⏭️ [PREVIEW SCROLL] Skipped - sync disabled');
       return;
@@ -1663,7 +1662,7 @@ graph TD
 
     requestAnimationFrame(() => {
       const editorHeight = editor.scrollHeight - editor.clientHeight;
-      const previewHeight = previewContent.scrollHeight - previewContent.clientHeight;
+      const previewHeight = previewContainer.scrollHeight - previewContainer.clientHeight;
 
       console.log(
         '📊 [PREVIEW→EDITOR] editor height:',
@@ -1671,20 +1670,20 @@ graph TD
         'preview height:',
         previewHeight
       );
-      console.log('📊 [PREVIEW→EDITOR] preview scrollTop:', previewContent.scrollTop);
+      console.log('📊 [PREVIEW→EDITOR] preview scrollTop:', previewContainer.scrollTop);
 
       // Handle edge cases for perfect alignment
-      if (previewContent.scrollTop <= 0) {
+      if (previewContainer.scrollTop <= 0) {
         // At top
         editor.scrollTop = 0;
         console.log('⬆️ [PREVIEW→EDITOR] At TOP');
-      } else if (previewContent.scrollTop >= previewHeight) {
+      } else if (previewContainer.scrollTop >= previewHeight) {
         // At bottom
         editor.scrollTop = editorHeight;
         console.log('⬇️ [PREVIEW→EDITOR] At BOTTOM');
       } else {
         // Middle - proportional scroll
-        const scrollPercent = previewContent.scrollTop / previewHeight;
+        const scrollPercent = previewContainer.scrollTop / previewHeight;
         editor.scrollTop = scrollPercent * editorHeight;
         console.log(
           '🎯 [PREVIEW→EDITOR] Middle scroll - percent:',
