@@ -1,143 +1,83 @@
-/* Nebula Light - Futuristic & Spacey */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+/* ==================== NEBULA LIGHT THEME ==================== */
+/* Maps Core Nebula Tokens to App Variables */
+
+[data-theme="nebula-light"] {
+    /* Use Nebula Light tokens by default in this scope if needed,
+       but here we map generic vars to those tokens */
+}
 
 :root {
-    /* Semantic Color System - Cosmic OKLCH */
-    --background: oklch(0.9804 0 0);
-    --foreground: oklch(0.2549 0.0186 278.6019);
-    --card: oklch(0.9608 0 0);
-    --card-foreground: oklch(0.2549 0.0186 278.6019);
-    --popover: oklch(0.9804 0 0);
-    --popover-foreground: oklch(0.2549 0.0186 278.6019);
-    --primary: oklch(0.5216 0.2341 285.5809);
-    --primary-foreground: oklch(1 0 0);
-    --secondary: oklch(0.6275 0.1745 230.2686);
-    --secondary-foreground: oklch(1 0 0);
-    --muted: oklch(0.9412 0 0);
-    --muted-foreground: oklch(0.5137 0.0093 278.6019);
-    --accent: oklch(0.5882 0.1983 196.8432);
-    --accent-foreground: oklch(1 0 0);
-    --destructive: oklch(0.6196 0.2157 24.4238);
-    --destructive-foreground: oklch(1 0 0);
-    --border: oklch(0.8824 0 0);
-    --input: oklch(0.8824 0 0);
-    --ring: oklch(0.5216 0.2341 285.5809);
+  /* ==================== BASE COLORS ==================== */
+  --bg-primary: var(--bg-universe);
+  --bg-secondary: var(--bg-glass-heavy);
+  --bg-tertiary: var(--bg-element);
 
-    /* Chart Colors - Cosmic Spectrum */
-    --chart-1: oklch(0.5216 0.2341 285.5809);
-    --chart-2: oklch(0.6275 0.1745 230.2686);
-    --chart-3: oklch(0.5882 0.1983 196.8432);
-    --chart-4: oklch(0.6196 0.2157 24.4238);
-    --chart-5: oklch(0.5961 0.1654 151.0178);
+  --text-primary: var(--text-star);
+  --text-secondary: var(--text-stardust);
 
-    /* Sidebar Colors */
-    --sidebar: oklch(0.9608 0 0);
-    --sidebar-foreground: oklch(0.2549 0.0186 278.6019);
-    --sidebar-primary: oklch(0.5216 0.2341 285.5809);
-    --sidebar-primary-foreground: oklch(1 0 0);
-    --sidebar-accent: oklch(0.5882 0.1983 196.8432);
-    --sidebar-accent-foreground: oklch(1 0 0);
-    --sidebar-border: oklch(0.8824 0 0);
-    --sidebar-ring: oklch(0.5216 0.2341 285.5809);
+  --border-color: var(--border-glass);
 
-    /* Typography - Futuristic & Technical */
-    --font-sans: 'Orbitron', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-    --font-mono: 'Fira Code', 'SF Mono', Monaco, Consolas, monospace;
-    --font-family-base: var(--font-sans);
-    --font-family-code: var(--font-mono);
+  /* ==================== ACCENTS & LINKS ==================== */
+  --link-color: var(--accent-cyan);
+  --link-hover: var(--accent-violet);
 
-    /* Border Radius - Sci-Fi */
-    --radius: 10px;
-    --radius-sm: 5px;
-    --radius-md: 8px;
-    --radius-lg: 10px;
-    --radius-xl: 14px;
+  /* ==================== CODE & SYNTAX ==================== */
+  --code-bg: rgba(255, 255, 255, 0.4);
+  --code-text: var(--text-star);
+  --code-block-bg: rgba(255, 255, 255, 0.5);
+  --code-border: var(--border-glass);
 
-    /* Shadow System - Cosmic Glow */
-    --shadow-color: hsl(285 80% 30%);
-    --shadow-2xs: 0px 1px 2px 0px hsl(285 80% 30% / 0.08);
-    --shadow-xs: 0px 1px 3px 0px hsl(285 80% 30% / 0.12);
-    --shadow-sm: 0px 2px 4px 0px hsl(285 80% 30% / 0.15), 0px 1px 2px -1px hsl(285 80% 30% / 0.12);
-    --shadow: 0px 2px 6px 0px hsl(285 80% 30% / 0.18), 0px 1px 2px -1px hsl(285 80% 30% / 0.12);
-    --shadow-md: 0px 4px 8px 0px hsl(285 80% 30% / 0.2), 0px 2px 4px -1px hsl(285 80% 30% / 0.15);
-    --shadow-lg: 0px 8px 16px 0px hsl(285 80% 30% / 0.25), 0px 4px 6px -1px hsl(285 80% 30% / 0.15);
-    --shadow-xl: 0px 12px 24px 0px hsl(285 80% 30% / 0.3), 0px 8px 10px -1px hsl(285 80% 30% / 0.15);
-    --shadow-2xl: 0px 16px 48px 0px hsl(285 80% 30% / 0.4);
+  --blockquote-border: var(--accent-cyan);
+  --blockquote-bg: rgba(0, 188, 212, 0.05); /* Cyan tint */
 
-    /* Spacing & Tracking */
-    --spacing: 0.25rem;
-    --tracking-normal: 0.02em;
+  --table-header-bg: rgba(0, 0, 0, 0.02);
+  --table-border: var(--border-glass);
 
-    /* Legacy Markdown Viewer Mappings */
-    --bg-primary: var(--background);
-    --bg-secondary: var(--card);
-    --bg-tertiary: var(--muted);
-    --text-primary: var(--foreground);
-    --text-secondary: var(--muted-foreground);
-    --border-color: var(--border);
+  /* ==================== TYPOGRAPHY DEFAULTS ==================== */
+  --h1-color: var(--accent-cyan);
+  --h2-color: var(--text-star);
+  --h3-color: var(--text-star);
 
-    /* Heading Colors - Cosmic Spectrum */
-    --h1-color: #6b21a8;
-    --h2-color: #3b82f6;
-    --h3-color: #06b6d4;
-    --h4-color: #8b5cf6;
-    --h5-color: #6b21a8;
-    --h6-color: #3b82f6;
+  --bold-color: var(--accent-violet);
+  --italic-color: var(--accent-cyan);
 
-    /* Interactive */
-    --link-color: var(--primary);
-    --link-hover: #7c3aed;
-    --bold-color: #6b21a8;
-    --italic-color: var(--accent);
+  /* ==================== SYNTAX TOKENS (Light Mode Adjusted) ==================== */
+  --syntax-comment: #a0aec0;
+  --syntax-punctuation: #718096;
+  --syntax-number: #d53f8c;       /* Pink/Purple */
+  --syntax-keyword: #00b5d8;      /* Cyan */
+  --syntax-class-name: #3182ce;   /* Blue */
+  --syntax-property: #d53f8c;
+  --syntax-string: #38a169;       /* Green */
+  --syntax-function: #3182ce;
+  --syntax-variable: #718096;
+  --syntax-operator: #d53f8c;
+}
 
-    /* Code */
-    --code-text: #6b21a8;
-    --code-bg: rgba(139, 92, 246, 0.12);
-    --code-block-bg: var(--card);
-    --code-border: var(--border);
+/* Specific overrides for Nebula feel */
+body {
+    /* Light Mode Gradients */
+    background-image:
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 188, 212, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(156, 39, 176, 0.03) 0%, transparent 50%);
+    background-attachment: fixed;
+    /* Force Light Mode tokens when this file is loaded, assuming JS adds data-theme attribute,
+       BUT simpler: The variables.css handles [data-theme="nebula-light"].
+       However, the theme loader (Service) just injecting this CSS file.
+       If variables.css depends on [data-theme] attribute on HTML,
+       we must ensure JS sets it.
+       OR we can just hardcode the Light Tokens here since this IS the light theme file. */
 
-    /* Syntax Highlighting - Nebula Colors */
-    --syntax-keyword: #6b21a8;
-    --syntax-string: #06b6d4;
-    --syntax-number: #3b82f6;
-    --syntax-function: #8b5cf6;
-    --syntax-comment: #94a3b8;
-    --syntax-operator: #6b21a8;
-    --syntax-punctuation: #64748b;
-    --syntax-variable: #0891b2;
-    --syntax-builtin: #3b82f6;
-    --syntax-class-name: #8b5cf6;
-    --syntax-property: #3b82f6;
-
-    /* UI Elements */
-    --blockquote-border: var(--primary);
-    --blockquote-bg: var(--muted);
-    --table-header-bg: var(--card);
-    --table-border: var(--border);
-
-    /* Mermaid - Hex colors for compatibility */
-    --mermaid-background: #fafafa;
-    --mermaid-text-color: #3d2f52;
-    --mermaid-line-color: #6b21a8;
-    --mermaid-main-bkg: #f5f5f5;
-    --mermaid-primary-color: #f5f5f5;
-    --mermaid-primary-text-color: #3d2f52;
-    --mermaid-primary-border-color: #6b21a8;
-    --mermaid-secondary-color: #fafafa;
-    --mermaid-secondary-text-color: #3d2f52;
-    --mermaid-secondary-border-color: #3b82f6;
-    --mermaid-tertiary-color: #f0f0f0;
-    --mermaid-tertiary-text-color: #3d2f52;
-    --mermaid-tertiary-border-color: #06b6d4;
-
-    /* Hex aliases for Mermaid fallbacks */
-    --bg-primary-hex: #fafafa;
-    --bg-secondary-hex: #f5f5f5;
-    --bg-tertiary-hex: #f0f0f0;
-    --text-primary-hex: #3d2f52;
-    --text-secondary-hex: #7c7485;
-    --h1-color-hex: #6b21a8;
-    --h2-color-hex: #3b82f6;
-    --h3-color-hex: #06b6d4;
+    /* HARDCODED TOKENS (Safety net if data-theme attr isn't set) */
+    --bg-universe: #f0f4f8;
+    --bg-element: #ffffff;
+    --bg-glass: rgba(255, 255, 255, 0.65);
+    --bg-glass-heavy: rgba(255, 255, 255, 0.85);
+    --border-glass: rgba(0, 0, 0, 0.06);
+    --text-star: #1a202c;
+    --text-stardust: #4a5568;
+    --accent-cyan: #00bcd4;
+    --accent-violet: #9c27b0;
 }
