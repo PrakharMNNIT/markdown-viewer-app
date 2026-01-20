@@ -322,7 +322,6 @@ const storageManager = new StorageManager();
 const themeManager = new ThemeManager(storageManager);
 const mermaidService = new MermaidService();
 const prismService = new PrismService();
-const copyButtonService = new CodeBlockCopyService();
 const pdfService = new PDFService();
 const htmlService = new HTMLService();
 const folderBrowserService = new FolderBrowserService(storageManager);
@@ -1147,9 +1146,6 @@ graph TD
 
       // Apply Prism syntax highlighting using PrismService
       prismService.highlightAll(preview);
-
-      // Add modern glassmorphism copy buttons to all code blocks
-      copyButtonService.addCopyButtons(preview);
 
       // NOTE: KaTeX auto-render is DISABLED
       // We handle all math via marked.js extensions ($...$ and $$...$$)
