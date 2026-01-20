@@ -1,143 +1,71 @@
 /* ============================================
-   CODE COPY BUTTONS - Theme-Aware Neon Design
-   Dynamically adapts to theme accent colors
+   CODE COPY BUTTONS - Glassmorphism Design
    ============================================ */
 
 .code-copy-btn {
   position: absolute;
   top: 12px;
   right: 12px;
-  padding: 10px 16px;
-
-  /* Dark gradient background with theme-aware subtle tint */
-  background: linear-gradient(135deg,
-      color-mix(in srgb, var(--bg-secondary) 95%, var(--h1-color) 5%),
-      color-mix(in srgb, var(--bg-tertiary) 90%, var(--h1-color) 10%));
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-
-  /* Animated border using theme accent */
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  position: relative;
-  border-radius: 10px;
-
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
   cursor: pointer;
   opacity: 0;
-  transform: translateY(-8px) scale(0.9);
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
+  transform: translateY(-4px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   align-items: center;
-  gap: 8px;
-
-  /* Theme-aware text color and glow */
-  color: var(--link-color, #00f0ff);
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 13px;
-  font-weight: 600;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  text-shadow: 0 0 10px color-mix(in srgb, var(--link-color) 50%, transparent);
-
+  font-weight: 500;
   z-index: 10;
   box-shadow:
-    0 8px 32px color-mix(in srgb, var(--h1-color) 15%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--h1-color) 10%, transparent) inset,
-    0 0 20px color-mix(in srgb, var(--h1-color) 5%, transparent);
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Animated neon border using theme colors */
-.code-copy-btn::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(45deg,
-      var(--h1-color),
-      var(--h2-color),
-      var(--link-color),
-      var(--h1-color));
-  border-radius: 10px;
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.3s ease;
-  animation: border-rotate 3s linear infinite;
-  background-size: 300% 300%;
-}
-
-@keyframes border-rotate {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Show on hover with dramatic entrance */
+/* Show on hover */
 pre:hover .code-copy-btn {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
-/* Hover state - activate theme-colored neon border */
+/* Hover state */
 .code-copy-btn:hover {
-  background: linear-gradient(135deg,
-      color-mix(in srgb, var(--bg-secondary) 98%, var(--h1-color) 10%),
-      color-mix(in srgb, var(--bg-tertiary) 95%, var(--h1-color) 15%));
-  transform: translateY(-2px) scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
   box-shadow:
-    0 12px 40px color-mix(in srgb, var(--h1-color) 30%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--h1-color) 20%, transparent) inset,
-    0 0 30px color-mix(in srgb, var(--link-color) 15%, transparent),
-    0 0 60px color-mix(in srgb, var(--h2-color) 10%, transparent);
-  text-shadow: 0 0 15px color-mix(in srgb, var(--link-color) 80%, transparent);
+    0 6px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.code-copy-btn:hover::before {
-  opacity: 1;
-}
-
-/* Active/press state - compression effect */
+/* Active/press state */
 .code-copy-btn:active {
-  transform: translateY(0) scale(0.97);
-  transition: all 0.1s ease;
+  transform: translateY(0) scale(0.95);
 }
 
-/* Icon states with theme-colored glow */
+/* Icon states */
 .code-copy-btn .copy-icon {
   display: block;
-  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--link-color) 60%, transparent));
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.2s ease;
 }
 
 .code-copy-btn .check-icon {
   display: none;
-  color: var(--bold-color, #00ff7f);
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--bold-color) 80%, transparent));
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  color: #10b981;
+  transition: all 0.2s ease;
 }
 
-/* Copied state - success with theme-aware success color */
+/* Copied state */
 .code-copy-btn.copied {
-  background: linear-gradient(135deg,
-      color-mix(in srgb, var(--bg-secondary) 95%, var(--bold-color) 10%),
-      color-mix(in srgb, var(--bg-tertiary) 90%, var(--bold-color) 15%));
-  border-color: var(--bold-color, #00ff7f);
-  color: var(--bold-color, #00ff7f);
-  text-shadow: 0 0 15px color-mix(in srgb, var(--bold-color) 80%, transparent);
-  animation: rgb-shift 0.6s ease-out;
-}
-
-.code-copy-btn.copied::before {
-  background: linear-gradient(45deg, var(--bold-color), var(--link-color), var(--bold-color));
-  opacity: 1;
-  animation: pulse-glow 1s ease-in-out;
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #10b981;
 }
 
 .code-copy-btn.copied .copy-icon {
@@ -146,129 +74,69 @@ pre:hover .code-copy-btn {
 
 .code-copy-btn.copied .check-icon {
   display: block;
-  animation: checkmark-pop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: checkmark-pop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Error state - theme-aware error color */
+/* Error state */
 .code-copy-btn.error {
-  background: linear-gradient(135deg,
-      color-mix(in srgb, var(--bg-secondary) 95%, #ff006e 10%),
-      color-mix(in srgb, var(--bg-tertiary) 90%, #ff006e 15%));
-  border-color: #ff006e;
-  animation: glitch 0.5s ease;
-  color: #ff006e;
-  text-shadow:
-    2px 0 #ff006e,
-    -2px 0 var(--link-color);
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  animation: shake 0.4s ease;
 }
 
-/* RGB Shift Animation */
-@keyframes rgb-shift {
-
-  0%,
-  100% {
-    filter: none;
-  }
-
-  25% {
-    filter: hue-rotate(30deg);
-  }
-
-  50% {
-    filter: hue-rotate(60deg);
-  }
-
-  75% {
-    filter: hue-rotate(30deg);
-  }
-}
-
-/* Pulse Glow Animation */
-@keyframes pulse-glow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px color-mix(in srgb, var(--bold-color) 40%, transparent);
-  }
-
-  50% {
-    box-shadow: 0 0 40px color-mix(in srgb, var(--bold-color) 80%, transparent);
-  }
-}
-
-/* Checkmark Pop with Bounce */
+/* Checkmark pop animation */
 @keyframes checkmark-pop {
   0% {
-    transform: scale(0) rotate(-180deg);
+    transform: scale(0);
     opacity: 0;
   }
 
   50% {
-    transform: scale(1.3) rotate(10deg);
+    transform: scale(1.2);
   }
 
   100% {
-    transform: scale(1) rotate(0deg);
+    transform: scale(1);
     opacity: 1;
   }
 }
 
-/* Glitch Animation */
-@keyframes glitch {
+/* Shake animation for errors */
+@keyframes shake {
 
   0%,
   100% {
-    transform: translate(0);
-    filter: none;
+    transform: translateX(0);
   }
 
-  20% {
-    transform: translate(-3px, 2px);
+  25% {
+    transform: translateX(-4px);
   }
 
-  40% {
-    transform: translate(3px, -2px);
-  }
-
-  60% {
-    transform: translate(-2px, -3px);
-  }
-
-  80% {
-    transform: translate(2px, 3px);
+  75% {
+    transform: translateX(4px);
   }
 }
 
-/* Icon SVG styling with glow */
+/* Icon SVG styling */
 .code-copy-btn svg {
   flex-shrink: 0;
-  width: 18px;
-  height: 18px;
 }
 
 /* Focus visible for accessibility */
 .code-copy-btn:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--link-color) 60%, transparent);
-  outline-offset: 4px;
-  box-shadow:
-    0 0 0 4px color-mix(in srgb, var(--link-color) 20%, transparent),
-    0 12px 40px color-mix(in srgb, var(--h1-color) 30%, transparent);
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
 }
 
-/* Particle effect on hover using theme color */
-.code-copy-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%,
-      color-mix(in srgb, var(--link-color) 15%, transparent) 0%,
-      transparent 50%);
-  border-radius: 10px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+/* Light theme adjustments */
+body[data-theme='light'] .code-copy-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.7);
 }
 
-.code-copy-btn:hover::after {
-  opacity: 1;
+body[data-theme='light'] .code-copy-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.15);
 }
