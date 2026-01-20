@@ -1000,7 +1000,7 @@ graph TD
   const previewOnlyBtn = document.getElementById('preview-only-btn');
   const syncScrollBtn = document.getElementById('sync-scroll-btn');
   const editorContainer = document.querySelector('.editor-container');
-  const previewContainer = document.getElementById('markdown-preview'); // FIXED: Use actual scrollable element
+  const previewContainer = document.querySelector('.preview-container');
 
   // Sync scroll state (unused placeholders for future features)
   const _isSyncScrollEnabled = false;
