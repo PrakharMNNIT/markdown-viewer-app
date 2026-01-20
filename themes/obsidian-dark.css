@@ -1,6 +1,6 @@
 /*
- * OBSIDIAN DARK THEME (Vibrant Edition)
- * Aesthetic: Deep Space, Amethyst, Holographic, High Tech
+ * OBSIDIAN DARK THEME (Enterprise Edition)
+ * Aesthetic: Volcanic Glass, Refined, Minimal, Stark
  * Fonts: DM Sans (Headers), Inter (Body), IBM Plex Mono (Mono)
  */
 
@@ -8,88 +8,82 @@
 
 :root {
   /* ==================== CORE PALETTE (OKLCH) ==================== */
-  /* Deep Space: Cosmic Black/Purple with Neon Violet Accents */
+  /* Monochromatic Scale */
 
   /* Layout Colors */
-  --bg-primary: oklch(15% 0.02 280);
-  /* Deep Cosmic Gray/Purple */
-  --bg-secondary: oklch(20% 0.04 275);
-  /* Dark Violet Charcoal */
-  --bg-tertiary: oklch(25% 0.06 270);
-  /* Lighter Space Rock */
+  --bg-primary: oklch(12% 0 0);
+  /* Deep Graphite */
+  --bg-secondary: oklch(16% 0 0);
+  /* Dark Gray */
+  --bg-tertiary: oklch(20% 0 0);
+  /* Lighter Gray */
 
   /* Text Colors */
-  --text-primary: oklch(90% 0.02 280);
-  /* Star White */
-  --text-secondary: oklch(75% 0.05 275);
-  /* Stardust Gray */
-  --text-tertiary: oklch(60% 0.08 280);
-  /* Nebula Gray */
+  --text-primary: oklch(95% 0 0);
+  /* White */
+  --text-secondary: oklch(70% 0 0);
+  /* Light Gray */
+  --text-tertiary: oklch(50% 0 0);
+  /* Medium Gray */
 
   /* Borders */
-  --border-color: oklch(35% 0.1 280);
-  /* Violet Border */
-  --border-hover: oklch(50% 0.15 290);
-  /* Bright Violet Border */
+  --border-color: oklch(25% 0 0);
+  --border-hover: oklch(35% 0 0);
 
   /* Accents */
-  --accent-primary: oklch(65% 0.25 290);
-  /* Neon Amethyst */
-  --accent-secondary: oklch(70% 0.2 260);
-  /* Electric Blue */
+  --accent-primary: oklch(100% 0 0);
+  /* Pure White */
+  --accent-secondary: oklch(80% 0 0);
+  /* Lightest Gray */
 
-  --link-color: oklch(75% 0.15 280);
-  /* Light Lavender */
-  --link-hover: oklch(85% 0.2 290);
-  /* Bright Magenta */
+  --link-color: oklch(90% 0 0);
+  --link-hover: oklch(100% 0 0);
 
-  /* Typography - RETAINED ENTERPRISE FONTS */
+  /* Typography */
   --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-family-headings: 'DM Sans', sans-serif;
   --font-family-mono: 'IBM Plex Mono', monospace;
 
-  /* ==================== SYNTAX HIGHLIGHTING (Neon Space) ==================== */
-  --code-bg: oklch(12% 0.02 280);
-  /* Black Hole */
+  /* ==================== SYNTAX HIGHLIGHTING (Minimalist Dark) ==================== */
+  --code-bg: oklch(14% 0 0);
   --code-text: var(--text-primary);
   --code-border: var(--border-color);
 
-  /* Tokens - Electric */
-  --syntax-comment: oklch(60% 0.1 280);
-  /* Muted Violet */
-  --syntax-keyword: oklch(70% 0.2 300);
-  /* Neon Pink */
-  --syntax-string: oklch(75% 0.15 140);
-  /* Cyber Green */
-  --syntax-function: oklch(75% 0.2 240);
-  /* Laser Blue */
-  --syntax-variable: oklch(80% 0.15 30);
-  /* Solar Orange */
-  --syntax-number: oklch(80% 0.2 60);
-  /* Gold */
-  --syntax-class-name: oklch(75% 0.2 280);
-  /* Bright Violet */
-  --syntax-operator: oklch(85% 0.2 320);
-  /* Magenta */
+  /* Tokens - Monochromatic / Subtle */
+  --syntax-comment: oklch(50% 0 0);
+  --syntax-keyword: oklch(95% 0.05 200);
+  /* Subtle Tint */
+  --syntax-string: oklch(85% 0 0);
+  /* Off White */
+  --syntax-function: oklch(90% 0 0);
+  /* White */
+  --syntax-variable: oklch(75% 0 0);
+  /* Light Gray */
+  --syntax-number: oklch(80% 0 0);
+  /* Light Gray */
+  --syntax-class-name: oklch(95% 0 0);
+  /* White */
+  --syntax-operator: oklch(60% 0 0);
+  /* Medium Gray */
 
   /* ==================== COMPONENT STYLES ==================== */
-  --border-radius-sm: 4px;
-  --border-radius-md: 8px;
-  --border-radius-lg: 12px;
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 6px;
 
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
 
   /* Scrollbar */
-  --scrollbar-track: var(--bg-secondary);
-  --scrollbar-thumb: oklch(50% 0.1 280);
-  --scrollbar-thumb-hover: var(--accent-primary);
+  --scrollbar-track: var(--bg-primary);
+  --scrollbar-thumb: oklch(30% 0 0);
+  --scrollbar-thumb-hover: oklch(40% 0 0);
 
   /* Helper colors for hex-only libs (Mermaid) */
-  --hex-bg-primary: #1a1625;
-  --hex-text-primary: #e6e6f0;
-  --hex-accent-primary: #a64dff;
+  --hex-bg-primary: #18181b;
+  --hex-text-primary: #fafafa;
+  --hex-accent-primary: #e4e4e7;
 }
 
 /* ==================== GLOBAL TYPOGRAPHY ==================== */
@@ -108,30 +102,29 @@ h5,
 h6 {
   font-family: var(--font-family-headings);
   color: var(--text-primary);
-  font-weight: 700;
+  font-weight: 500;
   margin-top: 1.5em;
   margin-bottom: 0.8em;
-  text-shadow: 0 0 10px rgba(166, 77, 255, 0.2);
+  letter-spacing: -0.02em;
 }
 
 h1 {
   font-size: 2.5rem;
   padding-bottom: 0.3em;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid var(--accent-primary);
-  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
 }
 
 h2 {
   font-size: 1.75rem;
-  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 h3 {
   font-size: 1.3rem;
-  color: var(--text-tertiary);
+  font-weight: 500;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.9em;
@@ -142,51 +135,45 @@ a {
   color: var(--link-color);
   text-decoration: none;
   border-bottom: 1px solid var(--border-color);
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
 a:hover {
   border-bottom-color: var(--link-hover);
-  color: var(--link-hover);
-  text-shadow: 0 0 8px var(--link-hover);
 }
 
 /* ==================== UI COMPONENTS ==================== */
 /* Blockquotes */
 blockquote {
-  border-left: 3px solid var(--accent-secondary);
-  background: linear-gradient(90deg, var(--bg-secondary), transparent);
-  padding: 1rem 1.5rem;
+  border-left: 2px solid var(--text-primary);
+  background: transparent;
+  padding: 0 1.5rem;
   margin: 2rem 0;
   color: var(--text-secondary);
   font-style: italic;
   font-family: var(--font-family-headings);
+  font-size: 1.25em;
+  font-weight: 300;
 }
 
 /* Tables */
 table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
   margin: 2rem 0;
   font-size: 0.95em;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 th {
-  background-color: var(--bg-secondary);
+  background-color: transparent;
   font-family: var(--font-family-headings);
-  font-weight: 600;
-  border-bottom: 2px solid var(--border-color);
+  font-weight: 500;
+  border-bottom: 2px solid var(--text-primary);
   padding: 0.75rem 0.5rem;
   text-align: left;
   text-transform: uppercase;
   font-size: 0.85em;
   letter-spacing: 0.05em;
-  color: var(--accent-secondary);
 }
 
 td {
@@ -195,30 +182,29 @@ td {
 }
 
 tr:hover td {
-  background-color: var(--bg-tertiary);
+  background-color: var(--bg-secondary);
 }
 
 /* Inline Code */
 :not(pre)>code {
   font-family: var(--font-family-mono);
   background-color: var(--bg-secondary);
-  color: var(--accent-primary);
+  color: var(--text-primary);
   padding: 0.1em 0.3em;
-  border-radius: 4px;
+  border-radius: 2px;
   font-size: 0.85em;
-  border: 1px solid var(--border-color);
 }
 
 /* Code Blocks */
 pre {
-  background-color: var(--code-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
+  background-color: var(--bg-secondary);
+  border: none;
+  border-radius: 0;
   padding: 1.5rem;
   overflow-x: auto;
   margin: 2rem 0;
   position: relative;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
 }
 
 pre code {
@@ -232,13 +218,13 @@ pre code {
   position: absolute;
   top: 0;
   right: 0;
-  background: var(--bg-tertiary);
+  background: var(--text-primary);
   border: none;
-  border-radius: 0 var(--border-radius-md) 0 4px;
+  border-radius: 0 0 0 2px;
   padding: 0.4rem 0.8rem;
-  color: var(--text-secondary);
+  color: var(--bg-primary);
   opacity: 0;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease;
   cursor: pointer;
   z-index: 10;
   font-family: var(--font-family-headings);
@@ -252,18 +238,16 @@ pre:hover .code-copy-btn {
 }
 
 .code-copy-btn:hover {
-  background: var(--accent-primary);
-  color: var(--bg-primary);
-  box-shadow: 0 0 10px var(--accent-primary);
+  background: var(--accent-secondary);
 }
 
 /* Buttons (Global UI) */
 .btn,
 button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
-  background-color: var(--bg-secondary);
-  color: var(--accent-primary);
-  border: 1px solid var(--accent-primary);
-  border-radius: var(--border-radius-sm);
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 2px;
   padding: 0.6rem 1.4rem;
   font-family: var(--font-family-headings);
   font-weight: 500;
@@ -272,22 +256,19 @@ button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 0.9em;
-  box-shadow: 0 0 5px rgba(166, 77, 255, 0.2);
 }
 
 .btn:hover {
-  background-color: var(--accent-primary);
-  color: white;
+  background-color: var(--text-secondary);
   transform: translateY(-1px);
-  box-shadow: 0 0 15px var(--accent-primary);
 }
 
 /* ==================== MERMAID CONFIGURATION ==================== */
 :root {
   --mermaid-theme: dark;
-  --mermaid-background: #1a1625;
-  --mermaid-primary-color: #302640;
-  --mermaid-primary-border-color: #a64dff;
-  --mermaid-line-color: #4da6ff;
-  --mermaid-text-color: #e6e6f0;
+  --mermaid-background: #18181b;
+  --mermaid-primary-color: #27272a;
+  --mermaid-primary-border-color: #52525b;
+  --mermaid-line-color: #a1a1aa;
+  --mermaid-text-color: #fafafa;
 }

@@ -141,40 +141,30 @@ export class MermaidService {
     await waitForCSS();
 
     // Extract core theme colors with Safari-safe fallbacks
-    // IMPORANT: We MUST prioritise the --hex- variants as Mermaid does not support OKLCH
+    // IMPORTANT: Prefer -hex variants to avoid OKLCH format (Mermaid doesn't support OKLCH)
     const bgPri = getSafeColor(
-      '--hex-bg-primary',
-      getSafeColor('--bg-primary-hex', DEFAULT_COLORS.bgPrimary)
+      '--bg-primary-hex',
+      getSafeColor('--bg-primary', DEFAULT_COLORS.bgPrimary)
     );
     const bgSec = getSafeColor(
-      '--hex-bg-secondary',
-      getSafeColor('--bg-secondary-hex', DEFAULT_COLORS.bgSecondary)
+      '--bg-secondary-hex',
+      getSafeColor('--bg-secondary', DEFAULT_COLORS.bgSecondary)
     );
     const bgTer = getSafeColor(
-      '--hex-bg-tertiary',
-      getSafeColor('--bg-tertiary-hex', DEFAULT_COLORS.bgTertiary)
+      '--bg-tertiary-hex',
+      getSafeColor('--bg-tertiary', DEFAULT_COLORS.bgTertiary)
     );
     const txtPri = getSafeColor(
-      '--hex-text-primary',
-      getSafeColor('--text-primary-hex', DEFAULT_COLORS.textPrimary)
+      '--text-primary-hex',
+      getSafeColor('--text-primary', DEFAULT_COLORS.textPrimary)
     );
     const txtSec = getSafeColor(
-      '--hex-text-secondary',
-      getSafeColor('--text-secondary-hex', DEFAULT_COLORS.textSecondary)
+      '--text-secondary-hex',
+      getSafeColor('--text-secondary', DEFAULT_COLORS.textSecondary)
     );
-    const h1 = getSafeColor(
-      '--hex-accent-primary',
-      getSafeColor('--h1-color-hex', DEFAULT_COLORS.h1)
-    );
-    const h2 = getSafeColor(
-      '--hex-accent-secondary',
-      getSafeColor('--h2-color-hex', DEFAULT_COLORS.h2)
-    );
-    // Fallback for h3 often maps to accent secondary or text secondary
-    const h3 = getSafeColor(
-      '--hex-accent-secondary',
-      getSafeColor('--h3-color-hex', DEFAULT_COLORS.h3)
-    );
+    const h1 = getSafeColor('--h1-color-hex', getSafeColor('--h1-color', DEFAULT_COLORS.h1));
+    const h2 = getSafeColor('--h2-color-hex', getSafeColor('--h2-color', DEFAULT_COLORS.h2));
+    const h3 = getSafeColor('--h3-color-hex', getSafeColor('--h3-color', DEFAULT_COLORS.h3));
 
     // Helper to get variable with fallback (for Mermaid-specific vars)
     const get = (varName, fallback) => getSafeColor(varName, fallback);
