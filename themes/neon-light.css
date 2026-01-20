@@ -1,300 +1,159 @@
-/*
- * NEON LIGHT THEME (Enterprise Edition)
- * Aesthetic: Vaporwave, Retro-Futuristic, Pastel Neons, Soft Glow
- * Fonts: Exo 2 (Headers), Lato (Body), Source Code Pro (Mono)
- */
-
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700&family=Lato:wght@400;700&family=Source+Code+Pro:wght@400;500;600&display=swap');
-
+/* Neon Light Theme */
 :root {
-  /* ==================== CORE PALETTE (OKLCH) ==================== */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fef3ff;
+  --bg-tertiary: #fce7f3;
+  --text-primary: #3b0764;
+  --text-secondary: #6b21a8;
+  --border-color: #e9d5ff;
 
-  /* Primary Hues - Vaporwave Palette */
-  --color-primary-base: 75% 0.16 310;
-  /* Hot Pink */
-  --color-secondary-base: 80% 0.14 180;
-  /* Cyan */
-  --color-accent-base: 80% 0.16 280;
-  /* Electric Purple */
+  --h1-color: #c026d3;
+  --h2-color: #7c3aed;
+  --h3-color: #3b82f6;
+  --h4-color: #06b6d4;
+  --h5-color: #f59e0b;
+  --h6-color: #ef4444;
 
-  /* Layout Colors */
-  --bg-primary: oklch(97% 0.01 300);
-  /* Pale pink-white */
-  --bg-secondary: oklch(95% 0.02 290);
-  /* Soft lavender */
-  --bg-tertiary: oklch(93% 0.03 280);
-  /* Muted purple */
+  --link-color: #c026d3;
+  --link-hover: #a21caf;
 
-  /* Text Colors */
-  --text-primary: oklch(30% 0.1 290);
-  /* Deep Purple */
-  --text-secondary: oklch(50% 0.1 290);
-  /* Medium Purple */
-  --text-tertiary: oklch(70% 0.05 290);
-  /* Soft Purple */
+  /* Code Colors */
+  --code-bg: #fef3ff;
+  --code-text: #7c3aed;
+  --code-block-bg: #fef3ff; /* Light purple background */
+  --code-border: #e9d5ff;
 
-  /* Borders */
-  --border-color: oklch(85% 0.08 300);
-  --border-hover: oklch(75% 0.12 300);
+  /* Syntax Highlighting - Production-Grade Token Colors (One Dark Architecture) */
 
-  /* Accents */
-  --accent-primary: oklch(var(--color-primary-base));
-  --accent-secondary: oklch(var(--color-secondary-base));
-  --link-color: oklch(60% 0.18 300);
-  --link-hover: oklch(50% 0.22 300);
+  /* Core hue-1: Cyan - URLs */
+  --syntax-url: #06b6d4; /* Cyan for URLs */
 
-  /* Typography */
-  --font-family-base: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-family-headings: 'Exo 2', sans-serif;
-  --font-family-mono: 'Source Code Pro', monospace;
+  /* Core hue-2: Purple/Violet - Functions, variables */
+  --syntax-function: #7c3aed; /* Vibrant purple for functions */
+  --syntax-variable: #6366f1; /* Indigo for variables */
 
-  /* ==================== SYNTAX HIGHLIGHTING (Synthwave) ==================== */
-  --code-bg: oklch(94% 0.02 280);
-  --code-text: var(--text-primary);
-  --code-border: var(--border-color);
+  /* Core hue-3: Magenta - Keywords */
+  --syntax-keyword: #c026d3; /* Bright magenta for keywords (final, sealed, class) */
 
-  /* Tokens */
-  --syntax-comment: oklch(70% 0.05 290);
-  --syntax-keyword: oklch(65% 0.2 320);
-  /* Magenta */
-  --syntax-string: oklch(70% 0.15 160);
-  /* Mint */
-  --syntax-function: oklch(60% 0.18 260);
-  /* Blue-Purple */
-  --syntax-variable: oklch(65% 0.15 30);
-  /* Orange */
-  --syntax-number: oklch(70% 0.18 340);
-  /* Pink */
-  --syntax-class-name: oklch(65% 0.15 190);
-  /* Cyan */
-  --syntax-operator: oklch(60% 0.1 300);
-  /* Purple */
+  /* Core hue-4: Green - Strings, builtins */
+  --syntax-string: #10b981; /* Emerald green for strings */
+  --syntax-builtin: #059669; /* Dark emerald for builtins (String, List) */
+  --syntax-char: #10b981; /* Same as strings */
+  --syntax-regex: #10b981; /* Same as strings */
+  --syntax-inserted: #10b981; /* For diff */
 
-  /* ==================== COMPONENT STYLES ==================== */
-  --border-radius-sm: 8px;
-  --border-radius-md: 12px;
-  --border-radius-lg: 16px;
+  /* Core hue-5: Blue - Properties, tags */
+  --syntax-property: #3b82f6; /* Blue for properties */
+  --syntax-tag: #2563eb; /* Dark blue for tags */
+  --syntax-deleted: #ef4444; /* Red for diff */
+  --syntax-important: #3b82f6; /* Blue for !important */
 
-  --shadow-sm: 0 2px 4px 0 rgba(236, 72, 153, 0.1);
-  --shadow-md: 0 4px 10px -1px rgba(236, 72, 153, 0.2), 0 2px 4px -2px rgba(236, 72, 153, 0.2);
-  --shadow-lg: 0 10px 25px -3px rgba(236, 72, 153, 0.3), 0 4px 6px -4px rgba(236, 72, 153, 0.3);
-  --glow-xs: 0 0 10px rgba(236, 72, 153, 0.2);
+  /* Core hue-6: Amber/Pink - Class names, constants, numbers */
+  --syntax-class-name: #d946ef; /* Fuchsia for class names (Rectangle, Shape) */
+  --syntax-number: #f59e0b; /* Amber for numbers */
+  --syntax-constant: #c026d3; /* Magenta for constants */
+  --syntax-boolean: #f59e0b; /* Same as numbers */
+  --syntax-atrule: #d946ef; /* Fuchsia for CSS @ rules */
 
-  /* Scrollbar */
-  --scrollbar-track: var(--bg-secondary);
-  --scrollbar-thumb: oklch(80% 0.1 300);
-  --scrollbar-thumb-hover: oklch(70% 0.15 300);
+  /* Neutral colors */
+  --syntax-comment: #9ca3af; /* Gray for comments */
+  --syntax-punctuation: #6b7280; /* Dark gray for punctuation */
+  --syntax-operator: #a21caf; /* Magenta-pink for operators */
 
-  /* Helper colors for hex-only libs (Mermaid) */
-  --hex-bg-primary: #fff0f5;
-  --hex-text-primary: #4a044e;
-  --hex-accent-primary: #d946ef;
-}
+  /* Markup specific */
+  --syntax-attr-name: #d946ef; /* Fuchsia like class-name */
+  --syntax-attr-value: #10b981; /* Green like strings */
+  --syntax-namespace: #7c3aed; /* Purple like keywords */
+  --syntax-entity: #6b7280; /* Neutral */
+  --syntax-selector: #3b82f6; /* Blue like properties */
 
-/* ==================== GLOBAL TYPOGRAPHY ==================== */
-body {
-  font-family: var(--font-family-base);
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
-  line-height: 1.6;
-}
+  --blockquote-border: #c026d3;
+  --blockquote-bg: #fef3ff;
+  --bold-color: #f59e0b;
+  --italic-color: #c026d3;
+  --table-header-bg: #fce7f3;
+  --table-border: #e9d5ff;
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-family-headings);
-  color: var(--accent-primary);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-}
+  /* === MERMAID COMPREHENSIVE CONFIGURATION === */
 
-h1 {
-  font-size: 2.5rem;
-  border-bottom: 3px solid var(--border-color);
-  padding-bottom: 0.3em;
-  margin-bottom: 1rem;
-  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+  /* Core Global */
+  --mermaid-background: #ffffff;
+  --mermaid-text-color: #3b0764;
+  --mermaid-line-color: #7c3aed;
+  --mermaid-main-bkg: #fce7f3;
 
-h2 {
-  font-size: 1.8rem;
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 0.2em;
-  color: var(--accent-secondary);
-}
-
-h3 {
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-  font-weight: 700;
-  transition: all 0.2s ease;
-  border-bottom: 2px solid transparent;
-}
-
-a:hover {
-  color: var(--link-hover);
-  border-bottom-color: var(--link-hover);
-  text-shadow: 0 0 8px rgba(217, 70, 239, 0.3);
-}
-
-/* ==================== UI COMPONENTS ==================== */
-/* Blockquotes */
-blockquote {
-  border-left: 5px solid var(--accent-primary);
-  background: linear-gradient(to right, var(--bg-secondary), rgba(255, 255, 255, 0));
-  padding: 1rem 1.5rem;
-  margin: 1.5rem 0;
-  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
-  color: var(--text-secondary);
-  font-style: italic;
-  box-shadow: var(--shadow-sm);
-}
-
-/* Tables */
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 1.5rem 0;
-  overflow: hidden;
-  border-radius: var(--border-radius-md);
-  border: 2px solid var(--border-color);
-  background: var(--bg-primary);
-  box-shadow: var(--shadow-sm);
-}
-
-th {
-  background-color: var(--bg-secondary);
-  font-weight: 700;
-  border-bottom: 2px solid var(--border-color);
-  padding: 0.75rem 1rem;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--accent-primary);
-}
-
-td {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-tr:last-child td {
-  border-bottom: none;
-}
-
-tr:hover td {
-  background-color: var(--bg-secondary);
-}
-
-/* Inline Code */
-:not(pre)>code {
-  font-family: var(--font-family-mono);
-  background-color: var(--code-bg);
-  color: var(--accent-primary);
-  padding: 0.2em 0.4em;
-  border-radius: 6px;
-  font-size: 0.9em;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 0 var(--border-color);
-}
-
-/* Code Blocks */
-pre {
-  background-color: var(--code-bg);
-  border: 2px solid var(--code-border);
-  border-radius: var(--border-radius-md);
-  padding: 1.25rem;
-  overflow-x: auto;
-  box-shadow: var(--shadow-md);
-  margin: 1.5rem 0;
-  position: relative;
-}
-
-pre code {
-  font-family: var(--font-family-mono);
-  color: var(--text-primary);
-  font-size: 0.95em;
-  line-height: 1.5;
-  background: transparent;
-  border: none;
-  padding: 0;
-}
-
-/* Copy Button */
-.code-copy-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: var(--bg-primary);
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  padding: 0.4rem;
-  color: var(--text-secondary);
-  opacity: 0;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  z-index: 10;
-  box-shadow: var(--shadow-sm);
-  font-weight: 700;
-}
-
-pre:hover .code-copy-btn {
-  opacity: 1;
-}
-
-.code-copy-btn:hover {
-  background: var(--bg-secondary);
-  color: var(--accent-primary);
-  border-color: var(--accent-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--glow-xs);
-}
-
-/* Buttons (Global UI) */
-.btn,
-button:not(.code-copy-btn):not(.zoom-btn):not(.theme-toggle) {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  padding: 0.5rem 1rem;
-  font-family: var(--font-family-base);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
-}
-
-.btn:hover {
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-  background-color: var(--bg-secondary);
-  transform: translateY(-2px);
-  box-shadow: var(--glow-xs);
-}
-
-/* ==================== MERMAID CONFIGURATION ==================== */
-:root {
-  --mermaid-theme: base;
-  --mermaid-background: #fff0f5;
+  /* Primary Set */
   --mermaid-primary-color: #fce7f3;
-  --mermaid-primary-border-color: #f472b6;
-  --mermaid-line-color: #be185d;
-  --mermaid-text-color: #831843;
+  --mermaid-primary-text-color: #3b0764;
+  --mermaid-primary-border-color: #c026d3;
+
+  /* Secondary Set */
+  --mermaid-secondary-color: #fef3ff;
+  --mermaid-secondary-text-color: #3b0764;
+  --mermaid-secondary-border-color: #7c3aed;
+
+  /* Tertiary Set */
+  --mermaid-tertiary-color: #ffffff;
+  --mermaid-tertiary-text-color: #3b0764;
+  --mermaid-tertiary-border-color: #d946ef;
+
+  /* Flowchart */
+  --mermaid-node-border: #c026d3;
+  --mermaid-cluster-bkg: #fef3ff;
+  --mermaid-cluster-border: #7c3aed;
+  --mermaid-default-link-color: #7c3aed;
+  --mermaid-title-color: #3b0764;
+  --mermaid-edge-label-background: #ffffff;
+  --mermaid-node-text-color: #3b0764;
+
+  /* Sequence Diagram */
+  --mermaid-actor-bkg: #fce7f3;
+  --mermaid-actor-border: #c026d3;
+  --mermaid-actor-text-color: #3b0764;
+  --mermaid-actor-line-color: #c026d3;
+  --mermaid-signal-color: #7c3aed;
+  --mermaid-signal-text-color: #3b0764;
+  --mermaid-label-box-bkg-color: #fce7f3;
+  --mermaid-label-box-border-color: #c026d3;
+  --mermaid-label-text-color: #3b0764;
+  --mermaid-loop-text-color: #3b0764;
+  --mermaid-activation-border-color: #7c3aed;
+  --mermaid-activation-bkg-color: #fef3ff;
+  --mermaid-sequence-number-color: #3b0764;
+
+  /* Pie Chart */
+  --mermaid-pie1: #c026d3;
+  --mermaid-pie2: #7c3aed;
+  --mermaid-pie3: #3b82f6;
+  --mermaid-pie4: #06b6d4;
+  --mermaid-pie5: #f59e0b;
+  --mermaid-pie6: #ef4444;
+  --mermaid-pie7: #d946ef;
+  --mermaid-pie8: #6366f1;
+  --mermaid-pie9: #10b981;
+  --mermaid-pie10: #c026d3;
+  --mermaid-pie11: #7c3aed;
+  --mermaid-pie12: #3b82f6;
+  --mermaid-pie-title-text-color: #3b0764;
+  --mermaid-pie-section-text-color: #ffffff; /* White on vibrant slices */
+  --mermaid-pie-legend-text-color: #3b0764;
+  --mermaid-pie-stroke-color: #c026d3;
+  --mermaid-pie-outer-stroke-color: #c026d3;
+
+  /* State Diagram */
+  --mermaid-label-color: #3b0764;
+  --mermaid-alt-background: #fef3ff;
+
+  /* Class Diagram */
+  --mermaid-class-text: #3b0764;
+
+  /* User Journey */
+  --mermaid-fill-type0: #c026d3;
+  --mermaid-fill-type1: #7c3aed;
+  --mermaid-fill-type2: #3b82f6;
+  --mermaid-fill-type3: #06b6d4;
+  --mermaid-fill-type4: #f59e0b;
+  --mermaid-fill-type5: #ef4444;
+  --mermaid-fill-type6: #d946ef;
+  --mermaid-fill-type7: #6366f1;
 }
