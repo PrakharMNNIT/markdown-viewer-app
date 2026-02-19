@@ -3001,6 +3001,80 @@ body.zen-mode .preview-container {
   border: 0;
 }
 
+/* ==================== EXPORT DROPDOWN ==================== */
+.export-dropdown {
+  position: relative;
+  z-index: var(--z-dropdown, 40);
+}
+
+.export-dropdown__panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 260px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.98);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 16px 48px -8px rgba(0,0,0,0.25), 0 8px 16px -4px rgba(0,0,0,0.15);
+}
+
+.export-dropdown__panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.export-dropdown__option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  margin: 2px 0;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: var(--font-ui, sans-serif);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.export-dropdown__option:hover {
+  background: rgba(0,0,0,0.06);
+  transform: translateX(2px);
+}
+
+.export-dropdown__option svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.export-dropdown__option:hover svg {
+  opacity: 1;
+}
+
+.export-dropdown__opt-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.export-dropdown__opt-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .export-dropdown__panel { min-width: 220px; }
+}
+
 /* ==================== FONT PICKER OVERRIDE LAYER ==================== */
 /* These vars are SET by JS when user picks a font, theme fonts apply when unset */
 /* Cascade order ensures these override theme-specific font declarations */

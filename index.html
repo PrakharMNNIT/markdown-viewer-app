@@ -273,8 +273,28 @@
             <div class="font-picker__panel" id="font-picker-panel"></div>
           </div>
           <button class="btn" id="customize-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17.5 10.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5"/><circle cx="6.5" cy="13.5" r="2.5"/><path d="M3 6v1a2 2 0 0 0 2 2h1"/><path d="M21 18v-1a2 2 0 0 0-2-2h-1"/></svg> Customize</button>
-          <button class="btn" id="export-html-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export HTML</button>
-          <button class="btn" id="export-pdf-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Export PDF</button>
+          <!-- Export Dropdown -->
+          <div class="export-dropdown" id="export-dropdown">
+            <button class="btn" id="export-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="export-dropdown__panel" id="export-panel">
+              <button class="export-dropdown__option" id="export-pdf-btn" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <div><div class="export-dropdown__opt-title">Export as PDF</div><div class="export-dropdown__opt-desc">Opens Export Studio with print options</div></div>
+              </button>
+              <button class="export-dropdown__option" id="export-html-btn" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+                <div><div class="export-dropdown__opt-title">Export as HTML</div><div class="export-dropdown__opt-desc">Downloads standalone HTML file</div></div>
+              </button>
+              <button class="export-dropdown__option" id="export-copy-btn" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <div><div class="export-dropdown__opt-title">Copy HTML</div><div class="export-dropdown__opt-desc">Copy rendered content to clipboard</div></div>
+              </button>
+            </div>
+          </div>
           <button
                  class="btn-icon"
                  id="zen-mode-btn"
@@ -990,6 +1010,112 @@
     })();
 
     
+
+    // Export Dropdown + Export Studio Controller
+    (function initExportStudio() {
+      const trigger = document.getElementById('export-trigger');
+      const panel = document.getElementById('export-panel');
+      const pdfBtn = document.getElementById('export-pdf-btn');
+      const htmlBtn = document.getElementById('export-html-btn');
+      const copyBtn = document.getElementById('export-copy-btn');
+      let isOpen = false;
+
+      // Dropdown toggle
+      trigger.addEventListener('click', e => {
+        e.stopPropagation();
+        isOpen = !isOpen;
+        panel.classList.toggle('open', isOpen);
+        trigger.setAttribute('aria-expanded', isOpen);
+      });
+      document.addEventListener('click', e => { if (isOpen && !e.target.closest('.export-dropdown')) { panel.classList.remove('open'); isOpen = false; trigger.setAttribute('aria-expanded','false'); }});
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) { panel.classList.remove('open'); isOpen = false; }});
+
+      // Resolve all CSS vars to computed values
+      function resolveStyles() {
+        const cs = getComputedStyle(document.documentElement);
+        const vars = ['--bg-primary','--bg-secondary','--bg-tertiary','--text-primary','--text-secondary','--h1-color','--h2-color','--h3-color','--h4-color','--h5-color','--h6-color','--link-color','--bold-color','--italic-color','--code-bg','--code-text','--code-block-bg','--code-border','--border-color','--blockquote-border','--blockquote-bg','--table-header-bg','--table-border','--syntax-keyword','--syntax-string','--syntax-number','--syntax-function','--syntax-comment','--syntax-variable','--syntax-punctuation','--syntax-property','--font-picker-preview','--font-picker-size','--font-picker-code'];
+        let css = ':root{';
+        vars.forEach(v => { const val = cs.getPropertyValue(v).trim(); if (val) css += v+':'+val+';'; });
+        css += '}';
+        return css;
+      }
+
+      // Get Google Fonts URL for font picker fonts
+      function getFontImports() {
+        const settings = JSON.parse(localStorage.getItem('fontSettings') || '{}');
+        const urls = [];
+        if (settings.previewBody && settings.previewBody !== 'System Default') urls.push(settings.previewBody.replace(/ /g,'+'));
+        if (settings.editor) urls.push(settings.editor.replace(/ /g,'+'));
+        if (settings.codeBlock) urls.push(settings.codeBlock.replace(/ /g,'+'));
+        if (urls.length === 0) return '';
+        return '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=' + urls.join('&family=') + '&display=swap">';
+      }
+
+      // Build self-contained HTML
+      function buildExportHTML() {
+        const content = document.getElementById('markdown-preview').innerHTML;
+        const resolvedCSS = resolveStyles();
+        const fontImports = getFontImports();
+        const katexCSS = document.querySelector('link[href*="katex"]');
+        const katexLink = katexCSS ? '<link rel="stylesheet" href="' + katexCSS.href + '">' : '';
+        return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Markdown Export</title>' + fontImports + katexLink + '<style>' + resolvedCSS + ' body{font-family:var(--font-picker-preview,var(--text-primary,sans-serif));font-size:var(--font-picker-size,16px);color:var(--text-primary);background:var(--bg-primary);max-width:800px;margin:0 auto;padding:40px 20px;line-height:1.7} h1{color:var(--h1-color);font-size:2.5em;border-bottom:2px solid var(--h1-color);padding-bottom:0.3em} h2{color:var(--h2-color);font-size:2em} h3{color:var(--h3-color);font-size:1.5em} h4{color:var(--h4-color)} h5{color:var(--h5-color)} h6{color:var(--h6-color)} a{color:var(--link-color)} strong{color:var(--bold-color)} em{color:var(--italic-color)} code{background:var(--code-bg);color:var(--code-text);padding:2px 6px;border-radius:4px;font-family:var(--font-picker-code,monospace)} pre{background:var(--code-block-bg);border:1px solid var(--code-border);border-radius:8px;padding:16px;overflow-x:auto;font-family:var(--font-picker-code,monospace)} blockquote{border-left:4px solid var(--blockquote-border);background:var(--blockquote-bg);padding:12px 20px;margin:1.5em 0} table{border-collapse:collapse;width:100%} th{background:var(--table-header-bg);padding:12px;border:1px solid var(--table-border)} td{padding:10px 12px;border:1px solid var(--table-border)} img{max-width:100%;height:auto;border-radius:8px} @media print{@page{size:A4;margin:2cm} body{color:#000;background:#fff} h1,h2,h3,h4,h5,h6{color:#1a1a2e} pre{break-inside:avoid} .no-print{display:none!important}}</style></head><body>' + content + '</body></html>';
+      }
+
+      // PDF Export: open Export Studio window
+      pdfBtn.addEventListener('click', () => {
+        panel.classList.remove('open'); isOpen = false;
+        const html = buildExportHTML();
+        const w = window.open('', '_blank');
+        if (!w) { alert('Popup blocked — please allow popups for this site'); return; }
+        w.document.write(html);
+        w.document.close();
+        // Add print toolbar (hidden in print)
+        const toolbar = w.document.createElement('div');
+        toolbar.className = 'no-print';
+        toolbar.style.cssText = 'position:fixed;top:0;left:0;right:0;padding:12px 20px;background:#1a1b26;color:#c0caf5;display:flex;align-items:center;gap:12px;z-index:9999;font-family:system-ui;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,0.3)';
+        toolbar.innerHTML = '<strong style="margin-right:auto">Export Studio</strong><select id="es-size" style="padding:6px 10px;border-radius:6px;border:1px solid #333;background:#24283b;color:#c0caf5"><option value="A4">A4</option><option value="Letter">Letter</option><option value="Legal">Legal</option></select><select id="es-orient" style="padding:6px 10px;border-radius:6px;border:1px solid #333;background:#24283b;color:#c0caf5"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select><select id="es-margin" style="padding:6px 10px;border-radius:6px;border:1px solid #333;background:#24283b;color:#c0caf5"><option value="2cm">Normal</option><option value="1cm">Narrow</option><option value="3cm">Wide</option></select><button id="es-print" style="padding:8px 20px;border-radius:8px;border:none;background:#7aa2f7;color:#fff;font-weight:600;cursor:pointer">Save as PDF</button>';
+        w.document.body.insertBefore(toolbar, w.document.body.firstChild);
+        w.document.body.style.paddingTop = '60px';
+        // Wire controls
+        const updatePage = () => {
+          const size = w.document.getElementById('es-size').value;
+          const orient = w.document.getElementById('es-orient').value;
+          const margin = w.document.getElementById('es-margin').value;
+          let style = w.document.getElementById('es-page-style');
+          if (!style) { style = w.document.createElement('style'); style.id = 'es-page-style'; w.document.head.appendChild(style); }
+          style.textContent = '@page{size:'+size+' '+orient+';margin:'+margin+'}';
+        };
+        setTimeout(() => {
+          w.document.getElementById('es-size').addEventListener('change', updatePage);
+          w.document.getElementById('es-orient').addEventListener('change', updatePage);
+          w.document.getElementById('es-margin').addEventListener('change', updatePage);
+          w.document.getElementById('es-print').addEventListener('click', () => w.print());
+          updatePage();
+        }, 100);
+      });
+
+      // HTML Export: download file
+      htmlBtn.addEventListener('click', () => {
+        panel.classList.remove('open'); isOpen = false;
+        const html = buildExportHTML();
+        const blob = new Blob([html], {type:'text/html'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'markdown-export.html'; a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      // Copy HTML
+      copyBtn.addEventListener('click', () => {
+        panel.classList.remove('open'); isOpen = false;
+        const content = document.getElementById('markdown-preview').innerHTML;
+        navigator.clipboard.writeText(content).then(() => {
+          copyBtn.querySelector('.export-dropdown__opt-title').textContent = 'Copied!';
+          setTimeout(() => { copyBtn.querySelector('.export-dropdown__opt-title').textContent = 'Copy HTML'; }, 2000);
+        });
+      });
+    })();
+
     // Font Picker Controller
     (function initFontPicker() {
       const FONTS = {
