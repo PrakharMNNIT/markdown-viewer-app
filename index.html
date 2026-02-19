@@ -500,11 +500,11 @@
           <a href="https://ko-fi.com/praxlannister" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:#FF5E5B;color:#fff;border-radius:20px;font-size:11px;font-weight:600;text-decoration:none">Ko-fi</a>
           <a href="https://github.com/sponsors/PrakharMNNIT" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:#db61a2;color:#fff;border-radius:20px;font-size:11px;font-weight:600;text-decoration:none">Sponsors</a>
           <div style="position:relative;display:inline-block" id="upi-popover-wrap">
-            <button type="button" id="upi-popover-btn" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:#FF9933;color:#fff;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:none">UPI</button>
-            <div id="upi-popover" style="display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);width:260px;background:var(--bg-primary,#fff);border:1px solid var(--border-color,#e2e8f0);border-radius:12px;box-shadow:0 12px 36px rgba(0,0,0,0.2);z-index:100;padding:16px;text-align:center">
+            <a href="https://razorpay.me/@praxlannister007" target="_blank" rel="noopener noreferrer" id="upi-popover-btn" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:#FF9933;color:#fff;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:none;text-decoration:none">UPI</a>
+            <div id="upi-popover" style="display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);width:340px;background:var(--bg-primary,#fff);border:1px solid var(--border-color,#e2e8f0);border-radius:12px;box-shadow:0 12px 36px rgba(0,0,0,0.2);z-index:100;padding:16px;text-align:center">
               <p style="font-weight:700;font-size:13px;color:var(--text-primary);margin:0 0 2px">Scan &amp; Pay via UPI</p>
               <p style="font-size:10px;color:var(--text-secondary);margin:0 0 12px;opacity:0.7">GPay, PhonePe, Paytm, BHIM</p>
-              <img src="assets/QrCode.jpeg" alt="UPI QR Code" style="width:160px;height:160px;border-radius:8px;margin:0 auto 12px;display:block;object-fit:contain" />
+              <img src="assets/QrCode.jpeg" alt="UPI QR Code" style="width:280px;height:280px;border-radius:8px;margin:0 auto 12px;display:block;object-fit:contain" />
               <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;background:var(--bg-secondary,#f1f5f9);padding:6px 10px;border-radius:8px;border:1px solid var(--border-color,#e2e8f0)">
                 <code style="font-size:11px;font-weight:600;color:var(--text-primary)">praxlannister@upi</code>
                 <button type="button" id="upi-pop-copy" style="font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;border:1px solid var(--border-color);background:var(--bg-primary,#fff);color:var(--text-secondary);cursor:pointer">Copy</button>
@@ -1247,10 +1247,11 @@
       const copyBtn = document.getElementById('upi-pop-copy');
       if (!btn || !pop) return;
       let isOpen = false;
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        isOpen = !isOpen;
-        pop.style.display = isOpen ? 'block' : 'none';
+      btn.addEventListener('mouseenter', () => {
+        pop.style.display = 'block'; isOpen = true;
+      });
+      document.getElementById('upi-popover-wrap').addEventListener('mouseleave', () => {
+        pop.style.display = 'none'; isOpen = false;
       });
       document.addEventListener('click', (e) => {
         if (isOpen && !e.target.closest('#upi-popover-wrap')) {
