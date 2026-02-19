@@ -281,11 +281,11 @@
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="export-dropdown__panel" id="export-panel">
-              <button class="export-dropdown__option" id="export-pdf-btn" type="button">
+              <button class="export-dropdown__option" id="export-studio-pdf-btn" type="button">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 <div><div class="export-dropdown__opt-title">Export as PDF</div><div class="export-dropdown__opt-desc">Opens Export Studio with print options</div></div>
               </button>
-              <button class="export-dropdown__option" id="export-html-btn" type="button">
+              <button class="export-dropdown__option" id="export-studio-html-btn" type="button">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
                 <div><div class="export-dropdown__opt-title">Export as HTML</div><div class="export-dropdown__opt-desc">Downloads standalone HTML file</div></div>
               </button>
@@ -1014,8 +1014,8 @@
     (function initExportStudio() {
       const trigger = document.getElementById('export-trigger');
       const panel = document.getElementById('export-panel');
-      const pdfBtn = document.getElementById('export-pdf-btn');
-      const htmlBtn = document.getElementById('export-html-btn');
+      const pdfBtn = document.getElementById('export-studio-pdf-btn');
+      const htmlBtn = document.getElementById('export-studio-html-btn');
       const copyBtn = document.getElementById('export-copy-btn');
       let isOpen = false;
 
