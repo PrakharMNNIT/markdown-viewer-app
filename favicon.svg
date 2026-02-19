@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background: Rounded square with gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1a1b26"/>
+      <stop offset="100%" stop-color="#24283b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="8" y1="8" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7aa2f7"/>
+      <stop offset="100%" stop-color="#bb9af7"/>
+    </linearGradient>
+    <linearGradient id="pen" x1="18" y1="6" x2="10" y2="26" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c0caf5"/>
+      <stop offset="100%" stop-color="#7aa2f7"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
+  <!-- Subtle inner border for depth -->
+  <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <!-- Markdown "M" abstraction with pen nib -->
+  <path d="M8 22V10l5 7 5-7v12" stroke="url(#accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Pen nib accent (top right) -->
+  <path d="M22 7l3 3-2.5 2.5-3-3L22 7z" fill="url(#pen)" opacity="0.9"/>
+  <line x1="19.5" y1="12.5" x2="24" y2="8" stroke="url(#pen)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <!-- Subtle glow dot -->
+  <circle cx="25" cy="7" r="1.5" fill="#7aa2f7" opacity="0.4"/>
+</svg>

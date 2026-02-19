@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Markdown Viewer Pro</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
     <!-- Main Styles -->
     <link rel="stylesheet" href="variables.css" />
@@ -15,9 +16,16 @@
     <link rel="stylesheet" href="themes/default-light.css" id="theme-stylesheet" />
   </head>
   <body>
+    <!-- Accessibility: Skip Links -->
+    <a href="#markdown-editor" class="skip-link">Skip to editor</a>
+    <a href="#markdown-preview" class="skip-link">Skip to preview</a>
+
+    <!-- Accessibility: Live Region for Screen Reader Announcements -->
+    <div id="live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
     <div class="app-container">
       <!-- Toolbar -->
-      <div class="toolbar">
+      <header role="banner" class="toolbar">
         <div style="display: flex; align-items: center; gap: 12px">
           <button
             id="sidebar-toggle-btn"
@@ -39,7 +47,7 @@
               <line x1="9" y1="3" x2="9" y2="21"></line>
             </svg>
           </button>
-          <h1>📝 Markdown Viewer Pro</h1>
+          <h1><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Markdown Viewer Pro</h1>
         </div>
         <div class="toolbar-controls">
           <!-- Folder Browser Toggle - Always visible -->
@@ -49,7 +57,7 @@
             title="Open Folder"
             aria-label="Open Folder to Browse Markdown Files"
           >
-            📁 Open Folder
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Open Folder
           </button>
 
           <!-- View Mode Buttons -->
@@ -127,10 +135,11 @@
             </button>
           </div>
 
-          <select id="theme-selector" class="btn">
+          <!-- Hidden native select for backward compat with script.js -->
+          <select id="theme-selector" class="sr-only" tabindex="-1" aria-hidden="true">
             <optgroup label="Default">
-              <option value="nebula-dark">🌌 Nebula Dark (Premium)</option>
-              <option value="nebula-light">❄️ Nebula Light (Premium)</option>
+              <option value="nebula-dark">Nebula Dark (Premium)</option>
+              <option value="nebula-light">Nebula Light (Premium)</option>
               <option value="default-light" selected>Default Light</option>
               <option value="default-dark">Default Dark</option>
             </optgroup>
@@ -158,9 +167,106 @@
               <option value="custom">Custom Theme</option>
             </optgroup>
           </select>
-          <button class="btn" id="customize-btn">🎨 Customize Colors</button>
-          <button class="btn" id="export-html-btn">💾 Export HTML</button>
-          <button class="btn" id="export-pdf-btn">📕 Export PDF</button>
+
+          <!-- Custom Theme Selector Component -->
+          <div class="theme-picker" id="theme-picker" role="listbox" aria-label="Select theme">
+            <button class="theme-picker__trigger" id="theme-picker-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="theme-picker__swatch" id="theme-picker-swatch"></span>
+              <span class="theme-picker__label" id="theme-picker-label">Default Light</span>
+              <svg class="theme-picker__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="theme-picker__dropdown" id="theme-picker-dropdown">
+              <div class="theme-picker__group">
+                <div class="theme-picker__group-label">Premium</div>
+                <button class="theme-picker__option" data-value="nebula-dark" data-mode="dark" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #0f1123, #050508)"></span>
+                  <span class="theme-picker__opt-name">Nebula Dark</span>
+                  <span class="theme-picker__opt-badge">Pro</span>
+                </button>
+                <button class="theme-picker__option" data-value="nebula-light" data-mode="light" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #f0f4f8, #ffffff)"></span>
+                  <span class="theme-picker__opt-name">Nebula Light</span>
+                  <span class="theme-picker__opt-badge">Pro</span>
+                </button>
+              </div>
+              <div class="theme-picker__group">
+                <div class="theme-picker__group-label">Default</div>
+                <button class="theme-picker__option" data-value="default-light" data-mode="light" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #ffffff, #f0f0f3)"></span>
+                  <span class="theme-picker__opt-name">Default Light</span>
+                </button>
+                <button class="theme-picker__option" data-value="default-dark" data-mode="dark" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #1e1e2e, #0d1117)"></span>
+                  <span class="theme-picker__opt-name">Default Dark</span>
+                </button>
+              </div>
+              <div class="theme-picker__group">
+                <div class="theme-picker__group-label">Ocean</div>
+                <button class="theme-picker__option" data-value="ocean-light" data-mode="light" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #e8f4f8, #d0ebff)"></span>
+                  <span class="theme-picker__opt-name">Ocean Light</span>
+                </button>
+                <button class="theme-picker__option" data-value="ocean-dark" data-mode="dark" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #0c1929, #1a2744)"></span>
+                  <span class="theme-picker__opt-name">Ocean Dark</span>
+                </button>
+              </div>
+              <div class="theme-picker__group">
+                <div class="theme-picker__group-label">Neon</div>
+                <button class="theme-picker__option" data-value="neon-light" data-mode="light" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #fef9ff, #f0e6ff)"></span>
+                  <span class="theme-picker__opt-name">Neon Light</span>
+                </button>
+                <button class="theme-picker__option" data-value="neon-dark" data-mode="dark" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #0a0014, #1a0030)"></span>
+                  <span class="theme-picker__opt-name">Neon Dark</span>
+                </button>
+              </div>
+              <div class="theme-picker__group">
+                <div class="theme-picker__group-label">Forest</div>
+                <button class="theme-picker__option" data-value="forest-light" data-mode="light" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #f0f7f0, #e0efe0)"></span>
+                  <span class="theme-picker__opt-name">Forest Light</span>
+                </button>
+                <button class="theme-picker__option" data-value="forest-dark" data-mode="dark" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #0b1a0b, #1a2e1a)"></span>
+                  <span class="theme-picker__opt-name">Forest Dark</span>
+                </button>
+              </div>
+              <div class="theme-picker__group">
+                <div class="theme-picker__group-label">Sunset</div>
+                <button class="theme-picker__option" data-value="sunset-light" data-mode="light" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #fff5f0, #ffe8d6)"></span>
+                  <span class="theme-picker__opt-name">Sunset Light</span>
+                </button>
+                <button class="theme-picker__option" data-value="sunset-dark" data-mode="dark" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #1a0c05, #2d1810)"></span>
+                  <span class="theme-picker__opt-name">Sunset Dark</span>
+                </button>
+              </div>
+              <div class="theme-picker__group">
+                <div class="theme-picker__group-label">Obsidian</div>
+                <button class="theme-picker__option" data-value="obsidian-light" data-mode="light" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #f5f5f5, #e8e8e8)"></span>
+                  <span class="theme-picker__opt-name">Obsidian Light</span>
+                </button>
+                <button class="theme-picker__option" data-value="obsidian-dark" data-mode="dark" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: linear-gradient(135deg, #1a1a2e, #16162a)"></span>
+                  <span class="theme-picker__opt-name">Obsidian Dark</span>
+                </button>
+              </div>
+              <div class="theme-picker__group">
+                <div class="theme-picker__group-label">Custom</div>
+                <button class="theme-picker__option" data-value="custom" data-mode="custom" role="option">
+                  <span class="theme-picker__opt-swatch" style="background: conic-gradient(#ef4444, #f59e0b, #22c55e, #3b82f6, #8b5cf6, #ef4444)"></span>
+                  <span class="theme-picker__opt-name">Custom Theme</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button class="btn" id="customize-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17.5 10.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5"/><circle cx="6.5" cy="13.5" r="2.5"/><path d="M3 6v1a2 2 0 0 0 2 2h1"/><path d="M21 18v-1a2 2 0 0 0-2-2h-1"/></svg> Customize</button>
+          <button class="btn" id="export-html-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export HTML</button>
+          <button class="btn" id="export-pdf-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Export PDF</button>
           <button
                  class="btn-icon"
                  id="zen-mode-btn"
@@ -173,7 +279,7 @@
                  </svg>
                </button>
         </div>
-      </div>
+      </header>
 
       <!-- Exit Zen Mode Button (Fixed) -->
       <button id="exit-zen-btn" class="btn floating-exit-btn" title="Exit Zen Mode">
@@ -201,7 +307,7 @@
 
           <div class="browser-header">
             <div class="browser-title">
-              <span class="folder-icon">📁</span>
+              <span class="folder-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
               <span id="current-folder-name">No Folder Open</span>
             </div>
             <div class="browser-actions">
@@ -250,7 +356,7 @@
           <div class="file-tree" id="file-tree">
             <!-- Tree structure will be rendered here -->
             <div class="empty-state">
-              <p>📂 No folder selected</p>
+              <p>No folder selected</p>
               <p class="hint">Click "Open Folder" to browse markdown files</p>
             </div>
           </div>
@@ -258,8 +364,8 @@
 
         <!-- Mobile Tabs (Visible only on < 768px) -->
         <div class="mobile-tabs">
-          <button class="mobile-tab-btn active" data-tab="editor">📝 Editor</button>
-          <button class="mobile-tab-btn" data-tab="preview">👁️ Preview</button>
+          <button class="mobile-tab-btn active" data-tab="editor"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Editor</button>
+          <button class="mobile-tab-btn" data-tab="preview"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Preview</button>
         </div>
 
         <!-- Editor -->
@@ -336,21 +442,57 @@
     </div>
 
     <!-- Footer -->
-    <footer class="app-footer">
-      <div class="footer-content">
-        <span>Made with ❤️ by Prax Lannister</span>
-        <span class="footer-separator">|</span>
-        <span>Follow me on
-          <a href="https://github.com/PrakharMNNIT" target="_blank" rel="noopener noreferrer">GitHub</a>
-          &amp;
-          <a href="https://x.com/ByteByByteSrSDE" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
-        </span>
-        <span class="footer-separator">|</span>
-        <div class="support-widget-container" id="support-widget">
-          <!-- Skeleton loader - will be replaced by JS -->
-          <a href="https://ko-fi.com/praxlannister?ref=webapp_footer" target="_blank" rel="noopener noreferrer" class="support-button support-button--loading">
-            ☕ Support
+    <footer class="app-footer" role="contentinfo">
+      <div class="footer-inner">
+        <!-- Row 1: Attribution & Social -->
+        <div class="footer-row footer-row--top">
+          <span class="footer-made">
+            Made with
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="none" class="footer-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            by
+            <a href="https://prax-portfolio-one.vercel.app/" target="_blank" rel="noopener noreferrer" class="footer-author">Prax Lannister</a>
+          </span>
+          <span class="footer-sep">|</span>
+          <span class="footer-social">
+            Follow me on
+            <a href="https://github.com/PrakharMNNIT" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+            &amp;
+            <a href="https://x.com/ByteByByteSrSDE" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X (Twitter)
+            </a>
+          </span>
+        </div>
+
+        <!-- Row 2: Support buttons -->
+        <div class="footer-row footer-row--support" id="support-widget">
+          <a href="https://ko-fi.com/praxlannister?ref=webapp_footer" target="_blank" rel="noopener noreferrer" class="footer-support-btn footer-support-btn--kofi">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            Support via Ko-fi
           </a>
+          <button type="button" class="footer-support-btn footer-support-btn--upi" id="upi-toggle-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><path d="M17 17h.01"/><rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/></svg>
+            In India? Use UPI
+          </button>
+        </div>
+
+        <!-- Row 3: UPI expandable section (hidden by default) -->
+        <div class="footer-upi-panel" id="upi-panel">
+          <div class="footer-upi-card">
+            <p class="footer-upi-title">Support via UPI</p>
+            <p class="footer-upi-subtitle">Scan using any UPI app</p>
+            <div class="footer-upi-qr-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/></svg>
+              <span class="footer-upi-qr-hint">QR Code Placeholder</span>
+            </div>
+            <div class="footer-upi-id">
+              <code>praxlannister@upi</code>
+              <button type="button" class="footer-upi-copy" id="copy-upi-btn">Copy</button>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -359,7 +501,7 @@
     <div id="pdf-modal" class="modal">
       <div class="modal-content pdf-modal-content">
         <div class="modal-header">
-          <h2>📕 PDF Export Settings</h2>
+          <h2>PDF Export Settings</h2>
           <button class="close-btn" id="close-pdf-modal">&times;</button>
         </div>
 
@@ -371,7 +513,7 @@
         <!-- PDF Configuration Controls -->
         <div class="pdf-controls">
           <!-- Page Settings -->
-          <div class="section-title">📄 Page Settings</div>
+          <div class="section-title">Page Settings</div>
           <div class="pdf-settings-grid">
             <div class="pdf-control">
               <label for="pdf-page-size">Page Size</label>
@@ -391,7 +533,7 @@
           </div>
 
           <!-- Margins -->
-          <div class="section-title">📏 Margins (inches)</div>
+          <div class="section-title">Margins (inches)</div>
           <div class="pdf-settings-grid">
             <div class="pdf-control">
               <label for="pdf-margin-top">Top</label>
@@ -412,7 +554,7 @@
           </div>
 
           <!-- Font Size -->
-          <div class="section-title">🔤 Font Size</div>
+          <div class="section-title">Font Size</div>
           <div class="font-size-control">
             <button class="btn" id="pdf-font-decrease" title="Decrease Font Size">-</button>
             <span id="pdf-font-size-display">12pt</span>
@@ -422,8 +564,8 @@
 
         <!-- Modal Actions -->
         <div class="modal-actions">
-          <button class="btn" id="pdf-preview-btn">👁️ Update Preview</button>
-          <button class="btn" id="pdf-download-btn">💾 Download PDF</button>
+          <button class="btn" id="pdf-preview-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Update Preview</button>
+          <button class="btn" id="pdf-download-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download PDF</button>
         </div>
       </div>
     </div>
@@ -432,7 +574,7 @@
     <div id="create-file-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="create-file-modal-title">
       <div class="modal-content create-file-modal-content">
         <span class="close-btn" id="close-create-file-modal" role="button" aria-label="Close dialog">&times;</span>
-        <h2 id="create-file-modal-title">📄 Create New Markdown File</h2>
+        <h2 id="create-file-modal-title">Create New Markdown File</h2>
 
         <div class="create-file-form">
           <div class="form-group">
@@ -450,7 +592,7 @@
           <div class="form-group">
             <label for="new-file-location">Location</label>
             <select id="new-file-location">
-              <option value="">📁 Root folder</option>
+              <option value="">Root folder</option>
               <!-- Subdirectories will be populated dynamically -->
             </select>
           </div>
@@ -478,7 +620,7 @@
     <div id="customizer-modal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h2>🎨 Theme Customizer</h2>
+          <h2>Theme Customizer</h2>
           <button class="close-btn" id="close-modal">&times;</button>
         </div>
 
@@ -603,7 +745,7 @@
           </div>
         </div>
 
-        <div class="section-title">💻 Code Block Colors</div>
+        <div class="section-title">Code Block Colors</div>
         <div class="color-grid">
           <div class="color-control">
             <label>Inline Code Text</label>
@@ -635,7 +777,7 @@
           </div>
         </div>
 
-        <div class="section-title">🎨 Syntax Highlighting</div>
+        <div class="section-title">Syntax Highlighting</div>
         <div class="color-grid">
           <div class="color-control">
             <label>Keywords (if, else, class)</label>
@@ -706,24 +848,24 @@
     <div id="support-modal" class="modal support-modal" role="dialog" aria-modal="true" aria-labelledby="support-modal-title">
       <div class="modal-content support-modal-content">
         <button class="close-btn" id="close-support-modal" aria-label="Close">&times;</button>
-        <h2 id="support-modal-title">☕ Support Markdown Viewer Pro</h2>
+        <h2 id="support-modal-title">Support Markdown Viewer Pro</h2>
         <p class="support-modal-desc">If you find this tool useful, consider supporting its development:</p>
 
         <div class="support-options">
           <a href="https://github.com/sponsors/PrakharMNNIT?ref=webapp_modal" target="_blank" rel="noopener noreferrer" class="support-option support-option--github">
-            <span class="support-option-icon">❤️</span>
+            <span class="support-option-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
             <span class="support-option-title">GitHub Sponsors</span>
             <span class="support-option-desc">0% fee • For developers</span>
           </a>
 
           <a href="https://ko-fi.com/praxlannister?ref=webapp_modal" target="_blank" rel="noopener noreferrer" class="support-option support-option--kofi">
-            <span class="support-option-icon">☕</span>
+            <span class="support-option-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></span>
             <span class="support-option-title">Ko-fi</span>
             <span class="support-option-desc">PayPal • Global</span>
           </a>
 
           <a href="https://razorpay.me/@prakharshekharparthasarthi?notes[source]=webapp_modal" target="_blank" rel="noopener noreferrer" class="support-option support-option--razorpay">
-            <span class="support-option-icon">🇮🇳</span>
+            <span class="support-option-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
             <span class="support-option-title">Razorpay</span>
             <span class="support-option-desc">UPI/Cards • India</span>
           </a>
@@ -737,6 +879,135 @@
         </div>
       </div>
     </div>
+
+    <!-- Theme Picker Controller (syncs custom picker ↔ hidden native select) -->
+    <script>
+    (function initThemePicker() {
+      const trigger = document.getElementById('theme-picker-trigger');
+      const dropdown = document.getElementById('theme-picker-dropdown');
+      const label = document.getElementById('theme-picker-label');
+      const swatch = document.getElementById('theme-picker-swatch');
+      const nativeSelect = document.getElementById('theme-selector');
+      const options = dropdown.querySelectorAll('.theme-picker__option');
+      let isOpen = false;
+
+      function open() {
+        isOpen = true;
+        dropdown.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+
+      function close() {
+        isOpen = false;
+        dropdown.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      function selectTheme(value) {
+        // Update native select (triggers script.js change handler)
+        nativeSelect.value = value;
+        nativeSelect.dispatchEvent(new Event('change'));
+
+        // Update custom picker UI
+        const opt = dropdown.querySelector(`[data-value="${value}"]`);
+        if (opt) {
+          options.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          label.textContent = opt.querySelector('.theme-picker__opt-name').textContent;
+          const optSwatch = opt.querySelector('.theme-picker__opt-swatch');
+          if (optSwatch) swatch.style.background = optSwatch.style.background;
+        }
+        close();
+      }
+
+      // Sync picker to current native select value on load
+      function syncFromNative() {
+        const val = nativeSelect.value;
+        const opt = dropdown.querySelector(`[data-value="${val}"]`);
+        if (opt) {
+          options.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          label.textContent = opt.querySelector('.theme-picker__opt-name').textContent;
+          const optSwatch = opt.querySelector('.theme-picker__opt-swatch');
+          if (optSwatch) swatch.style.background = optSwatch.style.background;
+        }
+      }
+
+      // Toggle dropdown
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        isOpen ? close() : open();
+      });
+
+      // Option click
+      options.forEach(opt => {
+        opt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectTheme(opt.dataset.value);
+        });
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (isOpen && !e.target.closest('.theme-picker')) close();
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) close();
+      });
+
+      // Keyboard nav inside dropdown
+      dropdown.addEventListener('keydown', (e) => {
+        const focused = document.activeElement;
+        const items = [...options];
+        const idx = items.indexOf(focused);
+        if (e.key === 'ArrowDown') { e.preventDefault(); items[(idx + 1) % items.length]?.focus(); }
+        if (e.key === 'ArrowUp') { e.preventDefault(); items[(idx - 1 + items.length) % items.length]?.focus(); }
+        if (e.key === 'Enter' && focused.dataset?.value) { selectTheme(focused.dataset.value); }
+      });
+
+      // Watch native select for programmatic changes from script.js
+      const observer = new MutationObserver(syncFromNative);
+      observer.observe(nativeSelect, { attributes: true, childList: true, subtree: true });
+
+      // Also poll to catch .value assignments (MutationObserver doesn't catch those)
+      let lastVal = nativeSelect.value;
+      setInterval(() => {
+        if (nativeSelect.value !== lastVal) { lastVal = nativeSelect.value; syncFromNative(); }
+      }, 300);
+
+      // Initial sync
+      syncFromNative();
+    })();
+
+    // Footer: UPI toggle + Copy UPI ID
+    (function initFooter() {
+      const upiToggle = document.getElementById('upi-toggle-btn');
+      const upiPanel = document.getElementById('upi-panel');
+      const copyBtn = document.getElementById('copy-upi-btn');
+
+      if (upiToggle && upiPanel) {
+        upiToggle.addEventListener('click', () => {
+          upiPanel.classList.toggle('open');
+          upiToggle.textContent = upiPanel.classList.contains('open') ? 'Hide UPI' : 'In India? Use UPI';
+        });
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText('praxlannister@upi').then(() => {
+            copyBtn.textContent = 'Copied!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+              copyBtn.textContent = 'Copy';
+              copyBtn.classList.remove('copied');
+            }, 2000);
+          });
+        });
+      }
+    })();
+    </script>
 
     <!-- Main Script -->
     <script type="module" src="script.js"></script>
