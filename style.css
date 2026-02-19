@@ -3003,37 +3003,37 @@ body.zen-mode .preview-container {
 
 /* ==================== PRISM COPY BUTTON REDESIGN ==================== */
 /* Override the default Prism copy-to-clipboard plugin styling */
-.code-toolbar {
+#markdown-preview .code-toolbar {
   position: relative;
 }
 
-.code-toolbar > .toolbar {
+#markdown-preview .code-toolbar > .toolbar {
   position: absolute;
   top: 8px;
   right: 8px;
-  opacity: 0;
+  opacity: 0 !important;
   transition: opacity 0.2s ease;
   z-index: 2;
 }
 
-.code-toolbar:hover > .toolbar {
+#markdown-preview .code-toolbar:hover > .toolbar {
   opacity: 1;
 }
 
-.code-toolbar > .toolbar > .toolbar-item > button,
-.code-toolbar > .toolbar > .toolbar-item > a,
-.code-toolbar > .toolbar > .toolbar-item > span {
+#markdown-preview .code-toolbar > .toolbar > .toolbar-item > button,
+#markdown-preview .code-toolbar > .toolbar > .toolbar-item > a,
+#markdown-preview .code-toolbar > .toolbar > .toolbar-item > span {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 5px 10px;
-  background: rgba(255, 255, 255, 0.08);
+  padding: 5px 10px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  color: var(--text-secondary, #aaa);
-  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+  color: var(--text-secondary, #aaa) !important;
+  font-size: 11px !important;
   font-weight: 500;
   font-family: var(--font-ui, sans-serif);
   cursor: pointer;
@@ -3043,8 +3043,8 @@ body.zen-mode .preview-container {
   line-height: 1;
 }
 
-.code-toolbar > .toolbar > .toolbar-item > button:hover,
-.code-toolbar > .toolbar > .toolbar-item > a:hover {
+#markdown-preview .code-toolbar > .toolbar > .toolbar-item > button:hover,
+#markdown-preview .code-toolbar > .toolbar > .toolbar-item > a:hover {
   background: rgba(255, 255, 255, 0.15);
   color: var(--text-primary, #fff);
   border-color: rgba(255, 255, 255, 0.2);
@@ -3052,7 +3052,7 @@ body.zen-mode .preview-container {
   transform: translateY(-1px);
 }
 
-.code-toolbar > .toolbar > .toolbar-item > button:active {
+#markdown-preview .code-toolbar > .toolbar > .toolbar-item > button:active {
   transform: translateY(0);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
