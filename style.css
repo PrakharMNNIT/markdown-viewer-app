@@ -158,7 +158,7 @@ body {
 #markdown-editor {
   flex: 1;
   padding: 20px;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: var(--font-picker-editor, var(--font-code, 'Consolas', 'Monaco', 'Courier New', monospace));
   font-size: 14px;
   line-height: 1.6;
   border: none;
@@ -2999,6 +2999,217 @@ body.zen-mode .preview-container {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ==================== FONT PICKER OVERRIDE LAYER ==================== */
+/* These vars are SET by JS when user picks a font, theme fonts apply when unset */
+/* Cascade order ensures these override theme-specific font declarations */
+
+/* Preview body font + size override */
+#markdown-preview {
+  font-family: var(--font-picker-preview, inherit);
+  font-size: var(--font-picker-size, inherit);
+}
+
+/* Editor font override */
+#markdown-editor {
+  font-family: var(--font-picker-editor, var(--font-code, 'Consolas', monospace));
+}
+
+/* Code block font override */
+#markdown-preview pre,
+#markdown-preview pre code {
+  font-family: var(--font-picker-code, var(--font-code, 'Consolas', monospace));
+}
+
+/* ==================== FONT PICKER POPOVER ==================== */
+.font-picker {
+  position: relative;
+  z-index: var(--z-dropdown, 40);
+}
+
+.font-picker__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  min-height: 36px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: var(--font-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset, 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.font-picker__trigger:hover {
+  border-color: var(--h1-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.font-picker__panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 340px;
+  max-height: 520px;
+  overflow-y: auto;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.98);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 16px 48px -8px rgba(0,0,0,0.25), 0 8px 16px -4px rgba(0,0,0,0.15);
+}
+
+.font-picker__panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.font-picker__section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin: 12px 0 6px;
+  opacity: 0.6;
+}
+
+.font-picker__section-label:first-child { margin-top: 0; }
+
+/* Font card grid for preview body fonts */
+.font-picker__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.font-picker__card {
+  padding: 8px 10px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  color: var(--text-primary);
+}
+
+.font-picker__card:hover {
+  border-color: var(--h1-color);
+  background: rgba(0,0,0,0.03);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.font-picker__card.selected {
+  border-color: var(--h1-color);
+  background: var(--h1-color);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.font-picker__card-name {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.6;
+  margin-bottom: 2px;
+}
+
+.font-picker__card-preview {
+  font-size: 15px;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mono font select (for editor + code) */
+.font-picker__select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06) inset;
+}
+
+/* Size stepper */
+.font-picker__size-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.font-picker__size-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.font-picker__size-btn:hover {
+  border-color: var(--h1-color);
+  background: rgba(0,0,0,0.03);
+}
+
+.font-picker__size-value {
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+/* Reset button */
+.font-picker__reset {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.font-picker__reset:hover {
+  border-color: var(--error, #ef4444);
+  color: var(--error, #ef4444);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .font-picker__panel { width: 280px; right: auto; left: 0; }
+  .font-picker__grid { grid-template-columns: 1fr; }
 }
 
 /* ==================== ACCESSIBILITY: REDUCED MOTION ==================== */

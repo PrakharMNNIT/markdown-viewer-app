@@ -264,6 +264,14 @@
               </div>
             </div>
           </div>
+          <!-- Font Picker -->
+          <div class="font-picker" id="font-picker">
+            <button class="font-picker__trigger" id="font-picker-trigger" type="button" aria-label="Font settings" title="Font Settings">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+              Aa
+            </button>
+            <div class="font-picker__panel" id="font-picker-panel"></div>
+          </div>
           <button class="btn" id="customize-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17.5 10.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5"/><circle cx="6.5" cy="13.5" r="2.5"/><path d="M3 6v1a2 2 0 0 0 2 2h1"/><path d="M21 18v-1a2 2 0 0 0-2-2h-1"/></svg> Customize</button>
           <button class="btn" id="export-html-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export HTML</button>
           <button class="btn" id="export-pdf-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Export PDF</button>
@@ -979,6 +987,51 @@
 
       // Initial sync
       syncFromNative();
+    })();
+
+    
+    // Font Picker Controller
+    (function initFontPicker() {
+      const FONTS = {
+        sans: [
+          {name:'System Default',family:'inherit',url:null},
+          {name:'Inter',family:"'Inter',sans-serif",url:'Inter:wght@300;400;500;600;700'},
+          {name:'IBM Plex Sans',family:"'IBM Plex Sans',sans-serif",url:'IBM+Plex+Sans:wght@300;400;500;600;700'},
+          {name:'DM Sans',family:"'DM Sans',sans-serif",url:'DM+Sans:wght@400;500;700'},
+          {name:'Figtree',family:"'Figtree',sans-serif",url:'Figtree:wght@300;400;500;600;700'},
+          {name:'Noto Sans',family:"'Noto Sans',sans-serif",url:'Noto+Sans:wght@300;400;500;700'},
+        ],
+        serif: [
+          {name:'Merriweather',family:"'Merriweather',serif",url:'Merriweather:wght@300;400;700'},
+          {name:'Lora',family:"'Lora',serif",url:'Lora:wght@400;500;600;700'},
+          {name:'Crimson Text',family:"'Crimson Text',serif",url:'Crimson+Text:wght@400;600;700'},
+          {name:'Source Serif 4',family:"'Source Serif 4',serif",url:'Source+Serif+4:wght@300;400;600;700'},
+          {name:'Literata',family:"'Literata',serif",url:'Literata:wght@300;400;500;700'},
+        ],
+        mono: [
+          {name:'JetBrains Mono',family:"'JetBrains Mono',monospace",url:'JetBrains+Mono:wght@400;500;600;700'},
+          {name:'Fira Code',family:"'Fira Code',monospace",url:'Fira+Code:wght@400;500;600;700'},
+          {name:'Source Code Pro',family:"'Source Code Pro',monospace",url:'Source+Code+Pro:wght@400;500;600;700'},
+          {name:'IBM Plex Mono',family:"'IBM Plex Mono',monospace",url:'IBM+Plex+Mono:wght@400;500;600;700'},
+          {name:'Space Mono',family:"'Space Mono',monospace",url:'Space+Mono:wght@400;700'},
+        ],
+        quirky: [
+          {name:'Outfit',family:"'Outfit',sans-serif",url:'Outfit:wght@300;400;500;600;700'},
+          {name:'Space Grotesk',family:"'Space Grotesk',sans-serif",url:'Space+Grotesk:wght@400;500;600;700'},
+          {name:'Recursive',family:"'Recursive',sans-serif",url:'Recursive:wght@400;500;700'},
+          {name:'Comic Neue',family:"'Comic Neue',cursive",url:'Comic+Neue:wght@400;700'},
+          {name:'Caveat',family:"'Caveat',cursive",url:'Caveat:wght@400;500;600;700'},
+        ]
+      };
+      const loadedFonts=new Set(),root=document.documentElement,trigger=document.getElementById('font-picker-trigger'),panel=document.getElementById('font-picker-panel');
+      let isOpen=false,settings=JSON.parse(localStorage.getItem('fontSettings')||'{}');
+      function loadFont(f){if(!f.url||loadedFonts.has(f.name))return;const l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family='+f.url+'&display=swap';document.head.appendChild(l);loadedFonts.add(f.name);}
+      function applySettings(){const all=[...FONTS.sans,...FONTS.serif,...FONTS.quirky];if(settings.previewBody&&settings.previewBody!=='System Default'){const f=all.find(x=>x.name===settings.previewBody);if(f){loadFont(f);root.style.setProperty('--font-picker-preview',f.family);}}else root.style.removeProperty('--font-picker-preview');if(settings.editor){const f=FONTS.mono.find(x=>x.name===settings.editor);if(f){loadFont(f);root.style.setProperty('--font-picker-editor',f.family);}}else root.style.removeProperty('--font-picker-editor');if(settings.codeBlock){const f=FONTS.mono.find(x=>x.name===settings.codeBlock);if(f){loadFont(f);root.style.setProperty('--font-picker-code',f.family);}}else root.style.removeProperty('--font-picker-code');if(settings.baseSize)root.style.setProperty('--font-picker-size',settings.baseSize+'px');else root.style.removeProperty('--font-picker-size');localStorage.setItem('fontSettings',JSON.stringify(settings));}
+      function buildPanel(){const pf=[...FONTS.sans,...FONTS.serif,...FONTS.quirky];let h='<div class="font-picker__section-label">Preview Font</div><div class="font-picker__grid">';pf.forEach(f=>{const s=settings.previewBody===f.name?' selected':'';h+='<button class="font-picker__card'+s+'" data-font="'+f.name+'" data-url="'+(f.url||'')+'" style="font-family:'+f.family+'"><div class="font-picker__card-name">'+f.name+'</div><div class="font-picker__card-preview" style="font-family:'+f.family+'">The quick fox</div></button>';});h+='</div>';h+='<div class="font-picker__section-label">Editor Font</div><select class="font-picker__select" id="fp-editor-select">';FONTS.mono.forEach(f=>{h+='<option value="'+f.name+'"'+(settings.editor===f.name?' selected':'')+'>'+f.name+'</option>';});h+='</select>';h+='<div class="font-picker__section-label">Code Block Font</div><select class="font-picker__select" id="fp-code-select">';FONTS.mono.forEach(f=>{h+='<option value="'+f.name+'"'+(settings.codeBlock===f.name?' selected':'')+'>'+f.name+'</option>';});h+='</select>';h+='<div class="font-picker__section-label">Base Size</div><div class="font-picker__size-row"><button class="font-picker__size-btn" id="fp-size-down">-</button><span class="font-picker__size-value" id="fp-size-val">'+(settings.baseSize||16)+'px</span><button class="font-picker__size-btn" id="fp-size-up">+</button></div>';h+='<button class="font-picker__reset" id="fp-reset">Reset to defaults</button>';panel.innerHTML=h;panel.querySelectorAll('.font-picker__card').forEach(c=>{c.addEventListener('mouseenter',()=>{if(c.dataset.url)loadFont({name:c.dataset.font,url:c.dataset.url});});c.addEventListener('click',()=>{panel.querySelectorAll('.font-picker__card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');settings.previewBody=c.dataset.font;applySettings();});});document.getElementById('fp-editor-select').addEventListener('change',e=>{settings.editor=e.target.value;applySettings();});document.getElementById('fp-code-select').addEventListener('change',e=>{settings.codeBlock=e.target.value;applySettings();});document.getElementById('fp-size-down').addEventListener('click',()=>{settings.baseSize=Math.max(12,(settings.baseSize||16)-1);document.getElementById('fp-size-val').textContent=settings.baseSize+'px';applySettings();});document.getElementById('fp-size-up').addEventListener('click',()=>{settings.baseSize=Math.min(24,(settings.baseSize||16)+1);document.getElementById('fp-size-val').textContent=settings.baseSize+'px';applySettings();});document.getElementById('fp-reset').addEventListener('click',()=>{settings={};localStorage.removeItem('fontSettings');['--font-picker-preview','--font-picker-editor','--font-picker-code','--font-picker-size'].forEach(v=>root.style.removeProperty(v));buildPanel();});}
+      trigger.addEventListener('click',e=>{e.stopPropagation();if(!isOpen){buildPanel();panel.classList.add('open');isOpen=true;}else{panel.classList.remove('open');isOpen=false;}});
+      document.addEventListener('click',e=>{if(isOpen&&!e.target.closest('.font-picker')){panel.classList.remove('open');isOpen=false;}});
+      document.addEventListener('keydown',e=>{if(e.key==='Escape'&&isOpen){panel.classList.remove('open');isOpen=false;}});
+      applySettings();
     })();
 
     // Footer: UPI toggle + Copy UPI ID
