@@ -3003,11 +3003,11 @@ body.zen-mode .preview-container {
 
 /* ==================== PRISM COPY BUTTON REDESIGN ==================== */
 /* Override the default Prism copy-to-clipboard plugin styling */
-#markdown-preview .code-toolbar {
+#markdown-preview div.code-toolbar {
   position: relative;
 }
 
-#markdown-preview .code-toolbar > .toolbar {
+#markdown-preview div.code-toolbar > .toolbar {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -3016,13 +3016,13 @@ body.zen-mode .preview-container {
   z-index: 2;
 }
 
-#markdown-preview .code-toolbar:hover > .toolbar {
-  opacity: 1;
+#markdown-preview div.code-toolbar:hover > .toolbar {
+  opacity: 1 !important;
 }
 
-#markdown-preview .code-toolbar > .toolbar > .toolbar-item > button,
-#markdown-preview .code-toolbar > .toolbar > .toolbar-item > a,
-#markdown-preview .code-toolbar > .toolbar > .toolbar-item > span {
+#markdown-preview div.code-toolbar > .toolbar > .toolbar-item > button,
+#markdown-preview div.code-toolbar > .toolbar > .toolbar-item > a,
+#markdown-preview div.code-toolbar > .toolbar > .toolbar-item > span {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -3043,8 +3043,8 @@ body.zen-mode .preview-container {
   line-height: 1;
 }
 
-#markdown-preview .code-toolbar > .toolbar > .toolbar-item > button:hover,
-#markdown-preview .code-toolbar > .toolbar > .toolbar-item > a:hover {
+#markdown-preview div.code-toolbar > .toolbar > .toolbar-item > button:hover,
+#markdown-preview div.code-toolbar > .toolbar > .toolbar-item > a:hover {
   background: var(--bg-tertiary, rgba(128, 128, 128, 0.25));
   color: var(--text-primary, #fff);
   border-color: var(--h1-color, rgba(128, 128, 128, 0.3));
@@ -3052,7 +3052,7 @@ body.zen-mode .preview-container {
   transform: translateY(-1px);
 }
 
-#markdown-preview .code-toolbar > .toolbar > .toolbar-item > button:active {
+#markdown-preview div.code-toolbar > .toolbar > .toolbar-item > button:active {
   transform: translateY(0);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
