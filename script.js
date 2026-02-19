@@ -1384,8 +1384,8 @@ graph TD
   pdfDownloadBtn.addEventListener('click', downloadPDF);
 
   // Event listeners for export buttons
-  exportHtmlBtn.addEventListener('click', exportHTML);
-  exportPdfBtn.addEventListener('click', () => {
+  exportHtmlBtn?.addEventListener('click', exportHTML);
+  exportPdfBtn?.addEventListener('click', () => {
     console.log('Export PDF button clicked');
     openPDFModal();
   });
