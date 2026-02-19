@@ -495,16 +495,11 @@
           </span>
         </div>
 
-        <!-- Row 2: Support buttons -->
-        <div class="footer-row footer-row--support" id="footer-support-row">
-          <a href="https://ko-fi.com/praxlannister?ref=webapp_footer" target="_blank" rel="noopener noreferrer" class="footer-support-btn footer-support-btn--kofi">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-            Support via Ko-fi
-          </a>
-          <button type="button" class="footer-support-btn footer-support-btn--upi" id="upi-toggle-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><path d="M17 17h.01"/><rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/></svg>
-            In India? Use UPI
-          </button>
+        <!-- Row 2: Support (inline) -->
+        <div class="footer-row" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px">
+          <a href="https://ko-fi.com/praxlannister" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:#FF5E5B;color:#fff;border-radius:20px;font-size:11px;font-weight:600;text-decoration:none">Ko-fi</a>
+          <a href="https://github.com/sponsors/PrakharMNNIT" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:#db61a2;color:#fff;border-radius:20px;font-size:11px;font-weight:600;text-decoration:none">Sponsors</a>
+          <button type="button" id="upi-toggle-btn" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:var(--bg-tertiary,rgba(0,0,0,0.05));color:var(--text-secondary);border:1px solid var(--border-color);border-radius:20px;font-size:11px;font-weight:600;cursor:pointer">UPI</button>
         </div>
 
         <!-- Row 3: UPI expandable section (hidden by default) -->
