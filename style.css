@@ -19,7 +19,7 @@ body {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 44px);
   /* Reserve space for footer */
 }
 
@@ -1154,7 +1154,7 @@ body {
 
   /* App container fills viewport minus footer */
   .app-container {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 44px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
