@@ -1004,10 +1004,10 @@ body {
 
 /* Mobile footer */
 @media (max-width: 768px) {
-  .footer-row--top { flex-direction: column; gap: 4px; }
+  .footer-inner { flex-direction: column !important; gap: 4px !important; align-items: center; }
+  .footer-row--top { flex-direction: column; gap: 2px; text-align: center; }
   .footer-sep { display: none; }
-  .footer-row--support { flex-direction: column; gap: 8px; }
-  .footer-support-btn { width: 100%; max-width: 260px; justify-content: center; }
+  .footer-social { flex-wrap: wrap; justify-content: center; }
 }
 
 /* ==================== SUPPORT WIDGET ==================== */
