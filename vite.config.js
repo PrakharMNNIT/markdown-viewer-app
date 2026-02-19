@@ -16,7 +16,7 @@ export default defineConfig({
   plugins: [
     prism({
       languages: 'all', // Load ALL languages for future-proofing
-      plugins: ['line-numbers', 'copy-to-clipboard'],
+      plugins: ['line-numbers'],
       theme: 'tomorrow',
       css: true,
     }),
