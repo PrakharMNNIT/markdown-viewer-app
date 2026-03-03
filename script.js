@@ -329,10 +329,6 @@ const folderBrowserService = new FolderBrowserService(storageManager);
 // Link navigation service (callback will be wired in setupEditor)
 let linkNavigationService = null;
 
-// Folder browser state (these are managed within setupEditor scope)
-const _currentFolderFiles = [];
-const _currentFileHandle = null;
-
 // Global render function reference (will be set in setupEditor)
 let globalRenderMarkdown = null;
 
