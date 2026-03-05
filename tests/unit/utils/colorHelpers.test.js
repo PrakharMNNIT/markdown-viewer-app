@@ -72,7 +72,7 @@ describe('colorHelpers', () => {
     });
     vi.stubGlobal(
       'getComputedStyle',
-      vi.fn(() => mockComputedStyle),
+      vi.fn(() => mockComputedStyle)
     );
   });
 
