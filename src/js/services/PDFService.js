@@ -46,7 +46,7 @@ export class PDFService {
 
     // Handle rgba/rgb
     const rgbaMatch = color.match(
-      /rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*[\d.]+)?\s*\)/i,
+      /rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*[\d.]+)?\s*\)/i
     );
     if (rgbaMatch) {
       const r = parseInt(rgbaMatch[1], 10);
@@ -294,7 +294,7 @@ export class PDFService {
         mergedConfig,
         mergedConfig.themeName,
         mergedConfig.customTheme,
-        margins,
+        margins
       );
 
       // Build html2pdf config
