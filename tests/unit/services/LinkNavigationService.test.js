@@ -202,7 +202,7 @@ describe('LinkNavigationService', () => {
       await service.navigateToMarkdownFile('test.md');
       expect(showWarningSpy).toHaveBeenCalledWith(
         'No file currently open',
-        'Please open a file from the folder browser first.'
+        'Please open a file from the folder browser first.',
       );
     });
 
@@ -280,7 +280,7 @@ describe('LinkNavigationService', () => {
 
       expect(showWarningSpy).toHaveBeenCalledWith(
         'Failed to load file',
-        'Could not read file: Permission denied'
+        'Could not read file: Permission denied',
       );
     });
   });
