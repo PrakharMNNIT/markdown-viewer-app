@@ -13,7 +13,15 @@ export default [
 
   // Global ignores
   {
-    ignores: ['node_modules/**', 'dist/**', 'coverage/**', '*.min.js', 'codebase_audit/**'],
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'coverage/**',
+      '*.min.js',
+      'codebase_audit/**',
+      '.claude/skills/**',
+      '.agents/skills/**',
+    ],
   },
 
   // Main configuration for all JS files

@@ -1,5 +1,5 @@
 const error = {
-    message: 'Something went wrong <img src=x onerror=alert(1)>'
+    message: 'Something went wrong <img src=x onerror=alert(1)>',
 };
 
 function escapeHTML(str) {
@@ -12,9 +12,9 @@ function escapeHTML(str) {
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#039;');
-        }
+        },
     };
-    div.textContent = 'Error rendering markdown: ' + str;
+    div.textContent = `Error rendering markdown: ${ str}`;
     return div.innerHTML;
 }
 

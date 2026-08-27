@@ -171,7 +171,7 @@ export class LinkNavigationService {
     if (!this.currentFilePath) {
       this.showWarning(
         'No file currently open',
-        'Please open a file from the folder browser first.'
+        'Please open a file from the folder browser first.',
       );
       return;
     }
@@ -182,7 +182,7 @@ export class LinkNavigationService {
     // Resolve absolute path
     const targetPath = this.resolveTargetPath(cleanPath);
     console.log(
-      `[LinkNav] Navigating: ${this.currentFilePath} → ${targetPath}${anchor ? `#${anchor}` : ''}`
+      `[LinkNav] Navigating: ${this.currentFilePath} → ${targetPath}${anchor ? `#${anchor}` : ''}`,
     );
 
     // Check cache
