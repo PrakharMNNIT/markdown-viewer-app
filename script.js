@@ -291,7 +291,7 @@ const AnchorNavigation = {
    */
   fuzzyMatchHeading(hash) {
     const headings = this.container.querySelectorAll(
-      'h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]'
+      'h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]',
     );
     const normalizedSearch = hash.toLowerCase().replace(/[^\w]/g, '');
 
@@ -500,7 +500,7 @@ async function detectSupportRegion() {
     // 4. Fail open - silent fail to global
     console.warn(
       '[SupportWidget] Geo-lookup failed/timed-out, defaulting to Global.',
-      error.message
+      error.message,
     );
     return SUPPORT_FALLBACK_REGION;
   }
@@ -606,7 +606,7 @@ function configureMarkedExtensions() {
         },
         tokenizer(src) {
           const match = src.match(
-            /^> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*\n((?:> .*\n?)*)/
+            /^> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*\n((?:> .*\n?)*)/,
           );
           if (match) {
             const type = match[1];
@@ -1109,7 +1109,7 @@ graph TD
           const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
           // Return placeholder div
           return `<div class="mermaid-diagram" id="${id}" data-code="${encodeURIComponent(decodedCode)}">${code}</div>`;
-        }
+        },
       );
 
       // Sanitize HTML using DOMPurify
@@ -1744,7 +1744,7 @@ graph TD
       if (isMobileView()) {
         initializeMobileView();
       }
-    }, 250)
+    }, 250),
   );
 
   // Initialize visibility
@@ -2003,7 +2003,7 @@ graph TD
       alert(
         'Folder browsing requires File System Access API.\n\n' +
           'Please use Chrome 86+ or Edge 86+.\n\n' +
-          'Firefox and Safari are not currently supported.'
+          'Firefox and Safari are not currently supported.',
       );
       return;
     }
@@ -2636,7 +2636,7 @@ Wrap up your thoughts and include a call to action.
     }
 
     console.log(
-      `[App] Loaded from link: ${fileData.path}${fileData.anchor ? `#${fileData.anchor}` : ''}`
+      `[App] Loaded from link: ${fileData.path}${fileData.anchor ? `#${fileData.anchor}` : ''}`,
     );
   });
 
