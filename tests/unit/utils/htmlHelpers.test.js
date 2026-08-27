@@ -28,7 +28,11 @@ describe('htmlHelpers', () => {
 
   describe('createBlobUrl', () => {
     beforeEach(() => {
-      vi.stubGlobal('Blob', vi.fn().mockImplementation((content, options) => ({ content, options })));
+      const BlobMock = vi.fn(function Blob(content, options) {
+        this.content = content;
+        this.options = options;
+      });
+      vi.stubGlobal('Blob', BlobMock);
       vi.stubGlobal('URL', {
         createObjectURL: vi.fn().mockReturnValue('blob:mock-url'),
         revokeObjectURL: vi.fn(),
