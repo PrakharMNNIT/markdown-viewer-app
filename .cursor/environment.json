@@ -1,0 +1,5 @@
+{
+  "name": "markdown-viewer-app",
+  "install": "npm ci && bash scripts/setup-gstack-full.sh",
+  "start": "echo 'markdown-viewer-app environment ready'"
+}

@@ -47,3 +47,17 @@ dist/
 # Testing
 coverage/
 .vitest/
+
+# gstack runtime sidecars (created by scripts/setup-gstack-full.sh; not vendored in git)
+.claude/skills/gstack/bin
+.claude/skills/gstack/lib
+.claude/skills/gstack/browse/
+.claude/skills/gstack/VERSION
+.claude/skills/gstack/supabase/
+.claude/skills/gstack/gstack-upgrade/SKILL.md
+.agents/skills/gstack/bin
+.agents/skills/gstack/lib
+.agents/skills/gstack/browse/
+.agents/skills/gstack/VERSION
+.agents/skills/gstack/supabase/
+.agents/skills/gstack/gstack-upgrade/SKILL.md

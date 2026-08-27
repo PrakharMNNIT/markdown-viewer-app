@@ -29,8 +29,28 @@ Each skill is a directory containing a `SKILL.md` with YAML frontmatter (`name`,
 Only the skill **markdown/templates** (the SOP content) are vendored here. The Bun
 runtime that powers gstack's executable tooling — `lib/`, `bin/`, `scripts/`,
 `browse/` (Chromium automation), `extension/`, `hosts/`, and tests — is **not**
-included. To enable the runnable tooling, install upstream and run its setup with
-[Bun](https://bun.sh):
+included in git (~26MB). Fetch the runtime at setup time instead.
+
+**Recommended (repo script — idempotent, Cloud Agent friendly):**
+
+```bash
+bash scripts/setup-gstack-full.sh
+```
+
+The script installs [Bun](https://bun.sh) if missing, clones/updates upstream
+gstack into a cache directory (`$XDG_CACHE_HOME/gstack-upstream` by default),
+runs `./setup --host cursor`, and symlinks `bin/`, `lib/`, and `browse/` into:
+
+- `.claude/skills/gstack/` (and via symlink, `.agents/skills/gstack/`)
+- `~/.claude/skills/gstack/` (global binary paths referenced by skill preambles)
+
+Override the cache location with `GSTACK_CACHE_DIR`, the upstream ref with
+`GSTACK_REF` (default `main`), or the host with `GSTACK_HOST` (e.g. `codex`, `claude`).
+
+Cloud Agents: this repo's `.cursor/environment.json` runs the script during
+`install` after `npm ci`.
+
+**Manual upstream install** (alternative):
 
 ```bash
 git clone --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack \
