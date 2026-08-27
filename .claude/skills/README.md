@@ -41,11 +41,11 @@ The script installs [Bun](https://bun.sh) if missing, clones/updates upstream
 gstack into a cache directory (`$XDG_CACHE_HOME/gstack-upstream` by default),
 runs `./setup --host cursor`, and symlinks `bin/`, `lib/`, and `browse/` into:
 
-- `.claude/skills/gstack/` and `.agents/skills/gstack/` (repo skills)
+- `.claude/skills/gstack/` (and via symlink, `.agents/skills/gstack/`)
 - `~/.claude/skills/gstack/` (global binary paths referenced by skill preambles)
 
-Override the cache location with `GSTACK_CACHE_DIR` or the host with
-`GSTACK_HOST` (e.g. `codex`, `claude`).
+Override the cache location with `GSTACK_CACHE_DIR`, the upstream ref with
+`GSTACK_REF` (default `main`), or the host with `GSTACK_HOST` (e.g. `codex`, `claude`).
 
 Cloud Agents: this repo's `.cursor/environment.json` runs the script during
 `install` after `npm ci`.

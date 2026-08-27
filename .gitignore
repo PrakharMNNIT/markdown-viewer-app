@@ -54,8 +54,10 @@ coverage/
 .claude/skills/gstack/browse/
 .claude/skills/gstack/VERSION
 .claude/skills/gstack/supabase/
+.claude/skills/gstack/gstack-upgrade/SKILL.md
 .agents/skills/gstack/bin
 .agents/skills/gstack/lib
 .agents/skills/gstack/browse/
 .agents/skills/gstack/VERSION
 .agents/skills/gstack/supabase/
+.agents/skills/gstack/gstack-upgrade/SKILL.md
