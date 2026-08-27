@@ -3,10 +3,13 @@
 This directory holds reusable **agent skills** (SOP-style `SKILL.md` files) that coding
 agents (Claude Code, Cursor, Codex, and other harnesses) can discover and invoke.
 
-The identical tree is maintained in two locations so every harness finds it:
+The canonical skill tree lives under `.claude/skills/`. Agent-agnostic harnesses
+(Cursor, Codex, Gemini, etc.) discover the same content via a relative symlink:
 
-- `.claude/skills/` — Claude Code / Anthropic-style discovery
-- `.agents/skills/` — agent-agnostic discovery (Cursor, Codex, Gemini, etc.)
+- `.claude/skills/` — canonical tree (Claude Code / Anthropic-style discovery)
+- `.agents/skills` → `../.claude/skills` — symlink for cross-runtime discovery
+
+Edit skills only under `.claude/skills/`; changes are visible through both paths.
 
 Each skill is a directory containing a `SKILL.md` with YAML frontmatter (`name`,
 `description`, optional `triggers`/`allowed-tools`). Supporting `references/`,
