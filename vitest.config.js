@@ -5,7 +5,12 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./tests/setup.js'],
-    exclude: ['**/node_modules/**', '**/.claude/skills/**', '**/.agents/skills/**'],
+    exclude: [
+      '**/node_modules/**',
+      '**/.claude/skills/**',
+      '**/.agents/skills/**',
+      '**/.cursor/skills/**',
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],

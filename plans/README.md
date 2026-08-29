@@ -11,7 +11,7 @@ honor its STOP conditions, and update your row when done.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 001 | Fix Vitest vendored skill test pollution | P1 | S | — | TODO |
+| 001 | Fix Vitest vendored skill test pollution | P1 | S | — | DONE |
 | 002 | Add Markdown Preview characterization tests | P1 | M | 001 | TODO |
 | 003 | Unify and tighten DOMPurify sanitize policy | P1 | S | 002 | TODO |
 | 004 | Add CI test and lint gates | P2 | S | 001 | TODO |
