@@ -1,48 +1,75 @@
-# Native Cursor plugins (desktop only)
+# Native Cursor / Claude / Codex plugins
 
-Cloud Agents cannot install Cursor marketplace plugins. Enable these in **Cursor Settings → Plugins** on your desktop machine.
+Some capabilities ship as **marketplace plugins** rather than vendored skill trees in git. Cloud Agents cannot run `/add-plugin` — install these on your local Cursor (or equivalent) IDE.
 
-## compound-engineering
+## Compound Engineering
 
-Compound Engineering adds spec-driven workflows, compound learning, and review loops.
+**Purpose:** Spec-driven product workflow (`/ce-*` commands), compound learning, structured reviews.
 
-```text
-/add-plugin compound-engineering
-```
+**Cannot automate in Cloud Agent:** `/add-plugin compound-engineering` requires the Cursor desktop marketplace.
 
-After install, use CE skills for large features (`/ce-spec`, `/ce-compound`) as an alternative to gstack or Spec Kit. Pick **one** spec methodology per task — see [`workflow-pipeline.md`](./workflow-pipeline.md).
+### Cursor (local)
+
+1. Open **Cursor Settings → Plugins** (or command palette: `Add Plugin`).
+2. Search **Compound Engineering** and enable it.
+3. Reload the window if prompted.
+4. Verify: slash commands such as `/ce-compound`, `/ce-review` appear in chat.
+
+### Claude Code (local)
+
+1. Install from the Anthropic plugin marketplace if listed, or clone [every-to/compound-engineering-plugin](https://github.com/every-to/compound-engineering-plugin) per upstream README.
+2. Place skills under `~/.claude/skills/` or use the plugin's documented install path.
+3. Run the plugin's setup skill if provided.
+
+### Codex CLI (local)
+
+1. Follow Compound Engineering upstream docs for Codex/OpenAI agent integration.
+2. Typically: copy skill pack to the Codex skills directory documented in that repo.
+
+**Workflow note:** Use Compound Engineering **or** gstack spec **or** Spec Kit for a given task — not all three (see [workflow-pipeline.md](./workflow-pipeline.md)).
 
 ## pstack
 
-pstack provides principles, arena, swarm, and verification workflows.
+**Purpose:** Principles, architecture panels, swarm/arena workflows.
 
-```text
-/add-plugin pstack
-/setup-pstack
-```
+### Cursor (local)
 
-`/setup-pstack` writes `~/.cursor/rules/pstack-models.mdc` with verified model slugs for your account. Re-run when your model entitlements change.
+1. `/add-plugin pstack` (or enable **pstack** in Settings → Plugins).
+2. Run `/setup-pstack` once to write `~/.cursor/rules/pstack-models.mdc`.
+3. This repo already vendors pstack skills under `.claude/skills/pstack/`; the plugin adds Task-tool integration and slash routing.
+
+### Claude Code / Codex
+
+Use vendored `.claude/skills/pstack/` — no separate plugin required for markdown SOPs. Model routing overrides are Cursor-specific (`pstack-models.mdc`).
 
 ## superpowers
 
-Superpowers enforces plan-before-code, TDD, debugging, and code-review discipline.
+**Purpose:** Plan-before-code, TDD, debugging, code review discipline.
 
-```text
-/add-plugin superpowers
+### Cursor (local)
+
+1. `/add-plugin superpowers`
+2. Skills are also vendored at `.claude/skills/superpowers/` for discovery without the plugin.
+
+### Claude Code
+
+Install via `npx skills add obra/superpowers` or use the vendored copy in this repo.
+
+## CodeRabbit / Browser Use / Mobbin / shadcn
+
+These are **MCP-backed Cursor plugins**, enabled per workspace or user in Cursor Cloud/local settings. They are listed in root `AGENTS.md` under companion plugins. No git vendoring — configure credentials and toggles in the IDE.
+
+## Verification checklist (local)
+
+After enabling plugins locally:
+
+```bash
+# Global discovery skill
+npx skills@latest list -g | grep find-skills
+
+# pstack models rule exists
+test -f ~/.cursor/rules/pstack-models.mdc && head ~/.cursor/rules/pstack-models.mdc
+
+# Project verification skill
+test -f .claude/skills/verify-markdown-viewer/SKILL.md && echo OK
 ```
-
-This repo also **vendors** the superpowers skill markdown under `.claude/skills/superpowers/` for cross-runtime discovery. The native plugin adds MCP integrations and slash commands in Cursor desktop.
-
-## Pairing with this repo
-
-| Plugin | Vendored in git? | When to use native plugin |
-| --- | --- | --- |
-| pstack | Yes (`.claude/skills/pstack/`) | Arena/swarm UI, `/setup-pstack` model config |
-| superpowers | Yes (`.claude/skills/superpowers/`) | Slash commands, brainstorming server |
-| compound-engineering | No | Large greenfield specs, compound retros |
-
-## Cloud Agent limitations
-
-- Plugin marketplace installs require Cursor desktop UI.
-- `~/.cursor/rules/pstack-models.mdc` is user-local; Cloud Agents write it in the VM but it does not sync to your desktop automatically.
-- Copy model config from the agent session or re-run `/setup-pstack` locally after merging skill changes.

@@ -64,7 +64,7 @@ See [`docs/agents/native-plugins.md`](../../docs/agents/native-plugins.md) and [
 | pstack | `/add-plugin pstack` → `/setup-pstack` |
 | superpowers | `/add-plugin superpowers` |
 | compound-engineering | `/add-plugin compound-engineering` |
-| Spec Kit | `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` |
+| Spec Kit | Installed in repo — see [`docs/agents/spec-kit.md`](../../docs/agents/spec-kit.md) |
 
 ### Stack cartridges (install per project when needed)
 
@@ -100,6 +100,8 @@ Override the cache location with `GSTACK_CACHE_DIR`, the upstream ref with
 
 Cloud Agents: this repo's `.cursor/environment.json` runs the script during
 `install` after `npm ci`.
+
+**Cursor host:** Upstream [gstack#2361](https://github.com/garrytan/gstack/issues/2361) fixed `./setup --host cursor` rejection. If an older cache rejects `cursor`, run `GSTACK_REF=main bash scripts/setup-gstack-full.sh`.
 
 **Manual upstream install** (alternative):
 

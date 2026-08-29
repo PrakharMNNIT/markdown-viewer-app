@@ -29,7 +29,11 @@ notes, and recommended skills for this codebase.
 | **Flat library** | 470+ | find-skills, ToB, Vercel, Anthropic, awesome-copilot |
 
 See [`docs/agents/workflow-pipeline.md`](docs/agents/workflow-pipeline.md) for the layered pipeline.
-Use **`find-skills`** to discover capabilities; do not load all skills into every session.
+Use **`find-skills`** to discover capabilities; do not load all ~693 skills into every session.
+
+**Native plugins** (Compound Engineering, pstack plugin UI): [`docs/agents/native-plugins.md`](docs/agents/native-plugins.md) — Cloud Agents cannot `/add-plugin`; install locally.
+
+**Verification:** [`verify-markdown-viewer`](.claude/skills/verify-markdown-viewer/SKILL.md) drives the Vite UI for proof artifacts.
 
 **gstack runtime:** Skill markdown is vendored; Bun runtime sidecars (`bin/`, `lib/`, `browse/`)
 are fetched at setup time. Cloud Agents run `bash scripts/setup-gstack-full.sh` via

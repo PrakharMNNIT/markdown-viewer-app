@@ -60,6 +60,16 @@ Commands (after init): `/speckit.constitution`, `/speckit.specify`, `/speckit.pl
 
 ## Context hygiene
 
-- Do **not** load all 500+ vendored skills into every session.
-- Use `find-skills` to pull in capabilities when needed.
-- One spec/planning methodology per task (gstack **or** Spec Kit **or** CE).
+- Do **not** load all ~693 vendored skills into every session.
+- Use **`find-skills`** globally (`npx skills@latest list -g`) or project-local to pull capabilities on demand.
+- **`microsoft/skills`**: selective install only — never `--skill '*'`.
+- **Stack cartridges** (Supabase, Cloudflare, AWS): install when that stack applies to the project.
+- **One spec/planning methodology per task** (gstack **or** Spec Kit **or** CE).
+- **Browser proof**: use [`verify-markdown-viewer`](../../.claude/skills/verify-markdown-viewer/SKILL.md) for the Vite UI.
+
+## Global vs project skills
+
+| Scope | Example | Purpose |
+| --- | --- | --- |
+| Global (`-g`) | `find-skills` | Discovery in every repo |
+| Project | `bash scripts/install-skill-arsenal.sh` | Flat library in `.claude/skills/` |
