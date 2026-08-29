@@ -1,0 +1,3173 @@
+{
+  "version": 1,
+  "skills": {
+    "academy-guide": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/academy-guide/SKILL.md",
+      "computedHash": "07075be5acc7c54fd6b06a1e7636608fa195b83eb98cbddb02e61b9ac1356889"
+    },
+    "acquire-codebase-knowledge": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/acquire-codebase-knowledge/SKILL.md",
+      "computedHash": "06b7a3d0bb44b70b470247aacc2ffffe37c8ce64cc3f9178be6f392c81cb6d22"
+    },
+    "acreadiness-assess": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/acreadiness-assess/SKILL.md",
+      "computedHash": "15d336153a334a340d12b70d2a3482fd1939fdb23c985dc04a1e34cfc7fe40ea"
+    },
+    "acreadiness-generate-instructions": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/acreadiness-generate-instructions/SKILL.md",
+      "computedHash": "8a3887176a8a1afd9552239a0aa29dba8c7bb79c599c3c1d8ad95f777a65045b"
+    },
+    "acreadiness-policy": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/acreadiness-policy/SKILL.md",
+      "computedHash": "bffac2eebecddd17d2399647f08a339b409e12752f7438f8350d369bf0ae905c"
+    },
+    "ad-campaign-analyzer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/ad-campaign-analyzer/SKILL.md",
+      "computedHash": "f68442debc84551a69f25c9abebbbac65ada3702b733e3b0c6a10dafc5e5204d"
+    },
+    "add-educational-comments": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/add-educational-comments/SKILL.md",
+      "computedHash": "65f6defd9f7da4af496d3c706839d2f48da6761b5eb1bb21ffc7f7aa35288670"
+    },
+    "address-sanitizer": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/address-sanitizer/SKILL.md",
+      "computedHash": "d16f051143e7330ed2a5d5f6b74ddf05eb3aadaaeb6fb61dc8f1b1838ba72c44"
+    },
+    "adobe-illustrator-scripting": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/adobe-illustrator-scripting/SKILL.md",
+      "computedHash": "dfeefdf543cd81458e6c9cacd796b083d0b44941c3051670e57df4fac9054a42"
+    },
+    "aflpp": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/aflpp/SKILL.md",
+      "computedHash": "126fad0457dc0783e5ef8de6895b379b5e74eb0c68a785c9d43ccc51a0cd1abc"
+    },
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "skillPath": "skills/agent-browser/SKILL.md",
+      "computedHash": "a674b7d81066e3cc471a7512ddb4ae724418cbfefa75cbb050b0dc430e4d57a0"
+    },
+    "agent-governance": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/agent-governance/SKILL.md",
+      "computedHash": "a91eb8ef638422fa4ec457d81e270f79fe5040b41d7f137dba35016bc20529f5"
+    },
+    "agent-owasp-compliance": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/agent-owasp-compliance/SKILL.md",
+      "computedHash": "3c461f890564aa52d154b64a85f70a396ff6533e68633fa02556ebbaa7b843e0"
+    },
+    "agent-skill-stack": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/agent-skill-stack/SKILL.md",
+      "computedHash": "75640472dc45619588946708a1d7d0cb9051d4f7b325f6ed4d60256cf290624a"
+    },
+    "agent-supply-chain": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/agent-supply-chain/SKILL.md",
+      "computedHash": "af309696b57bb67cffc07d23fc44f052ca2f9d7fdea8af2e30e06f3ad5dc2c6f"
+    },
+    "agentic-actions-auditor": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/agentic-actions-auditor/skills/agentic-actions-auditor/SKILL.md",
+      "computedHash": "b1845ded071fb1248fe997e312c79c9af0a1f3360fb94132f884e467c881fac0"
+    },
+    "agentic-eval": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/agentic-eval/SKILL.md",
+      "computedHash": "40771d7d389c1542e6cb995d75e516893466f01c3b66bc040b158ceb793d4bed"
+    },
+    "agentic-workflows": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": ".github/skills/agentic-workflows/SKILL.md",
+      "computedHash": "f0c90d536526973b1f63c34cdbaf6e5911a027b5fdb827429d34ed73105d5042"
+    },
+    "ai-prompt-engineering-safety-review": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/ai-prompt-engineering-safety-review/SKILL.md",
+      "computedHash": "81bf64d383cb7a6c06d252f6b1097c40a161b1968b05204fffeacc395fda1ae9"
+    },
+    "ai-ready": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/ai-ready/SKILL.md",
+      "computedHash": "18b3b83b888d5b770ddc2365c05a366457777c156c4dcda3eda7012820d37d5b"
+    },
+    "ai-team-orchestration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/ai-team-orchestration/SKILL.md",
+      "computedHash": "3a56a0e33d7c5b68a5d05d862b2c13c4a06f2f500e770f15552d16dd341dd677"
+    },
+    "algorand-vulnerability-scanner": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/algorand-vulnerability-scanner/SKILL.md",
+      "computedHash": "10522f5a30688a74e89d37acf0d554d043e88126fcb2ff6df1f2272868ff2d76"
+    },
+    "algorithmic-art": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/algorithmic-art/SKILL.md",
+      "computedHash": "b2ca295de7f9c86c444f1fa21239e22e0eb7013ced1c652169b9402cc96ff744"
+    },
+    "anti-ui-slop": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/anti-ui-slop/SKILL.md",
+      "computedHash": "b077eb8beaea0d913edef177c5e8d1dbdc10ad113b5703a35b0413fdd6fadac5"
+    },
+    "appinsights-instrumentation": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/appinsights-instrumentation/SKILL.md",
+      "computedHash": "b6c3f7ff42e006b77b388975ef5f73ba3d12e117787a6c3aee636768a0931903"
+    },
+    "apple-appstore-reviewer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/apple-appstore-reviewer/SKILL.md",
+      "computedHash": "25cb84d301e17fb5840a4d2409e9a7d341d6e195fb2272b110518512a7f0dbc3"
+    },
+    "arch-linux-triage": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arch-linux-triage/SKILL.md",
+      "computedHash": "c9858a61f9e06ceef21f3ff7202d06e3f0e8b7d5699bb7d18fc649fcbb0ab309"
+    },
+    "architecture-blueprint-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/architecture-blueprint-generator/SKILL.md",
+      "computedHash": "9b20f13d1d96ba1c2550e1ce535f932e943c42939d3fae906a9e0d6c1bfb471a"
+    },
+    "arduino-azure-iot-edge-integration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arduino-azure-iot-edge-integration/SKILL.md",
+      "computedHash": "16271790c91f98120b52a11d01a23d047fc63f0f054cf7e1237f8099c43c4d16"
+    },
+    "arize-ai-provider-integration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arize-ai-provider-integration/SKILL.md",
+      "computedHash": "53e2e94060d6a550bdfede60fc784f39c02245d90c21724410e3d11e3f2c4939"
+    },
+    "arize-annotation": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arize-annotation/SKILL.md",
+      "computedHash": "5f1d27e8ad47fb0afb9f4dea423874d01ca6caced556c51658b67363d9d46281"
+    },
+    "arize-dataset": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arize-dataset/SKILL.md",
+      "computedHash": "9fcc6f39797bce4a86239a73d0e600e617e146ac5573cb48ae6f3873d54b233f"
+    },
+    "arize-evaluator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arize-evaluator/SKILL.md",
+      "computedHash": "ca5cda8a35446dd00c57e0de1b62962bc715f37a541a198c4de16202ad3a216d"
+    },
+    "arize-experiment": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arize-experiment/SKILL.md",
+      "computedHash": "33a3253350f908707ea1a2b1f6afbf5da89e2566cd5b024a5295733064e69510"
+    },
+    "arize-instrumentation": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arize-instrumentation/SKILL.md",
+      "computedHash": "324fbfebe8819518c8719a262f268c7b5f4602f0755c442e0a81e73b3e0bd58d"
+    },
+    "arize-link": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arize-link/SKILL.md",
+      "computedHash": "a02b79f9dede402c253aa52e1543d3be537fa16edde0df8df93d6fd1892b9504"
+    },
+    "arize-prompt-optimization": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arize-prompt-optimization/SKILL.md",
+      "computedHash": "823af48c1666885b2768b6a18530f0dd4e344cc37e37a850c338acbe58ecfa37"
+    },
+    "arize-trace": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/arize-trace/SKILL.md",
+      "computedHash": "b7f9aeffc35d23c5dcce52307bf122a30818fd97e343b74fb4eb3f8c8ac9a2ce"
+    },
+    "aspire": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/aspire/SKILL.md",
+      "computedHash": "aa502e4ff4c9cb28baa2c9ebd14b48fe7ed572fd291a9e24cda5226654413903"
+    },
+    "aspnet-minimal-api-openapi": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/aspnet-minimal-api-openapi/SKILL.md",
+      "computedHash": "2c4b990eba7b246b17c043a60b85f0910a98ce5e8aad13b92e34c260fdf23d4b"
+    },
+    "atheris": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/atheris/SKILL.md",
+      "computedHash": "add6d5e4c5a757954a93e9b18a5739fac2e9a05e409c416888ae4ed5413d3a75"
+    },
+    "audit-augmentation": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/audit-augmentation/SKILL.md",
+      "computedHash": "5cf155c5df4725e717abee7807ae50f860a70777f547e64890155cef4f3608a4"
+    },
+    "audit-context-building": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/audit-context-building/skills/audit-context-building/SKILL.md",
+      "computedHash": "9f5109c1565741345aa580a16869e9356cd78e00cebd956b9aeb05f1334b66c6"
+    },
+    "audit-integrity": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/audit-integrity/SKILL.md",
+      "computedHash": "89893ec8a16cdb5240d8845ffd3cbba7a26338a90bc108285c7343fd49615831"
+    },
+    "audit-prep-assistant": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/audit-prep-assistant/SKILL.md",
+      "computedHash": "2d7afb7c09ee1abedf9d924656301d28c4eb9dc3597913c5e37e6762463ee5b2"
+    },
+    "automate-this": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/automate-this/SKILL.md",
+      "computedHash": "9d1d575cfc2e8088f090b3593dd8c5540913a6425348e8566dbf96fde796a853"
+    },
+    "autoresearch": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/autoresearch/SKILL.md",
+      "computedHash": "8bfae087ef27eb37092d94caf1da3406b500aa908756772bb1349a1ac70823dd"
+    },
+    "aws-cdk-python-setup": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/aws-cdk-python-setup/SKILL.md",
+      "computedHash": "6aa92139f8058346ee07e49a9f2bdfb6e743ed128eeab86a6176f86e3fc080a4"
+    },
+    "aws-cloudwatch-investigation": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/aws-cloudwatch-investigation/SKILL.md",
+      "computedHash": "4e7be1e0d2a9050330ecc882393d70e3c6b0fd2ca032b7bedce9b0b6475fd6ae"
+    },
+    "aws-cost-optimize": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/aws-cost-optimize/SKILL.md",
+      "computedHash": "a4034e859ce1f297df4fa504c8cb4561499e4d663a9480223dbf0c49a0b832fa"
+    },
+    "aws-resource-health-diagnose": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/aws-resource-health-diagnose/SKILL.md",
+      "computedHash": "6f689419a66b03f8a7f6fab360a8706af0d0efe6d197773169fe25f8f95fdf69"
+    },
+    "aws-resource-query": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/aws-resource-query/SKILL.md",
+      "computedHash": "7e01b067764fe6debe6ce1590b34bf56dbe394703a8faa9e69f5539c195e3c3a"
+    },
+    "aws-well-architected-review": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/aws-well-architected-review/SKILL.md",
+      "computedHash": "b3415325d66dc0bf7325b5cc0ff90ab115099bcc17f426892962520123747654"
+    },
+    "az-cost-optimize": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/az-cost-optimize/SKILL.md",
+      "computedHash": "4bad09d0db105898326d119abc6eeffdbcdb1f8026d6e793ced7ef9e9f50dad7"
+    },
+    "azure-architecture-autopilot": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-architecture-autopilot/SKILL.md",
+      "computedHash": "3f3c41f2e673f95796d801c30e38e40af6d48b57fbc89503425d863c62fe2138"
+    },
+    "azure-container-registry-cli": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-container-registry-cli/SKILL.md",
+      "computedHash": "917206d19ffb2f19451be3b8d6059712fed7e98e86fe3d454b59b247b12ae87f"
+    },
+    "azure-deployment-preflight": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-deployment-preflight/SKILL.md",
+      "computedHash": "2759103c197250041eed59020eb23a0adf8ade8a253b4d17030c76029f6476ca"
+    },
+    "azure-developer-cli": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-developer-cli/SKILL.md",
+      "computedHash": "2a6ed537ddf113f0a99639deb1db4c450f30898ffc5e0c2397fe2ed10ad37ebd"
+    },
+    "azure-devops-cli": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-devops-cli/SKILL.md",
+      "computedHash": "598a33d14dd669d454019feb080daeac1e361bfacde21dc3bd3382e8da283e64"
+    },
+    "azure-pricing": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-pricing/SKILL.md",
+      "computedHash": "016ade0ccf0b90e239ba770223cbc788fce83345dd71fa39c5464016447d6a5b"
+    },
+    "azure-resource-health-diagnose": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-resource-health-diagnose/SKILL.md",
+      "computedHash": "b58a96f0f25e6e031c68eb516f91de9ff994dfdd7f146eae583f50171022036a"
+    },
+    "azure-resource-visualizer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-resource-visualizer/SKILL.md",
+      "computedHash": "ffa93d60058eafad8d48fc37f7986e5cacead5780de036c05e672c79cf49ed61"
+    },
+    "azure-role-selector": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-role-selector/SKILL.md",
+      "computedHash": "5ecf0325ccde3e3a86fc6a33dd3d99ed547c809af6bcd614a5efab72505632bc"
+    },
+    "azure-smart-city-iot-solution-builder": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-smart-city-iot-solution-builder/SKILL.md",
+      "computedHash": "40a4ee392637d7f4ed4093a9e481d5fec67f10d3837b940ee1911829eada95a2"
+    },
+    "azure-static-web-apps": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-static-web-apps/SKILL.md",
+      "computedHash": "d8aa020f4c266800d5dce80d7ff9683d5114d42716f49776b3cc3d675b9aebc2"
+    },
+    "azure-well-architected-review": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/azure-well-architected-review/SKILL.md",
+      "computedHash": "05bf13a08ae968d06a3885030be79dd54d86c53ec7e9ef720520b1298941ac8f"
+    },
+    "batch-files": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/batch-files/SKILL.md",
+      "computedHash": "9a374062b036abf397548f8b080435332c3be2ecd17a1d90311167ece84c377a"
+    },
+    "bench-read": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/bench-read/SKILL.md",
+      "computedHash": "10c02f2d228c1698c119b5c107c089dd76495ceb91437df9cfbd2831995bb1e4"
+    },
+    "bigquery-pipeline-audit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/bigquery-pipeline-audit/SKILL.md",
+      "computedHash": "42f544298ade22c439a62e9ba40ced9c1df07c536332232266615ba078df00ef"
+    },
+    "boost-prompt": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/boost-prompt/SKILL.md",
+      "computedHash": "2621a44fbd9fc2636953d1e6e39e5faeed995f7fb958ec12cc98a2f0576f6fa7"
+    },
+    "brag-sheet": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/brag-sheet/SKILL.md",
+      "computedHash": "235eebe934fdf6348d018178d13ccbf2c36307ba6030d79561f44887322043e9"
+    },
+    "brand-guidelines": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/brand-guidelines/SKILL.md",
+      "computedHash": "e48840db6ea772ceecdb68b4e50f8cc77e2534b7580aeaf4a6fe6ee7bd845d7d"
+    },
+    "breakdown-epic-arch": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/breakdown-epic-arch/SKILL.md",
+      "computedHash": "76217938e959a2a39f1bda7659416f87b3bb12bd0fe09a3d8684f8a94cacbab4"
+    },
+    "breakdown-epic-pm": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/breakdown-epic-pm/SKILL.md",
+      "computedHash": "4417e67abc0e21034ebf077aa8aed9ec5dae5976c1aa862c83e1652bc2e1e2e0"
+    },
+    "breakdown-feature-implementation": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/breakdown-feature-implementation/SKILL.md",
+      "computedHash": "882f8ade84f599e37a4db242f131fbe85554611593d9710bef4d3258188ae9b3"
+    },
+    "breakdown-feature-prd": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/breakdown-feature-prd/SKILL.md",
+      "computedHash": "e0a851ff26f6ddc213c390556ede39ac8fa43b76076b4a187c8c759128fe9fce"
+    },
+    "breakdown-plan": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/breakdown-plan/SKILL.md",
+      "computedHash": "24abce941a7c952ad3da3b1acf4e6fdf566ba24ffeaa2e37d74d68fb401ef7c3"
+    },
+    "breakdown-test": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/breakdown-test/SKILL.md",
+      "computedHash": "aec76bd6b3246889ada4fecba3f78a6c5d0717d66a70af5791279556a3891759"
+    },
+    "bug-receipt": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/bug-receipt/SKILL.md",
+      "computedHash": "81e7cfdf2c31ed791e9e04f80d4a9e5f39d98b8108cb33baeda7b5428815547e"
+    },
+    "bug-reproduction-brief": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/bug-reproduction-brief/SKILL.md",
+      "computedHash": "d0b06abce04f9a0ac492a1b465db632dd34076f4d0f48ad8c28b29f38996be7b"
+    },
+    "build-evidence-map": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/build-evidence-map/SKILL.md",
+      "computedHash": "44cd4ac94f12248258db008a880025912421bee7c9217d9a7ee85563ac7f8287"
+    },
+    "burpsuite-project-parser": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/burpsuite-project-parser/skills/burpsuite-project-parser/SKILL.md",
+      "computedHash": "d7916ac132eca18a76f5d7d13fab63281555ac624db45ed5e09e609c9ea931d2"
+    },
+    "c-review": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/c-review/skills/c-review/SKILL.md",
+      "computedHash": "c6d168c0b0bc90d67eb9861ce29315709cc06fe163fe672eb630ad1093d8dbba"
+    },
+    "cairo-vulnerability-scanner": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/cairo-vulnerability-scanner/SKILL.md",
+      "computedHash": "4a266e70738b2de58e5eabf9d1355810758a71727c9b77529e90dc57d8fa8942"
+    },
+    "canvas-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/canvas-design/SKILL.md",
+      "computedHash": "3fa7ea60170023ad8268bf9fd734ea75dd404279a2ef8ddf5abaa1102ad8e5f4"
+    },
+    "cargo-fuzz": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/cargo-fuzz/SKILL.md",
+      "computedHash": "1ad756593c2d7807c0af27b00ebf7412b519c520f6b56aa926a0dbce01cce8b4"
+    },
+    "centos-linux-triage": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/centos-linux-triage/SKILL.md",
+      "computedHash": "cc32685413a75070d297a6531f0f2cb3e8b842d82015a5f9564fb14ac05451ab"
+    },
+    "chrome-devtools": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/chrome-devtools/SKILL.md",
+      "computedHash": "85d9c4ef94e00ddfc937d50aab72a307e80b98bc7e6744ec6e239ef68819c2d7"
+    },
+    "chrome-mcp-troubleshooting": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/claude-in-chrome-troubleshooting/skills/chrome-mcp-troubleshooting/SKILL.md",
+      "computedHash": "56fd1559923b39dacb793196eacbfb54d68260586770634108d9416f5401da93"
+    },
+    "claude-api": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/claude-api/SKILL.md",
+      "computedHash": "ed99167a20019ea718db7863ec56fc5ec5c304972789193369f6a4fd6b0f3948"
+    },
+    "cli-mastery": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/cli-mastery/SKILL.md",
+      "computedHash": "cc65d9b89f3e6a7a3fc2835af103b0429fa8150db4bff239c6c2b10aeb93b1b8"
+    },
+    "cloud-design-patterns": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/cloud-design-patterns/SKILL.md",
+      "computedHash": "be69c23d717e7f1ddd9b288c5ce36a582eb5717086392cbe5b0dd1faa5423c8e"
+    },
+    "code-exemplars-blueprint-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/code-exemplars-blueprint-generator/SKILL.md",
+      "computedHash": "1a4e9008100148a106bac0be4338b84a43a9d6b3bc70d14f75359977d4770f2e"
+    },
+    "code-improver": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/code-improver/skills/code-improver/SKILL.md",
+      "computedHash": "407d005f36cedf7da9e31fb62c41d0bf1ebe80a3ce8df1c54c197c2d073776a0"
+    },
+    "code-maturity-assessor": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/code-maturity-assessor/SKILL.md",
+      "computedHash": "b8e9bb1d6bc73f7419988034f163134a5ef3044f09185e7c959c77edd30ad106"
+    },
+    "code-tour": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/code-tour/SKILL.md",
+      "computedHash": "c391096df126d817ca65c817f8e9673a6f1514db1e3e944c48f8c2f9aeaf1fbe"
+    },
+    "codebase-memory-mcp": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/codebase-memory-mcp/SKILL.md",
+      "computedHash": "23b4c79dcd477d878d33e3c169b97409a761a6057d7a71dc817a7baca25a42ee"
+    },
+    "codeql": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/codeql/SKILL.md",
+      "computedHash": "a7d80450799b2141ddff9ec614477e237c1f50acb9eeade2dd869aeac3d004a9"
+    },
+    "comment-code-generate-a-tutorial": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/comment-code-generate-a-tutorial/SKILL.md",
+      "computedHash": "8fad68f9f99c8eb4a4799e34a5e66692a20d66e6975c93d358cbef01be23ba15"
+    },
+    "commit-message-storyteller": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/commit-message-storyteller/SKILL.md",
+      "computedHash": "ca0d63ccdfeb488294209fd40b8ce122e809931a6d5c22a105627624e4e2dece"
+    },
+    "competitor-ad-intelligence": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/competitor-ad-intelligence/SKILL.md",
+      "computedHash": "02629227262858684b1060e83787b53323f8d938306f7d42e5acc91b17f80660"
+    },
+    "constant-time-analysis": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/constant-time-analysis/skills/constant-time-analysis/SKILL.md",
+      "computedHash": "3173f9d1f19421159aa5b25a44b25970d5fa0d4753eba0c8de24de9578887351"
+    },
+    "constant-time-testing": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/constant-time-testing/SKILL.md",
+      "computedHash": "e96c357a1589b83b4372ad7cf3a82ce965231a3e758739603bc19d449731284e"
+    },
+    "containerize-aspnet-framework": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/containerize-aspnet-framework/SKILL.md",
+      "computedHash": "e6608a11e7c5ce16ff1b7048902a1fd51aa98fa5373167002a73deb9b5570749"
+    },
+    "containerize-aspnetcore": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/containerize-aspnetcore/SKILL.md",
+      "computedHash": "23f73cb98109f2a56c0b49b5121fc6132a5fddf1fd3bb145db94085f36f7d205"
+    },
+    "content-management-systems": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/content-management-systems/SKILL.md",
+      "computedHash": "f4979f1ffb3b4116b883ec4249521cef1d5b94c3d445bf0eb52a6dd9bf71c93c"
+    },
+    "context-map": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/context-map/SKILL.md",
+      "computedHash": "cca0523289057f0f6fbff2c3ead5063359dd2482a451bf8694eac0f282185786"
+    },
+    "conventional-branch": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/conventional-branch/SKILL.md",
+      "computedHash": "62d556675f48fd45ebe77b13ce7cac1e37a4982e648f389b4db237864f6702c4"
+    },
+    "conventional-commit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/conventional-commit/SKILL.md",
+      "computedHash": "f29c9486cede6c7b2df0cfb0a2e4aa67446552b991bcf17d1b309e903171f03d"
+    },
+    "convert-excel-to-md": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/convert-excel-to-md/SKILL.md",
+      "computedHash": "26655ce62af096ebd1abbfe23c220a987c7bbc1a76a37131f312740752270853"
+    },
+    "convert-pdf-to-md": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/convert-pdf-to-md/SKILL.md",
+      "computedHash": "31ec53d66edea2a3dc18dad62e88462c5c6c897570f1a78a88f9609af0333073"
+    },
+    "convert-plaintext-to-md": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/convert-plaintext-to-md/SKILL.md",
+      "computedHash": "934c017d41118a44f4db0e80b526db175cadcfdf8c5354fc9eceb0b3cb6beb50"
+    },
+    "convert-word-to-md": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/convert-word-to-md/SKILL.md",
+      "computedHash": "c7d1a1f8f07c77606b447881e491c656078fd2f8f56533892e3d447046d8b6f3"
+    },
+    "copilot-cli-quickstart": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/copilot-cli-quickstart/SKILL.md",
+      "computedHash": "720e848c508c9fccc0d9edbdb7a68ede333866e1e0a126b7d4b179e01d7ba5d7"
+    },
+    "copilot-instructions-blueprint-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/copilot-instructions-blueprint-generator/SKILL.md",
+      "computedHash": "45fd25e507349b05f80a0cafc159109071ed6c24ac5f014b9c749fd6846bd62b"
+    },
+    "copilot-pr-autopilot": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/copilot-pr-autopilot/SKILL.md",
+      "computedHash": "82616e27cbe437bc7edf4c7a6b9a908b158b47a11ea48555d3b90c6978a854be"
+    },
+    "copilot-sdk": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/copilot-sdk/SKILL.md",
+      "computedHash": "47d9593bd600fe5db335eb70fe629d9d862ca65a6d789a99c05bd755fb2a8822"
+    },
+    "copilot-spaces": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/copilot-spaces/SKILL.md",
+      "computedHash": "8040e190fca0c4c5a108cbfd20d476a22c18ae704d27f31453407d98d5bc1d1c"
+    },
+    "copilot-usage-metrics": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/copilot-usage-metrics/SKILL.md",
+      "computedHash": "ea89ea2c92405c84c51afff99cf1af8f47965459dcb5b785b14f9560ac2f6a26"
+    },
+    "cosmos-vulnerability-scanner": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/cosmos-vulnerability-scanner/SKILL.md",
+      "computedHash": "dc9f4bac9cd473745600af534192a76b529dd3e39816469378d2def17711fae0"
+    },
+    "cosmosdb-datamodeling": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/cosmosdb-datamodeling/SKILL.md",
+      "computedHash": "b588fe7b9cf925eee682e94564666b6d8c9451d661a6bad15b5d3b4e87558e9d"
+    },
+    "coverage-analysis": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/coverage-analysis/SKILL.md",
+      "computedHash": "0b1d3b01336ab656dcc56af74e6ee92eac3287804b8101b1b9856bc2502f4b5d"
+    },
+    "create-agentsmd": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-agentsmd/SKILL.md",
+      "computedHash": "bfbdbb76b17cca970d1d624e36ce72b6847860d740581c8865da796c1fef8552"
+    },
+    "create-architectural-decision-record": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-architectural-decision-record/SKILL.md",
+      "computedHash": "5c99e32293271aef0270c279c2af8b62301e29257bf85f2ebf7e810c740b4404"
+    },
+    "create-canvas-extension": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": ".github/skills/create-canvas-extension/SKILL.md",
+      "computedHash": "07774d8131c2031f3b9d96aa3c8fce5fde91450267eef12152fa1fbb2f78ed1c"
+    },
+    "create-github-action-workflow-specification": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-github-action-workflow-specification/SKILL.md",
+      "computedHash": "527e6c77d921d58a9d0059aa95d0d14b441d2166f9c20518263048a56ca8fbbb"
+    },
+    "create-github-issue-feature-from-specification": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-github-issue-feature-from-specification/SKILL.md",
+      "computedHash": "e4d8019e1a7e43b4ab7023117ec9d3332063fdb923a5cc9f2d42159b69cceb04"
+    },
+    "create-github-issues-feature-from-implementation-plan": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-github-issues-feature-from-implementation-plan/SKILL.md",
+      "computedHash": "ff0083bd824eaa94c6e4097abe27f1441694a44feb8d6ea43b51bf3f00b883e1"
+    },
+    "create-github-issues-for-unmet-specification-requirements": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-github-issues-for-unmet-specification-requirements/SKILL.md",
+      "computedHash": "f44956e909348a20a808bcc2aa56a1b063ff1cc2ae1a1659de6193cff45f59ac"
+    },
+    "create-implementation-plan": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-implementation-plan/SKILL.md",
+      "computedHash": "5c282fded01e40a7db621b0690513f62d179b600e0a271751e82cb0c9e1bcafc"
+    },
+    "create-llms": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-llms/SKILL.md",
+      "computedHash": "2eea327b7f6ad67d91addd334a864f545cd5a1474dd8b03f7a00abc70b2715e2"
+    },
+    "create-readme": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-readme/SKILL.md",
+      "computedHash": "d0ece1b2164ce1376e4ab6e98d6ac079df3a2a94f5f02224362b6a1ce2516ae9"
+    },
+    "create-specification": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-specification/SKILL.md",
+      "computedHash": "9796c1d33858522eb67ea2fa864993bdad11f5d79832cca9cf64b9a47c610c09"
+    },
+    "create-spring-boot-java-project": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-spring-boot-java-project/SKILL.md",
+      "computedHash": "f295d4ddc256642e850e7d7a40526ed10aad2801e0c202e0b4c78506c52f4461"
+    },
+    "create-spring-boot-kotlin-project": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-spring-boot-kotlin-project/SKILL.md",
+      "computedHash": "3700dedac4c989d6276dc3e8692135f5f2a90595c8f993c97bc51080af95a5cd"
+    },
+    "create-technical-spike": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-technical-spike/SKILL.md",
+      "computedHash": "e711706b4aebacac01bcc025e19bcf0e88bf784cbe6419ddf07c2be67c501f33"
+    },
+    "create-tldr-page": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-tldr-page/SKILL.md",
+      "computedHash": "9d929bc6ed3e9f90576986628758c8c39b7c9f110cd7863f87fa2ae6003f74ac"
+    },
+    "creating-oracle-to-postgres-master-migration-plan": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/creating-oracle-to-postgres-master-migration-plan/SKILL.md",
+      "computedHash": "7998313b9bfd779b4783e6ac2c8f96bc5241af55ff5706078eff7919207e2dfd"
+    },
+    "creating-oracle-to-postgres-migration-bug-report": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/creating-oracle-to-postgres-migration-bug-report/SKILL.md",
+      "computedHash": "34069068be2d2ca70d2f6e78353943d3c41c78eb04b697296d2727ac546ccb93"
+    },
+    "creating-oracle-to-postgres-migration-integration-tests": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/creating-oracle-to-postgres-migration-integration-tests/SKILL.md",
+      "computedHash": "fb863d5918442d6d869c8592475e07f6ce245aba16efd7cc4a284299752a169f"
+    },
+    "crypto-protocol-diagram": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/crypto-protocol-diagram/SKILL.md",
+      "computedHash": "b5eafc6cebc75d69ba68d8f5509bf59a2f25434f134313c830beea5bd32fdb44"
+    },
+    "csharp-async": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/csharp-async/SKILL.md",
+      "computedHash": "e889958419757528e43fb674607d13fffe331a6673cfcef2b0ab8ff9fb569bb8"
+    },
+    "csharp-docs": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/csharp-docs/SKILL.md",
+      "computedHash": "93da3063bb770f13feec581efa3ff232c69a5a94b75cddfc4ad6e82909835cfe"
+    },
+    "csharp-mstest": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/csharp-mstest/SKILL.md",
+      "computedHash": "f8417ce1101a3ea94d9dae01fae4901810f27d92172d108ec54c8fcb264045f8"
+    },
+    "csharp-nunit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/csharp-nunit/SKILL.md",
+      "computedHash": "2026047ba0a3b1f3b7d68fd87d35a55ed8592c075979c14a3fcf2fa8c8b9fc3a"
+    },
+    "csharp-tunit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/csharp-tunit/SKILL.md",
+      "computedHash": "634bf822bdbd01c5d5a8c7c9f473f3818dfca8acca309a0af97cd90a7e39b738"
+    },
+    "csharp-xunit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/csharp-xunit/SKILL.md",
+      "computedHash": "3c224e79f92ec027de3d5f44d0ca3077f076cb1e1bfff6b0db5b09c34c3aecd2"
+    },
+    "d365-solution-blueprint": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/d365-solution-blueprint/SKILL.md",
+      "computedHash": "692e685f558820454e79e347b513cb89dc0bcf1165e389965605ec0cf2854649"
+    },
+    "daily-focus-board": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/daily-focus-board/SKILL.md",
+      "computedHash": "eb8614e09d2da607da952c4f49f53dda6f84ed2868681e8333e06611682161c4"
+    },
+    "daily-prep": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/daily-prep/SKILL.md",
+      "computedHash": "205915474441d698548c8eeeb9271cfb8367ae370efc26130a1c14d198d803d8"
+    },
+    "data-breach-blast-radius": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/data-breach-blast-radius/SKILL.md",
+      "computedHash": "3dbd2b1836bef9becae18981f83fe9c68ef0de97d099783b99019827343a68a0"
+    },
+    "datanalysis-credit-risk": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/datanalysis-credit-risk/SKILL.md",
+      "computedHash": "303e7e536d141a90632941a782bd45f612c727ff36a6558e4d975e72662a57b1"
+    },
+    "dataverse-python-advanced-patterns": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dataverse-python-advanced-patterns/SKILL.md",
+      "computedHash": "dd4f65b62c3b702c7dfc14a4e19caaa9ab3515e87a1d7e110482d9ba19469bd0"
+    },
+    "dataverse-python-production-code": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dataverse-python-production-code/SKILL.md",
+      "computedHash": "7299422fdb42dcede45a761921656a6450c476388731288a6e5afb0303f1d25d"
+    },
+    "dataverse-python-quickstart": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dataverse-python-quickstart/SKILL.md",
+      "computedHash": "624493386b6fec1df180fcf5393a408c50f9aeb971580a2fff4dbab21118d682"
+    },
+    "dataverse-python-usecase-builder": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dataverse-python-usecase-builder/SKILL.md",
+      "computedHash": "f2350c6a1f6c297e910afc0f63b2530b2b76e3880dd6285d1de17d3d082a7a0b"
+    },
+    "debian-linux-triage": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/debian-linux-triage/SKILL.md",
+      "computedHash": "88092e8dbcdbe6d3682b6bc8b1be15cf1f3945203d111ff4a7ce39e58f94498a"
+    },
+    "declarative-agents": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/declarative-agents/SKILL.md",
+      "computedHash": "cbfcbb1f6916629db484acc9d08f0895f55158cc38d5c3f506dc317639eb917f"
+    },
+    "dependabot": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dependabot/SKILL.md",
+      "computedHash": "a7f64786f061e1ec9a513757a54f96e3c05b1f88d9d7e380222defbcd87a56e4"
+    },
+    "deploy-to-vercel": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/deploy-to-vercel/SKILL.md",
+      "computedHash": "03e0eaaa9bf13ba1e7ffa387f5893de6f324c0868c627001f179395a8feaa7c9"
+    },
+    "desk-journal": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/desk-journal/SKILL.md",
+      "computedHash": "e3cadeea21300c25ee5e396ef1695c7d078daa3b4f64b9e633ff83c19a29b6d6"
+    },
+    "desk-open": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/desk-open/SKILL.md",
+      "computedHash": "50c7d91bc5c4bc066824a072a58a1d04b2e1070a128be1a81fa9cff316a04b9b"
+    },
+    "devcontainer-setup": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/devcontainer-setup/skills/devcontainer-setup/SKILL.md",
+      "computedHash": "e676adf231701ce233dde757273a2a0a726d2570eafbf625495ae3f0da536b2c"
+    },
+    "devops-rollout-plan": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/devops-rollout-plan/SKILL.md",
+      "computedHash": "9c71bc5839febec1c42fdd6f5aed3beb3fa9df399460f0d20310124abd77cc31"
+    },
+    "diagnose": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/diagnose/SKILL.md",
+      "computedHash": "0bf9eac36d6a323bd4a76814da11ec6e142a41b398250bc39790faee3b37699c"
+    },
+    "diagramming-code": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/diagramming-code/SKILL.md",
+      "computedHash": "1a06f8075f613b2f0cd3dbff163895cf2af9e4d27c2bb3e8463c2fa6c7ffafe6"
+    },
+    "differential-review": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/differential-review/skills/differential-review/SKILL.md",
+      "computedHash": "deb285f46103f8f088b3d5e383bba497c28ef8839f1b18f9ce3196e93f8eed2b"
+    },
+    "dimensional-analysis": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/dimensional-analysis/skills/dimensional-analysis/SKILL.md",
+      "computedHash": "8b55aa37cc3d08a026e8ddee1852291686f70cbab6fb85055a963958f37ca4b8"
+    },
+    "discernment-nudge": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/discernment-nudge/SKILL.md",
+      "computedHash": "fbe8fab770e8e106623525caa342bd2a4c84992cb840377cb57d4365be599be8"
+    },
+    "doc-and-modernize": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/doc-and-modernize/SKILL.md",
+      "computedHash": "27157de30d59ee1b1797b4bea2f2b6d7bd6d610259ddcac58f5f435e1b53d788"
+    },
+    "doc-coauthoring": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/doc-coauthoring/SKILL.md",
+      "computedHash": "b964e4c3ffe13f66f76dd7919073e60c7aec622cd8a8363bb36323188100cf8e"
+    },
+    "documentation-writer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/documentation-writer/SKILL.md",
+      "computedHash": "ee53d65b163cd7eb953a930c95841cfe398cc2c0bd24c06508bbaa07c432be35"
+    },
+    "docx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/docx/SKILL.md",
+      "computedHash": "59c70107f8eae818bdfca7da685a6e4111aa519638b667775b794cb74987ec47"
+    },
+    "dotnet-best-practices": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dotnet-best-practices/SKILL.md",
+      "computedHash": "9ef94db7f06c167d544369817e5a4415eeb7886dcff0d47026837a1aada260e3"
+    },
+    "dotnet-design-pattern-review": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dotnet-design-pattern-review/SKILL.md",
+      "computedHash": "0b2b93ae1950e075045546dcf8d5a0971eea77abc5707916c99033c334accf69"
+    },
+    "dotnet-mcp-builder": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dotnet-mcp-builder/SKILL.md",
+      "computedHash": "2c4cb34ded225061fe9fb78fdb6345586e7a7d14b6de072bb4a087b517eeaf63"
+    },
+    "dotnet-timezone": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dotnet-timezone/SKILL.md",
+      "computedHash": "e40ba5b26bc8b37e7d73a1d8b2e2e934657559948cd2eacd42916d4f6833a886"
+    },
+    "dotnet-upgrade": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/dotnet-upgrade/SKILL.md",
+      "computedHash": "2cea79257527663b336e3a48f70a70bbede80695ac56ce96deae76a59a69142a"
+    },
+    "doublecheck": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/doublecheck/SKILL.md",
+      "computedHash": "b4767dd00fcdc47e7c7b91efaa56198639719056e1c3e2a7299300c0fb2a4241"
+    },
+    "draw-io-diagram-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/draw-io-diagram-generator/SKILL.md",
+      "computedHash": "62482a37dd45bfd414b285c1876e2028c5de62d43bb0af8a35fc488cafdb04b8"
+    },
+    "drawio": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/drawio/SKILL.md",
+      "computedHash": "d630545df2f85a8fdbab852aa6781b4f20f275700c2d5a42e4b0bc0fcf3b6dc2"
+    },
+    "dwarf-expert": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/dwarf-expert/skills/dwarf-expert/SKILL.md",
+      "computedHash": "9a0264a4b62875d1ea30bdbd05cbcfe1c9413309a50b6afc9deb4a94c7ca080c"
+    },
+    "editorconfig": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/editorconfig/SKILL.md",
+      "computedHash": "19ce7c1a970666aadccbcbdcf9a37b4675cb7da24f3a5b603ec06ed6d04a0124"
+    },
+    "ef-core": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/ef-core/SKILL.md",
+      "computedHash": "23f0a7c7e8c050337d67303f0af339da1ab8f0aa6a334f13112c3f85250c329c"
+    },
+    "efcore-d2-db-diagram": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/efcore-d2-db-diagram/SKILL.md",
+      "computedHash": "0892a31a7b121b6a3b16c537c99e58c6d766486673085931aabeeebaf0bdeee9"
+    },
+    "em-dash": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/em-dash/SKILL.md",
+      "computedHash": "c9de78fafa93e3a3994e440b291e656fd6b4f1c0c26b083943a0d2a84c3d5968"
+    },
+    "email-drafter": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/email-drafter/SKILL.md",
+      "computedHash": "723dbf7b93c9ce957bf19115b6117f2871267f2b5324f3752a97d311167f707e"
+    },
+    "entra-agent-user": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/entra-agent-user/SKILL.md",
+      "computedHash": "e2a7744aa594d4e2e16948e0524e59b60a28732e03a310470da03709d90eb2cf"
+    },
+    "entry-point-analyzer": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/entry-point-analyzer/skills/entry-point-analyzer/SKILL.md",
+      "computedHash": "78dd6cbfce13a600e890d1c8936d85eb9c6e4d8752327bb5954796f6e03f2bd9"
+    },
+    "eval-driven-dev": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/eval-driven-dev/SKILL.md",
+      "computedHash": "2ff19b1e3741984a273dd0b3ba2f4881ce81d3704a32a5c85465fd0a79ef2b57"
+    },
+    "exam-ready": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/exam-ready/SKILL.md",
+      "computedHash": "16aa13b7cd04bfedbed32deb4fe74b3f40109ed9c4e53a57f483089715265e44"
+    },
+    "excalidraw-diagram-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/excalidraw-diagram-generator/SKILL.md",
+      "computedHash": "d26f6110fda8be59a3ba2e627f26b9d11834cd6a82b8cba05a9d80e97ea457d3"
+    },
+    "eyeball": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/eyeball/SKILL.md",
+      "computedHash": "aa4c5c27420de62011701b85264712a17637d5521dd24b66d650c8580bf16c9e"
+    },
+    "fabric-lakehouse": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/fabric-lakehouse/SKILL.md",
+      "computedHash": "6b5cc12c853f8bdd62103d096b0050765a5ff5d6b86dba6a1f35c6e885e1558d"
+    },
+    "fedora-linux-triage": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/fedora-linux-triage/SKILL.md",
+      "computedHash": "9f66d011d7eeead88eb55b047607225407dfb3e3f7b33e5678f83c72207cce4f"
+    },
+    "finalize-agent-prompt": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/finalize-agent-prompt/SKILL.md",
+      "computedHash": "a72bea0359d7f69295a28e9f4b94c5dc6fc093930dae663d8c7bab294ea287d3"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "computedHash": "b146008599c31057cef1c145774cea5d5afb30e8f43fa802e47a4b461419aaaf"
+    },
+    "finnish-humanizer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/finnish-humanizer/SKILL.md",
+      "computedHash": "1b5b7e5ec1fee5191b3ad7e604403f99d0ec7bea5bcb47fcb69b76f242b2a8fe"
+    },
+    "firebase-apk-scanner": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/firebase-apk-scanner/skills/firebase-apk-scanner/SKILL.md",
+      "computedHash": "322d05ad1a09626ac5b6338caae6d054417607df7946e6dee9ee3b9973a9ec99"
+    },
+    "first-ask": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/first-ask/SKILL.md",
+      "computedHash": "5131fd3d738563429409476b2e0062d160e81a315d18b42bdd1f5675848bbca5"
+    },
+    "flowstudio-power-automate-build": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/flowstudio-power-automate-build/SKILL.md",
+      "computedHash": "5e8987c50131d2a71218ca2043283fabe8511174a73b4f48d3d4984008134d31"
+    },
+    "flowstudio-power-automate-debug": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/flowstudio-power-automate-debug/SKILL.md",
+      "computedHash": "9defd88f415286aa296304db2c29c4f0d524ec3665eea51614412de531fce587"
+    },
+    "flowstudio-power-automate-governance": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/flowstudio-power-automate-governance/SKILL.md",
+      "computedHash": "a20e415d1b47848db442af22d8deb30c72da00a78821fcb1075fb3f0d4be5c7a"
+    },
+    "flowstudio-power-automate-mcp": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/flowstudio-power-automate-mcp/SKILL.md",
+      "computedHash": "425c868cd354332287612173e4cae5b073798cd8f5dd93d8b2ce1977015c7775"
+    },
+    "flowstudio-power-automate-monitoring": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/flowstudio-power-automate-monitoring/SKILL.md",
+      "computedHash": "b2538f6f422d22e3539ce427635562e99730627500c4a4cfc608d005d4edbbd8"
+    },
+    "fluentui-blazor": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/fluentui-blazor/SKILL.md",
+      "computedHash": "54d30fd8565a8787fa7dfe6bc13e10c4c9139a3d32343a84b49bba6d5f547caf"
+    },
+    "folder-structure-blueprint-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/folder-structure-blueprint-generator/SKILL.md",
+      "computedHash": "418d532c42d0714986e90466e087f6fd8c975e7dc8afddafd1f37558968b639b"
+    },
+    "foundry-agent-sync": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/foundry-agent-sync/SKILL.md",
+      "computedHash": "546e7161500a94ca912ddebb936905edff5759b6a6370c8147856f2b084690d1"
+    },
+    "foundry-hosted-agent-copilotkit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/foundry-hosted-agent-copilotkit/SKILL.md",
+      "computedHash": "9b545797db093379f6c3415b392e29b14de319eb57378cb6b9705ad953eb9a99"
+    },
+    "fp-check": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/fp-check/skills/fp-check/SKILL.md",
+      "computedHash": "f66f363433a1e9784afd7f10b66602b260583af047f798663a72ade9845c0ec5"
+    },
+    "freecad-scripts": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/freecad-scripts/SKILL.md",
+      "computedHash": "c87789be2fa81d2f30cef22a3f2fe58034871c491def7086dc62a8df5b4f01e1"
+    },
+    "from-the-other-side-anitta": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/from-the-other-side-anitta/SKILL.md",
+      "computedHash": "ff2517147341c9b4236cb0158b2ccbd601308259bddd31e7da01786a40f50d57"
+    },
+    "from-the-other-side-quinn": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/from-the-other-side-quinn/SKILL.md",
+      "computedHash": "10f8db43dac15e998294bdc660dab03fac9ad1b76fd0c0ff3e80b00a17575dd5"
+    },
+    "from-the-other-side-vega": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/from-the-other-side-vega/SKILL.md",
+      "computedHash": "083009d5f084f6dbeb03338f71bda90787a92546ee37b6d05dfa7a1a4db19463"
+    },
+    "from-the-other-side-wiggins": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/from-the-other-side-wiggins/SKILL.md",
+      "computedHash": "2d23f0682ce08e09882ef2ef88c599075e97d91fa9b0f9096ad5e09c15c1e1ad"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "4eabc66183767153e404b39d1b839b1c37f2d82d86f0a0d7e880a579d8d62336"
+    },
+    "fuzzing-dictionary": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/fuzzing-dictionary/SKILL.md",
+      "computedHash": "00b79107006f09127f35f5ffbeb2816610883fcba8896c1775cc909e1a0ad839"
+    },
+    "fuzzing-obstacles": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/fuzzing-obstacles/SKILL.md",
+      "computedHash": "228c5a20f78b194ce97abf2beb8e9092f6fb05b6df7287c165861e89780cd9ca"
+    },
+    "game-engine": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/game-engine/SKILL.md",
+      "computedHash": "20057f62cf7a8b2d9f940b3de0b18e5426e8f4bb50e236d36b1033aa0d42c4d8"
+    },
+    "gdpr-compliant": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gdpr-compliant/SKILL.md",
+      "computedHash": "bbb381d78fe3c0dedbf6e524770344aafbedd9d73e06cb1ab322d0efd9360315"
+    },
+    "gem-devops-guidelines": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gem-devops-guidelines/SKILL.md",
+      "computedHash": "111156e63dfce2f88f9c31f76128fa732d409cdac447960fd8019041707a8bca"
+    },
+    "gen-specs-as-issues": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gen-specs-as-issues/SKILL.md",
+      "computedHash": "7c33068d277612faf02cd360c1045b738ee0cd9ff6caa943048387bf08a46101"
+    },
+    "generate-custom-instructions-from-codebase": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/generate-custom-instructions-from-codebase/SKILL.md",
+      "computedHash": "f24a3997ee9034af8b609bd02cd1f5303916ce8399b9ea7d89dcb2ecb3c4de8e"
+    },
+    "generate-image": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/generate-image/SKILL.md",
+      "computedHash": "f44895a266dab7b24ef433d3dcab54f14b0c98a373b671d3ce7c5320110db118"
+    },
+    "genotoxic": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/genotoxic/SKILL.md",
+      "computedHash": "f3c82a59fdf484bbfffc9afa02b81b233bb26e34d6c5549066883257558aee29"
+    },
+    "geofeed-tuner": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/geofeed-tuner/SKILL.md",
+      "computedHash": "73cce0254990801b86415bb209ae1238b68a5bd9f4746637ebef0fca780fd50e"
+    },
+    "gh-attach": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gh-attach/SKILL.md",
+      "computedHash": "9e6eb6ddbd36b416ff2649e4d0bc647e589192f5dfc071e457c0112ae5513efa"
+    },
+    "gh-cli": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/gh-cli/skills/gh-cli/SKILL.md",
+      "computedHash": "6dfc8c3797fdfedb651de5c9ecda0110564e8d09d185a81d38667e8b489d36fb"
+    },
+    "git-commit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/git-commit/SKILL.md",
+      "computedHash": "2607fc60629b82b257136dd2a7a373f0a4466c0b49df7746d845d59313c99b21"
+    },
+    "git-flow-branch-creator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/git-flow-branch-creator/SKILL.md",
+      "computedHash": "8add10a7fce31ef99856d36bffeb90f1f1130f5afd88b111417c257f1e5d39bd"
+    },
+    "github-actions-efficiency": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/github-actions-efficiency/SKILL.md",
+      "computedHash": "92628da7f3eb2ae5625168f31587712a3cd77ac9ba5a23ffc24e86fd12c4408c"
+    },
+    "github-actions-hardening": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/github-actions-hardening/SKILL.md",
+      "computedHash": "10e35ff70fcf42e09295ffad0ac3203e4d6b6f74557cc3fa1654112b89e0eea2"
+    },
+    "github-actions-runtime-upgrade-conventions": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/github-actions-runtime-upgrade-conventions/SKILL.md",
+      "computedHash": "a2086c47b046d101d92435bd4631ff040401bb7d42205868f14209beda58ef4a"
+    },
+    "github-codespaces-efficiency": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/github-codespaces-efficiency/SKILL.md",
+      "computedHash": "bd98f0147247e1bdd80bd7ac01969a61fa6e028891a318f0d4371293d8708537"
+    },
+    "github-copilot-starter": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/github-copilot-starter/SKILL.md",
+      "computedHash": "7b29145c2d3255c38d7333c41e2872411f668658c2c2f4782e420400abf08175"
+    },
+    "github-issues": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/github-issues/SKILL.md",
+      "computedHash": "9917c1e0908f0fd9ae0910acf07e3f779091ceddb910ce6a03453add92a6a876"
+    },
+    "github-release": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/github-release/SKILL.md",
+      "computedHash": "ffb2f9171bca9d806051154fdcddd14c95239c63d01e88d65efd7f167e374550"
+    },
+    "github-triage": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/github-triage/skills/github-triage/SKILL.md",
+      "computedHash": "102ebefa0cc93ab3cf7b90375236b6628aa3ae9c183d16e9303d70cf9d9c09e6"
+    },
+    "gitmoji": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gitmoji/SKILL.md",
+      "computedHash": "1334f5169972f38ea0c6f8296f885902202e184e59c43db7bce08a01e83c7716"
+    },
+    "go-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/go-mcp-server-generator/SKILL.md",
+      "computedHash": "96615e5275583ea9f3dbb747b059fd98e3b2bbfc7fe20ec59144c7447e1bbc86"
+    },
+    "goal-prompt": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/goal-prompt/skills/goal-prompt/SKILL.md",
+      "computedHash": "5f0aa478b80f9865b69a168fb946988ccde113096eaf5afa1dcf8d194e984a8b"
+    },
+    "graph-evolution": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/graph-evolution/SKILL.md",
+      "computedHash": "895c4b72ecceed2ef9ed8d93aab62800d6481f560fb8054c23ec3d5dc8ca480e"
+    },
+    "gsap-framer-scroll-animation": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-framer-scroll-animation/SKILL.md",
+      "computedHash": "e6a4caf23b818ffc5185d51339e941ca783944b6693da877fc1206693b2dff66"
+    },
+    "gtm-0-to-1-launch": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-0-to-1-launch/SKILL.md",
+      "computedHash": "ef73238bfc0595dcb0282c734444339208cb8c0770afe89ab70c3db0ae091666"
+    },
+    "gtm-ai-gtm": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-ai-gtm/SKILL.md",
+      "computedHash": "179d38abc1184661ed008435cad0c88a343bb569b42554d943fadf5a4bcfc539"
+    },
+    "gtm-board-and-investor-communication": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-board-and-investor-communication/SKILL.md",
+      "computedHash": "57aa8c8172663efa80d5af7056025e096387c0250ec4fdbad669f1696868fbec"
+    },
+    "gtm-developer-ecosystem": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-developer-ecosystem/SKILL.md",
+      "computedHash": "7819e397036a1d7389408e46579fc8150e57b026a2fe43f97743afa6679a6cf4"
+    },
+    "gtm-enterprise-account-planning": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-enterprise-account-planning/SKILL.md",
+      "computedHash": "06e4c111361ddaf8ba595eaa44e2bcec32b32b14a991bd4bbc61490edc115130"
+    },
+    "gtm-enterprise-onboarding": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-enterprise-onboarding/SKILL.md",
+      "computedHash": "0ce0c2753bbc9722aa9c1478e9b7a11473475f49fdd5db84556923d592ddf1e4"
+    },
+    "gtm-operating-cadence": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-operating-cadence/SKILL.md",
+      "computedHash": "5144c2dd67358b50f4945d9a306359c6a8a5f0d1ff98c42fc3ed2d690d8f69df"
+    },
+    "gtm-partnership-architecture": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-partnership-architecture/SKILL.md",
+      "computedHash": "51ae01c42c88b12c7b7bfc94108e5b412c05da420aafa1c3dc94c88b0736d003"
+    },
+    "gtm-positioning-strategy": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-positioning-strategy/SKILL.md",
+      "computedHash": "ab8c31ebdb6abb7832e587a3e8755abdfa2e02e852dad1a8e76fd933eb27728e"
+    },
+    "gtm-product-led-growth": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-product-led-growth/SKILL.md",
+      "computedHash": "3b4c43f619bc1c294d5519a1bcaeb936e3690a90c57bfecbfaed15a6bc4dac4e"
+    },
+    "gtm-technical-product-pricing": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/gtm-technical-product-pricing/SKILL.md",
+      "computedHash": "d5d8428507f3f2ab29feb3cc09b360e6faafcef8ef53899c63898e56d1b9f401"
+    },
+    "guidelines-advisor": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/guidelines-advisor/SKILL.md",
+      "computedHash": "1b63b6db44862d3b71c6f283c5a667191e5cf8b8b8e30cca0d44961753ff107f"
+    },
+    "harness-engineering": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/harness-engineering/SKILL.md",
+      "computedHash": "a442c82ec3f8cb2d25f33f18bb28c586af3402d7b630bcc38501d7182a1d782d"
+    },
+    "harness-writing": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/harness-writing/SKILL.md",
+      "computedHash": "e9db112474823ae3ed06cc263302e306ad4d03452143d4ee04a2780a64fb44a0"
+    },
+    "image-annotations": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/image-annotations/SKILL.md",
+      "computedHash": "72b07e580bf2f80d7ee5d224b322c6eb862791ad981efb24ba3d2df82aa973e3"
+    },
+    "image-manipulation-image-magick": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/image-manipulation-image-magick/SKILL.md",
+      "computedHash": "f4f81a1054a423c5eff04f05c1b72335beae2251201c5b5729b0dce4bee06f7e"
+    },
+    "impediment-prioritization": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/impediment-prioritization/SKILL.md",
+      "computedHash": "64d1c85a843bab939c519d2b003854b04e6f9e03f59aa83f4e7b2c568203bbb4"
+    },
+    "import-infrastructure-as-code": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/import-infrastructure-as-code/SKILL.md",
+      "computedHash": "374b851dcf36c9239094fecea6b67a66962d0bd4dd59ff2c24bb1ad4064884b3"
+    },
+    "improve": {
+      "source": "shadcn/improve",
+      "sourceType": "github",
+      "skillPath": "skills/improve/SKILL.md",
+      "computedHash": "39a9358732dcff385e9e4d3e60b4547856f834e54a58b35e455aa9bd49928c13"
+    },
+    "incident-postmortem": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/incident-postmortem/SKILL.md",
+      "computedHash": "007d7bb94f77b0e9793dddda5bff89ebad57059750c8691188b956732a08e1ce"
+    },
+    "integrate-context-matic": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/integrate-context-matic/SKILL.md",
+      "computedHash": "12cb5f0c22eb3afec9572ba89b5c39fba034b3afc11610b12e2924df8d213f23"
+    },
+    "internal-comms": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/internal-comms/SKILL.md",
+      "computedHash": "0bdc8867452b7ab9ef6167f6b0db2025ce5fb03773d3f85efcef2dfeb9d4976d"
+    },
+    "interpreting-culture-index": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/culture-index/skills/interpreting-culture-index/SKILL.md",
+      "computedHash": "50f7b27bfce1a04614103b8045ec4f78287013d9f87b3c4ec29a62a4511ef68a"
+    },
+    "issue-fields-migration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/issue-fields-migration/SKILL.md",
+      "computedHash": "d382a8705e541ec9ec6edbd441d93c61f3e69758d47d883c9e0adbef50326c61"
+    },
+    "java-add-graalvm-native-image-support": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-add-graalvm-native-image-support/SKILL.md",
+      "computedHash": "81dbd0ee073c906db0fa9f7942b610e5b12b977757bc880dc282a5150e705fcf"
+    },
+    "java-docs": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-docs/SKILL.md",
+      "computedHash": "76cf49efcd6e99d95031c78e56615dbaf641a756e852acf7e87f9197dfab43e0"
+    },
+    "java-helidon": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-helidon/SKILL.md",
+      "computedHash": "0b51be097e5b5feaeab29a8d0e0d225abbb451720fe2acd764d5c1ae3ba2a78b"
+    },
+    "java-junit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-junit/SKILL.md",
+      "computedHash": "fbf3cb0d47ffb44bdb6e1ebcc4d89dd7083208efdfc5b88f316c8bc2b58250b5"
+    },
+    "java-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-mcp-server-generator/SKILL.md",
+      "computedHash": "845cd573740bbee0496cd96fdde30e3a52ecac1b0b5b06c8520f1f1aca161d97"
+    },
+    "java-refactoring-extract-method": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-refactoring-extract-method/SKILL.md",
+      "computedHash": "8a467a2fe1f1d8c14a2c344dfef7060f5cf1300ad5b4d4f036b336c78f6952ab"
+    },
+    "java-refactoring-remove-parameter": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-refactoring-remove-parameter/SKILL.md",
+      "computedHash": "96f080496b55308f9e65e35789f243641e6986139a798fed81b452bac3cda34e"
+    },
+    "java-springboot": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/java-springboot/SKILL.md",
+      "computedHash": "f1b9c6b1277178fc33e5a612761c1cd1cf6ab5f946d05d69d52026d142c0a0c1"
+    },
+    "javascript-typescript-jest": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/javascript-typescript-jest/SKILL.md",
+      "computedHash": "0073d19ab0275eb6a8200aced6789a53744667bd717b5d1f44ce708a1740e5d4"
+    },
+    "javax-to-jakarta-migration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/javax-to-jakarta-migration/SKILL.md",
+      "computedHash": "00012770ad983334c6b6797979d4d70709161fa0d597a1d1deddbd5fadfc0522"
+    },
+    "kotlin-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/kotlin-mcp-server-generator/SKILL.md",
+      "computedHash": "f1d6d04bd8302df9bc5e6dcbb069c28978aec490fada7c7c37cbe46f3250ede3"
+    },
+    "kotlin-springboot": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/kotlin-springboot/SKILL.md",
+      "computedHash": "beaa34d307bfcce5dd026e3b03c357f98f471b0de1b9fc6a0b7a64d132b74e95"
+    },
+    "landing-page-conversion-audit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/landing-page-conversion-audit/SKILL.md",
+      "computedHash": "55925d3c6953ea31247b0b091b7e98fd85ea1de16e6ce7219068d3629b1fcf72"
+    },
+    "latchshot-page-capture": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/latchshot-page-capture/SKILL.md",
+      "computedHash": "7a1698a7b721fef755bed41b9cf179f280bba1fe29c0fb17c475c9802fbd112a"
+    },
+    "legacy-circuit-mockups": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/legacy-circuit-mockups/SKILL.md",
+      "computedHash": "25a548cc2e84396f9f85c57021c11c83d7a0234e4d1376ba529136a631cd0c57"
+    },
+    "let-fate-decide": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/let-fate-decide/skills/let-fate-decide/SKILL.md",
+      "computedHash": "ec6d1dc58cce3ddc89704afae78972449520f32f3a921c701771b851fd89da1b"
+    },
+    "libafl": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/libafl/SKILL.md",
+      "computedHash": "e092def8826fdade04e74b99a33b652b83e83e8b27d039778f94b6aaf78c855f"
+    },
+    "libfuzzer": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/libfuzzer/SKILL.md",
+      "computedHash": "22acb6573d38c9cddf84bf312ffb0f08367357c0756341014684f650c9ad0af2"
+    },
+    "linkedin-post-formatter": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/linkedin-post-formatter/SKILL.md",
+      "computedHash": "b527df4b7c4d4e8eace2162621756c84d41b90a7e1fa399bdf1e6a85c6a21db7"
+    },
+    "lsp-setup": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/lsp-setup/SKILL.md",
+      "computedHash": "3e7d2ab00279e79810d42dbedf1acb2985dc3e1dbc38e52b4c67dd948a441c89"
+    },
+    "make-repo-contribution": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/make-repo-contribution/SKILL.md",
+      "computedHash": "63448f43476e671552752ed4cda2c951cec43450f57792b667c7597e9d4d19b5"
+    },
+    "markdown-to-html": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/markdown-to-html/SKILL.md",
+      "computedHash": "fc87b1a02397a9dbcfdff39cdcf627659d433608bafbd347c60049dd2766a227"
+    },
+    "markstream-install": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/markstream-install/SKILL.md",
+      "computedHash": "9316f0bb814eb024733c50f406da6466b428f1ca94c702e920ee871cd3c0479a"
+    },
+    "mcp-builder": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-builder/SKILL.md",
+      "computedHash": "826e46adf81e1372282e205c34e1a2ee876e72148007726e4a2512599d2fef7b"
+    },
+    "mcp-cli": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-cli/SKILL.md",
+      "computedHash": "8133a09f06ac79d66b1c1b62f7a50537e179a481f25ef1ce0e823167d61d49b4"
+    },
+    "mcp-copilot-studio-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-copilot-studio-server-generator/SKILL.md",
+      "computedHash": "290b35da40b5a6485cd8b83ab0ce615a2bb2e3aaae78a09484349815c8b0b371"
+    },
+    "mcp-create-adaptive-cards": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-create-adaptive-cards/SKILL.md",
+      "computedHash": "9b01d7e179ce010b46b9e2461e678791c0a04ed2cd251e11d50d7f3198a6dab9"
+    },
+    "mcp-create-declarative-agent": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-create-declarative-agent/SKILL.md",
+      "computedHash": "e85004817b09658e5ec32b771a078b9c521e1b3ebae2384c50d5854adcc3ba0b"
+    },
+    "mcp-deploy-manage-agents": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-deploy-manage-agents/SKILL.md",
+      "computedHash": "54e29de79d6047e3be16f948afdd9b1755ea6a44038b5ffe9c8f0c97145f1d50"
+    },
+    "mcp-implementation-security-review": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-implementation-security-review/SKILL.md",
+      "computedHash": "b830bb1e079f2a3462e03ec151c95cb58063ce075ba58da832be46e019cd53b5"
+    },
+    "mcp-release-qa": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-release-qa/SKILL.md",
+      "computedHash": "0be021c85ba692151126f7d31b86e283fb9dd0e92938a9d6a17afedd8742402f"
+    },
+    "mcp-security-audit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-security-audit/SKILL.md",
+      "computedHash": "033f6989c7a06e204202c35eaa74308b957ced256b2128744700c46f0fbb2c71"
+    },
+    "md-to-docx": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/md-to-docx/SKILL.md",
+      "computedHash": "1c86f7e0736324ff1655ba1f896c24fb61ff19cba41024177da89baa9e40f29f"
+    },
+    "meeting-minutes": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/meeting-minutes/SKILL.md",
+      "computedHash": "d36e1cf7d58d1ea2eb24475a45924633d13c7c9bd6e03186f1759fa7a15fa905"
+    },
+    "memory-merger": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/memory-merger/SKILL.md",
+      "computedHash": "6d64cdfdbf2309c78905a6ab208cc5ccced0cb955f404d8fc124c9720ade6ac3"
+    },
+    "mentoring-juniors": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mentoring-juniors/SKILL.md",
+      "computedHash": "ea3d12e594aea60a35cf174be77bf9efcc6c3c17483c4560966b945102dfc44a"
+    },
+    "mermaid-to-proverif": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/mermaid-to-proverif/SKILL.md",
+      "computedHash": "59204d57ed12c4600ef59337743f663c7810b91cd030db7277fdf67cd47c76ff"
+    },
+    "microsoft-agent-framework": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/microsoft-agent-framework/SKILL.md",
+      "computedHash": "47f9e705f2a609ded19877db4d6c4691aa83a8415779b7fd4fb09e14cefd2c27"
+    },
+    "microsoft-code-reference": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/microsoft-code-reference/SKILL.md",
+      "computedHash": "2a86c1b1a876f777a8f99e0e27a9b2d5fa360352bd2dd396102e3110212dd296"
+    },
+    "microsoft-docs": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/microsoft-docs/SKILL.md",
+      "computedHash": "e49127ff2162330ac79bfde9e7ed1297df15be9ade09164fdebfe697153fcc36"
+    },
+    "microsoft-skill-creator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/microsoft-skill-creator/SKILL.md",
+      "computedHash": "78e6be5852e31f8e685eb1933e60b837d70e9eabfbfaef529b8078e2059d73da"
+    },
+    "migrating-oracle-to-postgres-data-access-code": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/migrating-oracle-to-postgres-data-access-code/SKILL.md",
+      "computedHash": "318270c9c8cc250a6036a4073028c87240defa75b0a0b2d165255120b5a5bbd9"
+    },
+    "migrating-oracle-to-postgres-stored-procedures": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/migrating-oracle-to-postgres-stored-procedures/SKILL.md",
+      "computedHash": "56b0b20a035c3ba238490893593db83db4c43eac465850525d40154a28876c98"
+    },
+    "minecraft-plugin-development": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/minecraft-plugin-development/SKILL.md",
+      "computedHash": "0dd6605a2f0b6729e8b2d18f2ce5faca1a93275b0b1e575a2c7987bfa0c2f1f1"
+    },
+    "mini-context-graph": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mini-context-graph/SKILL.md",
+      "computedHash": "8b228177f8cab3bd907f2b01581093ab8fe9eb1f2ffd0c7cdfcfce17a25f91dc"
+    },
+    "mkdocs-translations": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mkdocs-translations/SKILL.md",
+      "computedHash": "782aa96093d10b125f75a486c9434e4a5c7d3c2ecf6c8fb8276620f032c6f4bc"
+    },
+    "modern-cpp": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/modern-cpp/skills/modern-cpp/SKILL.md",
+      "computedHash": "400548bf5226487baaeb6c8f4d2b4ba6abb44444bc8aa25d27ed2347b5445556"
+    },
+    "modern-python": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/modern-python/skills/modern-python/SKILL.md",
+      "computedHash": "9d30ad6831ecc4b0ba267a20fddd5414c0bc8016a6c533352833b40016396b7b"
+    },
+    "msgraph-sdk": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/msgraph-sdk/SKILL.md",
+      "computedHash": "211c1bde0b1db81d2a6c9f14b7e40b6bd7f9a6718cf36439aa28e08ce84036fe"
+    },
+    "msstore-cli": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/msstore-cli/SKILL.md",
+      "computedHash": "abaef9913fe8c0d039ed3a6966d513656882c538cc3088d9c709ad78c00c3c7e"
+    },
+    "multi-stage-dockerfile": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/multi-stage-dockerfile/SKILL.md",
+      "computedHash": "698bf93a84dae18fd7bd0b1d35c21427307fde78fbdf4624be9726f5f98189ca"
+    },
+    "mutation-testing": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/mutation-testing/skills/mutation-testing/SKILL.md",
+      "computedHash": "ee91802178c04e766e589b5cd98205cda1ef891f540ed88eb2664134ae170400"
+    },
+    "mvvm-toolkit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mvvm-toolkit/SKILL.md",
+      "computedHash": "4e6340eb4f540a7c47d571faaf73bd2b8ad8e040bd607edc38db82186358bdc5"
+    },
+    "mvvm-toolkit-di": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mvvm-toolkit-di/SKILL.md",
+      "computedHash": "03d4ba593107178559ac03bac176bf9dcb66bd3d9bb3cc865e69a4997308acbf"
+    },
+    "mvvm-toolkit-messenger": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/mvvm-toolkit-messenger/SKILL.md",
+      "computedHash": "54183b200bc6eda2dfd3c72d648628bd676d8c58b0fbaa0c8f43eaa90b98bf86"
+    },
+    "namecheap": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/namecheap/SKILL.md",
+      "computedHash": "fa90fadac800df7ece43f1f7422b2284239bb5e8d54f8b4d01b86e4ebe96234d"
+    },
+    "nano-banana-pro-openrouter": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/nano-banana-pro-openrouter/SKILL.md",
+      "computedHash": "7f46510390d2871286717f8db72edd123fdefcfeec771ec608b3da48e2abe09c"
+    },
+    "napkin": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/napkin/SKILL.md",
+      "computedHash": "333e4b2870be463bb1bdc84862d152800c44ccbfe3758157b8cbee9c2538db7a"
+    },
+    "next-intl-add-language": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/next-intl-add-language/SKILL.md",
+      "computedHash": "6b30075c5f43a4498782729f129c513ca28db37d93032a81a07e444d4db575c5"
+    },
+    "noob-mode": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/noob-mode/SKILL.md",
+      "computedHash": "4ff85b4ddd03d0222eb9526c8fc9a40a83f07e4bb490cc2b524691dd8f8af305"
+    },
+    "nuget-manager": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/nuget-manager/SKILL.md",
+      "computedHash": "9081279ef0313a18766c8f03422de9ef31765212d31b13a513e66f39427b4e38"
+    },
+    "onboard-context-matic": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/onboard-context-matic/SKILL.md",
+      "computedHash": "ef32055c42e70a407d48afc7525b8ae35964a58f90559b0db4400ba5b8307380"
+    },
+    "oo-component-documentation": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/oo-component-documentation/SKILL.md",
+      "computedHash": "5d92d232f6cd4bab9177811da0b7b8ee5bc3fa92d707f943835541d9959d7e78"
+    },
+    "open-sourcing": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/open-sourcing/skills/open-sourcing/SKILL.md",
+      "computedHash": "2274e2b09904d5585cfbbf25aa83762a231cfa3f8f62a2515d7f6b86448e8e0e"
+    },
+    "openapi-to-application-code": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/openapi-to-application-code/SKILL.md",
+      "computedHash": "d98883f9f1f65b658c09af4a7d51eb31847e3302d4ebcc32b32cc8e4dcbe59c2"
+    },
+    "optimize-simplicite-logs": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/optimize-simplicite-logs/SKILL.md",
+      "computedHash": "24c3f55dd7b330918e1851fc1b5edf811743fe595caee80fc818c8d53d254ffc"
+    },
+    "ossfuzz": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/ossfuzz/SKILL.md",
+      "computedHash": "fab932968c300051637970d90bdc2e9c7623dfea363f7ba24272eb0604b00ef7"
+    },
+    "pdf": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/pdf/SKILL.md",
+      "computedHash": "cfbc539377088ca7e44a813b30c306327385bbd973cd7a721e1743f60837dd62"
+    },
+    "pdftk-server": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/pdftk-server/SKILL.md",
+      "computedHash": "a56ec988d9fae251b9d913fdf646f770a30474027e5d6e6d3250a83958f21ec3"
+    },
+    "penpot-uiux-design": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/penpot-uiux-design/SKILL.md",
+      "computedHash": "cd29e08bb7d2d4b9212582bcd9b70823619fbc6397078b8ba853962054ba4230"
+    },
+    "performance-review-writer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/performance-review-writer/SKILL.md",
+      "computedHash": "41aa964d32bff75567743e07f9588fac0eef56fc8dfdb1ddd9c5c5c81971eaf1"
+    },
+    "pester-migration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/pester-migration/SKILL.md",
+      "computedHash": "470406452ae53f836183270058327b5106e30d5deea64f36fcd1736150da33e7"
+    },
+    "pester-should-migration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/pester-should-migration/SKILL.md",
+      "computedHash": "72f7219ba3e6402a56ebb56f5db6de90cbe732843ff455a9b3d24a46638dc49f"
+    },
+    "phoenix-cli": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/phoenix-cli/SKILL.md",
+      "computedHash": "d722fbd59f82f03183535a4e5c96d4bad60bd835a45ee2d79f016c59cdf85688"
+    },
+    "phoenix-evals": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/phoenix-evals/SKILL.md",
+      "computedHash": "8ae581770ffc446daec5b34861ce74fc026c70cf744568bbe26576a5f496d2aa"
+    },
+    "phoenix-tracing": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/phoenix-tracing/SKILL.md",
+      "computedHash": "51a5753131db80a9db07988a0e9532858a75bb368c2117cccc9d6984b99cc0e4"
+    },
+    "php-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/php-mcp-server-generator/SKILL.md",
+      "computedHash": "f83ee3d7862186b49f732dc59e2860a25d5080c1df26f0de5c400b57c72b66c2"
+    },
+    "pinecone-rag": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/pinecone-rag/SKILL.md",
+      "computedHash": "5db881e5a6b47e6a002f6253de40340b4e388fb9f308b6363877fe9c4b28d8d5"
+    },
+    "planning-oracle-to-postgres-migration-integration-testing": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/planning-oracle-to-postgres-migration-integration-testing/SKILL.md",
+      "computedHash": "00fb60907c69314a769278bdf25ed99c84b80eefcda2c63564b64030a1315130"
+    },
+    "plantuml-ascii": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/plantuml-ascii/SKILL.md",
+      "computedHash": "2fb2b41487ea6559f4ccf877fe397c87214b35049528685ff1c02bb792b027d1"
+    },
+    "playwright-automation-fill-in-form": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/playwright-automation-fill-in-form/SKILL.md",
+      "computedHash": "05c39652cc1ef6a3066221d77d51e208f88f3ac8cbdd7ffe57a99de93776efe7"
+    },
+    "playwright-explore-website": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/playwright-explore-website/SKILL.md",
+      "computedHash": "ac361696198c2db22a0f9d3aa456d2f83c9f0110bf00d6ca529f735395fe3a5c"
+    },
+    "playwright-generate-test": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/playwright-generate-test/SKILL.md",
+      "computedHash": "8f963da3e25f705ff39755b8b990f20da0c0320cb86ac83fcc4d2d4eca91f6e4"
+    },
+    "poka-yoke": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/poka-yoke/SKILL.md",
+      "computedHash": "7a7d65dd85a0c46b9d145612077f087f91cb611459be516594ccd7acef292b74"
+    },
+    "postgresql-code-review": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/postgresql-code-review/SKILL.md",
+      "computedHash": "1167ec9449aa866e16bc7449e05ab4d391cdce95a0b0c5e1155b793160471eb5"
+    },
+    "postgresql-optimization": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/postgresql-optimization/SKILL.md",
+      "computedHash": "8022448de70ba9a485e3b5bce34c5bbc644f93eb39b68431c9f7dabcf03aeb09"
+    },
+    "power-apps-code-app-scaffold": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/power-apps-code-app-scaffold/SKILL.md",
+      "computedHash": "6d09e31150a185313f7fc8c001814edea2710810f25f07991f16b7a3dad20352"
+    },
+    "power-bi-dax-optimization": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/power-bi-dax-optimization/SKILL.md",
+      "computedHash": "e98206e9864acfbfec475a1213c2687c293f0ed9e4903b6a9dc271ff313d0944"
+    },
+    "power-bi-model-design-review": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/power-bi-model-design-review/SKILL.md",
+      "computedHash": "0e1f4a853086b048036dbd6f21527c3557713d76bb036b4c0b51c370d73ea264"
+    },
+    "power-bi-performance-troubleshooting": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/power-bi-performance-troubleshooting/SKILL.md",
+      "computedHash": "93b5d254c846d138ed8e60395f71e2e61c10826b2f53db24be5b13125f11ffb0"
+    },
+    "power-bi-report-design-consultation": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/power-bi-report-design-consultation/SKILL.md",
+      "computedHash": "12dacbd64cd67369f810c094dc70427d4805788f4ec6b1257e17d8e6aed74cf1"
+    },
+    "power-platform-architect": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/power-platform-architect/SKILL.md",
+      "computedHash": "536111d4874719e42543d2a43595755f2a83cb02c137df465b37663a0cf01df7"
+    },
+    "power-platform-mcp-connector-suite": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/power-platform-mcp-connector-suite/SKILL.md",
+      "computedHash": "da3f7078803c9e4fd25ee50de3b6f2de1a480e6e1509d8338520a04e2596d9c1"
+    },
+    "powerbi-modeling": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/powerbi-modeling/SKILL.md",
+      "computedHash": "b98ebe4d3876548b0a10c1c97216fdf4d50799243ffbb38158b367574bbf19f5"
+    },
+    "pptx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/pptx/SKILL.md",
+      "computedHash": "82eaf5daede5a1779aa17ccf06597cb209a0c2bd41d3a2f18bd45e0301a387fb"
+    },
+    "pr-dashboard": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/pr-dashboard/SKILL.md",
+      "computedHash": "19e46a4fd3f7cc981599534cfe952e734547ef562b0f6f207dedc141614e598b"
+    },
+    "pr-improver": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/code-improver/skills/pr-improver/SKILL.md",
+      "computedHash": "d6f86f999ba1e1dc9f1bbe02cdfe10a31872498258a2b91b0fe4127295bdd258"
+    },
+    "pr-screenshots": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/pr-screenshots/SKILL.md",
+      "computedHash": "ff7ffe37e28f3a4461bad1a73f0ef27ce91dc65334341aceec1de72acb44cf27"
+    },
+    "prd": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/prd/SKILL.md",
+      "computedHash": "1f3e1f005fc40fda85d250ae906c8ee4f7e8e833e23adfeca6542c19609fd7cd"
+    },
+    "premium-frontend-ui": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/premium-frontend-ui/SKILL.md",
+      "computedHash": "e7f3d02a0233beafdd6fe5335427388109b9699ebcdc6a8782a8bada2826d916"
+    },
+    "project-workflow-analysis-blueprint-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/project-workflow-analysis-blueprint-generator/SKILL.md",
+      "computedHash": "3d55c341daf416e131919657ef92616619bfa52b6caea81029b79a64e4f958a3"
+    },
+    "prompt-optimizer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/prompt-optimizer/SKILL.md",
+      "computedHash": "089759ae0d5a7701bb8e2cda124432f9d175cf454a9b861966eb841258dc678b"
+    },
+    "property-based-testing": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/property-based-testing/skills/property-based-testing/SKILL.md",
+      "computedHash": "ddde371888a75d492f6b296c3f33c0aa92e7722c82b547acbf53369f64b97449"
+    },
+    "publish-to-pages": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/publish-to-pages/SKILL.md",
+      "computedHash": "2ff8e5ae1ce51c04c3817dfc3107c9626d09276a66289b2ca9f88041192764be"
+    },
+    "pytest-coverage": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/pytest-coverage/SKILL.md",
+      "computedHash": "06481f4bbc6d80a52091ec9ba5856eb1dc5f80cbabb40fd4ad02aaea3085a0dc"
+    },
+    "python-azure-iot-edge-modules": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/python-azure-iot-edge-modules/SKILL.md",
+      "computedHash": "9451ee2ccb0b1da77e7eb6b42124c50f9419cf9219a4eb84d198ff42b0a9e0ad"
+    },
+    "python-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/python-mcp-server-generator/SKILL.md",
+      "computedHash": "2b598920b5fdc807c9ee5b69bad23b8327c4ea5f1178c38d3a99a9e06a49e628"
+    },
+    "python-pypi-package-builder": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/python-pypi-package-builder/SKILL.md",
+      "computedHash": "8873ae86fc80659e5cdfc005c29193ac7fb976fbc9335c2a05194323d60d0e84"
+    },
+    "qdrant-clients-sdk": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/qdrant-clients-sdk/SKILL.md",
+      "computedHash": "141f4f633e3b60d94149f4bd573d6106ee2eb7ab070dc99249a221d173c01946"
+    },
+    "qdrant-deployment-options": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/qdrant-deployment-options/SKILL.md",
+      "computedHash": "7e10de46a33e9422f27a0c03da63eb18c86ccc73438c847928e789370251b376"
+    },
+    "qdrant-model-migration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/qdrant-model-migration/SKILL.md",
+      "computedHash": "9354dcdd3742ecbccdd86c59110f5f163adbd0b0e992d0bb0d267f2e429e1d77"
+    },
+    "qdrant-monitoring": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/qdrant-monitoring/SKILL.md",
+      "computedHash": "b4f236b6875bce2c4690b0da201950a03204239f3a5351f2f1c3375584edc8c1"
+    },
+    "qdrant-performance-optimization": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/qdrant-performance-optimization/SKILL.md",
+      "computedHash": "00faabaa7ea9f3eeda8ab9adf93fe735c0d96ac7a45cc3c50b3d4b70673d0c19"
+    },
+    "qdrant-scaling": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/qdrant-scaling/SKILL.md",
+      "computedHash": "dc9c4d0e7104a77ebd9d55c884efc25fb79d3ebec284aabac986416ece018e44"
+    },
+    "qdrant-search-quality": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/qdrant-search-quality/SKILL.md",
+      "computedHash": "869383fcf900f621c9fd3c52bce7e5c9abd46f8d8cf9fbaf81635253aeb20739"
+    },
+    "qdrant-version-upgrade": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/qdrant-version-upgrade/SKILL.md",
+      "computedHash": "fb7d84a8ddc0df9b42d75f30b4d2fb2f9108a7dd348e60578379d20705d6a424"
+    },
+    "quality-playbook": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/quality-playbook/SKILL.md",
+      "computedHash": "84db1559eb02fa13576a439c4056b0056234cd6c3839b2b63dbe03db1bdc6fd0"
+    },
+    "quasi-coder": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/quasi-coder/SKILL.md",
+      "computedHash": "954dfd6b818d8b88708cdae77b3cb2d5986480bcd489902d9d9a4f0ad921577d"
+    },
+    "react-audit-grep-patterns": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react-audit-grep-patterns/SKILL.md",
+      "computedHash": "efd13f698533b4c6068be4cc6bd52a31b6c0b2ef4c59955e6a65a97cc04c7946"
+    },
+    "react-container-presentation-component": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react-container-presentation-component/SKILL.md",
+      "computedHash": "3bd5f84d344da882ca8e37985d00d727344f51a54ecbe74c417390c460c47b84"
+    },
+    "react18-batching-patterns": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react18-batching-patterns/SKILL.md",
+      "computedHash": "949163ac295ba82a7236108e92e06dc12574556b078793484797df606cfb200a"
+    },
+    "react18-dep-compatibility": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react18-dep-compatibility/SKILL.md",
+      "computedHash": "7f6d6b846b6d5496555e98c5f2dfb1cbe1b322a5ccc7ea8ad40109f52d2a0053"
+    },
+    "react18-enzyme-to-rtl": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react18-enzyme-to-rtl/SKILL.md",
+      "computedHash": "6df1e9b40cfcb16868fc92d153e2f99688a2221876df78757d7b757e9c1835b2"
+    },
+    "react18-legacy-context": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react18-legacy-context/SKILL.md",
+      "computedHash": "b4eeb7a3db01f7a6bf9ba8c92ef034bb920606229d344488c732da8097406381"
+    },
+    "react18-lifecycle-patterns": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react18-lifecycle-patterns/SKILL.md",
+      "computedHash": "2903201b29331cca92404cc72eb60c8109c10d4cc38ae57e376af4f9c8324239"
+    },
+    "react18-string-refs": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react18-string-refs/SKILL.md",
+      "computedHash": "aa7463c685f67949ef543f5eb84fdb1ad7ce6fb1636fb09b50e7a45c1afb04a8"
+    },
+    "react19-concurrent-patterns": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react19-concurrent-patterns/SKILL.md",
+      "computedHash": "7f8d2e6d77fd5644208d0cc5d6e63278cb231211e54f573a1278b11b50869160"
+    },
+    "react19-source-patterns": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react19-source-patterns/SKILL.md",
+      "computedHash": "4b109d3ae035c6c4b8e056d16841c4d1ac0813ad84846bb482c247c45febd226"
+    },
+    "react19-test-patterns": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/react19-test-patterns/SKILL.md",
+      "computedHash": "2544f319ef76174dd8859c28a66ff0c74f10065dae5e78967ca5b43af1cc1bc2"
+    },
+    "readme-blueprint-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/readme-blueprint-generator/SKILL.md",
+      "computedHash": "e2c7dabf2e455794260f1516e2ceda6a82dc92a409578cc184fcb0f45bddca54"
+    },
+    "refactor": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/refactor/SKILL.md",
+      "computedHash": "87789a786b96f99ba0680e89345a975106e10e7db1071c7cdc2e76d507c449d6"
+    },
+    "refactor-method-complexity-reduce": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/refactor-method-complexity-reduce/SKILL.md",
+      "computedHash": "a09a18f7b370e105c20480f9c772169948262fa07fdf5fbd4c5d45b2def958e0"
+    },
+    "refactor-plan": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/refactor-plan/SKILL.md",
+      "computedHash": "26f32d34d48e9a40e5dd91d877319c94c6b8537e204d95d187ba45b443276868"
+    },
+    "remember": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/remember/SKILL.md",
+      "computedHash": "fdbc1d3eca3219bfbdfca7309036aa78f52ea0ac845c0a1e2fb66284365bc637"
+    },
+    "remember-interactive-programming": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/remember-interactive-programming/SKILL.md",
+      "computedHash": "cdc356396df6b494231f2c1e40a0647e8d3ca572bbc66469f5acff7c1728f510"
+    },
+    "repo-standardizer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/repo-standardizer/SKILL.md",
+      "computedHash": "cfd60e67af66d41187a83905c7dda6e22d175b92b2208f22fe7afa1b8c3f94ae"
+    },
+    "repo-story-time": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/repo-story-time/SKILL.md",
+      "computedHash": "8f85047285d0e911bafb2ced184c0034784598f1035df96247a1b5bcd570abbf"
+    },
+    "resemble-detect": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/resemble-detect/SKILL.md",
+      "computedHash": "72f31bf840ca6081d8cd7d3ea0a2b2e9a97ac72b08f6ca0576f428f453f79270"
+    },
+    "resx-source-generator-migration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/resx-source-generator-migration/SKILL.md",
+      "computedHash": "f928391760d931fc4e9ebb05eb5d2fce84d40c9282786dc2193a615f17c23c2d"
+    },
+    "review-and-refactor": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/review-and-refactor/SKILL.md",
+      "computedHash": "9236d06a1500089ddb46975b866e9a63478e502afe7095b1980c618678a7c7fe"
+    },
+    "reviewing-oracle-to-postgres-migration": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/reviewing-oracle-to-postgres-migration/SKILL.md",
+      "computedHash": "d5c4232a16b626f2c5f162bb29bd2f47afea82ff32fb98bf196cd4f17b935859"
+    },
+    "rhino3d-scripts": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/rhino3d-scripts/SKILL.md",
+      "computedHash": "3d13fb8036f95d61df1e1e758e1c33493b519b36ccca580bcd000212b6de382f"
+    },
+    "roslyn-analyzers": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/roslyn-analyzers/SKILL.md",
+      "computedHash": "0ebe0845e3c16d845bea763eef60c65a56fd9d754a659c34082b458a520041f6"
+    },
+    "roundup": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/roundup/SKILL.md",
+      "computedHash": "95d187f8b2922dfa5c036549636a5f685ea138e61ae15e41ef880bf8093dd473"
+    },
+    "roundup-setup": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/roundup-setup/SKILL.md",
+      "computedHash": "c8548d97ac0353af2b5f5790d063886bd177384dccab9c33a35d470dd369e245"
+    },
+    "ruby-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/ruby-mcp-server-generator/SKILL.md",
+      "computedHash": "db811a087b7b1fa1837bdbc34f2b21cd00e545c0d0d0a4769bfc004e40536d6b"
+    },
+    "ruff-recursive-fix": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/ruff-recursive-fix/SKILL.md",
+      "computedHash": "a6f4b355dd277d24f9ea95cb0f6f181fb4fc77fa8080d1e4f649af21d2095f2a"
+    },
+    "rust-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/rust-mcp-server-generator/SKILL.md",
+      "computedHash": "420ae9213c67ac826ea54fbc3d7571189d74f22f3dfda3645fd3c6f7277c4944"
+    },
+    "rust-review": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/rust-review/skills/rust-review/SKILL.md",
+      "computedHash": "3de2fb6f09a8d57d4f5c3ea2e94871af222b960f5da444115ad4119af6fb38a4"
+    },
+    "ruzzy": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/ruzzy/SKILL.md",
+      "computedHash": "bf05bb593be3525b1ddaceedbdeca60c81da40cbef3c7e5f1d3bb9eefd75a85c"
+    },
+    "salesforce-apex-quality": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/salesforce-apex-quality/SKILL.md",
+      "computedHash": "cfd904f9077e9716ec31afe6390590fa8abfa956707891f28b5294b38d72b449"
+    },
+    "salesforce-component-standards": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/salesforce-component-standards/SKILL.md",
+      "computedHash": "7a1cf40c098d927b069a074ceb07a40cf556da4ff9064bca64affa80a4b4acfe"
+    },
+    "salesforce-flow-design": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/salesforce-flow-design/SKILL.md",
+      "computedHash": "d8123acaa4f0f0285c26fce74f04728ffc510f31391ba919671d3fed8d1e6fe9"
+    },
+    "sandbox-npm-install": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/sandbox-npm-install/SKILL.md",
+      "computedHash": "974fd633d6421af0f563b5afe6b144b4d3615ec528ebb620ae3091dda4546dcd"
+    },
+    "sarif-parsing": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/static-analysis/skills/sarif-parsing/SKILL.md",
+      "computedHash": "603c6c035a00c0e5be25767d91ebaa54f29f8bca7544a29b035c6071f375ff08"
+    },
+    "scaffolding-oracle-to-postgres-migration-test-project": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/scaffolding-oracle-to-postgres-migration-test-project/SKILL.md",
+      "computedHash": "85f7027bf84288a9e1621eec2160b6ef02ec80ef71c2900c7bd2c94652f1361f"
+    },
+    "scoutqa-test": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/scoutqa-test/SKILL.md",
+      "computedHash": "e9155cb506ef7c59e9a93ca1efe6fc4256c6ea83f32068446f1c2bbd27b6c955"
+    },
+    "screen-recording": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/screen-recording/SKILL.md",
+      "computedHash": "d0574cf904de9243778697464f0c41d073691a96e53231f16dd8176df1b46afd"
+    },
+    "second-opinion": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/second-opinion/skills/second-opinion/SKILL.md",
+      "computedHash": "f5dedb068e5c6a71514b65127f3b4c00a579a68ceae00faf49f4748ec7cadf7c"
+    },
+    "secret-scanning": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/secret-scanning/SKILL.md",
+      "computedHash": "cc7de79bee80775578227a370637d0a83aa0f2cbec28374058899859261d2081"
+    },
+    "secure-workflow-guide": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/secure-workflow-guide/SKILL.md",
+      "computedHash": "e69170d1dd7099c49c57c9c052e97cacf2842795e48617b137e643eecbf435f1"
+    },
+    "security-review": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/security-review/SKILL.md",
+      "computedHash": "9b1791054c648b84ca424fc1342dede2e04759dc73436bb91d21675d5a4c13ea"
+    },
+    "semantic-kernel": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/semantic-kernel/SKILL.md",
+      "computedHash": "c880316506a42e2730e9e6e970d5450ab3c3125662e8d790fa5c6dc202815c51"
+    },
+    "semgrep": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/static-analysis/skills/semgrep/SKILL.md",
+      "computedHash": "f3e64c82009ff2f61a8dea5a58df0356bf8ffdbc3838674bd7ce7d63da990233"
+    },
+    "semgrep-rule-creator": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/semgrep-rule-creator/skills/semgrep-rule-creator/SKILL.md",
+      "computedHash": "8fd82365ec87cd07e82da8cebb3409eae8fc435b56fce2a161d07d158da6ade7"
+    },
+    "semgrep-rule-variant-creator": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/semgrep-rule-variant-creator/skills/semgrep-rule-variant-creator/SKILL.md",
+      "computedHash": "c9110bfcfa19f0367ce7c0ef53f1004ef0a58d94603e60c50d0f8068b164732a"
+    },
+    "server-side-conversion-tracking": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/server-side-conversion-tracking/SKILL.md",
+      "computedHash": "7e7e012d88e4af05b07dbe723d73566d47a69408a2435fb33df742838fa4fbbb"
+    },
+    "setup-my-iq": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/setup-my-iq/SKILL.md",
+      "computedHash": "3c67c0e3c530c627e7fa423900e5b056d98943660b84fe0f39c29cc014ce1c1b"
+    },
+    "sharp-edges": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/sharp-edges/skills/sharp-edges/SKILL.md",
+      "computedHash": "8aa5c8ad250215a5b8f40c4e386dcd045b4a7a31c67952d1685d906aa7571843"
+    },
+    "shopify-review-triage": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/shopify-review-triage/SKILL.md",
+      "computedHash": "5ae994507aaefeb19a3de949dc872927a31e09710718141dbbcfd3d94582773f"
+    },
+    "shuffle-json-data": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/shuffle-json-data/SKILL.md",
+      "computedHash": "9035306ade3aed0a8898046bfc83fa01dd519f00d9f78ec1a7977288a38be514"
+    },
+    "signal-write": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/signal-write/SKILL.md",
+      "computedHash": "f24e94755f8707acad2481adb5a1079e738e8e954ce27312b51562ae65eef61b"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "computedHash": "5ea13a6d9f0d4bb694405d79acd00cadec0d21bb138c4dd10fcf3c500cb835c2"
+    },
+    "skill-improver": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/code-improver/skills/skill-improver/SKILL.md",
+      "computedHash": "bbb4cd18b25a5e6c72a9aeb8772cef6ed12461187e9fb9827df1e6292ac49788"
+    },
+    "slack-gif-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/slack-gif-creator/SKILL.md",
+      "computedHash": "fab4fcfcaed371071069d61a3ab94dff15d10d36403ff269d147ea986cd98083"
+    },
+    "slang-shader-engineer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/slang-shader-engineer/SKILL.md",
+      "computedHash": "eaf7d614bab0c76e0f2837514ad702b104a37613cd5d09d58f57e9afddec229a"
+    },
+    "slicing-code-context": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/slicing-code-context/SKILL.md",
+      "computedHash": "670515d9e5edda51325425c3b2c4080c61aba18215af27f4fb037fa10726f1b1"
+    },
+    "snowflake-semanticview": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/snowflake-semanticview/SKILL.md",
+      "computedHash": "42d1bf4bd7a1edd92e0637ae3189ec21edb052dca9de06f0501926c567bb48b2"
+    },
+    "solana-vulnerability-scanner": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/solana-vulnerability-scanner/SKILL.md",
+      "computedHash": "acdc30ad708e7972a01d9c0633d85abe4bc662a209ae25e9dd97325be1b49720"
+    },
+    "speak-summary": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/speak-summary/SKILL.md",
+      "computedHash": "a1d3af28c4e8aa67169c52fd1ae3c87a7b2bdbee1cd2590036ec20d14bb7f1ef"
+    },
+    "spec-to-code-compliance": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/spec-to-code-compliance/skills/spec-to-code-compliance/SKILL.md",
+      "computedHash": "c5385ff84662a0538b5091ee97c5f5c03c0d477fc95d5ce77b677b7bc1db47d2"
+    },
+    "sponsor-finder": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/sponsor-finder/SKILL.md",
+      "computedHash": "155923073dbbfd9b567c770a5b936619c98768816916d204b6310c456e99dc4f"
+    },
+    "spring-boot-testing": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/spring-boot-testing/SKILL.md",
+      "computedHash": "4e6153fd6eed64dfc6b0f9a2a38ef8e636a88977702a49f3c5691fafcc02d8a8"
+    },
+    "sql-code-review": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/sql-code-review/SKILL.md",
+      "computedHash": "7dd337a3271381237c5ace34f9a9a525f73e1a4f93a48321044b00fcd5f95942"
+    },
+    "sql-optimization": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/sql-optimization/SKILL.md",
+      "computedHash": "47c930907f25d67454ac8c2d155785eae3dce72242960d0c0e9ebf2ced9cd231"
+    },
+    "sql-server-table-reconciliation": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/sql-server-table-reconciliation/SKILL.md",
+      "computedHash": "12937f99eae704f5de309fe0d7cf5b0377d65a33bfc1095f7da89233b5c3e068"
+    },
+    "ssma-console": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/ssma-console/SKILL.md",
+      "computedHash": "559f7a8c2be015805b65aa1cf063656b5484012ae226668dd540f6f11a7a13cd"
+    },
+    "steno-mode": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/steno-mode/SKILL.md",
+      "computedHash": "3c55c1345411e5ee6cbf9ee9563d69c91929ea27de6d74923a05c7699bfa73b8"
+    },
+    "structured-autonomy-generate": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/structured-autonomy-generate/SKILL.md",
+      "computedHash": "bd623b72048f59aaad45cd8d7d71c6ece1aa650a186f948f0836c35d2331f025"
+    },
+    "structured-autonomy-implement": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/structured-autonomy-implement/SKILL.md",
+      "computedHash": "f985115da51ff25a5b1cd6f46ff713a43c11f1bb7955cda8f53e6171b2f9f97e"
+    },
+    "structured-autonomy-plan": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/structured-autonomy-plan/SKILL.md",
+      "computedHash": "a23272e52745d64fdc2469ccbe8f0d3ec7edb52e8f056ee5504a5982829e8463"
+    },
+    "substrate-vulnerability-scanner": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/substrate-vulnerability-scanner/SKILL.md",
+      "computedHash": "233b71e44c809142b52e2accd9192fad7f15986d05b2ee986c5a14201241d530"
+    },
+    "suggest-awesome-github-copilot-agents": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/suggest-awesome-github-copilot-agents/SKILL.md",
+      "computedHash": "974e629421e71810c7462b606262012d3cccb85dcfd9d595a25ab66620f78c76"
+    },
+    "suggest-awesome-github-copilot-instructions": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/suggest-awesome-github-copilot-instructions/SKILL.md",
+      "computedHash": "d2545b97b786f573aea63664e73a9ffbd619d5390a6c6e287f235f6f41ad1108"
+    },
+    "suggest-awesome-github-copilot-skills": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/suggest-awesome-github-copilot-skills/SKILL.md",
+      "computedHash": "326ab63e60c60b2880781cc05e7289c911612e4d74c71b3bbaf8cad2c531ab8e"
+    },
+    "supply-chain-risk-auditor": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/supply-chain-risk-auditor/skills/supply-chain-risk-auditor/SKILL.md",
+      "computedHash": "5af6ab2b2d976081fca2dfc7e2101b3ba66a7ca377339e3f8bcf58e747d8b70e"
+    },
+    "swift-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/swift-mcp-server-generator/SKILL.md",
+      "computedHash": "3fd2caf5c3da6b0fcd9d1e094241b1c050db0768da83e3119ce683489fdfee1d"
+    },
+    "system-commandline-cli": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/system-commandline-cli/SKILL.md",
+      "computedHash": "e8b4417caefda94a9be4eb68d604d88d9de2cf46edad266e7163728149736d56"
+    },
+    "technical-job-search": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/technical-job-search/SKILL.md",
+      "computedHash": "004561bd2215b671249719b3d54c36ffdbc6ad5bfd095af8905cc42df7ed6cdd"
+    },
+    "technology-stack-blueprint-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/technology-stack-blueprint-generator/SKILL.md",
+      "computedHash": "3819bfa893ce2aa75acb219991818e5daf75ce5d2b4cc6006f61c4e6dae085e4"
+    },
+    "template-skill": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "template/SKILL.md",
+      "computedHash": "38c88f722b574a922311d334a70c2008a2a5b896f06eaa75516d716e5725b26f"
+    },
+    "terraform-azurerm-set-diff-analyzer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/terraform-azurerm-set-diff-analyzer/SKILL.md",
+      "computedHash": "db4ccfecf95d4279085fa5d869585d4387484b414d892713a5499e651a47aa7c"
+    },
+    "testing-handbook-generator": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/testing-handbook-generator/SKILL.md",
+      "computedHash": "1fc41d3aa1827a265c276320a7aa839c0cf5197419c5586906746edee10bff67"
+    },
+    "theme-factory": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/theme-factory/SKILL.md",
+      "computedHash": "598ddfa9784ae2a8c55be5dbb047b98564d875dea6f4669168a87ae1ea1a4ed3"
+    },
+    "threat-model-analyst": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/threat-model-analyst/SKILL.md",
+      "computedHash": "abd264e1f7c545f4d1248ed471b519525359bdc9f2bc239ec02a7f76f88ab0b0"
+    },
+    "tiny-stepping": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/tiny-stepping/SKILL.md",
+      "computedHash": "03b8048ef1f610ffc2aa24bf3685f3269800718ab20b571890fbf9f1ee67425e"
+    },
+    "tldr-prompt": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/tldr-prompt/SKILL.md",
+      "computedHash": "3f5e0aec3cf4d16b8497cbdb430e2e91b952a863344d8b131bc057b7cd47f515"
+    },
+    "tm7-threat-model": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/tm7-threat-model/SKILL.md",
+      "computedHash": "77eca7f07afd3ef5a079cdcc6467af6da34f43d25e019f4b30b8166063b5f1ce"
+    },
+    "token-integration-analyzer": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/token-integration-analyzer/SKILL.md",
+      "computedHash": "d92fb7bf47b10adb5abc08a283375ac5b7b7c58825676c9459b5bc31a984989e"
+    },
+    "ton-vulnerability-scanner": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/building-secure-contracts/skills/ton-vulnerability-scanner/SKILL.md",
+      "computedHash": "6769c8d247061092d6a67733afc772c019599986b34cf80fd10481b73e8f2cff"
+    },
+    "trailmark": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/trailmark/SKILL.md",
+      "computedHash": "c72d76a143ebf293c6a54e9d7aad5b1e0e0db63df2851081284973f852ea77da"
+    },
+    "trailmark-finding-triage": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/trailmark-finding-triage/SKILL.md",
+      "computedHash": "9bc8b5fed2825f4e4be17c65a06078932a05addabfce3caa0f22d19edca80a49"
+    },
+    "trailmark-review-gate": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/trailmark-review-gate/SKILL.md",
+      "computedHash": "ec9eb54970677b012f9b2e144f31c540e1889daba904b6aa878b6a4b8cf41621"
+    },
+    "trailmark-structural": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/trailmark-structural/SKILL.md",
+      "computedHash": "4f2abe49d6b6de18bbf433cd3a07f2ea0e96b8f4156a17500f50ca41f69a2634"
+    },
+    "trailmark-summary": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/trailmark-summary/SKILL.md",
+      "computedHash": "94bda81fe73813674a9fc885b8c2e1345c1c74f526d703bb61dc7aab0316e93b"
+    },
+    "trailmark-variant-neighborhood": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/trailmark-variant-neighborhood/SKILL.md",
+      "computedHash": "fafb4c155720f1310a22a9cc7144291dce94c74e408bdb241ee6cfae513baa58"
+    },
+    "transloadit-media-processing": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/transloadit-media-processing/SKILL.md",
+      "computedHash": "f9b7f9988e6c9044182406f7466b84b6b2c6db580efff0a06906b0f15992d513"
+    },
+    "tugboat": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/tugboat/SKILL.md",
+      "computedHash": "a2af7d7101e352948e57eda5bbfef319a1eeeff8ab82b704addfc13733518123"
+    },
+    "typescript-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/typescript-mcp-server-generator/SKILL.md",
+      "computedHash": "389dd5b2f6bf325e142ae1e88833193935c120b4eb0abe34d479a0a788f3c887"
+    },
+    "typespec-api-operations": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/typespec-api-operations/SKILL.md",
+      "computedHash": "55f60154f528041437b53a1b4bb227b584f2b6accc1b85b625b78e07542cb9cd"
+    },
+    "typespec-create-agent": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/typespec-create-agent/SKILL.md",
+      "computedHash": "2cf564e4ce7004a3d227e719a33e4316d1dfcc0477136a678f87adb4da0e4f0a"
+    },
+    "typespec-create-api-plugin": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/typespec-create-api-plugin/SKILL.md",
+      "computedHash": "4f117e47c8da8be5b0feecf4fa02879ff54f7cabfb251e75d6bcc2b4b523e91a"
+    },
+    "ui-screenshots": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/ui-screenshots/SKILL.md",
+      "computedHash": "a69d97ff390d75e41f417180702b2e7269a81c053a016cecfc1f046266e41bde"
+    },
+    "unit-test-vue-pinia": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/unit-test-vue-pinia/SKILL.md",
+      "computedHash": "ef6e0d48f9932bcfb6220f2790fb5cfc3c1e84b17e04e9ec219331489b47a66f"
+    },
+    "update-avm-modules-in-bicep": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/update-avm-modules-in-bicep/SKILL.md",
+      "computedHash": "8071b53c14b949325cb055b69eb44afee07d5166d73ab5799205377880198277"
+    },
+    "update-implementation-plan": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/update-implementation-plan/SKILL.md",
+      "computedHash": "b2f2a6bf2544b416b9145e805c0f534ad078e7135c1ce26e73af1b0cd99cb692"
+    },
+    "update-llms": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/update-llms/SKILL.md",
+      "computedHash": "c54d9353f00ae1d34dd2804ab771e77545ba1a442337c7ba35f47e3c79866b6a"
+    },
+    "update-markdown-file-index": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/update-markdown-file-index/SKILL.md",
+      "computedHash": "c1a435b99ca6984cdac1880460e353d331b23ade70cfcbf61d8cfd3b24f49ad3"
+    },
+    "update-specification": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/update-specification/SKILL.md",
+      "computedHash": "56ce126a1040962dd6ea73f6210bef8e9742d35e3d2886ace64a6d9735e4f647"
+    },
+    "vardoger-analyze": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/vardoger-analyze/SKILL.md",
+      "computedHash": "7cd27bf876e5713fb0aee2c5f524a8a3ca2c3bebd26997552f761e49e90007f7"
+    },
+    "variant-analysis": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/variant-analysis/skills/variant-analysis/SKILL.md",
+      "computedHash": "b3ec9869c54c7c7fb9ee0d0980887be44749fe21a2489b47e6cc4598a6328d51"
+    },
+    "vcpkg": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/vcpkg/SKILL.md",
+      "computedHash": "ecccd74118283ba5c02868b08924a68eb7a48d656efbd856f484a6e4f11ee9fa"
+    },
+    "vector-forge": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/trailmark/skills/vector-forge/SKILL.md",
+      "computedHash": "ec09a65b7041ce2cb735d9f4b049db20fbca3f472d4c6b5d3bc02b360a0ed1b1"
+    },
+    "vercel-cli-with-tokens": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vercel-cli-with-tokens/SKILL.md",
+      "computedHash": "eb16b20dcbe6ce51e0372083d624e0847af1b09487ec99249227d5a8eddebfc0"
+    },
+    "vercel-composition-patterns": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "computedHash": "575757e3e25761c8c562d6e395d29f0b76c98b1273c0bd72d88e6ab1bc9c7d42"
+    },
+    "vercel-optimize": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vercel-optimize/SKILL.md",
+      "computedHash": "ad0ef9c5c980f824e2ec19cba5c45426aba923a17e71fbaf6d1830574b62cc44"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "ca7b0c0c6e5f2750043f7f0cd72d16ac4e2abc48f9b5500d047a4b77a2506212"
+    },
+    "vercel-react-native-skills": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-native-skills/SKILL.md",
+      "computedHash": "41d24eafa7c3d82e270439808f7cfbc4d51aeb2d14f2809a2267c16275784d06"
+    },
+    "vercel-react-view-transitions": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-view-transitions/SKILL.md",
+      "computedHash": "2033ef20681c90d4f93deee719e55e019c254e496d9bf80381c27cc539292001"
+    },
+    "verify-agent-action": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/verify-agent-action/SKILL.md",
+      "computedHash": "6d695f80736cda670904fb3a70be4c36cafcd45583832688c7610801dc554dc1"
+    },
+    "vscode-ext-commands": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/vscode-ext-commands/SKILL.md",
+      "computedHash": "26c40c1adb82b80a88e2e4b11307924e9f5cdc19c5c0cbb2a96aa02535034f70"
+    },
+    "vscode-ext-localization": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/vscode-ext-localization/SKILL.md",
+      "computedHash": "d35790138865dae71d8627c11c398b3eda6f00c23f34f51f9b6fd01ed1e21ced"
+    },
+    "vulnerability-triage-brocards": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/vulnerability-triage-brocards/skills/vulnerability-triage-brocards/SKILL.md",
+      "computedHash": "cf08800c3cd63e32b26b3899a321dda0127541214195fda63b6fb72d011131bd"
+    },
+    "web-artifacts-builder": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-artifacts-builder/SKILL.md",
+      "computedHash": "d52d422ead3fa26859a6af129609841a8536b230a2d649f86e61771d063e05e2"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    },
+    "web-design-reviewer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-reviewer/SKILL.md",
+      "computedHash": "4a05e32553a1dc916ee4f68f709d478c17de6b8ce184932f56f2b8646f3d4986"
+    },
+    "webapp-testing": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/webapp-testing/SKILL.md",
+      "computedHash": "e386cf78f5a002c8fa684066f933c670571f3cfb43b0d66bfc82050d74d6ea64"
+    },
+    "webmcpify": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/webmcpify/SKILL.md",
+      "computedHash": "4155fee44caa76b8c9447ba2808e274b73fe5802c3f29524e8a268242bc9ab25"
+    },
+    "what-context-needed": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/what-context-needed/SKILL.md",
+      "computedHash": "9a7c2542d4fc0e2868de10c2254b3f7b24b406501e3dd35f27d254fddf0f8367"
+    },
+    "winmd-api-search": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/winmd-api-search/SKILL.md",
+      "computedHash": "e49949740f6cdbeff41a12f6ff041b43b5d3ecfc00f55dab5985ed701882d147"
+    },
+    "winui3-migration-guide": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/winui3-migration-guide/SKILL.md",
+      "computedHash": "117001488fd02eb4cd9e4e6c24ba7270e729e2717c81c3387290ed624865be39"
+    },
+    "workiq-copilot": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/workiq-copilot/SKILL.md",
+      "computedHash": "666b1ab2c3ffba956b936304fb00397b7c82d1fce29d7fb10818cd5ffeed1f36"
+    },
+    "workshop-create": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/workshop-create/SKILL.md",
+      "computedHash": "4a4993b876ad650caa5729980ed883546eea89205ad85f0837496254997f65fc"
+    },
+    "write-coding-standards-from-file": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/write-coding-standards-from-file/SKILL.md",
+      "computedHash": "b87eddc73b6f759bafb4956bbe69838a961e0fd927145f612c4694d2cc65e07a"
+    },
+    "writing-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/writing-guidelines/SKILL.md",
+      "computedHash": "25aa3a33a97bddbcb1847ce4a6169106ec25e5b19b15b99c66e75ab383866ef2"
+    },
+    "writing-lean-proofs": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/writing-lean-proofs/skills/writing-lean-proofs/SKILL.md",
+      "computedHash": "a5aeca21e368bb6b0a625ed22b15f7da1daf1fc4165ca83642252c6317ebfddf"
+    },
+    "wycheproof": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/testing-handbook-skills/skills/wycheproof/SKILL.md",
+      "computedHash": "76f56e3c1d813b4699dce951f7f22a79b9f6ad0b820e0f7bff53076d6485ed8a"
+    },
+    "x-twitter-scraper": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/x-twitter-scraper/SKILL.md",
+      "computedHash": "3e65384ececec6b62c655143958482b651b528c01b95459632b4a2be5599b9a3"
+    },
+    "xlsx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/xlsx/SKILL.md",
+      "computedHash": "f5945e6e76dc7c178375e5cdf3140959b30cbcd4570ec3dc62296812259fc38d"
+    },
+    "yara-rule-authoring": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/yara-authoring/skills/yara-rule-authoring/SKILL.md",
+      "computedHash": "ec4d24b327bddcd2fdef6723a77e4da24f38f85329324bfccea27a677e093ca3"
+    },
+    "zeroize-audit": {
+      "source": "trailofbits/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/zeroize-audit/skills/zeroize-audit/SKILL.md",
+      "computedHash": "86cb57ef77ebd66805a0f7a71a746e23b3f25d4e019be5ab736c4a66b818396c"
+    }
+  }
+}

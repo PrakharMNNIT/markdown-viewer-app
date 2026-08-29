@@ -11,6 +11,8 @@ The canonical skill tree lives under `.claude/skills/`. Agent-agnostic harnesses
 
 Edit skills only under `.claude/skills/`; changes are visible through both paths.
 
+Cursor-native discovery also uses `.cursor/skills` → `.claude/skills` (symlink).
+
 Each skill is a directory containing a `SKILL.md` with YAML frontmatter (`name`,
 `description`, optional `triggers`/`allowed-tools`). Supporting `references/`,
 `sections/`, and templates live alongside it.
@@ -19,10 +21,59 @@ Each skill is a directory containing a `SKILL.md` with YAML frontmatter (`name`,
 
 | Pack | Source | License | Install | Skills |
 | --- | --- | --- | --- | --- |
-| `superpowers/` | [obra/superpowers](https://github.com/obra/superpowers) | MIT (Jesse Vincent) | full | 14 |
-| `mattpocock/` | [mattpocock/skills](https://github.com/mattpocock/skills) | MIT (Matt Pocock) | full | 37 |
-| `pstack/` | [cursor/plugins · pstack](https://github.com/cursor/plugins/tree/main/pstack) | MIT (Lauren Tan) | full | 45 |
-| `gstack/` | [garrytan/gstack](https://github.com/garrytan/gstack) | MIT (Garry Tan) | slimmed | 54 |
+| `superpowers/` | [obra/superpowers](https://github.com/obra/superpowers) | MIT | full tree | 14 |
+| `mattpocock/` | [mattpocock/skills](https://github.com/mattpocock/skills) | MIT | full tree | 37 |
+| `pstack/` | [cursor/plugins · pstack](https://github.com/cursor/plugins/tree/main/pstack) | MIT | full tree | 45 |
+| `gstack/` | [garrytan/gstack](https://github.com/garrytan/gstack) | MIT | slimmed | 54 |
+| `improve/` | [shadcn/improve](https://github.com/shadcn/improve) | MIT | full | 1 |
+| **Flat skills** | see below | various | `npx skills add` | 470+ |
+
+### Flat skills (on-demand discovery)
+
+The [vercel-labs/skills](https://github.com/vercel-labs/skills) CLI installs individual
+skill directories at `.claude/skills/<skill-name>/` (not nested under a pack folder).
+Use **`find-skills`** to search this library; do not load every skill into context.
+
+| Source repo | Installed via | Examples |
+| --- | --- | --- |
+| [vercel-labs/skills](https://github.com/vercel-labs/skills) | `find-skills` only | skill discovery |
+| [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | `--skill '*'` | `vercel-react-best-practices`, `web-design-guidelines` |
+| [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `--skill agent-browser` | real-browser QA |
+| [trailofbits/skills](https://github.com/trailofbits/skills) | `--skill '*'` | `differential-review`, `semgrep`, `second-opinion` |
+| [anthropics/skills](https://github.com/anthropics/skills) | `--skill '*'` | reference Agent Skills, document workflows |
+| [github/awesome-copilot](https://github.com/github/awesome-copilot) | `--skill '*'` | `acquire-codebase-knowledge`, GitHub workflows |
+
+**Workflow pipeline:** see [`docs/agents/workflow-pipeline.md`](../docs/agents/workflow-pipeline.md).
+
+**Matt Pocock config:** `docs/agents/issue-tracker.md`, `triage-labels.md`, `domain.md`.
+
+**pstack models:** `~/.cursor/rules/pstack-models.mdc` (run `/setup-pstack` to regenerate).
+
+### Project verification
+
+| Skill | Purpose |
+| --- | --- |
+| `verify-markdown-viewer/` | Browser QA for Vite dev server (agent-browser) |
+
+### Not vendored (native plugins — enable in Cursor)
+
+See [`docs/agents/native-plugins.md`](../../docs/agents/native-plugins.md) and [`docs/agents/spec-kit.md`](../../docs/agents/spec-kit.md).
+
+| Plugin | Install |
+| --- | --- |
+| pstack | `/add-plugin pstack` → `/setup-pstack` |
+| superpowers | `/add-plugin superpowers` |
+| compound-engineering | `/add-plugin compound-engineering` |
+| Spec Kit | Installed in repo — see [`docs/agents/spec-kit.md`](../../docs/agents/spec-kit.md) |
+
+### Stack cartridges (install per project when needed)
+
+| Stack | Command |
+| --- | --- |
+| Supabase | `npx skills add supabase/agent-skills --skill '*' -y` |
+| Cloudflare | `npx skills add cloudflare/skills --skill '*' -y` |
+| AWS | `npx skills add aws/agent-toolkit-for-aws/skills --skill '*' -y` |
+| Microsoft | `npx skills add microsoft/skills` (selective — avoid full `*`) |
 
 ### gstack is a slimmed install
 
@@ -50,6 +101,8 @@ Override the cache location with `GSTACK_CACHE_DIR`, the upstream ref with
 Cloud Agents: this repo's `.cursor/environment.json` runs the script during
 `install` after `npm ci`.
 
+**Cursor host:** Upstream [gstack#2361](https://github.com/garrytan/gstack/issues/2361) fixed `./setup --host cursor` rejection. If an older cache rejects `cursor`, run `GSTACK_REF=main bash scripts/setup-gstack-full.sh`.
+
 **Manual upstream install** (alternative):
 
 ```bash
@@ -57,8 +110,21 @@ git clone --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gsta
   && cd ~/.claude/skills/gstack && ./setup --host cursor
 ```
 
-`superpowers`, `mattpocock`, and `pstack` are full skill trees (Markdown SOPs with no
-mandatory runtime), so they work as-is.
+`superpowers`, `mattpocock`, `pstack`, and `improve` are full skill trees (Markdown SOPs
+with no mandatory runtime), so they work as-is.
+
+### shadcn/improve — codebase advisor (read-only)
+
+Install/update with the open [skills CLI](https://github.com/vercel-labs/skills):
+
+```bash
+npx skills add shadcn/improve --yes
+```
+
+Use `/improve` for read-only audits that produce handoff plans under `plans/`. The skill
+never modifies source code — it writes self-contained specs for other agents to execute.
+High value for security review, tech-debt triage, and roadmap suggestions on this Markdown
+renderer (XSS surface via DOMPurify, Mermaid/KaTeX rendering, etc.).
 
 ## Recommended for this project (Markdown Viewer Pro)
 
@@ -98,6 +164,50 @@ These MCP/skill plugins are already enabled for the workspace and pair well here
 
 Enable additional MCP servers or Claude/Cursor plugins from the marketplace as needed;
 those require per-user configuration (and any secrets) and are not vendored here.
+
+## Recommended external packs (not vendored)
+
+Install selectively with `npx skills add <owner/repo> --yes`. These are widely used,
+credible ecosystems that complement the packs above without duplicating them:
+
+| Ecosystem | Source | Why install |
+| --- | --- | --- |
+| **Agent Skills spec + CLI** | [agentskills/agentskills](https://github.com/agentskills/agentskills) · [vercel-labs/skills](https://github.com/vercel-labs/skills) | Open standard (Linux Foundation); `npx skills` installs into 70+ agents |
+| **Anthropic official skills** | [anthropics/skills](https://github.com/anthropics/skills) | Reference implementations: PDF/DOCX, webapp testing (Playwright), MCP builder |
+| **Vercel agent skills** | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | React/Next.js performance rules, composition patterns, web design guidelines |
+| **Addy Osmani agent-skills** | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 25 skills + `/spec`, `/plan`, `/build`, `/test`, `/review`, `/ship` commands |
+| **Cursor plugins marketplace** | [cursor/plugins](https://github.com/cursor/plugins) | Official Cursor plugin monorepo (pstack is one subtree; others: Vercel, Linear, etc.) |
+| **CodeRabbit** | Cursor plugin (MCP) | Automated PR code review — already enabled in this Cloud Agent environment |
+| **Browser Use / Browserbase** | Cursor plugin (MCP) | Real-browser QA — pairs with gstack QA and this app's rendered Markdown UI |
+
+**Not recommended to vendor wholesale:** packs that overlap heavily with installed ones
+(e.g. another TDD/planning methodology) or stack-specific packs unrelated to this repo
+(e.g. Supabase/Remotion skills unless you adopt those stacks).
+
+## Verification
+
+```bash
+# Count discoverable skills (expect 500+)
+find .claude/skills -name 'SKILL.md' | wc -l
+
+# Confirm cross-runtime symlinks
+test -L .agents/skills && test -L .cursor/skills && echo "symlinks OK"
+
+# Skill discovery
+head -5 .claude/skills/find-skills/SKILL.md
+
+# Browser QA CLI (devDependency)
+npx agent-browser --help
+
+# gstack runtime (after setup script)
+bash scripts/setup-gstack-full.sh
+```
+
+## Reinstall flat skill packs
+
+```bash
+bash scripts/install-skill-arsenal.sh
+```
 
 ## Provenance
 
