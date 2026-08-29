@@ -109,6 +109,42 @@ GSTACK_HOST=claude bash scripts/setup-gstack-full.sh   # or codex, opencode, …
 
 Or manual: clone [garrytan/gstack](https://github.com/garrytan/gstack) and `./setup --host claude`.
 
+## wshobson/agents marketplace
+
+**Purpose:** Large plugin marketplace (94 plugins, 175+ skills) — architecture, debugging, PPTX, session guard, AI debt, etc.
+
+**Do not install the full pack** in this repo (context explosion). Select 1–2 skills per need:
+
+```bash
+npx skills add wshobson/agents --skill ai-debt-detector --skill session-guard -a cursor -y
+```
+
+Browse [wshobson/agents](https://github.com/wshobson/agents) for the catalog. Cloud Agents cannot browse the Cursor marketplace UI — use `npx skills add` with explicit `--skill` names.
+
+## google-labs-code/stitch-skills
+
+**Purpose:** Google's Stitch UI/design skills for agent-driven interface work.
+
+### Cursor (local)
+
+1. Search **Stitch** or **google-labs-code** in Cursor Settings → Plugins / marketplace.
+2. Or install skills via upstream README if published to the skills registry.
+3. Pair with **Hallmark** + **Impeccable** + Vercel web guidelines for the UI loop (see [workflow-pipeline.md](./workflow-pipeline.md)).
+
+## OpenSpec / Graphify / Impeccable (repo-local, not marketplace)
+
+These ship as CLI + project skills, installed by `bash scripts/install-praxstack-agent-workstation.sh`:
+
+| Tool | Slash / command | Notes |
+| --- | --- | --- |
+| OpenSpec | `/openspec-propose`, `/opsx-propose` | Default brownfield spec; `npm install -D @fission-ai/openspec` |
+| Graphify | `/graphify .` | `uv tool install graphifyy`; writes `.cursor/rules/graphify.mdc` |
+| Impeccable | `/impeccable init` | `npx impeccable skills install` (project scope) |
+
+## MCP plugins (user approval required)
+
+**Context7**, **Serena**, **Graphify MCP** — official install documented in [`mcp-recommendations.md`](./mcp-recommendations.md). Do not commit shadow `.cursor/mcp.json` entries without approval.
+
 ## CodeRabbit / Browser Use / Mobbin / shadcn
 
 These are **MCP-backed Cursor plugins**, enabled per workspace or user in Cursor Cloud/local settings. They are listed in root `AGENTS.md` under companion plugins. No git vendoring — configure credentials and toggles in the IDE.

@@ -31,6 +31,7 @@
   "homepage": "https://github.com/PrakharMNNIT/markdown-viewer-app#readme",
   "devDependencies": {
     "@eslint/js": "9.39.2",
+    "@fission-ai/openspec": "^1.11.0",
     "@vitest/coverage-v8": "4.0.8",
     "@vitest/ui": "4.0.8",
     "agent-browser": "^0.27.0",
