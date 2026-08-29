@@ -17,14 +17,14 @@ specify init --here --integration cursor-agent --force
 
 ## Cloud Agent result
 
-In this VM, `uv tool install specify-cli` succeeded. `specify init --here` failed on a non-empty repo without `--force` (would merge/overwrite template files). **Do not run `--force` on main** without reviewing the template diff first.
+In this VM, `uv tool install specify-cli` and `specify init --here --integration cursor-agent --force` **succeeded**.
 
-### Manual init on desktop
+Generated artifacts (committed on branch `prax/dev-skills-workflow-setup-ab5b`):
 
-1. Create a feature branch.
-2. Run `specify init --here --integration cursor-agent --force` and review the generated files.
-3. Commit only the Spec Kit scaffolding you want (`.specify/`, slash commands, templates).
-4. Merge via PR.
+- `.claude/skills/speckit-*` — slash-command skills (`/speckit-constitution`, `/speckit-specify`, etc.)
+- `.specify/` — templates, scripts, constitution scaffold
+
+Review template diffs before merging to `main`; `--force` can overwrite overlapping paths.
 
 ## Commands (after init)
 
