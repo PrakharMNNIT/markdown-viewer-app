@@ -40,7 +40,20 @@ are fetched at setup time. Cloud Agents run `bash scripts/setup-gstack-full.sh` 
 `.cursor/environment.json`.
 
 **Full workstation setup:** `bash scripts/install-praxstack-agent-workstation.sh` — gstack slash
-commands, skill arsenal, 2026 discovery/research/UI skills, OpenSpec, Graphify, Impeccable.
+commands, skill arsenal, 2026 discovery/research/UI skills, OpenSpec, Graphify, Impeccable,
+and praxstack skills/personas.
+
+**praxstack skills & personas:** [`docs/agents/praxstack-skills-personas.md`](docs/agents/praxstack-skills-personas.md) —
+41 canonical skills from [praxstack/skills-and-personas](https://github.com/praxstack/skills-and-personas)
+(kingmode, constellation-team, backend-pe-*, teach-pro-max, etc.). Install:
+
+```bash
+bash scripts/setup-praxstack-skills-personas.sh
+```
+
+Persona source material links to `.claude/skills/_praxstack-source/`. Skills install under
+`.claude/skills/praxstack/`. The `/goal` autonomous work pattern is documented there (paste
+prompt — no dedicated skill).
 
 **MCP governance:** [`docs/agents/mcp-recommendations.md`](docs/agents/mcp-recommendations.md) —
 Context7, Serena, Graphify MCP documented for desktop approval; no shadow MCP in git.
