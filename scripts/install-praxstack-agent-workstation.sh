@@ -40,6 +40,19 @@ ensure_skills_symlinks() {
   fi
 }
 
+# npx skills can leave self-referential broken symlinks (e.g. ai-debt-detector).
+repair_broken_skill_entries() {
+  local skill
+  for skill in ai-debt-detector session-guard; do
+    for base in .claude/skills .agents/skills; do
+      if [ -L "${base}/${skill}" ] && [ ! -e "${base}/${skill}" ]; then
+        warn "Removing broken symlink ${base}/${skill}"
+        rm -f "${base}/${skill}"
+      fi
+    done
+  done
+}
+
 write_pstack_models() {
   local dest="${HOME}/.cursor/rules/pstack-models.mdc"
   if [ -f "$dest" ]; then
@@ -194,6 +207,7 @@ main() {
   install_project_skill nutlope/hallmark --skill hallmark
 
   log "Phase 4: selective wshobson/agents examples (not full 94-plugin pack)"
+  repair_broken_skill_entries
   install_project_skill wshobson/agents --skill ai-debt-detector --skill session-guard \
     || warn "wshobson/agents selective install failed — pick skills manually from marketplace"
 
