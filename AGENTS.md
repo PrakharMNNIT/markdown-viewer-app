@@ -39,6 +39,12 @@ Use **`find-skills`** to discover capabilities; do not load all ~693 skills into
 are fetched at setup time. Cloud Agents run `bash scripts/setup-gstack-full.sh` via
 `.cursor/environment.json`.
 
+**Full workstation setup:** `bash scripts/install-praxstack-agent-workstation.sh` — gstack slash
+commands, skill arsenal, 2026 discovery/research/UI skills, OpenSpec, Graphify, Impeccable.
+
+**MCP governance:** [`docs/agents/mcp-recommendations.md`](docs/agents/mcp-recommendations.md) —
+Context7, Serena, Graphify MCP documented for desktop approval; no shadow MCP in git.
+
 **gstack slash commands (Cursor desktop):** Vendored `.claude/skills/gstack/` gives agents
 **Skill-tool discovery only** — it does **not** register chat slash commands like
 `/plan-ceo-review`. Those come from upstream `./setup --host cursor`, which installs flat

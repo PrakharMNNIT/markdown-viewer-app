@@ -61,3 +61,6 @@ coverage/
 .agents/skills/gstack/VERSION
 .agents/skills/gstack/supabase/
 .agents/skills/gstack/gstack-upgrade/SKILL.md
+
+# Local agent harness overrides (machine-specific)
+.claude/settings.local.json
