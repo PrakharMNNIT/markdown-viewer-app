@@ -39,6 +39,18 @@ Use **`find-skills`** to discover capabilities; do not load all ~693 skills into
 are fetched at setup time. Cloud Agents run `bash scripts/setup-gstack-full.sh` via
 `.cursor/environment.json`.
 
+**gstack slash commands (Cursor desktop):** Vendored `.claude/skills/gstack/` gives agents
+**Skill-tool discovery only** — it does **not** register chat slash commands like
+`/plan-ceo-review`. Those come from upstream `./setup --host cursor`, which installs flat
+skill folders under `~/.cursor/skills/gstack-*` on your machine. Run locally once:
+
+```bash
+bash scripts/setup-gstack-full.sh
+```
+
+Then reload Cursor and type `/plan-ceo-review` in chat (or ask the agent to use the
+`plan-ceo-review` skill). See [`docs/agents/native-plugins.md`](docs/agents/native-plugins.md#gstack).
+
 ## Agent skills
 
 ### Issue tracker
