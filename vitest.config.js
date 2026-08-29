@@ -10,6 +10,7 @@ export default defineConfig({
       '**/.claude/skills/**',
       '**/.agents/skills/**',
       '**/.cursor/skills/**',
+      '**/.cache/**',
     ],
     coverage: {
       provider: 'v8',
