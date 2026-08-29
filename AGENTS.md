@@ -1,0 +1,76 @@
+# Agent instructions (Markdown Viewer Pro)
+
+This repository uses the open [Agent Skills](https://agentskills.io) format. Skills are
+standard operating procedures (`SKILL.md` files) that coding agents load when a task matches
+their description.
+
+## Skill discovery paths
+
+| Path | Role |
+| --- | --- |
+| `.claude/skills/` | **Canonical** skill tree (edit here) |
+| `.agents/skills` → `.claude/skills` | Cross-runtime discovery (Cursor, Codex, Gemini CLI) |
+| `.cursor/skills` → `.claude/skills` | Cursor-native discovery |
+
+Do not duplicate skills across paths. Changes under `.claude/skills/` are visible everywhere.
+
+## Installed skill packs
+
+See [`.claude/skills/README.md`](.claude/skills/README.md) for the full inventory, install
+notes, and recommended skills for this codebase.
+
+| Pack | Skills | Notes |
+| --- | ---: | --- |
+| [superpowers](https://github.com/obra/superpowers) | 14 | Plan-before-code, TDD, debugging, code review |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | 37 | Engineering workflows, TDD, code review, triage |
+| [pstack](https://github.com/cursor/plugins/tree/main/pstack) | 45 | Principles, architecture, TypeScript, verification |
+| [gstack](https://github.com/garrytan/gstack) | 54 | QA, design review, ship, browser automation (slimmed) |
+| [shadcn/improve](https://github.com/shadcn/improve) | 1 | Read-only codebase audit → handoff plans |
+| **Flat library** | 470+ | find-skills, ToB, Vercel, Anthropic, awesome-copilot |
+
+See [`docs/agents/workflow-pipeline.md`](docs/agents/workflow-pipeline.md) for the layered pipeline.
+Use **`find-skills`** to discover capabilities; do not load all skills into every session.
+
+**gstack runtime:** Skill markdown is vendored; Bun runtime sidecars (`bin/`, `lib/`, `browse/`)
+are fetched at setup time. Cloud Agents run `bash scripts/setup-gstack-full.sh` via
+`.cursor/environment.json`.
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues for `praxstack/markdown-viewer-app` via `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default mattpocock vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout (`CONTEXT.md` + `docs/adr/` at repo root, created lazily). See `docs/agents/domain.md`.
+
+### Workflow pipeline
+
+Layered skill stack (discover → spec → implement → review → security → browser QA → ship). See `docs/agents/workflow-pipeline.md`.
+
+## Project context
+
+- **Stack:** Vite + vanilla JavaScript (marked, DOMPurify, Prism, Mermaid, KaTeX, html2pdf)
+- **Tests:** Vitest (`npm test`)
+- **Lint:** ESLint (`npm run lint`)
+- **Deploy:** GitHub Pages
+
+When auditing or planning improvements, prefer `/improve` (shadcn/improve skill) for read-only
+surveys and handoff plans. Implementation stays in separate agent sessions.
+
+## Companion Cursor plugins (not vendored)
+
+These MCP/skill plugins are enabled in Cursor Cloud and pair well with this repo:
+
+- **CodeRabbit** — automated code review
+- **Browser Use** — real-browser QA for rendered Markdown
+- **Mobbin** — production UI/UX references
+- **shadcn** — component registry (if UI moves to a component framework)
+
+Additional credible skill ecosystems are listed in `.claude/skills/README.md` under
+**Recommended external packs** — install selectively with `npx skills add <owner/repo>`.
