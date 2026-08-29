@@ -63,7 +63,14 @@ Layered skill stack (discover → spec → implement → review → security →
 When auditing or planning improvements, prefer `/improve` (shadcn/improve skill) for read-only
 surveys and handoff plans. Implementation stays in separate agent sessions.
 
+## Verification
+
+Project-local browser verification: **`verify-markdown-viewer`** (`.claude/skills/verify-markdown-viewer/`).
+Use after UI changes; complements Vitest unit tests.
+
 ## Companion Cursor plugins (not vendored)
+
+Native marketplace plugins require Cursor desktop — see [`docs/agents/native-plugins.md`](docs/agents/native-plugins.md).
 
 These MCP/skill plugins are enabled in Cursor Cloud and pair well with this repo:
 
@@ -74,3 +81,5 @@ These MCP/skill plugins are enabled in Cursor Cloud and pair well with this repo
 
 Additional credible skill ecosystems are listed in `.claude/skills/README.md` under
 **Recommended external packs** — install selectively with `npx skills add <owner/repo>`.
+
+**Spec Kit:** see [`docs/agents/spec-kit.md`](docs/agents/spec-kit.md) for install and init steps.

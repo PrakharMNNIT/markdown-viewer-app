@@ -50,20 +50,13 @@ Install with `npx skills add <owner/repo> --skill <name> -y` when the stack appl
 
 ## Native plugins (not vendored in git)
 
-Enable in Cursor Settings → Plugins:
-
-- **pstack** — then run `/setup-pstack`
-- **superpowers** — `/add-plugin superpowers`
-- **compound-engineering** — `/add-plugin compound-engineering`
+See [`native-plugins.md`](./native-plugins.md) for desktop install steps (`/add-plugin`).
 
 ## Spec Kit (large / greenfield features)
 
-```bash
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
-specify init --here --integration cursor-agent
-```
+See [`spec-kit.md`](./spec-kit.md). CLI installs via `uv tool`; repo init requires `--force` on non-empty trees.
 
-Commands: `/speckit.constitution`, `/speckit.specify`, `/speckit.plan`, `/speckit.implement`.
+Commands (after init): `/speckit.constitution`, `/speckit.specify`, `/speckit.plan`, `/speckit.implement`.
 
 ## Context hygiene
 

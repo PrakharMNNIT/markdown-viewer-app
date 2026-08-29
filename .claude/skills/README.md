@@ -49,7 +49,15 @@ Use **`find-skills`** to search this library; do not load every skill into conte
 
 **pstack models:** `~/.cursor/rules/pstack-models.mdc` (run `/setup-pstack` to regenerate).
 
+### Project verification
+
+| Skill | Purpose |
+| --- | --- |
+| `verify-markdown-viewer/` | Browser QA for Vite dev server (agent-browser) |
+
 ### Not vendored (native plugins — enable in Cursor)
+
+See [`docs/agents/native-plugins.md`](../../docs/agents/native-plugins.md) and [`docs/agents/spec-kit.md`](../../docs/agents/spec-kit.md).
 
 | Plugin | Install |
 | --- | --- |
