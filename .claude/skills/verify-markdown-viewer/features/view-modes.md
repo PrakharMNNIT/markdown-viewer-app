@@ -1,24 +1,30 @@
 # View modes
 
-Toolbar toggles between editor-only, split, and preview-only layouts.
+Users switch between editor-only, split, and preview-only layouts via toolbar buttons.
 
 ## Sub-features
 
-- **split-view** — both panes visible (default)
-- **editor-only** — hides preview
-- **preview-only** — hides editor
+- `mode-editor-only` — hides preview, shows editor full width.
+- `mode-preview-only` — hides editor, shows preview full width.
+- `mode-split` — restores split layout.
 
 ## How to get to it (user POV)
 
-Click toolbar buttons: "Split View", "Editor Only", or "Preview Only" (ARIA labels on `#split-view-btn`, `#editor-only-btn`, `#preview-only-btn`).
+- Toolbar buttons: **Editor Only**, **Split View**, **Preview Only** (icons with those `aria-label`s).
 
 ## Driving it with agent-browser
 
-Preconditions: dev server running.
+Preconditions:
 
-- **Split → Preview only:** click `[aria-label="Preview Only"]`; snapshot should show `#markdown-preview` visible, editor hidden or minimized per CSS.
-- **Proof:** screenshot `$ART/view-mode-preview-only.png`.
+- App loaded at verification URL.
+- Split view is the starting layout.
+
+- **Editor only.** Run `npx agent-browser click "#editor-only-btn"`. `#markdown-editor` visible; `#markdown-preview` hidden or zero-width.
+- **Preview only.** Run `npx agent-browser click "#preview-only-btn"`. Preview visible; editor hidden.
+- **Split restore.** Run `npx agent-browser click "#split-view-btn"`. Both panes visible.
+- **Proof.** Run `npx agent-browser screenshot /opt/cursor/artifacts/verify-view-modes-split.png` after restoring split.
 
 ## Gotchas
 
-- Layout is CSS-driven; use snapshot text visibility, not fixed coordinates.
+- Mobile tab UI (`data-tab`) is separate; this map covers desktop toolbar only.
+- View mode persists in localStorage — reload may restore last mode; click Split explicitly before proof.
