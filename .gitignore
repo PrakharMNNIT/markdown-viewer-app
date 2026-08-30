@@ -62,6 +62,11 @@ coverage/
 .agents/skills/gstack/supabase/
 .agents/skills/gstack/gstack-upgrade/SKILL.md
 
+# Praxstack skills-and-personas (symlinks from setup script; cache is gitignored)
+.claude/skills/praxstack/*
+!.claude/skills/praxstack/README.md
+.claude/skills/_praxstack-source/
+
 # Graphify runtime outputs (local architecture graph cache)
 graphify-out/
 

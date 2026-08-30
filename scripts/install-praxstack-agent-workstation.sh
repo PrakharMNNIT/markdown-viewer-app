@@ -148,6 +148,16 @@ EOF
   ls "${HOME}/.cursor/skills"/gstack-* 2>/dev/null | head -5 | sed 's/^/  /' || echo "  (none — re-run setup-gstack-full.sh)"
 
   echo ""
+  echo "praxstack skills (project):"
+  for s in kingmode constellation-team teach-pro-max superimprove backend-pe techtutor; do
+    if [ -f "${REPO_ROOT}/.claude/skills/praxstack/${s}/SKILL.md" ]; then
+      echo "  ✓ ${s}"
+    else
+      echo "  ✗ ${s} (missing — run setup-praxstack-skills-personas.sh)"
+    fi
+  done
+
+  echo ""
   echo "2026 stack skills (project):"
   for s in deep-research last30days hallmark openspec-propose graphify impeccable ai-debt-detector session-guard; do
     if [ -f "${REPO_ROOT}/.claude/skills/${s}/SKILL.md" ]; then
@@ -194,10 +204,13 @@ main() {
   log "Phase 1: gstack runtime + slash commands"
   bash "$SCRIPT_DIR/setup-gstack-full.sh"
 
-  log "Phase 2: flat skill arsenal"
+  log "Phase 2: praxstack skills-and-personas"
+  bash "$SCRIPT_DIR/setup-praxstack-skills-personas.sh"
+
+  log "Phase 3: flat skill arsenal"
   bash "$SCRIPT_DIR/install-skill-arsenal.sh"
 
-  log "Phase 3: 2026 discovery / research / UI skills"
+  log "Phase 4: 2026 discovery / research / UI skills"
   install_global_skill 24601/agent-deep-research --skill deep-research
   install_global_skill mvanhorn/last30days-skill --skill last30days
   install_global_skill nutlope/hallmark --skill hallmark \
@@ -206,17 +219,17 @@ main() {
   install_project_skill mvanhorn/last30days-skill --skill last30days
   install_project_skill nutlope/hallmark --skill hallmark
 
-  log "Phase 4: selective wshobson/agents examples (not full 94-plugin pack)"
+  log "Phase 5: selective wshobson/agents examples (not full 94-plugin pack)"
   repair_broken_skill_entries
   install_project_skill wshobson/agents --skill ai-debt-detector --skill session-guard \
     || warn "wshobson/agents selective install failed — pick skills manually from marketplace"
 
   ensure_skills_symlinks
 
-  log "Phase 5: pstack model defaults"
+  log "Phase 6: pstack model defaults"
   write_pstack_models
 
-  log "Phase 6: repo-local tools"
+  log "Phase 7: repo-local tools"
   init_openspec
   init_graphify
   init_impeccable

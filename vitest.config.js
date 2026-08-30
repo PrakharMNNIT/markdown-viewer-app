@@ -7,6 +7,7 @@ export default defineConfig({
     setupFiles: ['./tests/setup.js'],
     exclude: [
       '**/node_modules/**',
+      '**/.cache/**',
       '**/.claude/skills/**',
       '**/.agents/skills/**',
       '**/.cursor/skills/**',
