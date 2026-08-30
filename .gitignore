@@ -67,5 +67,8 @@ coverage/
 !.claude/skills/praxstack/README.md
 .claude/skills/_praxstack-source/
 
+# Graphify runtime outputs (local architecture graph cache)
+graphify-out/
+
 # Local agent harness overrides (machine-specific)
 .claude/settings.local.json
